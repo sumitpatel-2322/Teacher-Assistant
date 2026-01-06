@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRP Dashboard - Teacher-AssistantAI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin:0; padding:0; font-family:'Inter', sans-serif; }
+    body { background:#fef9f5; color:#333; line-height:1.5; }
+
+    /* Navbar */
+    nav {
+      width: 100%;
+      background: #4b0082;
+      color: #fff;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      border-radius: 0;
+      margin: 0;
+    }
+    nav .logo { font-size:20px; font-weight:600; }
+    nav ul { list-style: none; display: flex; gap: 15px; flex-wrap: wrap; }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: 0.3s;
+    }
+    nav ul li a:hover { background:#6a00b0; }
+    nav ul li.logout a { background:#ff4d4d; font-weight:600; }
+    nav ul li.logout a:hover { background:#e63939; }
+
+    /* Header */
+    header {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:15px 20px; background:#fff; border-radius:12px; margin:20px auto;
+      max-width:1200px; box-shadow:0 4px 12px rgba(0,0,0,0.05);
+      flex-wrap: wrap;
+    }
+    .header-left { display:flex; align-items:center; gap:15px; flex-wrap: wrap; }
+    .header-left img { width:50px; height:50px; border-radius:50%; }
+    .header-left .title { font-size:20px; font-weight:600; }
+    .header-left .subtitle { font-size:12px; color:#666; }
+    .header-right img { width:40px; height:40px; border-radius:50%; margin-top:10px; }
+
+    /* Section Title */
+    .section-title {
+      max-width:95%;
+      margin:30px auto 15px;
+      font-size:18px;
+      font-weight:600;
+      text-align:center;
+    }
+
+    /* Actions */
+    .actions {
+      max-width:95%;
+      margin:20px auto 40px;
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      flex-wrap: wrap;
+    }
+    .actions button {
+      padding:10px 18px;
+      font-size:14px;
+      border:none;
+      border-radius:6px;
+      background:#ffae42;
+      color:#fff;
+      cursor:pointer;
+      font-weight:600;
+      transition:0.3s;
+    }
+    .actions button:hover { background:#e69530; }
+
+    /* Footer */
+    footer {
+      max-width:1200px;
+      margin:20px auto;
+      padding:10px 20px;
+      text-align:center;
+      color:#666;
+      font-size:14px;
+    }
+
+    /* Responsive */
+    @media screen and (max-width:768px){
+      nav { flex-direction: column; align-items: flex-start; }
+      nav ul { justify-content: flex-start; gap:10px; }
+   header { flex-direction: column; align-items: flex-start; }
+      .header-left { flex-direction: column; align-items: flex-start; }
+      .section-title { font-size:16px; }
+      .actions button { padding:8px 12px; font-size:13px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">Teacher-AssistantAI</div>
+    <ul>
+      <li><a href="Home_page.html">Home</a></li>
+      <li><a href="Teacher_dashboard.html">Teachers</a></li>
+      <li class="logout"><a href="#">Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- Header -->
+  <header>
+    <div class="header-left">
+      <img src="https://via.placeholder.com/50" alt="CRP">
+      <div>
+        <div class="title">CRP Dashboard</div>
+        <div class="subtitle">Digital Coaching Platform</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <img src="https://via.placeholder.com/40" alt="User">
+    </div>
+  </header>
+
+  <!-- CRP Actions -->
+  <div class="section-title">CRP Actions</div>
+  <div class="actions">
+    <button>Reply to Teachers</button>
+    <button>Upload Guidance</button>
+    <button>Send Messages</button>
+  </div>
+
+  <!-- Teachers Section -->
+  <div class="section-title" id="teachers">List of Teachers</div>
+  <div style="max-width:95%; margin:0 auto 30px; text-align:center;">
+    <select id="teacherDropdown" style="width:90%; max-width:400px; padding:10px; border-radius:6px; border:1px solid #ccc; font-size:14px;">
+      <option value="">Select a Teacher</option>
+      <option value="Teacher 1">Teacher 1</option>
+      <option value="Teacher 2">Teacher 2</option>
+      <option value="Teacher 3">Teacher 3</option>
+      <option value="Teacher 4">Teacher 4</option>
+      <option value="Teacher 5">Teacher 5</option>
+    </select>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Digital Coaching Platform</p>
+  </footer>
+
+</body>
+</html>
