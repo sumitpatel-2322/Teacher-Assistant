@@ -1,186 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Teacher Dashboard - Ask Doubt</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    * { box-sizing: border-box; margin:0; padding:0; font-family:'Inter', sans-serif; }
-    body { background:#fef9f5; color:#333; line-height:1.5; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teacher Dashboard - Ask Doubt</title>
+<link href="<https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap>" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin:0; padding:0; font-family:'Inter', sans-serif; }
+body { background:#fef9f5; color:#333; line-height:1.5; transition: margin-right 0.5s; }
 
-    /* Navbar */
- nav {
-      width: 100%;
-      background: #4b0082;
-      color: #fff;
-      padding: 10px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      border-radius: 0;
-      margin: 0;
+/* Navbar - Fixed full width, always on top */
+nav {
+    width: 100%;
+    background: #4b0082;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;                  /* Full width */
+    z-index: 1003;             /* Above side panel */
+    transition: none;
+}
+
+nav .logo { font-size:20px; font-weight:600; }
+
+.hamburger {
+    font-size: 30px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #fff;
+    padding: 10px 15px;
+    position: relative;
+    z-index: 1004;
+}
+
+/* Side Panel - Right side */
+#mySidepanel {
+    width: 0;
+    position: fixed;
+    z-index: 1002;
+    height: 100%;
+    top: 0;
+    right: 0;
+    background-color: #4b0082;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 80px;
+}
+
+#mySidepanel a {
+    padding: 18px 30px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #fff;
+    display: block;
+    transition: 0.3s;
+    text-align: left;
+}
+
+#mySidepanel a:hover {
+    background-color: #6a00b0;
+}
+
+#mySidepanel .logout-link {
+    background: #ff4d4d;
+    font-weight: 600;
+    margin-top: 30px;
+}
+
+#mySidepanel .logout-link:hover {
+    background: #e63939;
+}
+
+/* Push content when panel opens */
+body.sidepanel-open {
+    margin-right: 250px;
+}
+
+header, .toggle-container, .ask-btn, .dropdowns, .ask-doubt-section {
+    transition: margin-right 0.5s;
+}
+
+body.sidepanel-open header,
+body.sidepanel-open .toggle-container,
+body.sidepanel-open .ask-btn,
+body.sidepanel-open .dropdowns,
+body.sidepanel-open .ask-doubt-section {
+    margin-right: 250px;
+}
+
+/* Original styles - unchanged */
+header { display:flex; justify-content:space-between; align-items:center; padding:15px 20px; background:#fff; border-radius:12px; margin:20px auto; max-width:1200px; box-shadow:0 4px 12px rgba(0,0,0,0.05); flex-wrap: wrap; margin-top: 70px; } /* Extra top margin for fixed nav */
+.header-left { display:flex; align-items:center; gap:15px; flex-wrap: wrap; }
+.header-left img { width:50px; height:50px; border-radius:50%; }
+.header-left .title { font-size:20px; font-weight:600; }
+.header-left .subtitle { font-size:12px; color:#666; }
+.header-right img { width:40px; height:40px; border-radius:50%; margin-top:10px; }
+
+.toggle-container { display:flex; justify-content:center; align-items:center; gap:10px; margin:30px 0 20px; }
+.switch { position: relative; display:inline-block; width:60px; height:34px; }
+.switch input { opacity:0; width:0; height:0; }
+.slider { position:absolute; cursor:pointer; top:0; left:0; right:0; bottom:0; background-color:#ccc; transition:0.4s; border-radius:34px; }
+.slider:before { position:absolute; content:""; height:26px; width:26px; left:4px; bottom:4px; background:white; transition:0.4s; border-radius:50%; }
+input:checked + .slider { background-color:#28a745; }
+input:checked + .slider:before { transform:translateX(26px); }
+.status { font-weight:600; font-size:16px; }
+.online { color:#28a745; }
+.offline { color:#dc3545; }
+
+.dropdowns { display:flex; justify-content:center; gap:15px; flex-wrap:wrap; margin-bottom:20px; }
+.dropdowns select { padding:10px 15px; border-radius:8px; border:1px solid #ccc; font-size:14px; cursor:pointer; }
+
+.ask-btn { display:block; margin:0 auto 25px; background:#4b0082; color:#fff; border:none; padding:12px 25px; font-size:16px; font-weight:600; border-radius:8px; cursor:pointer; transition:0.3s; }
+.ask-btn:hover { background:#6a00b0; }
+
+.ask-doubt-section { max-width:900px; margin:20px auto 40px; background:#fff; border-radius:12px; padding:25px; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
+.ask-doubt-section textarea { width:100%; padding:12px; border-radius:8px; border:1px solid #ccc; resize:vertical; font-size:14px; margin-bottom:15px; }
+.speak-btn { background:#ff6600; color:#fff; border:none; padding:10px 20px; border-radius:8px; cursor:pointer; font-weight:600; transition:0.3s; }
+.speak-btn:hover { background:#ff8533; }
+
+.ai-response { background:#eef2f7; border-radius:12px; padding:20px; margin-top:15px; }
+.response-item { display:inline-block; background:#fff; padding:12px 18px; border-radius:8px; margin:8px; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.1); transition:0.2s; font-weight:500; }
+.response-item:hover { background:#f0e6ff; }
+
+.feedback-buttons { margin-top:20px; display:flex; gap:15px; flex-wrap:wrap; justify-content:center; }
+.feedback-buttons button { padding:10px 20px; border:none; border-radius:8px; cursor:pointer; font-weight:600; transition:0.3s; }
+.worked { background:#28a745; color:#fff; }
+.worked:hover { background:#45c65c; }
+.not-worked { background:#dc3545; color:#fff; }
+.not-worked:hover { background:#e86a6a; }
+
+@media screen and (max-width:768px){
+    .dropdowns select, .ask-doubt-section textarea, .ask-btn, .speak-btn { width:95%; }
+    body.sidepanel-open {
+        margin-right: 0;
     }
-   nav .logo { font-size:20px; font-weight:600; }
-    nav ul { list-style: none; display: flex; gap: 15px; flex-wrap: wrap; }
-    nav ul li a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 500;
-      padding: 6px 12px;
-      border-radius: 6px;
-      transition: 0.3s;
+    body.sidepanel-open header,
+    body.sidepanel-open .toggle-container,
+    body.sidepanel-open .ask-btn,
+    body.sidepanel-open .dropdowns,
+    body.sidepanel-open .ask-doubt-section {
+        margin-right: 0;
     }
-    nav ul li a:hover { background:#6a00b0; }
-    nav ul li.logout a { background:#ff4d4d; font-weight:600; }
-    nav ul li.logout a:hover { background:#e63939; }
-
-    /* Header */
-    header {
-      display:flex; justify-content:space-between; align-items:center;
-      padding:15px 20px; background:#fff; border-radius:12px; margin:20px auto;
-      max-width:1200px; box-shadow:0 4px 12px rgba(0,0,0,0.05);
-      flex-wrap: wrap;
-    }
-    .header-left { display:flex; align-items:center; gap:15px; flex-wrap: wrap; }
-    .header-left img { width:50px; height:50px; border-radius:50%; }
-    .header-left .title { font-size:20px; font-weight:600; }
-    .header-left .subtitle { font-size:12px; color:#666; }
-    .header-right img { width:40px; height:40px; border-radius:50%; margin-top:10px; }
-
-    /* Section Title */
-    .section-title { max-width:95%; margin:30px auto 15px; font-size:18px; font-weight:600; text-align:center; }
-
-    /* Toggle */
-    .toggle-container { display:flex; justify-content:center; align-items:center; gap:10px; margin-bottom:20px; }
-    .switch { position: relative; display:inline-block; width:60px; height:34px; }
-    .switch input { opacity:0; width:0; height:0; }
-    .slider { position:absolute; cursor:pointer; top:0; left:0; right:0; bottom:0; background-color:#ccc; transition:0.4s; border-radius:34px; }
-    .slider:before { position:absolute; content:""; height:26px; width:26px; left:4px; bottom:4px; background:white; transition:0.4s; border-radius:50%; }
-    input:checked + .slider { background-color:#28a745; }
-    input:checked + .slider:before { transform:translateX(26px); }
-    .status { font-weight:600; font-size:16px; }
-    .online { color:#28a745; }
-    .offline { color:#dc3545; }
-
-    /* Ask Doubt Section */
-    .ask-doubt-section {
-      max-width:900px; margin:20px auto 40px; background:#fff; border-radius:12px; padding:25px;
-      box-shadow:0 4px 12px rgba(0,0,0,0.05);
-    }
-    .ask-doubt-section textarea { width:100%; padding:12px; border-radius:8px; border:1px solid #ccc; resize:vertical; font-size:14px; margin-bottom:15px; }
-    .speak-btn { background:#ff6600; color:#fff; border:none; padding:10px 20px; border-radius:8px; cursor:pointer; font-weight:600; transition:0.3s; }
-    .speak-btn:hover { background:#ff8533; }
-
-    /* Dropdowns */
-    .dropdowns { display:flex; justify-content:center; gap:15px; flex-wrap:wrap; margin-bottom:20px; }
-    .dropdowns select { padding:10px 15px; border-radius:8px; border:1px solid #ccc; font-size:14px; cursor:pointer; }
-
-    /* Ask Button */
-    .ask-btn { display:block; margin:0 auto 25px; background:#4b0082; color:#fff; border:none; padding:12px 25px; font-size:16px; font-weight:600; border-radius:8px; cursor:pointer; transition:0.3s; }
-    .ask-btn:hover { background:#6a00b0; }
-
-    /* AI Response Section */
-    .ai-response { background:#eef2f7; border-radius:12px; padding:20px; margin-top:15px; }
-    .response-item { display:inline-block; background:#fff; padding:12px 18px; border-radius:8px; margin:8px; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.1); transition:0.2s; font-weight:500; }
-    .response-item:hover { background:#f0e6ff; }
-
-    /* Feedback Buttons */
-    .feedback-buttons { margin-top:20px; display:flex; gap:15px; flex-wrap:wrap; }
-    .feedback-buttons button { padding:10px 20px; border:none; border-radius:8px; cursor:pointer; font-weight:600; transition:0.3s; }
-    .worked { background:#28a745; color:#fff; }
-    .worked:hover { background:#45c65c; }
-    .not-worked { background:#dc3545; color:#fff; }
-    .not-worked:hover { background:#e86a6a; }
-
-    /* Responsive */
-    @media screen and (max-width:768px){
-      .dropdowns select, .ask-doubt-section textarea, .ask-btn, .speak-btn { width:95%; }
-    }
-  </style>
+}
+</style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav>
+<!-- Side Panel - Right side -->
+<div id="mySidepanel">
+    <a href="teacher-home.html">Home</a>
+    <a href="#ask-doubt">Ask Doubt</a>
+    <a href="#">Resources</a>
+    <a href="#" class="logout-link">Logout</a>
+</div>
+
+<!-- Navbar - Fixed, hamburger always visible -->
+<nav>
     <div class="logo">Teacher-AssistantAI</div>
-    <ul>
-      <li><a href="teacher-home.html">Home</a></li>
-      <li><a href="#ask-doubt">Ask Doubt</a></li>
-      <li><a href="#">Resources</a></li>
-      <li class="logout"><a href="#">Logout</a></li>
-    </ul>
-  </nav>
+    <button class="hamburger" id="hamburgerBtn">☰</button>
+</nav>
 
-  <!-- Header -->
-  <header>
-    <div class="header-left">
-      <img src="" alt="Teacher">
-      <div>
-        <div class="title">Teacher Dashboard</div>
-        <div class="subtitle">Ask Your Doubts Here</div>
-      </div>
-    </div>
-    <div class="header-right">
-      <img src="" alt="User">
-    </div>
-  </header>
+<!-- Header -->
+<header>
+<div class="header-left">
+<img src="" alt="Teacher">
+<div>
+<div class="title">Teacher Dashboard</div>
+<div class="subtitle">Ask Your Doubts Here</div>
+</div>
+</div>
+<div class="header-right">
+<img src="" alt="User">
+</div>
+</header>
 
-  <!-- Online/Offline Toggle -->
-  <div class="toggle-container">
-    <label class="switch">
-      <input type="checkbox" id="toggleStatus">
-      <span class="slider"></span>
-    </label>
-    <span class="status offline" id="statusText">Offline</span>
-  </div>
+<!-- Online/Offline Toggle -->
+<div class="toggle-container">
+<label class="switch">
+<input type="checkbox" id="toggleStatus">
+<span class="slider"></span>
+</label>
+<span class="status offline" id="statusText">Offline</span>
+</div>
 
-  <!-- Ask Doubt Button -->
-  <input type="button" class="ask-btn" value="Ask Your Doubt">
+<!-- Ask Doubt Button -->
+<h2 style="text-align:center; margin:20px 0; color:#4b0082;">
+  Ask Your Doubt
+</h2>
 
-  <!-- Dropdowns -->
-  <div class="dropdowns">
-    <select>
-      <option>Class</option>
-      <option>Class 6</option>
-      <option>Class 7</option>
-    </select>
-    <select>
-      <option>Subject</option>
-      <option>Mathematics</option>
-      <option>Science</option>
-    </select>
-    <select>
-      <option>Topic</option>
-      <option>Algebra</option>
-      <option>Physics</option>
-    </select>
-  </div>
+<!-- Dropdowns -->
+<div class="dropdowns">
+<select>
+<option>Class</option>
+<option>Class 6</option>
+<option>Class 7</option>
+</select>
+<select>
+<option>Subject</option>
+<option>Mathematics</option>
+<option>Science</option>
+</select>
+<select>
+<option>Topic</option>
+<option>Algebra</option>
+<option>Physics</option>
+</select>
+</div>
 
-  <!-- Ask Doubt Section -->
-  <div class="ask-doubt-section" id="ask-doubt">
-    <h2>Ask Your Doubt</h2>
-    <textarea placeholder="Type your doubt here..."></textarea>
-    <button class="speak-btn">🎤 Speak</button>
+<!-- Ask Doubt Section -->
+<div class="ask-doubt-section" id="ask-doubt">
+<h2>Ask Your Doubt</h2>
+<textarea placeholder="Type your doubt here..."></textarea>
+<button class="speak-btn">🎤 Speak</button>
 
-    <!-- AI Response -->
-    <div class="ai-response">
-      <h2>AI Response</h2>
-      <div class="response-item">Classroom Activity</div>
-      <div class="response-item">Teaching Tip</div>
-      <div class="response-item">Engagement Idea</div>
-      <div class="response-item">Micro-learning</div>
+<!-- AI Response -->
+<div class="ai-response">
+<h2>AI Response</h2>
+<div class="response-item">Classroom Activity</div>
+<div class="response-item">Teaching Tip</div>
+<div class="response-item">Engagement Idea</div>
+<div class="response-item">Micro-learning</div>
 
-      <!-- Feedback Buttons -->
-      <div class="feedback-buttons">
-        <button class="worked">Worked ✅</button>
-        <button class="not-worked">Did Not Work ❌</button>
-      </div>
-    </div>
-  </div>
+<!-- Feedback Buttons -->
+<div class="feedback-buttons">
+<button class="worked">Worked ✅</button>
+<button class="not-worked">Did Not Work ❌</button>
+</div>
+</div>
+</div>
 
+<script>
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const sidepanel = document.getElementById('mySidepanel');
 
+hamburgerBtn.addEventListener('click', function() {
+    if (document.body.classList.contains('sidepanel-open')) {
+        sidepanel.style.width = "0";
+        document.body.classList.remove('sidepanel-open');
+    } else {
+        sidepanel.style.width = "250px";
+        document.body.classList.add('sidepanel-open');
+    }
+});
+</script>
 
 </body>
 </html>
