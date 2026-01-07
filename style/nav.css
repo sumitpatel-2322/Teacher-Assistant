@@ -1,0 +1,191 @@
+
+    /* GLOBAL RESET & BASE STYLES */
+    * { box-sizing: border-box; margin:0; padding:0; font-family:'Inter', sans-serif; }
+    
+    /* Background: Lightest Mint (#EDF5E1) | Base Text: Dark Navy Teal (#05386B) */
+    body { 
+      background: #EDF5E1; 
+      color: #05386B; 
+      line-height: 1.5; 
+    }
+
+    /* NAVBAR - Dark Navy Teal (#05386B) */
+    nav {
+      width: 100%;
+      background: #05386B;
+      color: #fff;
+      padding: 12px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    nav .logo { font-size: 20px; font-weight: 600; color: #5CDB95; } /* Logo in Bright Mint */
+    nav ul { list-style: none; display: flex; gap: 20px; align-items: center; }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    nav ul li a:hover { color: #5CDB95; }
+    nav ul li.login a { 
+      background: #5CDB95; 
+      color: #05386B; 
+      padding: 8px 18px; 
+      border-radius: 6px; 
+      font-weight: 600;
+    }
+    nav ul li.login a:hover { background: #8EE4AF; }
+
+    /* HEADER - White with Deep Teal Accents */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: #fff;
+      width: 100%;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      flex-wrap: wrap;
+    }
+    .header-left { display: flex; align-items: center; gap: 15px; }
+    .header-left img { 
+      height: 45px; 
+      width: 45px; 
+      border-radius: 50%; 
+      background: #EDF5E1; 
+      object-fit: cover;
+    }
+    .header-left .title { 
+      font-size: 20px; 
+      font-weight: 600; 
+      color: #379683; /* Deep Teal */
+    }
+    .header-left .subtitle { 
+      font-size: 12px; 
+      color: #05386B; 
+      opacity: 0.8;
+    }
+    .header-right img { 
+      height: 40px; 
+      width: 40px; 
+      border-radius: 50%;
+      background: #f0f0f0;
+    }
+
+    /* INTRO SECTION */
+    .intro {
+      max-width: 1200px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 40px 20px;
+      border-radius: 12px;
+      text-align: center;
+      border: 1px solid #8EE4AF; /* Light Green border */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+    .intro h1 { font-size: 28px; margin-bottom: 15px; color: #379683; }
+    .intro p { font-size: 16px; color: #05386B; max-width: 850px; margin: 0 auto; }
+
+    /* ROLE NAVIGATION - Bright Mint Buttons (#5CDB95) */
+    .role-nav {
+      max-width: 1200px;
+      margin: 20px auto;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .role-nav button {
+      padding: 12px 24px;
+      font-size: 15px;
+      border: none;
+      border-radius: 8px;
+      background: #5CDB95;
+      color: #05386B;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .role-nav button:hover { 
+      background: #379683; 
+      color: #fff; 
+      transform: translateY(-2px); 
+    }
+
+    /* SECTION TITLES */
+    .section-title {
+      max-width: 1200px;
+      margin: 50px auto 25px;
+      font-size: 22px;
+      font-weight: 600;
+      text-align: center;
+      color: #379683;
+      position: relative;
+    }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: #5CDB95;
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+
+    /* CARD GRID */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto 50px;
+      padding: 0 20px;
+    }
+    .card {
+      background: #fff; 
+      border-radius: 12px; 
+      padding: 25px;
+      box-shadow: 0 4px 12px rgba(5, 56, 107, 0.05);
+      transition: 0.3s; 
+      display: flex; 
+      flex-direction: column; 
+      gap: 12px;
+      border-bottom: 4px solid transparent;
+    }
+    .card:hover { 
+      transform: translateY(-5px); 
+      box-shadow: 0 8px 20px rgba(5, 56, 107, 0.1); 
+      border-bottom: 4px solid #5CDB95;
+    }
+    .card .icon {
+      font-size: 24px; 
+      background: #EDF5E1; 
+      padding: 10px; 
+      border-radius: 8px; 
+      width: 50px; 
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #379683;
+      border: 1px solid #8EE4AF;
+    }
+    .card h3 { font-size: 18px; font-weight: 600; color: #05386B; }
+    .card p { font-size: 14px; color: #555; line-height: 1.5; }
+
+    /* RESPONSIVE DESIGN */
+    @media screen and (max-width: 768px) {
+      nav { padding: 15px 20px; flex-direction: column; gap: 15px; }
+      nav ul { gap: 10px; }
+      header { padding: 15px 20px; justify-content: center; text-align: center; }
+      .header-left { flex-direction: column; }
+      .intro h1 { font-size: 22px; }
+      .card-grid { grid-template-columns: 1fr; }
+    }
