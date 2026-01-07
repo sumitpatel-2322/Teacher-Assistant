@@ -6,8 +6,8 @@
 }
 
 body { 
-    background: #fef9f5; 
-    color: #333; 
+    background: #EDF5E1; 
+    color: #05386B; 
     line-height: 1.5; 
     transition: margin-right 0.5s; 
 }
@@ -15,8 +15,8 @@ body {
 /* Navbar - Fixed full width, always on top */
 nav {
     width: 100%;
-    background: #4b0082;
-    color: #fff;
+    background: #05386B;
+    color: #EDF5E1;
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
@@ -39,7 +39,7 @@ nav .logo {
     cursor: pointer;
     background: none;
     border: none;
-    color: #fff;
+    color: #EDF5E1;
     padding: 10px 15px;
     position: relative;
     z-index: 1004;
@@ -53,7 +53,7 @@ nav .logo {
     height: 100%;
     top: 0;
     right: 0;
-    background-color: #4b0082;
+    background-color: #8EE4AF;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 80px;
@@ -63,18 +63,18 @@ nav .logo {
     padding: 18px 30px;
     text-decoration: none;
     font-size: 18px;
-    color: #fff;
+    color: #05386B ;
     display: block;
     transition: 0.3s;
     text-align: left;
 }
 
 #mySidepanel a:hover {
-    background-color: #6a00b0;
+    background-color: #379683;
 }
 
 #mySidepanel .logout-link {
-    background: #ff4d4d;
+    background: #dc3545;
     font-weight: 600;
     margin-top: 30px;
 }
@@ -83,22 +83,6 @@ nav .logo {
     background: #e63939;
 }
 
-/* Push content when panel opens */
-body.sidepanel-open {
-    margin-right: 250px;
-}
-
-header, .toggle-container, .ask-btn, .dropdowns, .ask-doubt-section {
-    transition: margin-right 0.5s;
-}
-
-body.sidepanel-open header,
-body.sidepanel-open .toggle-container,
-body.sidepanel-open .ask-btn,
-body.sidepanel-open .dropdowns,
-body.sidepanel-open .ask-doubt-section {
-    margin-right: 250px;
-}
 
 /* Original styles */
 header { 
@@ -106,10 +90,10 @@ header {
     justify-content: space-between; 
     align-items: center; 
     padding: 15px 20px; 
-    background: #fff; 
+    background: #EDF5E1; 
     border-radius: 12px; 
     margin: 20px auto; 
-    max-width: 1200px; 
+    width: 100%;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
     flex-wrap: wrap; 
     margin-top: 70px; 
@@ -135,7 +119,7 @@ header {
 
 .header-left .subtitle { 
     font-size: 12px; 
-    color: #666; 
+    color: #379683; 
 }
 
 .header-right img { 
@@ -185,13 +169,13 @@ header {
     width: 26px; 
     left: 4px; 
     bottom: 4px; 
-    background: white; 
+    background: #EDF5E1; 
     transition: 0.4s; 
     border-radius: 50%; 
 }
 
 input:checked + .slider { 
-    background-color: #28a745; 
+    background-color: #5CDB95; 
 }
 
 input:checked + .slider:before { 
@@ -204,7 +188,7 @@ input:checked + .slider:before {
 }
 
 .online { 
-    color: #28a745; 
+    color: #5CDB95; 
 }
 
 .offline { 
@@ -222,16 +206,17 @@ input:checked + .slider:before {
 .dropdowns select { 
     padding: 10px 15px; 
     border-radius: 8px; 
-    border: 1px solid #ccc; 
+    border: 1px solid #379683; 
     font-size: 14px; 
     cursor: pointer; 
+    color: #05386B;
 }
 
 .ask-btn { 
     display: block; 
     margin: 0 auto 25px; 
-    background: #4b0082; 
-    color: #fff; 
+    background: #05386B; 
+    color: #EDF5E1; 
     border: none; 
     padding: 12px 25px; 
     font-size: 16px; 
@@ -242,45 +227,47 @@ input:checked + .slider:before {
 }
 
 .ask-btn:hover { 
-    background: #6a00b0; 
+    background: #379683; 
 }
 
 .ask-doubt-section { 
     max-width: 900px; 
     margin: 20px auto 40px; 
-    background: #fff; 
+    background:#05386B; 
     border-radius: 12px; 
     padding: 25px; 
     box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+    color:#08935d
 }
 
 .ask-doubt-section textarea { 
     width: 100%; 
     padding: 12px; 
     border-radius: 8px; 
-    border: 1px solid #ccc; 
+    border: 1px solid #379683; 
     resize: vertical; 
     font-size: 14px; 
     margin-bottom: 15px; 
 }
 
 .speak-btn { 
-    background: #ff6600; 
-    color: #fff; 
+    background: #5CDB95; 
+    color: #131cb7; 
     border: none; 
     padding: 10px 20px; 
     border-radius: 8px; 
     cursor: pointer; 
     font-weight: 600; 
     transition: 0.3s; 
+    margin:0 auto;
 }
 
 .speak-btn:hover { 
-    background: #ff8533; 
+    background: #8EE4AF; 
 }
 
 .ai-response { 
-    background: #eef2f7; 
+    background: #8EE4AF; 
     border-radius: 12px; 
     padding: 20px; 
     margin-top: 15px; 
@@ -288,7 +275,7 @@ input:checked + .slider:before {
 
 .response-item { 
     display: inline-block; 
-    background: #fff; 
+    background: #EDF5E1; 
     padding: 12px 18px; 
     border-radius: 8px; 
     margin: 8px; 
@@ -299,7 +286,7 @@ input:checked + .slider:before {
 }
 
 .response-item:hover { 
-    background: #f0e6ff; 
+    background: #8EE4AF; 
 }
 
 .feedback-buttons { 
@@ -320,17 +307,17 @@ input:checked + .slider:before {
 }
 
 .worked { 
-    background: #28a745; 
-    color: #fff; 
+    background: #13fc3a; 
+    color: #05386B; 
 }
 
 .worked:hover { 
-    background: #45c65c; 
+    background: #51f967; 
 }
 
 .not-worked { 
     background: #dc3545; 
-    color: #fff; 
+    color: #EDF5E1; 
 }
 
 .not-worked:hover { 
@@ -354,4 +341,57 @@ input:checked + .slider:before {
     body.sidepanel-open .ask-doubt-section {
         margin-right: 0;
     }
+}
+
+.feedback-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* centers horizontally */
+  margin-top: 30px;
+}
+
+.feedback-section label {
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 8px;
+}
+
+.feedback-box {
+  width: 100%;
+  max-width: 900px;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #046554;
+  border-radius: 6px;
+  resize: none;
+}
+.feedback{
+    font: weight 300px;}
+
+
+.ask-btn { 
+    background: #5CDB95; 
+    color: #05386B; 
+    border: none; 
+    padding: 10px 20px; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-weight: 600; 
+    transition: 0.3s; 
+    margin: 0 auto 15px;  
+
+}
+
+.ask-btn:hover { 
+    background: #8EE4AF; 
+}    
+.ask-btn,
+.speak-btn {
+    width: 100%;
+    max-width: 900px;
+}
+
+.feedback-section label {
+  font-size: 18px;   
+  font-weight: 600;
 }
