@@ -6,84 +6,84 @@
 <title>Teacher Dashboard - Ask Doubt</title>
 <link href="<https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap>" rel="stylesheet">
 <style>
-/* Palette: Background - #EDF5E1 | Primary Text - #05386B | Accents - #379683 & #5CDB95 */
+* { box-sizing: border-box; margin:0; padding:0; font-family:'Inter', sans-serif; }
 body { background:#fef9f5; color:#333; line-height:1.5; transition: margin-right 0.5s; }
 
 /* Navbar - Fixed full width, always on top */
 nav {
-    width: 100%;
-    background: #4b0082;
-    color: #fff;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;                  /* Full width */
-    z-index: 1003;             /* Above side panel */
-    transition: none;
+    width: 100%;
+    background: #4b0082;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;                  /* Full width */
+    z-index: 1003;             /* Above side panel */
+    transition: none;
 }
 
 nav .logo { font-size:20px; font-weight:600; }
 
 .hamburger {
-    font-size: 30px;
-    cursor: pointer;
-    background: none;
-    border: none;
-    color: #fff;
-    padding: 10px 15px;
-    position: relative;
-    z-index: 1004;
+    font-size: 30px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #fff;
+    padding: 10px 15px;
+    position: relative;
+    z-index: 1004;
 }
 
 /* Side Panel - Right side */
 #mySidepanel {
-    width: 0;
-    position: fixed;
-    z-index: 1002;
-    height: 100%;
-    top: 0;
-    right: 0;
-    background-color: #4b0082;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 80px;
+    width: 0;
+    position: fixed;
+    z-index: 1002;
+    height: 100%;
+    top: 0;
+    right: 0;
+    background-color: #4b0082;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 80px;
 }
 
 #mySidepanel a {
-    padding: 18px 30px;
-    text-decoration: none;
-    font-size: 18px;
-    color: #fff;
-    display: block;
-    transition: 0.3s;
-    text-align: left;
+    padding: 18px 30px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #fff;
+    display: block;
+    transition: 0.3s;
+    text-align: left;
 }
 
 #mySidepanel a:hover {
-    background-color: #6a00b0;
+    background-color: #6a00b0;
 }
 
 #mySidepanel .logout-link {
-    background: #ff4d4d;
-    font-weight: 600;
-    margin-top: 30px;
+    background: #ff4d4d;
+    font-weight: 600;
+    margin-top: 30px;
 }
 
 #mySidepanel .logout-link:hover {
-    background: #e63939;
+    background: #e63939;
 }
 
 /* Push content when panel opens */
 body.sidepanel-open {
-    margin-right: 250px;
+    margin-right: 250px;
 }
 
 header, .toggle-container, .ask-btn, .dropdowns, .ask-doubt-section {
-    transition: margin-right 0.5s;
+    transition: margin-right 0.5s;
 }
 
 body.sidepanel-open header,
@@ -91,7 +91,7 @@ body.sidepanel-open .toggle-container,
 body.sidepanel-open .ask-btn,
 body.sidepanel-open .dropdowns,
 body.sidepanel-open .ask-doubt-section {
-    margin-right: 250px;
+    margin-right: 250px;
 }
 
 /* Original styles - unchanged */
@@ -136,18 +136,18 @@ input:checked + .slider:before { transform:translateX(26px); }
 .not-worked:hover { background:#e86a6a; }
 
 @media screen and (max-width:768px){
-    .dropdowns select, .ask-doubt-section textarea, .ask-btn, .speak-btn { width:95%; }
-    body.sidepanel-open {
-        margin-right: 0;
-    }
-    body.sidepanel-open header,
-    body.sidepanel-open .toggle-container,
-    body.sidepanel-open .ask-btn,
-    body.sidepanel-open .dropdowns,
-    body.sidepanel-open .ask-doubt-section {
-        margin-right: 0;
-    }
-}change color only 
+    .dropdowns select, .ask-doubt-section textarea, .ask-btn, .speak-btn { width:95%; }
+    body.sidepanel-open {
+        margin-right: 0;
+    }
+    body.sidepanel-open header,
+    body.sidepanel-open .toggle-container,
+    body.sidepanel-open .ask-btn,
+    body.sidepanel-open .dropdowns,
+    body.sidepanel-open .ask-doubt-section {
+        margin-right: 0;
+    }
+}
 </style>
 </head>
 <body>
