@@ -7,12 +7,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin:0; padding:0; font-family:'Inter', sans-serif; }
-    body { background:#fef9f5; color:#333; line-height:1.5; }
+    
+    /* Background: #EDF5E1 | Primary Text: #05386B */
+    body { background:#EDF5E1; color:#05386B; line-height:1.5; }
 
-    /* Navbar */
+    /* Navbar - Dark Navy Teal */
     nav {
       width: 100%;
-      background: #4b0082;
+      background: #05386B;
       color: #fff;
       padding: 10px 20px;
       display: flex;
@@ -22,7 +24,7 @@
       border-radius: 0;
       margin: 0;
     }
-    nav .logo { font-size:20px; font-weight:600; }
+    nav .logo { font-size:20px; font-weight:600; color: #5CDB95; }
     nav ul { list-style: none; display: flex; gap: 15px; flex-wrap: wrap; }
     nav ul li a {
       color: #fff;
@@ -32,22 +34,22 @@
       border-radius: 6px;
       transition: 0.3s;
     }
-    nav ul li a:hover { background:#6a00b0; }
+    nav ul li a:hover { background:#379683; }
     nav ul li.logout a { background:#ff4d4d; font-weight:600; }
     nav ul li.logout a:hover { background:#e63939; }
 
-    /* Header */
+    /* Header Card */
     header {
       display:flex; justify-content:space-between; align-items:center;
-      padding:15px 20px; background:#fff; border-radius:12px; margin:20px auto;
-      max-width:1200px; box-shadow:0 4px 12px rgba(0,0,0,0.05);
+      padding:15px 20px; background:#fff; border-radius:12px; margin:0;
+      width:100%; box-shadow:0 4px 12px rgba(5, 56, 107, 0.1);
       flex-wrap: wrap;
     }
     .header-left { display:flex; align-items:center; gap:15px; flex-wrap: wrap; }
-    .header-left img { width:50px; height:50px; border-radius:50%; }
-    .header-left .title { font-size:20px; font-weight:600; }
-    .header-left .subtitle { font-size:12px; color:#666; }
-    .header-right img { width:40px; height:40px; border-radius:50%; margin-top:10px; }
+    .header-left img { width:50px; height:50px; border-radius:50%; background: #EDF5E1; }
+    .header-left .title { font-size:20px; font-weight:600; color: #379683; } /* Deep Teal Title */
+    .header-left .subtitle { font-size:12px; color: #05386B; opacity: 0.8; }
+    .header-right img { width:40px; height:40px; border-radius:50%; margin-top:10px; background: #f0f0f0; }
 
     /* Section Title */
     .section-title {
@@ -56,9 +58,10 @@
       font-size:18px;
       font-weight:600;
       text-align:center;
+      color: #379683;
     }
 
-    /* Actions */
+    /* Actions - Using Mint Green (#5CDB95) */
     .actions {
       max-width:95%;
       margin:20px auto 40px;
@@ -72,13 +75,26 @@
       font-size:14px;
       border:none;
       border-radius:6px;
-      background:#ffae42;
-      color:#fff;
+      background:#5CDB95;
+      color:#05386B;
       cursor:pointer;
       font-weight:600;
       transition:0.3s;
     }
-    .actions button:hover { background:#e69530; }
+    .actions button:hover { background:#8EE4AF; transform: translateY(-2px); }
+
+    /* Form Elements - Themed */
+    #teacherDropdown {
+      width:90%; 
+      max-width:400px; 
+      padding:12px; 
+      border-radius:8px; 
+      border:1px solid #8EE4AF; 
+      font-size:14px;
+      background: #fff;
+      color: #05386B;
+      outline-color: #379683;
+    }
 
     /* Footer */
     footer {
@@ -86,24 +102,24 @@
       margin:20px auto;
       padding:10px 20px;
       text-align:center;
-      color:#666;
+      color:#05386B;
+      opacity: 0.6;
       font-size:14px;
     }
 
     /* Responsive */
     @media screen and (max-width:768px){
       nav { flex-direction: column; align-items: flex-start; }
-      nav ul { justify-content: flex-start; gap:10px; }
-   header { flex-direction: column; align-items: flex-start; }
-      .header-left { flex-direction: column; align-items: flex-start; }
+      nav ul { justify-content: flex-start; gap:10px; margin-top: 10px; }
+      header { flex-direction: column; align-items: center; text-align: center; margin: 15px; }
+      .header-left { flex-direction: column; align-items: center; }
       .section-title { font-size:16px; }
-      .actions button { padding:8px 12px; font-size:13px; }
+      .actions button { width: 100%; padding: 12px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
   <nav>
     <div class="logo">Teacher-AssistantAI</div>
     <ul>
@@ -113,21 +129,19 @@
     </ul>
   </nav>
 
-  <!-- Header -->
   <header>
     <div class="header-left">
-      <img src="https://via.placeholder.com/50" alt="CRP">
+      <img src="https://via.placeholder.com/50/379683/FFFFFF?text=CRP" alt="CRP">
       <div>
         <div class="title">CRP Dashboard</div>
         <div class="subtitle">Digital Coaching Platform</div>
       </div>
     </div>
     <div class="header-right">
-      <img src="https://via.placeholder.com/40" alt="User">
+      <img src="https://via.placeholder.com/40/05386B/FFFFFF?text=U" alt="User">
     </div>
   </header>
 
-  <!-- CRP Actions -->
   <div class="section-title">CRP Actions</div>
   <div class="actions">
     <button>Reply to Teachers</button>
@@ -135,10 +149,9 @@
     <button>Send Messages</button>
   </div>
 
-  <!-- Teachers Section -->
   <div class="section-title" id="teachers">List of Teachers</div>
   <div style="max-width:95%; margin:0 auto 30px; text-align:center;">
-    <select id="teacherDropdown" style="width:90%; max-width:400px; padding:10px; border-radius:6px; border:1px solid #ccc; font-size:14px;">
+    <select id="teacherDropdown">
       <option value="">Select a Teacher</option>
       <option value="Teacher 1">Teacher 1</option>
       <option value="Teacher 2">Teacher 2</option>
@@ -148,9 +161,8 @@
     </select>
   </div>
 
-  <!-- Footer -->
   <footer>
-    <p>© 2026 Digital Coaching Platform</p>
+    <p>© 2026 Teacher Coaching Platform</p>
   </footer>
 
 </body>

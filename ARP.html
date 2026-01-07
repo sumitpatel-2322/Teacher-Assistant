@@ -7,12 +7,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin:0; padding:0; font-family:'Inter', sans-serif; }
-    body { background:#fef9f5; color:#333; line-height:1.5; }
+    /* Palette: Background - #EDF5E1 | Text - #05386B */
+    body { background:#EDF5E1; color:#05386B; line-height:1.5; }
 
-    /* Navbar */
+    /* Navbar - Dark Navy Teal (#05386B) */
     nav {
       width: 100%;
-      background: #4b0082;
+      background: #05386B;
       color: #fff;
       padding: 10px 20px;
       display: flex;
@@ -22,7 +23,7 @@
       border-radius: 0;
       margin: 0;
     }
-    nav .logo { font-size:20px; font-weight:600; }
+    nav .logo { font-size:20px; font-weight:600; color: #5CDB95; }
     nav ul { list-style: none; display: flex; gap: 15px; flex-wrap: wrap; }
     nav ul li a {
       color: #fff;
@@ -32,27 +33,27 @@
       border-radius: 6px;
       transition: 0.3s;
     }
-    nav ul li a:hover { background:#6a00b0; }
+    nav ul li a:hover { background:#379683; }
     nav ul li.logout a { background:#ff4d4d; font-weight:600; }
     nav ul li.logout a:hover { background:#e63939; }
 
     /* Header */
-    header {
+ header {
       display:flex; justify-content:space-between; align-items:center;
-      padding:15px 20px; background:#fff; border-radius:12px; margin:20px auto;
-      max-width:1200px; box-shadow:0 4px 12px rgba(0,0,0,0.05);
+      padding:15px 20px; background:#fff; border-radius:12px; margin:0;
+      width:100%; box-shadow:0 4px 12px rgba(5, 56, 107, 0.1);
       flex-wrap: wrap;
     }
     .header-left { display:flex; align-items:center; gap:15px; flex-wrap: wrap; }
-    .header-left img { width:50px; height:50px; border-radius:50%; }
-    .header-left .title { font-size:20px; font-weight:600; }
-    .header-left .subtitle { font-size:12px; color:#666; }
-    .header-right img { width:40px; height:40px; border-radius:50%; margin-top:10px; }
+    .header-left img { width:50px; height:50px; border-radius:50%; background: #EDF5E1; }
+    .header-left .title { font-size:20px; font-weight:600; color: #379683; } /* Deep Teal Title */
+    .header-left .subtitle { font-size:12px; color: #05386B; opacity: 0.8; }
+    .header-right img { width:40px; height:40px; border-radius:50%; margin-top:10px; background: #f0f0f0; }
 
     /* Section Title */
-    .section-title { max-width:95%; margin:30px auto 15px; font-size:18px; font-weight:600; text-align:center; }
+    .section-title { max-width:95%; margin:30px auto 15px; font-size:18px; font-weight:600; text-align:center; color: #379683; }
 
-    /* Actions */
+    /* Actions - Bright Mint (#5CDB95) */
     .actions {
       max-width:95%;
       margin:20px auto 40px;
@@ -66,13 +67,13 @@
       font-size:14px;
       border:none;
       border-radius:6px;
-      background:#ffae42;
-      color:#fff;
+      background:#5CDB95;
+      color:#05386B;
       cursor:pointer;
       font-weight:600;
       transition:0.3s;
     }
-    .actions button:hover { background:#e69530; }
+    .actions button:hover { background:#8EE4AF; transform: translateY(-1px); }
 
     /* Footer */
     footer {
@@ -80,7 +81,7 @@
       margin:20px auto;
       padding:10px 20px;
       text-align:center;
-      color:#666;
+      color:#379683;
       font-size:14px;
     }
 
@@ -92,30 +93,27 @@
 </head>
 <body>
 
-  <!-- Navbar -->
   <nav>
     <div class="logo">Teacher-AssistantAI</div>
     <ul>
-      <li><a href="arp-dashboard.html">Home</a></li>
+      <li><a href="Home_page.html">Home</a></li>
       <li class="logout"><a href="#">Logout</a></li>
     </ul>
   </nav>
 
-  <!-- Header -->
   <header>
     <div class="header-left">
-      <img src="https://via.placeholder.com/50" alt="ARP">
+      <img src="https://via.placeholder.com/50/379683/FFFFFF?text=ARP" alt="ARP">
       <div>
         <div class="title">ARP Dashboard</div>
         <div class="subtitle">State Monitoring & Teaching Improvement</div>
       </div>
     </div>
     <div class="header-right">
-      <img src="https://via.placeholder.com/40" alt="User">
+      <img src="https://via.placeholder.com/40/05386B/FFFFFF?text=User" alt="User">
     </div>
   </header>
 
-  <!-- ARP Actions -->
   <div class="section-title">ARP Actions</div>
   <div class="actions">
     <button>Upload Subject Models</button>
@@ -123,7 +121,6 @@
     <button>Improve Teaching Strategies</button>
   </div>
 
-  <!-- Footer -->
   <footer>
     <p>© 2026 Digital Coaching Platform</p>
   </footer>

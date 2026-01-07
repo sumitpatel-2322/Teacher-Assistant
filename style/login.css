@@ -1,0 +1,111 @@
+/* GLOBAL RESET & BASE */
+* { box-sizing: border-box; margin:0; padding:0; font-family:'Inter', sans-serif; }
+
+body {
+    margin: 0;
+    padding: 0;
+    /* Using the Lightest Mint from the palette as the base background */
+    background-color: #7fdca0; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Auth Container (Login & Register) */
+.auth-container, .login-container {
+    width: 420px;
+    /* Dark Navy Teal (#05386B) with slight transparency for a modern feel */
+    background-color: #05386B;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(5, 56, 107, 0.25);
+    text-align: center;
+}
+
+/* Title - Bright Mint (#5CDB95) */
+.auth-container h2, .login-container h2 {
+    color: #5CDB95;
+    font-size: 38px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    letter-spacing: -1px;
+}
+
+/* Labels - Light Green (#8EE4AF) */
+.auth-container label, .login-container label {
+    color: #8EE4AF;
+    font-size: 14px;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 8px;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Inputs */
+.auth-container input, .login-container input {
+    width: 100%;
+    height: 44px;
+    font-size: 15px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    margin-bottom: 25px;
+    background-color: #EDF5E1; /* Light mint input field */
+    color: #05386B;
+    transition: all 0.3s ease;
+}
+
+.auth-container input:focus, .login-container input:focus {
+    outline: none;
+    border: 2px solid #5CDB95; /* Mint border on focus */
+    box-shadow: 0 0 8px rgba(92, 219, 149, 0.4);
+}
+
+/* Button - Bright Mint (#5CDB95) */
+.auth-container button, .login-container button {
+    width: 100%;
+    height: 48px;
+    font-size: 17px;
+    font-weight: 600;
+    background-color: #5CDB95;
+    color: #05386B;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.auth-container button:hover, .login-container button:hover {
+    background-color: #8EE4AF;
+    transform: translateY(-2px);
+}
+
+/* Footer text (Links) */
+.auth-container p, .login-container p {
+    color: #EDF5E1;
+    font-size: 14px;
+    margin-top: 25px;
+    opacity: 0.9;
+}
+
+.auth-container a, .login-container a {
+    color: #5CDB95;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.auth-container a:hover, .login-container a:hover {
+    color: #8EE4AF;
+    text-decoration: underline;
+}
+
+/* Layout for forms */
+.auth-container form {
+    display: flex;
+    flex-direction: column;
+}
