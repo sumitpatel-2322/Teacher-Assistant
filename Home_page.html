@@ -7,9 +7,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin:0; padding:0; font-family:'Inter', sans-serif; }
-    body { background:#fef9f5; color:#333; line-height:1.5; }
+    body { background:#fef9f5; color:#333; line-height:1.5; transition: margin-right 0.5s; }
 
-    /* Navbar */
+    /* Navbar - Fixed, always visible */
     nav {
       width: 100%;
       background: #4b0082;
@@ -18,44 +18,88 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      border-radius: 0;
-      margin: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1003;
     }
     nav .logo { font-size:20px; font-weight:600; }
-    nav ul { list-style: none; display: flex; gap: 15px; flex-wrap: wrap; }
-    nav ul li a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 500;
-      padding: 6px 12px;
-      border-radius: 6px;
-      transition: 0.3s;
-    }
-    nav ul li a:hover { background:#6a00b0; }
-    nav ul li.logout a { background:#ff4d4d; font-weight:600; }
-    nav ul li.logout a:hover { background:#e63939; }
 
-    /* Header */
-    header {
-      display:flex; justify-content:space-between; align-items:center;
-      padding:15px 20px; background:#fff; border-radius:12px; margin:20px auto;
-      max-width:1200px; box-shadow:0 4px 12px rgba(0,0,0,0.05);
-      flex-wrap: wrap;
+    .hamburger {
+      font-size: 30px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: #fff;
+      padding: 10px 15px;
+      position: relative;
+      z-index: 1004;
     }
-    .header-left { display:flex; align-items:center; gap:15px; flex-wrap: wrap; }
-    .header-left img { width:50px; height:50px; border-radius:50%; }
-    .header-left .title { font-size:20px; font-weight:600; }
-    .header-left .subtitle { font-size:12px; color:#666; }
-    .header-right img { width:40px; height:40px; border-radius:50%; margin-top: 10px; }
+
+    /* Side Panel - Right side */
+    #mySidepanel {
+      width: 0;
+      position: fixed;
+      z-index: 1002;
+      height: 100%;
+      top: 0;
+      right: 0;
+      background-color: #4b0082;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 80px;
+    }
+
+    #mySidepanel a {
+      padding: 18px 30px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #fff;
+      display: block;
+      transition: 0.3s;
+      text-align: left;
+    }
+
+    #mySidepanel a:hover {
+      background-color: #6a00b0;
+    }
+
+    #mySidepanel .logout-link {
+      background: #ff4d4d;
+      font-weight: 600;
+      margin-top: 30px;
+    }
+
+    #mySidepanel .logout-link:hover {
+      background: #e63939;
+    }
+
+    /* Push content when panel opens */
+    body.sidepanel-open {
+      margin-right: 250px;
+    }
+
+    .intro, .role-nav, .section-title, .card-grid, #login {
+      transition: margin-right 0.5s;
+    }
+
+    body.sidepanel-open .intro,
+    body.sidepanel-open .role-nav,
+    body.sidepanel-open .section-title,
+    body.sidepanel-open .card-grid,
+    body.sidepanel-open #login {
+      margin-right: 250px;
+    }
 
     /* Intro Section */
     .intro {
       max-width:95%;
-      margin:20px auto;
+      margin:90px auto 20px; /* Extra top margin for fixed navbar */
       background:#fff3e6;
       padding:20px 15px;
-      border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.05);
+      border-radius:12px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.05);
       text-align:center;
     }
     .intro h1 { font-size:24px; margin-bottom:10px; }
@@ -147,48 +191,43 @@
 
     /* Responsive */
     @media screen and (max-width:768px){
-      nav { flex-direction: column; align-items: flex-start; }
-      nav ul { justify-content: flex-start; gap:10px; }
-      header { flex-direction: column; align-items: flex-start; }
-      .header-left { flex-direction: column; align-items: flex-start; }
-      .intro h1 { font-size:20px; }
-      .intro p { font-size:13px; }
+      .intro { margin-top: 80px; }
       .role-nav button { padding:8px 12px; font-size:13px; }
       .section-title { font-size:16px; }
       .card .icon { width:40px; font-size:20px; }
       .card h3 { font-size:14px; }
       .card p { font-size:12px; }
       #login { width:95%; padding:15px; }
+
+      body.sidepanel-open {
+        margin-right: 0;
+      }
+      body.sidepanel-open .intro,
+      body.sidepanel-open .role-nav,
+      body.sidepanel-open .section-title,
+      body.sidepanel-open .card-grid,
+      body.sidepanel-open #login {
+        margin-right: 0;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
+  <!-- Side Panel - Right side -->
+  <div id="mySidepanel">
+    <a href="#system-overview">Home</a>
+    <a href="#challenges">Challenges</a>
+    <a href="#features">Features</a>
+    <a href="#roles">Roles</a>
+    <a href="#login" class="logout-link">Login</a>
+  </div>
+
+  <!-- Navbar - Fixed with Hamburger -->
   <nav>
     <div class="logo">Teacher-AssistantAI</div>
-    <ul>
-      <li><a href="#system-overview">Home</a></li>
-      <li><a href="#challenges">Challenges</a></li>
-      <li><a href="#features">Features</a></li>
-      <li><a href="#roles">Roles</a></li>
-      <li class="login"><a href="#login">Login</a></li>
-    </ul>
+    <button class="hamburger" id="hamburgerBtn">☰</button>
   </nav>
-
-  <!-- Header -->
-  <header>
-    <div class="header-left">
-      <img src="" alt="Logo">
-      <div>
-        <div class="title">Teacher-AssistantAI</div>
-        <div class="subtitle">Just-In-Time Digital Coaching Platform for Teachers</div>
-      </div>
-    </div>
-    <div class="header-right">
-      <img src="" alt="User">
-    </div>
-  </header>
 
   <!-- Intro Section -->
   <div class="intro" id="system-overview">
@@ -232,6 +271,21 @@
   </div>
 
   
+
+  <script>
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const sidepanel = document.getElementById('mySidepanel');
+
+    hamburgerBtn.addEventListener('click', function() {
+      if (document.body.classList.contains('sidepanel-open')) {
+        sidepanel.style.width = "0";
+        document.body.classList.remove('sidepanel-open');
+      } else {
+        sidepanel.style.width = "250px";
+        document.body.classList.add('sidepanel-open');
+      }
+    });
+  </script>
 
 </body>
 </html>
