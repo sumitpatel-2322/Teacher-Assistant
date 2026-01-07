@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BRP Dashboard - Teacher-AssistantAI</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/brp.css">
 </head>
 <body>
 
@@ -44,21 +44,7 @@
     <p>© 2026 Digital Coaching Platform</p>
   </footer>
 
-  <script>
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
-    const sidepanel = document.getElementById('mySidepanel');
-
-    hamburgerBtn.addEventListener('click', function() {
-      if (document.body.classList.contains('sidepanel-open')) 
-      {
-        sidepanel.style.width = "0";
-        document.body.classList.remove('sidepanel-open');
-      } else {
-        sidepanel.style.width = "250px";
-        document.body.classList.add('sidepanel-open');
-      }
-    });
-  </script>
+  <script src="js/brp.js"></script>
 
 </body>
 </html>

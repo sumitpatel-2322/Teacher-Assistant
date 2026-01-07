@@ -4,8 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Teacher Dashboard - Ask Doubt</title>
-<link href="<https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap>" rel="stylesheet">
-<link rel="stylesheet" href="css/theme.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/Tb.css">
+
 </head>
 <body>
 
@@ -83,17 +84,6 @@
 <div class="response-item">Teaching Tip</div>
 <div class="response-item">Engagement Idea</div>
 <div class="response-item">Micro-learning</div>
-<br>
-
-<label for="feedback"><b>Your Feedback:</b></label><br><br>
-  <textarea 
-    id="feedback" 
-    name="feedback" 
-    rows="5" 
-    cols="50" 
-    placeholder="Enter your feedback here...">
-  </textarea>
-
 
 <!-- Feedback Buttons -->
 <div class="feedback-buttons">
@@ -103,20 +93,7 @@
 </div>
 </div>
 
-<script>
-const hamburgerBtn = document.getElementById('hamburgerBtn');
-const sidepanel = document.getElementById('mySidepanel');
-
-hamburgerBtn.addEventListener('click', function() {
-    if (document.body.classList.contains('sidepanel-open')) {
-        sidepanel.style.width = "0";
-        document.body.classList.remove('sidepanel-open');
-    } else {
-        sidepanel.style.width = "250px";
-        document.body.classList.add('sidepanel-open');
-    }
-});
-</script>
+<script src="js/Tb.js"></script>
 
 </body>
 </html>
