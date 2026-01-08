@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Teacher-AssistantAI - System Design</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/Hp.css">
+  <link rel="stylesheet" href="static/css/Hp.css">
 </head>
 <body>
 
@@ -15,7 +15,7 @@
     <a href="#challenges">Challenges</a>
     <a href="#features">Features</a>
     <a href="#roles">Roles</a>
-    <a href="#login" class="logout-link">Login</a>
+    <a href="/login" class="logout-link">Login</a>
   </div>
 
   <!-- Navbar - Fixed with Hamburger -->
@@ -36,10 +36,10 @@
 
   <!-- User Role Navigation -->
   <div class="role-nav" id="roles">
-    <button onclick="location.href='Teacher_dashboard.html'">Teacher</button>
-    <button onclick="location.href='CRP.html'">CRP</button>
-    <button onclick="location.href='BRP.html'">BRP</button>
-    <button onclick="location.href='ARP.html'">ARP</button>
+    <button onclick="location.href='/teacher'">Teacher</button>
+    <button onclick="location.href='/crp'">CRP</button>
+    <button onclick="location.href='/brp'">BRP</button>
+    <button onclick="location.href='/arp'">ARP</button>
   </div>
 
   <!-- Challenges -->
@@ -64,9 +64,7 @@
     <div class="card"><div class="icon">⚙️</div><h3>One Model for All Users</h3><p>Unified platform to solve problems for Teacher–CRP–BRP–ARP efficiently.</p></div>
     <div class="card"><div class="icon">📚</div><h3>Micro-Learning & Resources</h3><p>Provides lesson plans, teaching tips, and engagement ideas in micro-learning format.</p></div>
   </div>
-
-
-<script src="js/Hp.js"></script>
+<script src="static/js/Hp.js"></script>
 
 </body>
 </html>
