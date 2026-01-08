@@ -1,32 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teacher-AssistantAI - Login</title>
+  <meta charset="UTF-8">
+  <title>Teacher-AssistantAI | Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style/login.css">
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/login.css">
 </head>
 
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
 
-        <form method="post">
-            <label>Username</label>
-            <input type="text" name="username" id="username" required>
+<!-- ================= NAVBAR ================= -->
+<nav>
+  <div class="logo">Teacher-AssistantAI</div>
+  <button class="hamburger" id="hamburgerBtn">☰</button>
+</nav>
 
-            <label>Password</label>
-            <input type="password" name="password" id="password" required>
+<!-- ================= SIDEBAR ================= -->
+<div id="mySidepanel">
+  <span class="sidebar-close" id="closeSidebar">✕</span>
 
-            <button type="submit">Login</button>
-        </form>
+  <a href="Home_page.html" class="btn">Home</a>
+  <a href="login.html" class="btn">Sign In</a>
+</div>
 
-        <p>
-            Don't have an account?
-            <a href="/register">Register here</a>
-        </p>
+<!-- ================= HEADER ================= -->
+<header>
+  <div class="header-left">
+    <img src="" alt="Teacher">
+    <div>
+      <div class="title">Teacher Dashboard</div>
+      <div class="subtitle">Just-In-Time Digital Platform For Teachers</div>
     </div>
+  </div>
+
+  <div class="header-right">
+    <img src="" alt="User">
+  </div>
+</header>
+
+<!-- ================= LOGIN CONTENT ================= -->
+<div class="login-container">
+
+  <h2>Login</h2>
+
+  <label for="role">Role</label>
+  <select id="role" name="role" required>
+    <option value="">Select Role</option>
+    <option value="teacher">Teacher</option>
+    <option value="crp">CRP</option>
+    <option value="brp">BRP</option>
+    <option value="arp">ARP</option>
+  </select>
+
+  <form method="post" action="/login">
+    <label>Username</label>
+    <input type="text" required>
+
+    <label>Password</label>
+    <input type="password" required>
+
+    <button type="submit">Login</button>
+  </form>
+
+  <p>
+    Don’t have an account?
+    <a href="/register">Register here</a>
+  </p>
+
+</div>
+
+<!-- ================= SIDEBAR SCRIPT ================= -->
+<script>
+  const hamburger = document.getElementById("hamburgerBtn");
+  const sidepanel = document.getElementById("mySidepanel");
+  const closeBtn = document.getElementById("closeSidebar");
+
+  hamburger.onclick = () => {
+    sidepanel.classList.add("open");
+  };
+
+  closeBtn.onclick = () => {
+    sidepanel.classList.remove("open");
+  };
+</script>
+
 </body>
 </html>

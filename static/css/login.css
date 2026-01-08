@@ -1,0 +1,223 @@
+/* ================= RESET ================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: linear-gradient(160deg, #EDF5E1, #c5f8d9);
+  color: #05386B;
+  min-height: 100vh;
+}
+
+/* ================= NAVBAR ================= */
+nav {
+  width: 100%;
+  background: #05386B;
+  color: #EDF5E1;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1003;
+}
+
+nav .logo {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.hamburger {
+  font-size: 28px;
+  background: none;
+  border: none;
+  color: #EDF5E1;
+  cursor: pointer;
+}
+
+/* ================= HEADER ================= */
+header {
+  margin-top: 70px;
+  padding: 16px 22px;
+  background: #EDF5E1;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header-left img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.header-left .title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.header-left .subtitle {
+  font-size: 12px;
+  color: #379683;
+}
+
+.header-right img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+/* ================= SIDEBAR ================= */
+#mySidepanel {
+  width: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  z-index: 9999;
+  overflow-x: hidden;
+  transition: width 0.45s ease;
+  padding-top: 80px;
+
+  background: linear-gradient(
+    160deg,
+    rgba(255,255,255,0.65),
+    rgba(180,225,215,0.85),
+    rgba(150,205,215,0.9)
+  );
+
+  backdrop-filter: blur(20px) saturate(150%);
+  border-left: 1.5px solid rgba(255,255,255,0.7);
+  border-top-left-radius: 26px;
+  border-bottom-left-radius: 26px;
+}
+
+#mySidepanel.open {
+  width: 260px;
+}
+
+#mySidepanel a {
+  display: block;
+  padding: 18px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #05386B;
+  text-decoration: none;
+}
+
+#mySidepanel a:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+#mySidepanel a.active {
+  background: rgba(60,160,140,0.7);
+  color: #fff;
+}
+
+.sidebar-close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 26px;
+  cursor: pointer;
+  color: #05386B;
+}
+
+/* ================= LOGIN CARD ================= */
+.login-container {
+  max-width: 420px;
+  margin: 40px auto;
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(14px);
+  padding: 28px;
+  border-radius: 14px;
+  border: 1.5px solid rgba(5,56,107,0.25);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.login-container label {
+  font-size: 14px;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.login-container input,
+.login-container select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(5,56,107,0.35);
+}
+
+.login-container button {
+  width: 100%;
+  padding: 11px;
+  background: #05386B;
+  color: #EDF5E1;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.login-container button:hover {
+  background: #379683;
+}
+
+.login-container p {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.login-container a {
+  color: #05386B;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.login-container a:hover {
+  text-decoration: underline;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+  header {
+    margin: 80px 10px 10px;
+  }
+
+  .login-container {
+    margin: 20px 12px;
+  }
+}
+#mySidepanel .btn {
+  font-weight: 600;
+  margin-top: 30px;
+  color: black;
+  font-size: medium;
+    text-align: center;
+ font-size: 20px;
+}
+
+#mySidepanel .btn:hover {
+  background: #05386B
+}

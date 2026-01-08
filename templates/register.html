@@ -1,32 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Register</title>
-    <link rel="stylesheet" href="style/login.css">
+  <meta charset="UTF-8">
+  <title>Teacher-AssistantAI | Register</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/register.css">
 </head>
 
 <body>
-    <div class="auth-container">
-        <h2>Register</h2>
 
-        <form method="post" action="/registered">
-            <label>Username</label>
-            <input type="text" name="username" required>
+<nav>
+  <div class="logo">Teacher-AssistantAI</div>
+  <button class="hamburger" id="hamburgerBtn">☰</button>
+</nav>
 
-            <label>Password</label>
-            <input type="password" name="password" required>
+<div id="mySidepanel">
+  <span class="sidebar-close" id="closeSidebar">✕</span>
 
-            <label>Confirm Password</label>
-            <input type="password" name="confirm_password" required>
+  <a href="Home_page.html" class="btn">Home</a>
+  
+  <a href="register.html" class="btn">Sign Up</a>
+</div>
 
-            <button type="submit">Register</button>
-        </form>
-
-        <p>
-            Have an account?
-            <a href="login.html">Login</a>
-        </p>
+<header>
+  <div class="header-left">
+    <img src="" alt="Teacher">
+    <div>
+      <div class="title">Teacher Dashboard</div>
+      <div class="subtitle">Just-In-Time Digital Platform For Teachers</div>
     </div>
+  </div>
+
+  <div class="header-right">
+    <img src="" alt="User">
+  </div>
+</header>
+
+<div class="auth-container">
+
+  <h2>Register</h2>
+
+  <form method="post" action="/registered">
+
+    <label for="role">Role</label>
+    <select id="role" name="role" required>
+      <option value="">Select Role</option>
+      <option value="teacher">Teacher</option>
+      <option value="crp">CRP</option>
+      <option value="brp">BRP</option>
+      <option value="arp">ARP</option>
+    </select>
+
+    <label for="teacher_id">Teacher ID</label>
+    <input type="text" id="teacher_id" name="teacher_id" required>
+
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="school_name">School Name</label>
+    <input type="text" id="school_name" name="school_name" required>
+
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" required>
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required>
+
+    <label for="confirm_password">Confirm Password</label>
+    <input type="password" id="confirm_password" name="confirm_password" required>
+
+    <button type="submit">Register</button>
+  </form>
+
+  <p>
+    Have an account?
+    <a href="login.html">Login</a>
+  </p>
+
+</div>
+
+<!-- ================= SIDEBAR SCRIPT ================= -->
+<script>
+  const hamburger = document.getElementById("hamburgerBtn");
+  const sidepanel = document.getElementById("mySidepanel");
+  const closeBtn = document.getElementById("closeSidebar");
+
+  hamburger.onclick = () => {
+    sidepanel.classList.add("open");
+  };
+
+  closeBtn.onclick = () => {
+    sidepanel.classList.remove("open");
+  };
+</script>
+
 </body>
 </html>
