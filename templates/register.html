@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="css/register.css">
+  <link rel="stylesheet" href="static/css/register.css">
 </head>
 
 <body>
@@ -22,9 +22,9 @@
 <div id="mySidepanel">
   <span class="sidebar-close" id="closeSidebar">✕</span>
 
-  <a href="Home_page.html" class="btn">Home</a>
+  <a href="/" class="btn">Home</a>
   
-  <a href="register.html" class="btn">Sign Up</a>
+  <a href="/login" class="btn">login</a>
 </div>
 
 <header>
@@ -85,18 +85,7 @@
 </div>
 
 <!-- ================= SIDEBAR SCRIPT ================= -->
-<script>
-  const hamburger = document.getElementById("hamburgerBtn");
-  const sidepanel = document.getElementById("mySidepanel");
-  const closeBtn = document.getElementById("closeSidebar");
-
-  hamburger.onclick = () => {
-    sidepanel.classList.add("open");
-  };
-
-  closeBtn.onclick = () => {
-    sidepanel.classList.remove("open");
-  };
+<script src="static/js/register.js">
 </script>
 
 </body>

@@ -10,3 +10,13 @@ const hamburgerBtn = document.getElementById('hamburgerBtn');
         document.body.classList.add('sidepanel-open');
       }
     });
+  const hamburger = document.getElementById("hamburgerBtn");
+  const closeBtn = document.getElementById("closeSidebar");
+
+  hamburger.onclick = () => {
+    sidepanel.classList.add("open");
+  };
+
+  closeBtn.onclick = () => {
+    sidepanel.classList.remove("open");
+  };
