@@ -57,31 +57,32 @@
 </h2>
 
 <!-- Dropdowns -->
+<form action="/teacher/ask" method="post">
 <div class="dropdowns">
-<select>
-<option>Class</option>
-<option>Class 6</option>
-<option>Class 7</option>
+<select name="class_name" required>
+<option value="">Class</option>
+<option value="Class 6">Class 6</option>
+<option value="Class 7">Class 7</option>
 </select>
-<select>
-<option>Subject</option>
-<option>Mathematics</option>
-<option>Science</option>
+<select name="subject" required>
+<option value="">Subject</option>
+<option value="Mathematics">Mathematics</option>
+<option value="Science">Science</option>
 </select>
-<select>
-<option>Topic</option>
-<option>Algebra</option>
-<option>Physics</option>
+<select name="topic" required>
+<option value="">Topic</option>
+<option value="Algebra">Algebra</option>
+<option value="Physics">Physics</option>
 </select>
 </div>
 
 <!-- Ask Doubt Section -->
 <div class="ask-doubt-section" id="ask-doubt">
 <h2>Ask Your Doubt</h2>
-<textarea placeholder="Type your doubt here..."></textarea>
-<button class="ask-btn">Enter</button>
-<button class="speak-btn">🎤 Speak</button>
-
+<textarea placeholder="Type your doubt here..." name="question"></textarea>
+<button type="submit" class="ask-btn">Enter</button>
+<button type="button" class="speak-btn">🎤 Speak</button>
+</form>
 
 <!-- AI Response -->
 <div class="ai-response">

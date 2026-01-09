@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Request
 from fastapi.templating import Jinja2Templates
+from fastapi.responses import RedirectResponse
 from Database.db import get_connection
 import re
 
@@ -81,7 +82,7 @@ async def registered(request: Request):
     conn.commit()
     conn.close()
 
-    return templates.TemplateResponse(
-        "registered.html",
-        {"request": request}
+    return RedirectResponse(
+        "/login",
+        status_code=302
     )

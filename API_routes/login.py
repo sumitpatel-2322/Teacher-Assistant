@@ -32,8 +32,22 @@ async def login_check(
     user = cursor.fetchone()
     conn.close()
 
-    if user is None or user["password"] != password:
-        return {"error": "Invalid username or password"}
+    if user is None:
+        return templates.TemplateResponse(
+            "login.html",
+            {
+                "request":request,
+                "error":"User name does not exist!!"
+            }
+        )
+    if user["password"]!= password:
+        return templates.TemplateResponse(
+            "login.html",
+            {
+                "request":request,
+                "error":"Incorrect Password!!"
+            }
+        )
 
     # ✅ FIXED SESSION STORAGE
     request.session["user"] = {
@@ -42,14 +56,16 @@ async def login_check(
     }
 
     return RedirectResponse(
-        url="/teacher",
+        url="/dashboard",
         status_code=302
     )
 
 @router.get("/logout")
 def logout(request: Request):
     request.session.clear()
-    return RedirectResponse(
-        url="/",
-        status_code=302
+    return templates.TemplateResponse(
+        "logout.html",
+        {
+            "request":request
+        }
     )

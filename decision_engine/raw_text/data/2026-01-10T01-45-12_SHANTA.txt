@@ -1,0 +1,10 @@
+timestamp: 2026-01-10T01:45:12
+role: teacher
+username: SHANTA
+
+class: Class 6 
+subject: Mathematics
+topic: Algebra
+
+question:
+Students are not Listening
