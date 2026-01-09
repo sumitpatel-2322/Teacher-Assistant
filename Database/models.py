@@ -7,6 +7,7 @@ def create_teacher_table():
                    CREATE TABLE IF NOT EXISTS teachers(
                        id INTEGER PRIMAR KEY,
                       name TEXT NOT NULL,
+                      role TEXT NOT NULL,
                       school_name TEXT NOT NULL,
                       username TEXT UNIQUE NOT NULL,
                       password TEXT NOT NULL);

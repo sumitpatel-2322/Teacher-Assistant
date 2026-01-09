@@ -3,12 +3,16 @@ from fastapi.templating import Jinja2Templates
 from Database.db import get_connection
 router=APIRouter()
 templates=Jinja2Templates(directory="templates")
-@router.post("/registered")
+@router.post("/login")
 async def registered(request:Request):
     form= await request.form()
-    
+    id=form.get("teacher_id")
+    role=form.get("role")
+    name=form.get("name")
+    school_name=form.get("school_name")
     username=form.get("username")
     password=form.get("password")
+    
     confirm_password=form.get("confirm_password")
     if (not username or not password):
         return {"error":"All fields are required"}
@@ -19,7 +23,7 @@ async def registered(request:Request):
     cursor=conn.cursor()
     try:
         cursor.execute(
-            "INSERT INTO teachers(username,password) VALUES(?,?)",(username,password)
+            "INSERT INTO teachers(id,name,role,school_name,username,password) VALUES(?,?,?,?,?,?)",(id,name,role,school_name,username,password,)
         )
         conn.commit()
     except Exception:
