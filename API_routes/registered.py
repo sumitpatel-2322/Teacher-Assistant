@@ -3,7 +3,7 @@ from fastapi.templating import Jinja2Templates
 from Database.db import get_connection
 router=APIRouter()
 templates=Jinja2Templates(directory="templates")
-@router.post("/login")
+@router.post("/register")
 async def registered(request:Request):
     form= await request.form()
     id=form.get("teacher_id")
