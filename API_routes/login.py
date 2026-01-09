@@ -13,6 +13,7 @@ def login(request: Request):
         "login.html",
         {"request": request}
     )
+
 # Handle login form submission (AUTH CHECK)
 @router.post("/login")
 async def login_check(
@@ -44,6 +45,7 @@ async def login_check(
         url="/teacher",
         status_code=302
     )
+
 @router.get("/logout")
 def logout(request: Request):
     request.session.clear()
