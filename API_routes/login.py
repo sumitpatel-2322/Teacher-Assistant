@@ -13,16 +13,14 @@ def login(request: Request):
         "login.html",
         {"request": request}
     )
-
 # Handle login form submission (AUTH CHECK)
 @router.post("/login")
-async def login_check(request: Request,
-                      email: str = Form(...),
-                      role: str = Form(...)):
-    form = await request.form()
-    username = form.get("username")
-    password = form.get("password")
-
+async def login_check(
+    request: Request,
+    username: str = Form(...),
+    password: str = Form(...),
+    role: str = Form(...)
+):
     conn = get_connection()
     cursor = conn.cursor()
 
@@ -33,19 +31,15 @@ async def login_check(request: Request,
     user = cursor.fetchone()
     conn.close()
 
-    # Invalid username
-    if user is None:
-        return {"error": "Invalid username"}
-
-    # Invalid password
-    if user["password"] != password:
+    if user is None or user["password"] != password:
         return {"error": "Invalid username or password"}
 
-    request.session["username"] = {
-        "email": email,
+    # ✅ FIXED SESSION STORAGE
+    request.session["user"] = {
+        "username": username,
         "role": role
     }
-    # SUCCESS → render loggedin.html
+
     return RedirectResponse(
         url="/teacher",
         status_code=302
