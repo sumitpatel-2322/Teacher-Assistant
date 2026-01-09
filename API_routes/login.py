@@ -1,5 +1,6 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, Form
 from fastapi.templating import Jinja2Templates
+from fastapi.responses import RedirectResponse
 from Database.db import get_connection
 
 router = APIRouter()
@@ -15,9 +16,10 @@ def login(request: Request):
 
 # Handle login form submission (AUTH CHECK)
 @router.post("/login")
-async def login_check(request: Request):
+async def login_check(request: Request,
+                      email: str = Form(...),
+                      role: str = Form(...)):
     form = await request.form()
-
     username = form.get("username")
     password = form.get("password")
 
@@ -39,8 +41,19 @@ async def login_check(request: Request):
     if user["password"] != password:
         return {"error": "Invalid username or password"}
 
+    request.session["username"] = {
+        "email": email,
+        "role": role
+    }
     # SUCCESS → render loggedin.html
-    return templates.TemplateResponse(
-        "loggedin.html",
-        {"request": request}
+    return RedirectResponse(
+        url="/teacher",
+        status_code=302
+    )
+@router.get("/logout")
+def logout(request: Request):
+    request.session.clear()
+    return RedirectResponse(
+        url="/",
+        status_code=302
     )

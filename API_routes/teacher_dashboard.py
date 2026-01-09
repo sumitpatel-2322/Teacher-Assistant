@@ -1,8 +1,11 @@
-from fastapi import APIRouter, Request
-from fastapi.templating import Jinja2Templates 
+from fastapi import APIRouter, Request,Depends
+from API_routes.auth import require_login
+from fastapi.templating import Jinja2Templates
 router=APIRouter()
 templates=Jinja2Templates(directory="templates")
 @router.get("/teacher")
-def teacher_dashboard(request:Request):
+async def teacher_dashboard(request:Request,
+                            user=Depends(require_login)):
     return templates.TemplateResponse("Teacher_dashboard.html",
-                                      {"request":request})
+                                      {"request":request,
+                                       "user":user})
