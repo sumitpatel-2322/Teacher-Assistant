@@ -9,82 +9,13 @@ body {
     background: #EDF5E1; 
     color: #05386B; 
     line-height: 1.5; 
-    transition: margin-right 0.5s; 
+    transition: margin-right 0.5s;
 }
 
-/* Navbar - Fixed full width, always on top */
-nav {
-    width: 100%;
-    background: #05386B;
-    color: #EDF5E1;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1003;
-    transition: none;
+body.sidepanel-open {
+    margin-right: 250px;
 }
 
-nav .logo { 
-    font-size: 20px; 
-    font-weight: 600; 
-}
-
-.hamburger {
-    font-size: 30px;
-    cursor: pointer;
-    background: none;
-    border: none;
-    color: #EDF5E1;
-    padding: 10px 15px;
-    position: relative;
-    z-index: 1004;
-}
-
-/* Side Panel - Right side */
-#mySidepanel {
-    width: 0;
-    position: fixed;
-    z-index: 1002;
-    height: 100%;
-    top: 0;
-    right: 0;
-    background-color: #8EE4AF;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 80px;
-}
-
-#mySidepanel a {
-    padding: 18px 30px;
-    text-decoration: none;
-    font-size: 18px;
-    color: #05386B ;
-    display: block;
-    transition: 0.3s;
-    text-align: left;
-}
-
-#mySidepanel a:hover {
-    background-color: #379683;
-}
-
-#mySidepanel .logout-link {
-    background: #dc3545;
-    font-weight: 600;
-    margin-top: 30px;
-}
-
-#mySidepanel .logout-link:hover {
-    background: #e63939;
-}
-
-
-/* Original styles */
 header { 
     display: flex; 
     justify-content: space-between; 
@@ -129,6 +60,9 @@ header {
     margin-top: 10px; 
 }
 
+/* =================================================
+   TOGGLE
+   ================================================= */
 .toggle-container { 
     display: flex; 
     justify-content: center; 
@@ -153,18 +87,15 @@ header {
 .slider { 
     position: absolute; 
     cursor: pointer; 
-    top: 0; 
-    left: 0; 
-    right: 0; 
-    bottom: 0; 
+    inset: 0; 
     background-color: #ccc; 
     transition: 0.4s; 
     border-radius: 34px; 
 }
 
 .slider:before { 
-    position: absolute; 
     content: ""; 
+    position: absolute; 
     height: 26px; 
     width: 26px; 
     left: 4px; 
@@ -187,14 +118,12 @@ input:checked + .slider:before {
     font-size: 16px; 
 }
 
-.online { 
-    color: #5CDB95; 
-}
+.online { color: #5CDB95; }
+.offline { color: #dc3545; }
 
-.offline { 
-    color: #dc3545; 
-}
-
+/* =================================================
+   DROPDOWNS & CONTENT
+   ================================================= */
 .dropdowns { 
     display: flex; 
     justify-content: center; 
@@ -226,9 +155,7 @@ input:checked + .slider:before {
     transition: 0.3s; 
 }
 
-.ask-btn:hover { 
-    background: #379683; 
-}
+.ask-btn:hover { background: #379683; }
 
 .ask-doubt-section { 
     max-width: 900px; 
@@ -237,7 +164,7 @@ input:checked + .slider:before {
     border-radius: 12px; 
     padding: 25px; 
     box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
-    color:#08935d
+    color:#08935d;
 }
 
 .ask-doubt-section textarea { 
@@ -259,12 +186,10 @@ input:checked + .slider:before {
     cursor: pointer; 
     font-weight: 600; 
     transition: 0.3s; 
-    margin:0 auto;
+    margin: 0 auto;
 }
 
-.speak-btn:hover { 
-    background: #8EE4AF; 
-}
+.speak-btn:hover { background: #8EE4AF; }
 
 .ai-response { 
     background: #8EE4AF; 
@@ -285,10 +210,11 @@ input:checked + .slider:before {
     font-weight: 500; 
 }
 
-.response-item:hover { 
-    background: #8EE4AF; 
-}
+.response-item:hover { background: #8EE4AF; }
 
+/* =================================================
+   FEEDBACK
+   ================================================= */
 .feedback-buttons { 
     margin-top: 20px; 
     display: flex; 
@@ -306,92 +232,40 @@ input:checked + .slider:before {
     transition: 0.3s; 
 }
 
-.worked { 
-    background: #13fc3a; 
-    color: #05386B; 
-}
-
-.worked:hover { 
-    background: #51f967; 
-}
-
-.not-worked { 
-    background: #dc3545; 
-    color: #EDF5E1; 
-}
-
-.not-worked:hover { 
-    background: #e86a6a; 
-}
-
-@media screen and (max-width: 768px) {
-    .dropdowns select, 
-    .ask-doubt-section textarea, 
-    .ask-btn, 
-    .speak-btn { 
-        width: 95%; 
-    }
-    body.sidepanel-open {
-        margin-right: 0;
-    }
-    body.sidepanel-open header,
-    body.sidepanel-open .toggle-container,
-    body.sidepanel-open .ask-btn,
-    body.sidepanel-open .dropdowns,
-    body.sidepanel-open .ask-doubt-section {
-        margin-right: 0;
-    }
-}
+.worked { background: #13fc3a; color: #05386B; }
+.not-worked { background: #dc3545; color: #EDF5E1; }
 
 .feedback-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;   /* centers horizontally */
-  margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
 }
 
 .feedback-section label {
-  width: 100%;
-  max-width: 500px;
-  margin-bottom: 8px;
+    font-size: 18px;
+    font-weight: 600;
 }
 
 .feedback-box {
-  width: 100%;
-  max-width: 900px;
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid #046554;
-  border-radius: 6px;
-  resize: none;
-}
-.feedback{
-    font: weight 300px;}
-
-
-.ask-btn { 
-    background: #5CDB95; 
-    color: #05386B; 
-    border: none; 
-    padding: 10px 20px; 
-    border-radius: 8px; 
-    cursor: pointer; 
-    font-weight: 600; 
-    transition: 0.3s; 
-    margin: 0 auto 15px;  
-
-}
-
-.ask-btn:hover { 
-    background: #8EE4AF; 
-}    
-.ask-btn,
-.speak-btn {
     width: 100%;
     max-width: 900px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #046554;
+    border-radius: 6px;
+    resize: none;
 }
 
-.feedback-section label {
-  font-size: 18px;   
-  font-weight: 600;
+/* =================================================
+   RESPONSIVE
+   ================================================= */
+@media screen and (max-width: 768px) {
+    .dropdowns select,
+    .ask-doubt-section textarea,
+    .ask-btn,
+    .speak-btn {
+        width: 95%;
+    }
+    body.sidepanel-open { margin-right: 0; }
 }

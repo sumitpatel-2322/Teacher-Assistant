@@ -1,12 +1,17 @@
-const hamburgerBtn = document.getElementById('hamburgerBtn');
-const sidepanel = document.getElementById('mySidepanel');
+document.addEventListener("DOMContentLoaded", function () {
 
-hamburgerBtn.addEventListener('click', function() {
-    if (document.body.classList.contains('sidepanel-open')) {
-        sidepanel.style.width = "0";
-        document.body.classList.remove('sidepanel-open');
-    } else {
-        sidepanel.style.width = "250px";
-        document.body.classList.add('sidepanel-open');
-    }
+  const sidepanel = document.getElementById("mySidepanel");
+  const hamburgerBtn = document.getElementById("hamburgerBtn");
+  const closeBtn = document.querySelector("#mySidepanel .sidebar-close");
+
+  // Open panel
+  hamburgerBtn.addEventListener("click", function () {
+    sidepanel.style.width = "250px";
+  });
+
+  // Close panel (✕ button)
+  closeBtn.addEventListener("click", function () {
+    sidepanel.style.width = "0";
+  });
+
 });

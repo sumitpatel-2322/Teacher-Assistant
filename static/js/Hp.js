@@ -11,7 +11,6 @@ hamburgerBtn.addEventListener('click', function () {
   }
 });
 
-
 function openDashboard() {
   const role = localStorage.getItem("userRole"); 
 

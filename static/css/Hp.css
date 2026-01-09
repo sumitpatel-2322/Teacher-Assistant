@@ -38,14 +38,10 @@ nav .logo {
   cursor: pointer;
   background: none;
   border: none;
-  color:#EDF5E1; 
+  color: #EDF5E1;
   padding: 10px 15px;
-  position: fixed;
-  z-index: 10001;
-  top: 2px;
-  right:18px;
-  pointer-events: auto;
-
+  position: relative;
+  z-index: 1004;
 }
 
 /* Side Panel - Right side */
@@ -77,7 +73,7 @@ color: #05386B;
 }
 
 #mySidepanel a:hover {
-  background-color:#05386B;;
+  background-color:#05386B;
 }
 
 #mySidepanel .logout-link {
@@ -395,9 +391,10 @@ header {
 
 #mySidepanel .sidebar-close {
   position: absolute;
-  top: 14px;
+    top: 10px;
   right: 20px; 
-  font-size: 28px;    
-  font-weight: 800;   
-  color: #05386B;
-  pointer-events: none; }
+  font-size: 40px;    
+  color: black;
+  pointer-events: none;
+  text-decoration: none;
+    cursor: pointer; }

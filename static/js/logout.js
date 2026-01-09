@@ -10,4 +10,3 @@ const hamburgerBtn = document.getElementById('hamburgerBtn');
         document.body.classList.add('sidepanel-open');
       }
     });
-  

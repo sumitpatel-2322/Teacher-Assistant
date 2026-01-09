@@ -1,0 +1,139 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(160deg, #EDF5E1, #c5f8d9);
+  color: #05386B;
+}
+
+
+
+nav {
+  width: 100%;
+  background: #05386B;
+  color: #EDF5E1;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1003;
+}
+
+nav .logo {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.hamburger {
+  font-size: 30px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #EDF5E1;
+  padding: 10px 15px;
+  position: relative;
+  z-index: 1004;
+}
+
+#mySidepanel {
+  width: 0;               
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  z-index: 9999;
+  overflow-x: hidden;
+  transition: width 0.45s ease;
+  padding-top: 80px;
+
+  background: linear-gradient(
+    160deg,
+    rgba(255,255,255,0.65),
+    rgba(180,225,215,0.85),
+    rgba(150,205,215,0.9)
+  );
+
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+
+  border-left: 1.5px solid rgba(255,255,255,0.7);
+  border-top-left-radius: 26px;
+  border-bottom-left-radius: 26px;
+
+  box-shadow:
+    -8px 0 20px rgba(0,0,0,0.18),
+    inset 1px 0 0 rgba(255,255,255,0.35);
+}
+
+/* Sidebar links */
+#mySidepanel a {
+  display: block;
+  padding: 18px 30px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #05386B;
+    transition: 0.3s;
+  text-decoration: none;
+  text-align: left;
+}
+
+#mySidepanel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-top-left-radius: 26px;
+  border-bottom-left-radius: 26px;
+  z-index: -1;
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.35),
+    transparent 40%
+  );
+  pointer-events: none;
+
+}
+#mySidepanel a:hover {
+  background-color:#05386B;
+}
+#mySidepanel .sidebar-close {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+  font-size: 28px;
+  font-weight: 800;
+  color: #05386B;
+  cursor: pointer;
+}
+#mySidepanel .logout-link {
+     font-weight: 600;
+  margin-top: 30px;
+  color: black;
+  font-size: medium;
+    text-align: center;
+ font-size: 20px;
+}
+
+#mySidepanel .logout-link:hover {
+  background: #05386B
+}
+
+
+#mySidepanel {
+  width: 0;
+  transition: width 0.45s ease;
+}
+
+#mySidepanel.open {
+  width: 260px;
+}

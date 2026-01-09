@@ -39,14 +39,14 @@ nav .logo { font-size:20px; font-weight:600; color: #5CDB95; } /* Mint Logo */
 
 /* Side Panel - Right side */
 #mySidepanel {
-    width: 0;
-    position: fixed;
+  width: 0;
+  position: fixed;
     z-index: 1002;
-    height: 100%;
-    top: 0;
-    right: 0;
+  height: 100%;
+  top: 0;
+  right: 0;
     background-color: #05386B; /* Matching Nav */
-    overflow-x: hidden;
+  overflow-x: hidden;
     transition: 0.5s;
     padding-top: 80px;
 }

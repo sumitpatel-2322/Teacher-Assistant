@@ -10,6 +10,9 @@ body {
   background: linear-gradient(160deg, #EDF5E1, #c5f8d9);
   color: #05386B;
   min-height: 100vh;
+  padding-top:200px; /* navbar height */
+
+
 }
 
 /* ================= NAVBAR ================= */
@@ -138,7 +141,7 @@ header {
 
 /* ================= LOGIN CARD ================= */
 .login-container {
-  max-width: 420px;
+  max-width: 600px;
   margin: 40px auto;
   background: rgba(255,255,255,0.75);
   backdrop-filter: blur(14px);
@@ -146,6 +149,7 @@ header {
   border-radius: 14px;
   border: 1.5px solid rgba(5,56,107,0.25);
   box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+
 }
 
 .login-container h2 {

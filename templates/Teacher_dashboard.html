@@ -5,17 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Teacher Dashboard - Ask Doubt</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/static/css/Tb.css">
+<link rel="stylesheet" href="static/css/Tb.css">
+<link rel="stylesheet" href="static/css/sidebar.css">
+
+
 </head>
 <body>
 
 <!-- Side Panel - Right side -->
 <div id="mySidepanel">
-    <a href="Home_page.html">Home</a>
-    <a href="#ask-doubt">Ask Doubt</a>
-    <a href="#">Resources</a>
-    <a href="#" class="logout-link">Logout</a>
+  <span class="sidebar-close">✕</span>
+  <a href="/" class="logout-link">Home</a>
+  <a href="#ask-doubt" class="logout-link">Ask Doubt</a>
+  <a href="#" class="logout-link">Resources</a>
+  <a href="logout.html" class="logout-link">Logout</a>
 </div>
+
 
 <!-- Navbar - Fixed, hamburger always visible -->
 <nav>
@@ -105,8 +110,8 @@
   </textarea>
 </div>
 
-
 <script src="/static/js/Tb.js"></script>
+
 
 </body>
 </html>
