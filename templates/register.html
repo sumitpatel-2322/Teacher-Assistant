@@ -23,10 +23,15 @@
 
 <div id="mySidepanel">
   <span class="sidebar-close" id="closeSidebar">✕</span>
+<<<<<<< HEAD
 
   <a href="/" class="logout-link">Home</a>
   
   <a href="/login" class="logout-link">login</a>
+=======
+  <a href="/" class="btn">Home</a>
+  <a href="/login" class="btn">Login</a>
+>>>>>>> backend
 </div>
 
 <div class="auth-container">
@@ -56,8 +61,16 @@
     <label for="username">Username</label>
     <input type="text" id="username" name="username" required>
 
+    <!-- PASSWORD FIELD -->
     <label for="password">Password</label>
     <input type="password" id="password" name="password" required>
+
+    <!-- LIVE PASSWORD MESSAGE -->
+    <p id="passwordMessage" style="font-size:14px; margin-top:5px;"></p>
+
+    <small style="color:#555;">
+      Password must contain uppercase, lowercase, digit, special character (min 8 characters)
+    </small>
 
     <label for="confirm_password">Confirm Password</label>
     <input type="password" id="confirm_password" name="confirm_password" required>
@@ -72,8 +85,35 @@
 
 </div>
 
+<<<<<<< HEAD
 <!-- ================= SIDEBAR SCRIPT ================= -->
 <script src="/static/js/login.js">
+=======
+<!-- ================= PASSWORD VALIDATION SCRIPT ================= -->
+<script>
+  const passwordInput = document.getElementById("password");
+  const message = document.getElementById("passwordMessage");
+
+  passwordInput.addEventListener("input", function () {
+    const password = passwordInput.value;
+
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+    if (password.length === 0) {
+      message.textContent = "";
+      return;
+    }
+
+    if (!regex.test(password)) {
+      message.textContent =
+        "Password must contain uppercase, lowercase, digit, special character (min 8 characters)";
+      message.style.color = "red";
+    } else {
+      message.textContent = "Strong password ✔";
+      message.style.color = "green";
+    }
+  });
+>>>>>>> backend
 </script>
 
 </body>

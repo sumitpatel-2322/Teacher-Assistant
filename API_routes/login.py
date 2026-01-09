@@ -1,5 +1,6 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, Form
 from fastapi.templating import Jinja2Templates
+from fastapi.responses import RedirectResponse
 from Database.db import get_connection
 
 router = APIRouter()
@@ -15,12 +16,12 @@ def login(request: Request):
 
 # Handle login form submission (AUTH CHECK)
 @router.post("/login")
-async def login_check(request: Request):
-    form = await request.form()
-
-    username = form.get("username")
-    password = form.get("password")
-
+async def login_check(
+    request: Request,
+    username: str = Form(...),
+    password: str = Form(...),
+    role: str = Form(...)
+):
     conn = get_connection()
     cursor = conn.cursor()
 
@@ -31,16 +32,24 @@ async def login_check(request: Request):
     user = cursor.fetchone()
     conn.close()
 
-    # Invalid username
-    if user is None:
-        return {"error": "Invalid username"}
-
-    # Invalid password
-    if user["password"] != password:
+    if user is None or user["password"] != password:
         return {"error": "Invalid username or password"}
 
-    # SUCCESS → render loggedin.html
-    return templates.TemplateResponse(
-        "loggedin.html",
-        {"request": request}
+    # ✅ FIXED SESSION STORAGE
+    request.session["user"] = {
+        "username": username,
+        "role": role
+    }
+
+    return RedirectResponse(
+        url="/teacher",
+        status_code=302
+    )
+
+@router.get("/logout")
+def logout(request: Request):
+    request.session.clear()
+    return RedirectResponse(
+        url="/",
+        status_code=302
     )
