@@ -3,3 +3,5 @@ pydantic
 uvicorn
 jinja2
 python-multipart
+starlette
+itsdangerous
