@@ -144,13 +144,17 @@ input:checked + .slider:before {
 .ask-btn { 
     display: block; 
     margin: 0 auto 25px; 
-    background: #05386B; 
-    color: #EDF5E1; 
+    background:#8EE4AF;  
+    color:rgb(12, 10, 10); 
     border: none; 
     padding: 12px 25px; 
     font-size: 16px; 
     font-weight: 600; 
-    border-radius: 8px; 
+    border-radius: 8px; /* ========= FORCE mic inside textarea ========= */
+}
+.doubt-input-wrapper {
+    position: relative !important;
+    width: 100%;
     cursor: pointer; 
     transition: 0.3s; 
 }
@@ -196,18 +200,22 @@ input:checked + .slider:before {
     border-radius: 12px; 
     padding: 20px; 
     margin-top: 15px; 
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+
 }
 
 .response-item { 
     display: inline-block; 
     background: #EDF5E1; 
     padding: 12px 18px; 
-    border-radius: 8px; 
+    border-radius: 8px;
     margin: 8px; 
     cursor: pointer; 
     box-shadow: 0 2px 6px rgba(0,0,0,0.1); 
     transition: 0.2s; 
-    font-weight: 500; 
+    font-weight: 500px; 
 }
 
 .response-item:hover { background: #8EE4AF; }
@@ -268,4 +276,42 @@ input:checked + .slider:before {
         width: 95%;
     }
     body.sidepanel-open { margin-right: 0; }
+}
+/* override existing textarea rule */
+.doubt-textarea {
+    width: 100% !important;
+    padding: 14px 60px 14px 14px !important;
+    margin-bottom: 0 !important;
+    border-radius: 8px;
+    border: 1px solid #379683;
+    resize: vertical;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+/* wrapper */
+.doubt-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* mic inside textarea */
+.mic-inside {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #5CDB95;
+    z-index: 2;
+}
+
+/* optional hover */
+.mic-inside:hover {
+    opacity: 0.8;
+}
+.mic-inside {
+  color: #17693c; /* matches your theme */
 }
