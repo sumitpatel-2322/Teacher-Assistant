@@ -4,3 +4,4 @@ venv/
 __pycache__/
 *.pyc
 *.pyo
+decision_engine/raw_text/data
