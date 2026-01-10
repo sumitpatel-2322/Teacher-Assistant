@@ -315,3 +315,94 @@ input:checked + .slider:before {
 .mic-inside {
   color: #17693c; /* matches your theme */
 }
+/* =================================================
+   MICRO ANIMATIONS (SAFE TO APPEND AT END)
+   ================================================= */
+
+/* Buttons & cards – subtle lift */
+.ask-btn,
+.speak-btn,
+.feedback-buttons button,
+.response-item {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ask-btn:hover,
+.speak-btn:hover,
+.feedback-buttons button:hover,
+.response-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+
+/* Textarea focus feedback */
+.ask-doubt-section textarea,
+.doubt-textarea {
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ask-doubt-section textarea:focus,
+.doubt-textarea:focus {
+    border-color: #5CDB95;
+    box-shadow: 0 0 0 3px rgba(92,219,149,0.25);
+    outline: none;
+}
+
+/* Mic button micro interaction */
+.mic-inside {
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.mic-inside:hover {
+    transform: scale(1.15);
+    opacity: 0.9;
+}
+
+/* Toggle refinement */
+.slider {
+    transition: background-color 0.35s ease;
+}
+
+.slider:before {
+    transition: transform 0.35s ease;
+}
+
+/* AI response gentle entrance */
+.ai-response {
+    animation: fadeSlideIn 0.35s ease forwards;
+}
+
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Feedback button click feel */
+.feedback-buttons button:active {
+    transform: scale(0.97);
+}
+
+/* Dropdown hover polish */
+.dropdowns select {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dropdowns select:hover,
+.dropdowns select:focus {
+    border-color: #5CDB95;
+    box-shadow: 0 0 0 2px rgba(92,219,149,0.2);
+}
+
+/* Accessibility – reduce motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
