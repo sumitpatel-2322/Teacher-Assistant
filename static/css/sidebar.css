@@ -28,6 +28,7 @@ nav {
   left: 0;
   right: 0;
   z-index: 1003;
+  height: 50px;
 }
 
 nav .logo {
@@ -47,7 +48,7 @@ nav .logo {
 }
 
 #mySidepanel {
-  width: 0;               
+  width:50px;               
   position: fixed;
   top: 0;
   right: 0;
@@ -135,5 +136,5 @@ nav .logo {
 }
 
 #mySidepanel.open {
-  width: 260px;
+  width: 220px;
 }
