@@ -12,22 +12,5 @@ hamburgerBtn.addEventListener('click', function () {
 });
 
 function openDashboard() {
-  const role = localStorage.getItem("userRole"); 
-
-  if (!role) {
-    window.location.href = "/login";
-    return;
-  }
-
-  if (role === "teacher") {
-    window.location.href = "/teacher-dashboard";
-  } else if (role === "crp") {
-    window.location.href = "/CRP";
-  } else if (role === "brp") {
-    window.location.href = "/BRP";
-  } else if (role === "arp") {
-    window.location.href = "/ARP";
-  } else {
-    window.location.href = "/login";
-  }
+  window.location.href = "/dashboard";
 }
