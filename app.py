@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 # import sqlite3
+from API_routes.dashboard import router as dashboard_router
 from starlette.middleware.sessions import SessionMiddleware
 from API_routes.home import router as home_router
 from API_routes.login import router as login_router
@@ -17,6 +18,7 @@ app.add_middleware(SessionMiddleware,secret_key="our_secret_key",
                    same_site="lax",
                    https_only=False)
 app.mount("/static",StaticFiles(directory="static"),name="static")
+app.include_router(dashboard_router)
 app.include_router(home_router)
 app.include_router(login_router)
 app.include_router(teacher_router)
