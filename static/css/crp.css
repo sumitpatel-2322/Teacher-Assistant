@@ -5,12 +5,14 @@
   font-family:'Inter', sans-serif; 
 }
 
-body { 
-  background:#EDF5E1; 
-  color:#05386B; 
-  line-height:1.5; 
-  transition: margin-right 0.5s; 
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background:#EDF5E1;
+  color:#05386B;
 }
+
 
 /* Header */
 header { 
@@ -138,4 +140,7 @@ footer {
   font-size: 26px;
   font-weight: 700;
   cursor: pointer;
+}
+.page-content {
+    flex: 1; 
 }

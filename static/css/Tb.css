@@ -53,16 +53,17 @@ header {
     border-radius: 50%; 
 }
 
-/* =================================================
-   TOGGLE
-   ================================================= */
-.toggle-container { 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    gap: 10px; 
-    margin: 30px 0 20px; 
+/* place toggle beside user in header */
+.toggle-container {
+    margin: 0;
+    position: absolute;
+    top: 80px;          /* aligns with header content */
+    right: 90px;        /* sits just left of user icon */
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
+
 
 .switch { 
     position: relative; 
@@ -114,13 +115,19 @@ input:checked + .slider:before {
 .online { color: #5CDB95; }
 .offline { color: #dc3545; }
 
-.dropdowns { 
-    display: flex; 
-    justify-content: center; 
-    gap: 15px; 
-    flex-wrap: wrap; 
-    margin-bottom: 20px; 
+.dropdowns {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    background:#5CDB95;      /* light sidebar background */
+    padding: 24px 18px;
+    border-radius: 16px;
+
+    height: 100%;             /* full column height */
+    align-self: stretch;
 }
+
 
 .dropdowns select { 
     padding: 10px 15px; 
@@ -129,6 +136,7 @@ input:checked + .slider:before {
     font-size: 14px; 
     cursor: pointer; 
     color: #05386B;
+    margin-top: 80px;
 }
 
 .ask-btn { 
@@ -152,13 +160,15 @@ input:checked + .slider:before {
 .ask-btn:hover { background: #379683; }
 
 .ask-doubt-section { 
-    max-width: 900px; 
-    margin: 20px auto 40px; 
+    margin-top: 200px;
+    text-align: center;
+    width: 100%; 
+    margin: 0; 
     background:#05386B; 
     border-radius: 12px; 
     padding: 25px; 
     box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
-    color:#08935d;
+    color:beige;
 }
 
 .ask-doubt-section textarea { 
@@ -186,14 +196,15 @@ input:checked + .slider:before {
 .speak-btn:hover { background: #8EE4AF; }
 
 .ai-response { 
-    background: #8EE4AF; 
+    background:#379683; 
     border-radius: 12px; 
     padding: 20px; 
     margin-top: 15px; 
     justify-content: flex-end;
     flex-wrap: wrap;
     gap: 10px;
-
+    align-items: center;
+  
 }
 
 .response-item { 
@@ -380,18 +391,16 @@ input:checked + .slider:before {
     align-items: center;
     gap: 6px;
 }
-/* ===== UPDATED feedback send button (CLEAN FIX) ===== */
 
 .feedback-input-wrapper {
     position: relative !important;
     width: 100%;
     max-width: 900px;
-    margin: 15px auto 0; /* Centering and top spacing */
+    margin: 15px auto 0;
 }
 
 .feedback-input-wrapper textarea {
     width: 100%;
-    /* Extra padding at the bottom ensures text doesn't hide behind the button */
     padding: 14px 14px 45px 14px !important; 
     box-sizing: border-box;
     resize: none;
@@ -402,12 +411,10 @@ input:checked + .slider:before {
     display: block;
 }
 
-/* Resetting global button styles for this specific element */
 .feedback-input-wrapper button {
     all: unset;
 }
 
-/* Positioning the arrow pinned to the BOTTOM-RIGHT corner */
 .feedback-input-wrapper .send-inside {
     position: absolute !important;
     right: 12px;
@@ -447,4 +454,23 @@ input:checked + .slider:before {
     
     display: inline-block;
     line-height: 1.2;
+}
+
+.ai-response .items {
+    display: flex;
+    justify-content: center;   
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;           
+    margin-top: 12px;
+    ;
+}
+.ask-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr; /* left sidebar + content */
+    gap: 32px;
+    align-items: stretch;             /* full height alignment */
+    min-height: calc(100vh - 260px);  /* fills screen like reference */
+    max-width:none;
+    margin: 0 40px;
 }

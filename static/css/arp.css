@@ -10,6 +10,9 @@ body {
   color:#05386B; 
   line-height:1.5; 
   transition: margin-right 0.5s; 
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Header */
@@ -92,15 +95,7 @@ header {
   background:#8EE4AF; 
 }
 
-/* Footer */
-footer {
-  max-width:1200px;
-  margin:20px auto;
-  padding:10px 20px;
-  text-align:center;
-  color:#379683;
-  font-size:14px;
-}
+
 
 
 #mySidepanel .sidebar-close {
@@ -118,4 +113,7 @@ footer {
     font-size:13px; 
   }
   body.sidepanel-open { margin-right: 0; }
+}
+.page-content {
+  flex: 1;   /* pushes footer to bottom */
 }

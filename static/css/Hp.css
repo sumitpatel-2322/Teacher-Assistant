@@ -10,6 +10,7 @@ body {
   color:#05386B; 
   line-height:1.5; 
   transition: margin-right 0.5s; 
+  max-width: 100%;
 }
 
 /* Navbar - Fixed, always visible */

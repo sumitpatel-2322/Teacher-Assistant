@@ -8,6 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="static/css/Tb.css">
 <link rel="stylesheet" href="static/css/sidebar.css">
+<link rel="stylesheet" href="static/css/footer.css">
+
 
 
 </head>
@@ -35,17 +37,9 @@
 <img src="static/img/logo.png" alt="Teacher">
 <div>
 <div class="title">Teacher Dashboard</div>
-<div class="subtitle">Just-In-Time Digital Platform For Teachers</div>
+<div class="subtitle">Virtual Educator And Digital Assistant</div>
 </div>
 </div>
-<div class="header-right user-profile">
-  <img src="/static/img/user-icon.jpg" alt="User">
-  <span class="username">{{ user.username }}</span>
-</div>
-
-</header>
-
-<!-- Online/Offline Toggle -->
 <div class="toggle-container">
 <label class="switch">
 <input type="checkbox" id="toggleStatus">
@@ -54,11 +48,18 @@
 <span class="status offline" id="statusText">Offline</span>
 </div>
 
-<!-- Ask Doubt Button -->
-<h2 style="text-align:center; margin:20px 0; color:#4b0082;">
-  Ask Your Doubt
-</h2>
+<div class="header-right user-profile">
+  <img src="/static/img/user-icon.jpg" alt="User">
+  <span class="username">{{ user.username }}</span>
+</div>
 
+</header>
+
+<!-- Online/Offline Toggle -->
+
+<!-- Ask Doubt Button -->
+
+<div class="ask-layout">
 <!-- Dropdowns -->
 <form action="/teacher/ask" method="post">
   <div class="dropdowns">
@@ -109,11 +110,12 @@
 <!-- AI Response -->
 <div class="ai-response">
 <h2>AI Response</h2>
-<div class="response-item">Classroom Activity</div>
-<div class="response-item">Teaching  Tip   </div>
-<div class="response-item">Engagement Idea</div>
-<div class="response-item">Micro-learning</div>
-
+<div class="items">
+<button class="response-item">Classroom Activity</button>
+<button class="response-item">Teaching Tip</button>
+<button class="response-item">Engagement Idea</button>
+<button class="response-item">Micro-learning</button>
+</div>
 <!-- Feedback Buttons -->
 <div class="feedback-buttons">
 <button class="worked">Worked ✅</button>
@@ -127,6 +129,14 @@
     <button type="button" class="send-inside" title="Send Feedback">➤</button>
   </div>
 </div>
+</div>
+</div>
+<footer class="app-footer">
+  <div class="footer-inner">
+    <span>© 2026 VEDA – Virtual Educator & Digital Assistant</span>
+    <span>Made for Teachers</span>
+  </div>
+</footer>
 
 <script src="/static/js/Tb.js"></script>
 <script src="/static/js/sub.js"></script>

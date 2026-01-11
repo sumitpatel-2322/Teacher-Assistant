@@ -13,15 +13,20 @@ body {
     #f4faff
   );
   display: flex;
+  color: #05386B;
+    max-width: 100%;
+  flex-direction: column;
+
+
+}
+.logout-wrapper {
+  flex: 1;                 /* pushes footer to bottom */
+  display: flex;
   align-items: center;
   justify-content: center;
-  color: #05386B;
-}
-
-.logout-wrapper {
-  width: 100%;
   padding: 20px;
 }
+
 
 .logout-card {
   max-width: 520px;
