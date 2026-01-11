@@ -1,0 +1,7 @@
+request_id,timestamp,raw_query,situations,constraints,solutions_shown,solution_chosen,worked,feedback
+12bb5820-3040-4c33-b5e0-30568a687cab,2026-01-11T20:39:02.967146,"
+    Class: Class 10
+    Subject: Mathematics
+    Topic: Fractions
+    Problem: Students are not Understanding fractions and the lecture time is about to end.
+    ",{'students_not_understanding': 0.6},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",student_demonstration,True,

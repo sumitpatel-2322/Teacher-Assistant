@@ -8,32 +8,29 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="static/css/Tb.css">
-<link rel="stylesheet" href="static/css/sidebar.css">
-<link rel="stylesheet" href="static/css/footer.css">
+<link rel="stylesheet" href="/static/css/Tb.css">
+<link rel="stylesheet" href="/static/css/sidebar.css">
+<link rel="stylesheet" href="/static/css/footer.css">
 </head>
 
 <body>
 
-<!-- Side Panel -->
 <div id="mySidepanel">
   <span class="sidebar-close">✕</span>
-  <a href="/" class="logout-link">Home</a>
-  <a href="#ask-doubt" class="logout-link">Ask Doubt</a>
-  <a href="#" class="logout-link">Resources</a>
-  <a href="/logout" class="logout-link">Logout</a>
+  <a href="/">Home</a>
+  <a href="#ask-doubt">Ask Doubt</a>
+  <a href="#">Resources</a>
+  <a href="/logout">Logout</a>
 </div>
 
-<!-- Navbar -->
 <nav>
   <div class="logo">VEDA</div>
   <button class="hamburger" id="hamburgerBtn">☰</button>
 </nav>
 
-<!-- Header -->
 <header>
   <div class="header-left">
-    <img src="static/img/logo.png" alt="Teacher">
+    <img src="/static/img/logo.png">
     <div>
       <div class="title">Teacher Dashboard</div>
       <div class="subtitle">Virtual Educator And Digital Assistant</div>
@@ -49,32 +46,33 @@
   </div>
 
   <div class="header-right user-profile">
-    <img src="/static/img/user-icon.jpg" alt="User">
+    <img src="/static/img/user-icon.jpg">
     <span class="username">{{ user.username }}</span>
   </div>
 </header>
 
-<!-- Main Layout -->
 <div class="ask-layout">
 
-<!-- Form -->
-<form action="/teacher/ask" method="post">
-  <div class="dropdowns">
+<form action="/teacher/ask" method="post" style="display: contents;">
 
+  <!-- HIDDEN STATE (for persistence) -->
+  <input type="hidden" id="selected_class" value="{{ selected_class or '' }}">
+  <input type="hidden" id="selected_subject" value="{{ selected_subject or '' }}">
+  <input type="hidden" id="selected_topic" value="{{ selected_topic or '' }}">
+
+  <!-- LEFT -->
+  <div class="dropdowns">
     <select name="class_name" id="classSelect" required>
       <option value="">Class</option>
-      <option value="Class 1">Class 1</option>
-      <option value="Class 2">Class 2</option>
-      <option value="Class 3">Class 3</option>
-      <option value="Class 4">Class 4</option>
-      <option value="Class 5">Class 5</option>
-      <option value="Class 6">Class 6</option>
-      <option value="Class 7">Class 7</option>
-      <option value="Class 8">Class 8</option>
-      <option value="Class 9">Class 9</option>
-      <option value="Class 10">Class 10</option>
+      {% for c in ["Class 1","Class 2","Class 3","Class 4","Class 5",
+                   "Class 6","Class 7","Class 8","Class 9","Class 10"] %}
+        <option value="{{ c }}" {% if selected_class == c %}selected{% endif %}>
+          {{ c }}
+        </option>
+      {% endfor %}
     </select>
 
+    <!-- ⚠️ DO NOT TOUCH THESE (JS CONTROLS THEM) -->
     <select name="subject" id="subjectSelect" required disabled>
       <option value="">Subject</option>
     </select>
@@ -82,73 +80,63 @@
     <select name="topic" id="topicSelect" required disabled>
       <option value="">Topic</option>
     </select>
-
   </div>
 
-  <!-- Ask Doubt -->
+  <!-- RIGHT -->
   <div class="ask-doubt-section" id="ask-doubt">
+
     <h2>Ask Your Doubt</h2>
 
     <div class="doubt-input-wrapper">
       <textarea
         class="doubt-textarea"
-        placeholder="Type your doubt here..."
         name="question"
-        required
-      ></textarea>
-
-      <button class="mic-inside" type="button">
-        🎤
-      </button>
+        placeholder="Type your doubt here..."
+        required></textarea>
+      <button type="button" class="mic-inside">🎤</button>
     </div>
 
+    {% if engine_output %}
+      <input type="hidden" id="request_id" value="{{ engine_output.request_id }}">
+    {% endif %}
+
     <button class="ask-btn" type="submit">Enter</button>
+
+    <div class="ai-response">
+      <h2>AI Response</h2>
+
+      <div class="items">
+        {% if engine_output and engine_output.ranked_solutions %}
+          {% for sol in engine_output.ranked_solutions %}
+            <button type="button"
+                    class="response-item"
+                    data-solution-id="{{ sol.solution_id }}">
+              {{ sol.text }}
+              <br><small>Confidence: {{ sol.confidence }}</small>
+            </button>
+          {% endfor %}
+        {% else %}
+          <p style="opacity:0.7;">No suggestions yet.</p>
+        {% endif %}
+      </div>
+
+      <div class="feedback-buttons">
+        <button type="button" class="worked">Worked ✅</button>
+        <button type="button" class="not-worked">Did Not Work ❌</button>
+      </div>
+    </div>
+
+    <div class="feedback-section">
+      <label><b>Your Feedback:</b></label>
+      <div class="feedback-input-wrapper">
+        <textarea id="feedback" class="feedback-box"
+                  placeholder="Enter your feedback here..."></textarea>
+        <button type="button" class="send-inside">➤</button>
+      </div>
+    </div>
+
   </div>
 </form>
-
-<!-- AI Response -->
-<div class="ai-response">
-  <h2>AI Response</h2>
-  <input type="hidden" id="request_id" value="{{ engine_output.request_id if engine_output }}">
-  <div class="items">
-    {% if engine_output and engine_output.ranked_solutions %}
-      {% for sol in engine_output.ranked_solutions %}
-        <button
-          class="response-item"
-          data-solution-id="{{ sol.solution_id }}"
-        >
-          {{ sol.text }}
-          <br>
-          <small>Confidence: {{ sol.confidence }}</small>
-        </button>
-      {% endfor %}
-    {% else %}
-      <p style="opacity:0.7;">No suggestions yet. Ask a doubt above.</p>
-    {% endif %}
-  </div>
-
-  <!-- Feedback Buttons (STEP 2 will wire these) -->
-  <div class="feedback-buttons">
-    <button class="worked" type="button">Worked ✅</button>
-    <button class="not-worked" type="button">Did Not Work ❌</button>
-  </div>
-</div>
-
-<!-- Feedback Text -->
-<div class="feedback-section">
-  <label for="feedback"><b>Your Feedback:</b></label>
-  <div class="feedback-input-wrapper">
-    <textarea
-      id="feedback"
-      name="feedback"
-      class="feedback-box"
-      rows="4"
-      placeholder="Enter your feedback here..."
-    ></textarea>
-    <button type="button" class="send-inside" title="Send Feedback">➤</button>
-  </div>
-</div>
-
 </div>
 
 <footer class="app-footer">
@@ -160,6 +148,5 @@
 
 <script src="/static/js/Tb.js"></script>
 <script src="/static/js/sub.js"></script>
-
 </body>
 </html>

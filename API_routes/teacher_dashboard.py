@@ -1,5 +1,4 @@
 from fastapi import APIRouter, Request, Depends, Form
-from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 
 from API_routes.auth import require_login
@@ -11,6 +10,9 @@ router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 
 
+# =========================
+# DASHBOARD (GET)
+# =========================
 @router.get("/teacher")
 async def teacher_dashboard(
     request: Request,
@@ -21,13 +23,19 @@ async def teacher_dashboard(
         {
             "request": request,
             "user": user,
-            "engine_output": None   # default
+            "engine_output": None,
+            "selected_class": None,
+            "selected_subject": None,
+            "selected_topic": None
         }
     )
 
 
+# =========================
+# ASK DOUBT (POST)
+# =========================
 @router.post("/teacher/ask")
-def ask_doubt(
+async def ask_doubt(
     request: Request,
     class_name: str = Form(...),
     subject: str = Form(...),
@@ -35,7 +43,9 @@ def ask_doubt(
     question: str = Form(...),
     user=Depends(require_login)
 ):
-    # ---- existing functionality (UNCHANGED) ----
+    # ----------------------------------
+    # 1️⃣ Existing functionality (KEEP)
+    # ----------------------------------
     store_raw_input(
         username=user["username"],
         role=user["role"],
@@ -45,26 +55,47 @@ def ask_doubt(
         question=question.strip()
     )
 
-    # ---- prepare raw text for Decision Engine ----
+    # ----------------------------------
+    # 2️⃣ Structured input for engine
+    # ----------------------------------
+    engine_input = {
+        "username": user["username"],
+        "role": user["role"],
+        "class": class_name.strip(),
+        "subject": subject.strip(),
+        "topic": topic.strip(),
+        "question": question.strip()
+    }
     raw_text = f"""
     Class: {class_name}
     Subject: {subject}
     Topic: {topic}
     Problem: {question}
     """
-
-    # ---- Decision Engine call ----
+    # ----------------------------------
+    # 3️⃣ Decision Engine call
+    # ----------------------------------
     engine_output = process_teacher_query(raw_text)
 
-    # ---- Render dashboard WITH engine output ----
+    # ----------------------------------
+    # 4️⃣ Render dashboard WITH state
+    # ----------------------------------
     return templates.TemplateResponse(
         "Teacher_dashboard.html",
         {
             "request": request,
             "user": user,
-            "engine_output": engine_output
+            "engine_output": engine_output,
+            "selected_class": class_name,
+            "selected_subject": subject,
+            "selected_topic": topic
         }
     )
+
+
+# =========================
+# FEEDBACK (POST)
+# =========================
 @router.post("/teacher/feedback")
 async def teacher_feedback(
     request: Request,
@@ -85,45 +116,24 @@ async def teacher_feedback(
     # -------------------------
     # Validation (STRICT)
     # -------------------------
-
     if not request_id:
-        return {
-            "success": False,
-            "message": "request_id is required"
-        }
+        return {"success": False, "message": "request_id is required"}
 
     if not solution_id:
-        return {
-            "success": False,
-            "message": "solution_id is required"
-        }
+        return {"success": False, "message": "solution_id is required"}
 
-    if worked is None:
-        return {
-            "success": False,
-            "message": "worked field is required"
-        }
-
-    if not isinstance(worked, bool):
-        return {
-            "success": False,
-            "message": "worked must be a boolean"
-        }
+    if worked is None or not isinstance(worked, bool):
+        return {"success": False, "message": "worked must be boolean"}
 
     # -------------------------
-    # Logging hook (core action)
+    # Logging hook (CORE)
     # -------------------------
-
     log_feedback(
         request_id=request_id,
         solution_chosen=solution_id,
         worked=worked,
         feedback=feedback
     )
-
-    # -------------------------
-    # Response
-    # -------------------------
 
     return {
         "success": True,
