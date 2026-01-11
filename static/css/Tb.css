@@ -11,25 +11,19 @@ body {
     line-height: 1.5; 
     transition: margin-right 0.5s;
 }
-
-body.sidepanel-open {
-    margin-right: 250px;
-}
-
 header { 
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
     padding: 15px 20px; 
-    background: #8ee3b4;
+    background:#b8e6dd;  
     border-radius: 12px; 
     margin: 20px auto; 
     width: 100%;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
     flex-wrap: wrap; 
-    margin-top: 70px; 
+    margin-top: 50px; 
 }
-
 .header-left { 
     display: flex; 
     align-items: center; 
@@ -120,9 +114,6 @@ input:checked + .slider:before {
 .online { color: #5CDB95; }
 .offline { color: #dc3545; }
 
-/* =================================================
-   DROPDOWNS & CONTENT
-   ================================================= */
 .dropdowns { 
     display: flex; 
     justify-content: center; 
@@ -219,9 +210,6 @@ input:checked + .slider:before {
 
 .response-item:hover { background: #8EE4AF; }
 
-/* =================================================
-   FEEDBACK
-   ================================================= */
 .feedback-buttons { 
     margin-top: 20px; 
     display: flex; 
@@ -262,10 +250,6 @@ input:checked + .slider:before {
     border-radius: 6px;
     resize: none;
 }
-
-/* =================================================
-   RESPONSIVE
-   ================================================= */
 @media screen and (max-width: 768px) {
     .dropdowns select,
     .ask-doubt-section textarea,
@@ -454,19 +438,12 @@ input:checked + .slider:before {
     transform: scale(0.95);
 }
 .logo {
-    /* 1. Set the new font */
     font-family: 'Courgette', cursive !important;
-    
-    /* 2. Sizing and Weight */
-    font-size: 36px; /* Script fonts usually look better slightly smaller than Gothic ones */
+        font-size: 36px;
     font-weight: 400 !important;
-    
-    /* 3. Elegance settings */
-    letter-spacing: 1px; /* Script fonts need tighter spacing so the cursive flows */
+        letter-spacing: 1px; 
     color: #ffffff;
-    
-    /* 4. Disable Uppercase (CRITICAL) */
-    text-transform: none !important; /* Script fonts look best in Title Case: 'Veda' */
+        text-transform: none !important; 
     
     display: inline-block;
     line-height: 1.2;

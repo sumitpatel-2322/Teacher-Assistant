@@ -4,22 +4,40 @@ document.addEventListener("DOMContentLoaded", () => {
   const sidepanel = document.getElementById("mySidepanel");
   const closeBtn = document.querySelector(".sidebar-close");
   const links = document.querySelectorAll("#mySidepanel a");
+  const dashboardLink = document.getElementById("dashboardLink");
 
-  // open / close via hamburger
   hamburgerBtn.addEventListener("click", () => {
     sidepanel.classList.toggle("open");
   });
 
-  // close via X
   closeBtn.addEventListener("click", () => {
     sidepanel.classList.remove("open");
   });
 
-  // close after clicking ANY link
   links.forEach(link => {
     link.addEventListener("click", () => {
       sidepanel.classList.remove("open");
     });
   });
 
+if (dashboardLink) {
+  dashboardLink.addEventListener("click", () => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    const role = localStorage.getItem("userRole");
+    if (!isLoggedIn || !role) {
+      window.location.href = "/login";
+      return;
+    }
+
+    if (role === "teacher") {
+      window.location.href = "/teacher";
+    } else if (role === "student") {
+      window.location.href = "/student";
+    } else if (role === "admin") {
+      window.location.href = "/admin";
+    } else {
+      window.location.href = "/login";
+    }
+  });
+}
 });

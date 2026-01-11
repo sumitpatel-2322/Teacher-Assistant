@@ -66,3 +66,66 @@ body {
 .logout-card .btn:hover {
   background: #1558b0;
 }
+.btn {
+  display: inline-block;
+  width: 220px;
+  padding: 12px 20px;
+
+  background: linear-gradient(
+    135deg,
+    #5CDB95,
+    #8EE4AF
+  );
+
+  color: #05386B;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255,255,255,0.5);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+/* Hover */
+.btn:hover {
+  background: linear-gradient(
+    135deg,
+    #8EE4AF,
+    #5CDB95
+  );
+
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 22px rgba(0,0,0,0.18);
+}
+
+/* Click */
+.btn:active {
+  transform: scale(0.97);
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* Focus (accessibility) */
+.btn:focus {
+  outline: none;
+  box-shadow:
+    0 0 0 3px rgba(92, 219, 149, 0.35);
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .btn {
+    width: 100%;
+  }
+}

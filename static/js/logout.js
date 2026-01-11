@@ -1,17 +1,22 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
 
   const hamburgerBtn = document.getElementById("hamburgerBtn");
   const sidepanel = document.getElementById("mySidepanel");
-  const closeBtn = document.querySelector("#mySidepanel .sidebar-close");
+  const closeBtn = document.querySelector(".sidebar-close");
+  const links = document.querySelectorAll("#mySidepanel a");
+  const dashboardLink = document.getElementById("dashboardLink");
 
-  // Open panel
-  hamburgerBtn.addEventListener("click", function () {
-    sidepanel.style.width = "250px";
+  hamburgerBtn.addEventListener("click", () => {
+    sidepanel.classList.toggle("open");
   });
 
-  // Close panel (✕ button)
-  closeBtn.addEventListener("click", function () {
-    sidepanel.style.width = "0";
+  closeBtn.addEventListener("click", () => {
+    sidepanel.classList.remove("open");
   });
 
+  links.forEach(link => {
+    link.addEventListener("click", () => {
+      sidepanel.classList.remove("open");
+    });
+  });
 });
