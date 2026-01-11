@@ -96,15 +96,6 @@ header {
   background:#8EE4AF; 
 }
 
-/* Footer */
-footer {
-  max-width:1200px;
-  margin:20px auto;
-  padding:10px 20px;
-  text-align:center;
-  color:#379683;
-  font-size:14px;
-}
 
 /* Responsive */
 @media screen and (max-width:768px){
