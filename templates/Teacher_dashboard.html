@@ -4,18 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Teacher Dashboard - Ask Doubt</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="static/css/Tb.css">
 <link rel="stylesheet" href="static/css/sidebar.css">
 <link rel="stylesheet" href="static/css/footer.css">
-
-
-
 </head>
+
 <body>
 
-<!-- Side Panel - Right side -->
+<!-- Side Panel -->
 <div id="mySidepanel">
   <span class="sidebar-close">✕</span>
   <a href="/" class="logout-link">Home</a>
@@ -24,43 +24,40 @@
   <a href="/logout" class="logout-link">Logout</a>
 </div>
 
-
-<!-- Navbar - Fixed, hamburger always visible -->
+<!-- Navbar -->
 <nav>
-    <div class="logo">VEDA</div>
-    <button class="hamburger" id="hamburgerBtn">☰</button>
+  <div class="logo">VEDA</div>
+  <button class="hamburger" id="hamburgerBtn">☰</button>
 </nav>
 
 <!-- Header -->
 <header>
-<div class="header-left">
-<img src="static/img/logo.png" alt="Teacher">
-<div>
-<div class="title">Teacher Dashboard</div>
-<div class="subtitle">Virtual Educator And Digital Assistant</div>
-</div>
-</div>
-<div class="toggle-container">
-<label class="switch">
-<input type="checkbox" id="toggleStatus">
-<span class="slider"></span>
-</label>
-<span class="status offline" id="statusText">Offline</span>
-</div>
+  <div class="header-left">
+    <img src="static/img/logo.png" alt="Teacher">
+    <div>
+      <div class="title">Teacher Dashboard</div>
+      <div class="subtitle">Virtual Educator And Digital Assistant</div>
+    </div>
+  </div>
 
-<div class="header-right user-profile">
-  <img src="/static/img/user-icon.jpg" alt="User">
-  <span class="username">{{ user.username }}</span>
-</div>
+  <div class="toggle-container">
+    <label class="switch">
+      <input type="checkbox" id="toggleStatus">
+      <span class="slider"></span>
+    </label>
+    <span class="status offline" id="statusText">Offline</span>
+  </div>
 
+  <div class="header-right user-profile">
+    <img src="/static/img/user-icon.jpg" alt="User">
+    <span class="username">{{ user.username }}</span>
+  </div>
 </header>
 
-<!-- Online/Offline Toggle -->
-
-<!-- Ask Doubt Button -->
-
+<!-- Main Layout -->
 <div class="ask-layout">
-<!-- Dropdowns -->
+
+<!-- Form -->
 <form action="/teacher/ask" method="post">
   <div class="dropdowns">
 
@@ -87,50 +84,73 @@
     </select>
 
   </div>
-</form>
-<!-- Ask Doubt Section -->
-<div class="ask-doubt-section" id="ask-doubt">
+
+  <!-- Ask Doubt -->
+  <div class="ask-doubt-section" id="ask-doubt">
     <h2>Ask Your Doubt</h2>
 
     <div class="doubt-input-wrapper">
-        <textarea class="doubt-textarea" placeholder="Type your doubt here..." name="question"></textarea>
-        <button class="mic-inside" type="button">
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-       stroke="currentColor" stroke-width="2"
-       stroke-linecap="round" stroke-linejoin="round">
-    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
-    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-    <line x1="12" y1="19" x2="12" y2="23"/>
-    <line x1="8" y1="23" x2="16" y2="23"/>
-  </svg>
-</button>
+      <textarea
+        class="doubt-textarea"
+        placeholder="Type your doubt here..."
+        name="question"
+        required
+      ></textarea>
+
+      <button class="mic-inside" type="button">
+        🎤
+      </button>
     </div>
 
-    <button class="ask-btn">Enter</button>
+    <button class="ask-btn" type="submit">Enter</button>
+  </div>
+</form>
+
 <!-- AI Response -->
 <div class="ai-response">
-<h2>AI Response</h2>
-<div class="items">
-<button class="response-item">Classroom Activity</button>
-<button class="response-item">Teaching Tip</button>
-<button class="response-item">Engagement Idea</button>
-<button class="response-item">Micro-learning</button>
+  <h2>AI Response</h2>
+  <input type="hidden" id="request_id" value="{{ engine_output.request_id if engine_output }}">
+  <div class="items">
+    {% if engine_output and engine_output.ranked_solutions %}
+      {% for sol in engine_output.ranked_solutions %}
+        <button
+          class="response-item"
+          data-solution-id="{{ sol.solution_id }}"
+        >
+          {{ sol.text }}
+          <br>
+          <small>Confidence: {{ sol.confidence }}</small>
+        </button>
+      {% endfor %}
+    {% else %}
+      <p style="opacity:0.7;">No suggestions yet. Ask a doubt above.</p>
+    {% endif %}
+  </div>
+
+  <!-- Feedback Buttons (STEP 2 will wire these) -->
+  <div class="feedback-buttons">
+    <button class="worked" type="button">Worked ✅</button>
+    <button class="not-worked" type="button">Did Not Work ❌</button>
+  </div>
 </div>
-<!-- Feedback Buttons -->
-<div class="feedback-buttons">
-<button class="worked">Worked ✅</button>
-<button class="not-worked">Did Not Work ❌</button>
-</div>
-</div>
+
+<!-- Feedback Text -->
 <div class="feedback-section">
   <label for="feedback"><b>Your Feedback:</b></label>
   <div class="feedback-input-wrapper">
-    <textarea id="feedback" name="feedback" class="feedback-box" rows="4" placeholder="Enter your feedback here..."></textarea>
+    <textarea
+      id="feedback"
+      name="feedback"
+      class="feedback-box"
+      rows="4"
+      placeholder="Enter your feedback here..."
+    ></textarea>
     <button type="button" class="send-inside" title="Send Feedback">➤</button>
   </div>
 </div>
+
 </div>
-</div>
+
 <footer class="app-footer">
   <div class="footer-inner">
     <span>© 2026 VEDA – Virtual Educator & Digital Assistant</span>
