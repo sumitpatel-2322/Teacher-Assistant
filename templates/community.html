@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>VEDA Community</title>
+    <link rel="stylesheet" href="/static/css/community.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="brand-container">
+                <a href="/teacher" style="text-decoration:none; color:inherit;">
+                    <div class="brand-main">
+                        <img src="/static/img/logo.png" alt="VEDA Logo" class="brand-logo">
+                        <span>VEDA</span>
+                    </div>
+                </a>
+                <div class="brand-sub">Virtual Educator for Digital and Assistance</div>
+            </div>
+            <div class="nav-actions">
+                <a href="/teacher" class="back-btn">← Back to Dashboard</a>
+                <div class="user-profile"><div class="avatar">S</div><span class="username">{{ user.username }}</span></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header"><h3>Explore Topics</h3></div>
+            <ul id="tag-list" class="filter-menu"><li class="loading-tags">Loading topics...</li></ul>
+        </aside>
+
+        <main class="feed">
+            <div class="feed-header">
+                <h2 id="current-topic-title">✨ Recent Stories</h2>
+                <div class="sort-container">
+                    <select id="sortOrder" onchange="handleSortChange()">
+                        <option value="top_agreed">🔥 Top Agreed</option>
+                        <option value="newest">🕒 Newest</option>
+                        <option value="oldest">🗓️ Oldest</option>
+                        <option value="less_agreed">📉 Less Agreed</option>
+                    </select>
+                </div>
+            </div>
+            <div id="feed-container"></div>
+        </main>
+
+        <aside class="widgets">
+            <div class="widget-card ask-box">
+                <h3>Ask the Community</h3>
+                <input type="text" id="postTitle" placeholder="Give your topic a title...">
+                <textarea id="postContent" placeholder="What's on your mind today?"></textarea>
+                <div class="tag-selector">
+                    <label>Tag:</label>
+                    <input list="tag-options" id="postTagInput" placeholder="Choose a vibe...">
+                    <datalist id="tag-options"></datalist>
+                </div>
+                <button class="btn-primary" onclick="submitPost()">✨ Publish Post</button>
+            </div>
+        </aside>
+    </div>
+    <script>const USER_NAME = "{{ user.username }}";</script>
+    <script src="/static/js/community.js"></script>
+</body>
+</html>

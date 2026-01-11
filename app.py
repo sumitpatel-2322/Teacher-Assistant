@@ -11,6 +11,7 @@ from API_routes.arp import router as arp_router
 from API_routes.crp import router as crp_router
 from API_routes.brp import router as brp_router
 from API_routes.registered import router as registered_router
+from API_routes.community import router as community_router
 from Database.models import create_teacher_table
 create_teacher_table()
 app=FastAPI()
@@ -27,3 +28,4 @@ app.include_router(arp_router)
 app.include_router(crp_router)
 app.include_router(brp_router)
 app.include_router(registered_router)
+app.include_router(community_router)
