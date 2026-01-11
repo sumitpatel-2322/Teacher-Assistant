@@ -1,16 +1,25 @@
-const hamburgerBtn = document.getElementById('hamburgerBtn');
-const sidepanel = document.getElementById('mySidepanel');
+document.addEventListener("DOMContentLoaded", () => {
 
-hamburgerBtn.addEventListener('click', function () {
-  if (document.body.classList.contains('sidepanel-open')) {
-    sidepanel.style.width = "0";
-    document.body.classList.remove('sidepanel-open');
-  } else {
-    sidepanel.style.width = "250px";
-    document.body.classList.add('sidepanel-open');
-  }
+  const hamburgerBtn = document.getElementById("hamburgerBtn");
+  const sidepanel = document.getElementById("mySidepanel");
+  const closeBtn = document.querySelector(".sidebar-close");
+  const links = document.querySelectorAll("#mySidepanel a");
+
+  // open / close via hamburger
+  hamburgerBtn.addEventListener("click", () => {
+    sidepanel.classList.toggle("open");
+  });
+
+  // close via X
+  closeBtn.addEventListener("click", () => {
+    sidepanel.classList.remove("open");
+  });
+
+  // close after clicking ANY link
+  links.forEach(link => {
+    link.addEventListener("click", () => {
+      sidepanel.classList.remove("open");
+    });
+  });
+
 });
-
-function openDashboard() {
-  window.location.href = "/dashboard";
-}

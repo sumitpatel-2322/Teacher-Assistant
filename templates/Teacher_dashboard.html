@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Teacher Dashboard - Ask Doubt</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="static/css/Tb.css">
 <link rel="stylesheet" href="static/css/sidebar.css">
 
@@ -31,16 +32,15 @@
 <!-- Header -->
 <header>
 <div class="header-left">
-<img src="" alt="Teacher">
+<img src="static/img/logo.png" alt="Teacher">
 <div>
 <div class="title">Teacher Dashboard</div>
 <div class="subtitle">Just-In-Time Digital Platform For Teachers</div>
 </div>
 </div>
-<div class="header-right">
-  <span style="font-weight:600; color:#2c3e50;">
-    {{ user.username }}
-  </span>
+<div class="header-right user-profile">
+  <img src="/static/img/user-icon.jpg" alt="User">
+  <span class="username">{{ user.username }}</span>
 </div>
 
 </header>
@@ -86,7 +86,7 @@
     </select>
 
   </div>
-
+</form>
 <!-- Ask Doubt Section -->
 <div class="ask-doubt-section" id="ask-doubt">
     <h2>Ask Your Doubt</h2>
@@ -120,20 +120,13 @@
 <button class="not-worked">Did Not Work ❌</button>
 </div>
 </div>
-
-
 <div class="feedback-section">
   <label for="feedback"><b>Your Feedback:</b></label>
-  <textarea
-    id="feedback"
-    name="feedback"
-    class="feedback-box"
-    rows="4"
-    placeholder="Enter your feedback here...">
-  </textarea>
+  <div class="feedback-input-wrapper">
+    <textarea id="feedback" name="feedback" class="feedback-box" rows="4" placeholder="Enter your feedback here..."></textarea>
+    <button type="button" class="send-inside" title="Send Feedback">➤</button>
+  </div>
 </div>
-</div>
-</form>
 
 <script src="/static/js/Tb.js"></script>
 <script src="/static/js/sub.js"></script>

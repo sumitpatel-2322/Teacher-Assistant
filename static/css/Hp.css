@@ -47,34 +47,6 @@ nav .logo {
   z-index: 1004;
 }
 
-/* Side Panel - Right side */
-#mySidepanel {
-  width: 0;
-  position: fixed;
-  z-index: 9999;
-  height: 100%;
-  top: 0;
-  right: 0;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top:0;
-  border-top: 2px solid #01080f;
-  pointer-events: none;
-  height: 50px;
-
-
-}
-
-#mySidepanel a {
-  padding: 18px 30px;
-  text-decoration: none;
-  font-size: 18px;
-color: #05386B;
-  display: block;
-  transition: 0.3s;
-  text-align: left;
-}
-
 #mySidepanel a:hover {
   background-color:#05386B;
 }
@@ -273,7 +245,7 @@ header {
     justify-content: space-between; 
     align-items: center; 
     padding: 15px 20px; 
-    background: #EDF5E1; 
+    background:#b8e6dd;  
     border-radius: 12px; 
     margin: 20px auto; 
     width: 100%;
@@ -311,19 +283,17 @@ header {
     border-radius: 50%; 
     margin-top: 10px; 
 }
-/* ===============================
-   Light Theme Liquid Glass Sidebar
-   (Soft mint / teal / pale blue)
-   =============================== */
 
 #mySidepanel {
-  width: 0;
+  width: 200px;
   position: fixed;
   z-index:9999;
   height: 100%;
-  top: 0;
+  top: 10px;
   right: 0;
+  height: calc(100vh-140px);
   overflow-x: hidden;
+  overflow-y: auto;
   transition: width 0.45s ease;
   padding-top: 80px;
 
@@ -365,7 +335,6 @@ header {
 
 }
 
-/* menu items */
 #mySidepanel a {
   display: block;
   padding: 14px 28px;
@@ -398,6 +367,12 @@ header {
   right: 20px; 
   font-size: 40px;    
   color: black;
-  pointer-events: none;
+  pointer-events: auto;
   text-decoration: none;
     cursor: pointer; }
+
+/*challenges and features button*/
+    #challenges,
+#features {
+  scroll-margin-top: 140px; 
+}
