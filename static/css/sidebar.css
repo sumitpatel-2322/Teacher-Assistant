@@ -87,8 +87,8 @@ nav .logo {
   background: linear-gradient(
     160deg,
     rgba(255,255,255,0.65),
-    rgba(180,225,215,0.85),
-    rgba(150,205,215,0.9)
+    rgba(255,255,255,0.65),
+    rgba(255,255,255,0.65),
   );
   backdrop-filter: blur(20px) saturate(150%);
   border-left: 1.5px solid rgba(255,255,255,0.7);
