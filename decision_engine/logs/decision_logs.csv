@@ -5,3 +5,9 @@ request_id,timestamp,raw_query,situations,constraints,solutions_shown,solution_c
     Topic: Fractions
     Problem: Students are not Understanding fractions and the lecture time is about to end.
     ",{'students_not_understanding': 0.6},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",student_demonstration,True,
+f5145045-01dc-4463-811f-14296e4031a9,2026-01-12T04:16:41.090015,"
+    Class: Class 10
+    Subject: Science
+    Topic: Heat
+    Problem: Shanta is not Listening she is in her own world.
+    ",{'low_attention': 0.6},{},"['silent_think_time', 'attention_reset', 'short_activity_burst', 'role_play_activity', 'peer_teaching_pairs']",silent_think_time,True,
