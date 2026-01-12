@@ -11,3 +11,27 @@ f5145045-01dc-4463-811f-14296e4031a9,2026-01-12T04:16:41.090015,"
     Topic: Heat
     Problem: Shanta is not Listening she is in her own world.
     ",{'low_attention': 0.6},{},"['silent_think_time', 'attention_reset', 'short_activity_burst', 'role_play_activity', 'peer_teaching_pairs']",silent_think_time,True,
+d842ef3f-20c4-4bd6-a1a5-ded5f841a045,2026-01-12T05:20:43.293724,"
+    Class: Class 10
+    Subject: Science
+    Topic: Heat
+    Problem: Situation is messy classroom is in chaos projector is not working
+    ",{'low_attention': 0.6},{'projector_available': 0.6},"['projector_visual_aid', 'silent_think_time', 'attention_reset', 'short_activity_burst', 'role_play_activity']",projector_visual_aid,True,
+6787a42e-e592-43e3-9ad0-cf298aa0e341,2026-01-12T05:21:29.038207,"
+    Class: Class 10
+    Subject: Science
+    Topic: Heat
+    Problem: Situation is messy classroom is in chaos projector is not working
+    ",{'low_attention': 0.6},{'projector_available': 0.6},"['projector_visual_aid', 'silent_think_time', 'attention_reset', 'short_activity_burst', 'role_play_activity']",,,
+6200a372-3b88-46d7-ab5f-03d8c728a150,2026-01-12T05:22:30.685113,"
+    Class: Class 10
+    Subject: Science
+    Topic: Motion
+    Problem: Shanta Jhali yedi sumit aahe shaanaa
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",question_based_checking,True,
+e41b65ab-8640-4e5f-b522-016032a03601,2026-01-12T05:23:55.725480,"
+    Class: Class 10
+    Subject: Mathematics
+    Topic: Fractions
+    Problem: It is difficult to explain them the fractions concept.
+    ",{'students_not_understanding': 0.6},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",real_life_example,True,
