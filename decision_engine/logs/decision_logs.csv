@@ -1,0 +1,49 @@
+request_id,timestamp,raw_query,situations,constraints,solutions_shown,solution_chosen,worked,feedback
+12bb5820-3040-4c33-b5e0-30568a687cab,2026-01-11T20:39:02.967146,"
+    Class: Class 10
+    Subject: Mathematics
+    Topic: Fractions
+    Problem: Students are not Understanding fractions and the lecture time is about to end.
+    ",{'students_not_understanding': 0.6},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",student_demonstration,True,
+f5145045-01dc-4463-811f-14296e4031a9,2026-01-12T04:16:41.090015,"
+    Class: Class 10
+    Subject: Science
+    Topic: Heat
+    Problem: Shanta is not Listening she is in her own world.
+    ",{'low_attention': 0.6},{},"['silent_think_time', 'attention_reset', 'short_activity_burst', 'role_play_activity', 'peer_teaching_pairs']",silent_think_time,True,
+942021ea-ca1a-44b5-bc42-2f6de2741594,2026-01-12T07:17:39.763182,"
+    Class: Class 10
+    Subject: Mathematics
+    Topic: Integers
+    Problem: Shanta chi PC kharab he 
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",peer_teaching_pairs,True,
+d842ef3f-20c4-4bd6-a1a5-ded5f841a045,2026-01-12T05:20:43.293724,"
+    Class: Class 10
+    Subject: Science
+    Topic: Heat
+    Problem: Situation is messy classroom is in chaos projector is not working
+    ",{'low_attention': 0.6},{'projector_available': 0.6},"['projector_visual_aid', 'silent_think_time', 'attention_reset', 'short_activity_burst', 'role_play_activity']",projector_visual_aid,True,
+6787a42e-e592-43e3-9ad0-cf298aa0e341,2026-01-12T05:21:29.038207,"
+    Class: Class 10
+    Subject: Science
+    Topic: Heat
+    Problem: Situation is messy classroom is in chaos projector is not working
+    ",{'low_attention': 0.6},{'projector_available': 0.6},"['projector_visual_aid', 'silent_think_time', 'attention_reset', 'short_activity_burst', 'role_play_activity']",,,
+6200a372-3b88-46d7-ab5f-03d8c728a150,2026-01-12T05:22:30.685113,"
+    Class: Class 10
+    Subject: Science
+    Topic: Motion
+    Problem: Shanta Jhali yedi sumit aahe shaanaa
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",question_based_checking,True,
+e41b65ab-8640-4e5f-b522-016032a03601,2026-01-12T05:23:55.725480,"
+    Class: Class 10
+    Subject: Mathematics
+    Topic: Fractions
+    Problem: It is difficult to explain them the fractions concept.
+    ",{'students_not_understanding': 0.6},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",real_life_example,True,
+bc1c5f6a-e779-4e75-88f6-04934cc3daf2,2026-01-12T06:54:15.459237,"
+    Class: Class 6
+    Subject: Mathematics
+    Topic: Algebra
+    Problem: The fraction concept is a bit tricky to explain some are understanding some are not.
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",question_based_checking,True,
