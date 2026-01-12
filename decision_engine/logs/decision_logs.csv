@@ -11,3 +11,9 @@ f5145045-01dc-4463-811f-14296e4031a9,2026-01-12T04:16:41.090015,"
     Topic: Heat
     Problem: Shanta is not Listening she is in her own world.
     ",{'low_attention': 0.6},{},"['silent_think_time', 'attention_reset', 'short_activity_burst', 'role_play_activity', 'peer_teaching_pairs']",silent_think_time,True,
+942021ea-ca1a-44b5-bc42-2f6de2741594,2026-01-12T07:17:39.763182,"
+    Class: Class 10
+    Subject: Mathematics
+    Topic: Integers
+    Problem: Shanta chi PC kharab he 
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",peer_teaching_pairs,True,
