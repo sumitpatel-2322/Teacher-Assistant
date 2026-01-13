@@ -7,53 +7,60 @@
 
   <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
-  
 
   <!-- CSS -->
   <link rel="stylesheet" href="static/css/login.css">
-    <link rel="stylesheet" href="static/css/sidebar.css">
-      <link rel="stylesheet" href="static/css/footer.css">
-
+  <link rel="stylesheet" href="static/css/sidebar.css">
 </head>
 
 <body>
 
+<!-- ⚠ WARNING MESSAGE -->
+<div id="loginWarning" style="
+  display:none;
+  background:#ffe6e6;
+  color:#a00;
+  padding:12px;
+  text-align:center;
+  font-weight:600;
+">
+  You are already logged in. Please logout first.
+</div>
+
 <!-- ================= NAVBAR ================= -->
 <nav>
-  <div class="logo">VEDA</div>
+  <div class="logo">Teacher-AssistantAI</div>
   <button class="hamburger" id="hamburgerBtn">☰</button>
 </nav>
 
 <!-- ================= SIDEBAR ================= -->
 <div id="mySidepanel">
   <span class="sidebar-close" id="closeSidebar">✕</span>
-
-  <a href="/" class="logout-link">Home</a>
-  <a href="/register" class="logout-link">Sign In</a>
+  <a href="/" class="btn">Home</a>
+  <a href="/register" class="btn">Sign In</a>
 </div>
-
 
 <!-- ================= LOGIN CONTENT ================= -->
 <div class="login-container">
 
   <h2>Login</h2>
-  
+
   {% if error %}
-    <p style="color:red; margin-bottom:10px; font-size:14px">
-      {{error}}
+    <p style="color:red; margin-bottom:10px; font-size:14px;">
+      {{ error }}
     </p>
   {% endif %}
-    
+
   <form method="post" action="/login">
-  <label for="role">Role</label>
-  <select id="role" name="role" required>
-    <option value="">Select Role</option>
-    <option value="teacher">Teacher</option>
-    <option value="crp">CRP</option>
-    <option value="brp">BRP</option>
-    <option value="arp">ARP</option>
-  </select>
+
+    <label for="role">Role</label>
+    <select id="role" name="role" required>
+      <option value="">Select Role</option>
+      <option value="teacher">Teacher</option>
+      <option value="crp">CRP</option>
+      <option value="brp">BRP</option>
+      <option value="arp">ARP</option>
+    </select>
 
     <label>Username</label>
     <input type="text" name="username" required>
@@ -70,15 +77,23 @@
   </p>
 
 </div>
-<footer class="app-footer">
-  <div class="footer-inner">
-    <span>© 2026 VEDA – Virtual Educator & Digital Assistant</span>
-    <span>Made for Teachers</span>
-  </div>
-</footer>
 
 <!-- ================= SIDEBAR SCRIPT ================= -->
 <script src="static/js/login.js"></script>
+
+<!-- ================= BACK BUTTON HANDLER ================= -->
+<script>
+  // Detect back/forward navigation from cache
+  window.addEventListener("pageshow", function (event) {
+    if (event.persisted) {
+      document.getElementById("loginWarning").style.display = "block";
+
+      setTimeout(() => {
+        window.location.href = "/dashboard";
+      }, 2000);
+    }
+  });
+</script>
 
 </body>
 </html>

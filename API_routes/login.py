@@ -6,15 +6,33 @@ from Database.db import get_connection
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 
-# Show login page
+
+# =========================
+# SHOW LOGIN PAGE
+# =========================
 @router.get("/login")
 def login(request: Request):
-    return templates.TemplateResponse(
+
+    # 🔒 If already logged in → block login page
+    if "user" in request.session:
+        return RedirectResponse(url="/dashboard", status_code=302)
+
+    response = templates.TemplateResponse(
         "login.html",
         {"request": request}
     )
 
-# Handle login form submission (AUTH CHECK)
+    # 🚫 Disable browser caching (VERY IMPORTANT)
+    response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+
+    return response
+
+
+# =========================
+# HANDLE LOGIN
+# =========================
 @router.post("/login")
 async def login_check(
     request: Request,
@@ -36,36 +54,33 @@ async def login_check(
         return templates.TemplateResponse(
             "login.html",
             {
-                "request":request,
-                "error":"User name does not exist!!"
-            }
-        )
-    if user["password"]!= password:
-        return templates.TemplateResponse(
-            "login.html",
-            {
-                "request":request,
-                "error":"Incorrect Password!!"
+                "request": request,
+                "error": "User name does not exist!!"
             }
         )
 
-    # ✅ FIXED SESSION STORAGE
+    if user["password"] != password:
+        return templates.TemplateResponse(
+            "login.html",
+            {
+                "request": request,
+                "error": "Incorrect Password!!"
+            }
+        )
+
+    # ✅ Store session
     request.session["user"] = {
         "username": username,
         "role": role
     }
 
-    return RedirectResponse(
-        url="/dashboard",
-        status_code=302
-    )
+    return RedirectResponse(url="/dashboard", status_code=302)
 
+
+# =========================
+# LOGOUT
+# =========================
 @router.get("/logout")
 def logout(request: Request):
     request.session.clear()
-    return templates.TemplateResponse(
-        "logout.html",
-        {
-            "request":request
-        }
-    )
+    return RedirectResponse(url="/", status_code=302)
