@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="/static/css/sidebar.css">
 <link rel="stylesheet" href="/static/css/footer.css">
 </head>
-
+<script src="/static/js/solution_details.js"></script>
 <body>
 
 <div id="mySidepanel">
@@ -104,7 +104,7 @@
 
     <div class="ai-response">
       <h2>AI Response</h2>
-
+    {% include "solution_details.html" %}
       <div class="items">
         {% if engine_output and engine_output.ranked_solutions %}
           {% for sol in engine_output.ranked_solutions %}

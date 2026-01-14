@@ -11,6 +11,7 @@ from API_routes.arp import router as arp_router
 from API_routes.crp import router as crp_router
 from API_routes.brp import router as brp_router
 from API_routes.registered import router as registered_router
+from API_routes.solution_details import router as solution_details_router
 from Database.models import create_teacher_table
 create_teacher_table()
 app=FastAPI()
@@ -18,6 +19,7 @@ app.add_middleware(SessionMiddleware,secret_key="our_secret_key",
                    same_site="lax",
                    https_only=False)
 app.mount("/static",StaticFiles(directory="static"),name="static")
+app.include_router(solution_details_router)
 app.include_router(dashboard_router)
 app.include_router(home_router)
 app.include_router(login_router)

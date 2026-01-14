@@ -32,23 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let selectedSolutionId = null;
 
-  function attachSolutionClickHandlers() {
-    document.querySelectorAll(".response-item").forEach(btn => {
-      btn.addEventListener("click", () => {
-
-        document.querySelectorAll(".response-item")
-          .forEach(b => b.classList.remove("active"));
-
-        btn.classList.add("active");
-        selectedSolutionId = btn.dataset.solutionId;
-
-        console.log("Selected solution:", selectedSolutionId);
-      });
-    });
-  }
-
-  attachSolutionClickHandlers();
-
   function sendFeedback(worked) {
     if (!selectedSolutionId) {
       alert("Please select a solution first.");
