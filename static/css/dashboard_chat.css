@@ -25,9 +25,9 @@
 /* ================= MAIN LAYOUT (GRID) ================= */
 .main-layout {
     display: grid;
-    grid-template-columns: 280px 1fr; /* Fixed Left Sidebar, Flexible Right Chat */
+    grid-template-columns: 280px 1fr; 
     gap: 20px;
-    height: calc(100vh - 160px); /* Adjust height to fit screen */
+    height: calc(100vh - 200px); 
     min-height: 500px;
 }
 
@@ -290,10 +290,10 @@
         height: auto;
     }
     .chat-window {
-        height: 500px;
+        height: 60vh;
     }
     .left-sidebar {
-        flex-direction: column-reverse;
+        flex-direction: column;
     }
 }
 
@@ -313,4 +313,61 @@
 /* Prevent horizontal scroll */
 body {
     overflow-x: hidden;
+}
+@media (max-width: 768px) {
+
+    /* FULL WIDTH ON MOBILE */
+    .dashboard-container {
+        left: 0;
+        transform: none;
+        width: 100%;
+        max-width: 100%;
+        padding: 16px;
+    }
+
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+@media (max-width: 768px) {
+
+    /* Switch layout to vertical flow */
+    .main-layout {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Order elements for mobile UX */
+    .dash-header {
+        order: 1;
+    }
+
+    .right-chat-area {
+        order: 2;   /* 👈 chat intro comes right after header */
+    }
+
+    .left-sidebar {
+        order: 3;   /* context + feedback after intro */
+    }
+
+}
+.mic-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #05386B;
+    color: #ffffff;
+    border: none;
+    box-shadow: 0 6px 16px rgba(5,56,107,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.mic-btn:hover {
+    background: #379683;
+}
+.dashboard-container {
+    background: linear-gradient(180deg, #e8ffe8, #d7fbe8);
 }
