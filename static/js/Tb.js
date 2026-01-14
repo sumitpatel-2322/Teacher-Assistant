@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   // ------------------------------
-  // Sidebar logic (unchanged)
+  // Sidebar logic (UNCHANGED)
   // ------------------------------
   const hamburgerBtn = document.getElementById("hamburgerBtn");
   const sidepanel = document.getElementById("mySidepanel");
@@ -27,10 +27,40 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ------------------------------
-  // Decision Engine Feedback Wiring
+  // AI Response Selection Logic
   // ------------------------------
 
   let selectedSolutionId = null;
+
+  function attachSolutionClickHandlers() {
+    const responseButtons = document.querySelectorAll(".response-item");
+
+    responseButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+
+        // Hide all other responses
+        responseButtons.forEach(other => {
+          if (other !== btn) {
+            other.style.display = "none";
+          }
+        });
+
+        // Highlight selected response
+        btn.classList.add("active");
+
+        // Save selected solution
+        selectedSolutionId = btn.dataset.solutionId;
+
+        console.log("Selected solution:", selectedSolutionId);
+      });
+    });
+  }
+
+  attachSolutionClickHandlers();
+
+  // ------------------------------
+  // Feedback Handling
+  // ------------------------------
 
   function sendFeedback(worked) {
     if (!selectedSolutionId) {
@@ -52,9 +82,12 @@ document.addEventListener("DOMContentLoaded", () => {
       })
     })
       .then(res => res.json())
-      .then(data => {
-        console.log("Feedback response:", data);
-        alert("Feedback recorded. Thank you!");
+      .then(() => {
+        if (worked) {
+          alert("Have a nice teaching 😊");
+        } else {
+          alert("Thank you for your feedback!");
+        }
       })
       .catch(err => {
         console.error("Feedback error:", err);
@@ -72,4 +105,33 @@ document.addEventListener("DOMContentLoaded", () => {
   if (notWorkedBtn) {
     notWorkedBtn.addEventListener("click", () => sendFeedback(false));
   }
+
+  // ------------------------------
+  // 🔥 CRITICAL FIX: Allow Multiple Queries
+  // ------------------------------
+
+  const askForm = document.querySelector("form[action='/teacher/ask']");
+
+  if (askForm) {
+    askForm.addEventListener("submit", () => {
+
+      // Reset selected solution
+      selectedSolutionId = null;
+
+      
+
+      // Clear feedback box
+      const feedbackBox = document.getElementById("feedback");
+      if (feedbackBox) feedbackBox.value = "";
+
+      // Reset AI responses UI (safety reset)
+      document.querySelectorAll(".response-item").forEach(btn => {
+        btn.style.display = "block";
+        btn.classList.remove("active");
+      });
+
+      console.log("New query submitted – form state reset");
+    });
+  }
+
 });

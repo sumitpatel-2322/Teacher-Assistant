@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Request, Depends, Form
 from fastapi.templating import Jinja2Templates
+from typing import Optional
 
 from API_routes.auth import require_login
 from decision_engine.logging import log_feedback
@@ -38,48 +39,47 @@ async def teacher_dashboard(
 async def ask_doubt(
     request: Request,
     class_name: str = Form(...),
-    subject: str = Form(...),
-    topic: str = Form(...),
+    subject: Optional[str] = Form(None),   # ✅ FIX
+    topic: Optional[str] = Form(None),     # ✅ FIX
     question: str = Form(...),
     user=Depends(require_login)
 ):
-    # ----------------------------------
-    # 1️⃣ Existing functionality (KEEP)
-    # ----------------------------------
+    # -------------------------
+    # Normalize optional fields
+    # -------------------------
+    subject = (subject or "").strip()
+    topic = (topic or "").strip()
+
+    # -------------------------
+    # 1️⃣ Store raw input safely
+    # -------------------------
     store_raw_input(
         username=user["username"],
         role=user["role"],
         class_name=class_name.strip(),
-        subject=subject.strip(),
-        topic=topic.strip(),
+        subject=subject,
+        topic=topic,
         question=question.strip()
     )
 
-    # ----------------------------------
-    # 2️⃣ Structured input for engine
-    # ----------------------------------
-    engine_input = {
-        "username": user["username"],
-        "role": user["role"],
-        "class": class_name.strip(),
-        "subject": subject.strip(),
-        "topic": topic.strip(),
-        "question": question.strip()
-    }
+    # -------------------------
+    # 2️⃣ Build raw text for AI
+    # -------------------------
     raw_text = f"""
     Class: {class_name}
     Subject: {subject}
     Topic: {topic}
     Problem: {question}
     """
-    # ----------------------------------
-    # 3️⃣ Decision Engine call
-    # ----------------------------------
+
+    # -------------------------
+    # 3️⃣ Decision Engine
+    # -------------------------
     engine_output = process_teacher_query(raw_text)
 
-    # ----------------------------------
-    # 4️⃣ Render dashboard WITH state
-    # ----------------------------------
+    # -------------------------
+    # 4️⃣ Render dashboard
+    # -------------------------
     return templates.TemplateResponse(
         "Teacher_dashboard.html",
         {
@@ -126,7 +126,7 @@ async def teacher_feedback(
         return {"success": False, "message": "worked must be boolean"}
 
     # -------------------------
-    # Logging hook (CORE)
+    # Logging hook
     # -------------------------
     log_feedback(
         request_id=request_id,

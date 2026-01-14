@@ -47,6 +47,7 @@ bc1c5f6a-e779-4e75-88f6-04934cc3daf2,2026-01-12T06:54:15.459237,"
     Topic: Algebra
     Problem: The fraction concept is a bit tricky to explain some are understanding some are not.
     ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",question_based_checking,True,
+<<<<<<< HEAD
 71052317-9c72-49cb-b0f5-9296be9443ca,2026-01-12T11:12:30.370458,"
     Class: Class 4
     Subject: Mathematics
@@ -141,3 +142,305 @@ e276d245-7244-4ee7-b3b0-f1f2f9b9d55b,2026-01-13T19:38:21.654567,Too much noise a
     Problem: Fractions are not easy to explain what do i do some students are struggling a lot while some have finished and sitting idle.
 
     ",{},{},"['peer_teaching_math_mixed_levels', 'silent_think_time_general_low_attention', 'visual_math_story_primary', 'circle_time_inclusivity_primary', 'think_pair_share_language_upper']",,,
+=======
+4341124b-d604-4c8a-a3a0-9b988ca7d6e3,2026-01-12T08:28:51.092190,"
+    Class: Class 5
+    Subject: Mathematics
+    Topic: Algebra
+    Problem: Checking the query
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",peer_teaching_pairs,True,
+ecadd6d3-ae6f-40e4-a795-9c115c34a6b8,2026-01-12T08:32:15.681243,"
+    Class: Class 5
+    Subject: Mathematics
+    Topic: Algebra
+    Problem: Checking the query
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",,,
+484c864b-eb8e-42e2-973d-24943a0300f3,2026-01-12T08:32:37.999091,"
+    Class: Class 5
+    Subject: Mathematics
+    Topic: Algebra
+    Problem: Checking the query
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",,,
+1a25bc24-5999-45ec-a122-41444bd17ef8,2026-01-12T08:33:42.926221,"
+    Class: Class 6
+    Subject: Science
+    Topic: Physics
+    Problem: explain the physics formula
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",peer_teaching_pairs,True,
+41e82fcf-edac-48c3-a75d-61960088a0bf,2026-01-12T08:34:41.703768,"
+    Class: Class 7
+    Subject: Mathematics
+    Topic: Algebra
+    Problem: explain the class7th algebra
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",silent_think_time,True,
+24138cb1-d2d7-40d0-9c91-14434bc48155,2026-01-12T08:36:32.277206,"
+    Class: Class 9
+    Subject: Mathematics
+    Topic: Fractions
+    Problem: explain the fraction 
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",peer_teaching_pairs,True,
+bac9f07e-2a5c-4c5a-8d2a-bf5da5e4813a,2026-01-12T08:36:55.722869,"
+    Class: Class 9
+    Subject: Mathematics
+    Topic: Fractions
+    Problem: explain the fraction 
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",,,
+6b539d1d-9704-4082-8c2d-92b04f282c67,2026-01-12T08:37:49.429026,"
+    Class: Class 3
+    Subject: Marathi
+    Topic: व्याकरण
+    Problem: explain the basic marathi
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",question_based_checking,True,
+91fe5142-03b2-47d1-aad7-38b83738063d,2026-01-12T09:31:18.768741,"
+    Class: Class 9
+    Subject: Science
+    Topic: Heat
+    Problem: what is the current temp of pune
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",peer_teaching_pairs,True,
+e4a146b1-80b8-4c60-b00a-a2995f5ee9d6,2026-01-12T09:59:53.370288,"
+    Class: Class 7
+    Subject: Mathematics
+    Topic: Algebra
+    Problem: explain the algebra rules for class
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",question_based_checking,True,
+f775952e-8cd0-4309-aace-824a36435e9c,2026-01-12T10:00:46.117731,"
+    Class: Class 8
+    Subject: Science
+    Topic: Physics
+    Problem: explaub the pysics formula for class
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",real_life_example,True,
+cc46c320-6616-488a-90fa-737b9f47a5ad,2026-01-12T10:03:56.629988,"
+    Class: Class 7
+    Subject: Mathematics
+    Topic: Geometry
+    Problem: explain the geometry for class 7th 
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",question_based_checking,True,
+3e5ff596-0032-4c63-8b9e-3d61960a0011,2026-01-12T10:22:23.993995,"
+    Class: Class 6
+    Subject: Science
+    Topic: Physics
+    Problem: what came the new logics in physics
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",real_life_example,False,
+6590237c-524a-46ed-9fdf-52c983d06f70,2026-01-12T10:47:09.114667,"
+    Class: Class 7
+    Subject: Science
+    Topic: Biology
+    Problem: explain the biology for 7th class
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",peer_teaching_pairs,True,
+80e4dd66-e2d7-4d1c-b401-e5554086ff8c,2026-01-12T10:48:39.294748,"
+    Class: Class 7
+    Subject: Science
+    Topic: Biology
+    Problem: explain the biology for 7th class
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",,,
+1fdc7ca3-06f2-45c3-b3e6-8f28aabad9db,2026-01-12T10:51:06.809174,"
+    Class: Class 2
+    Subject: Drawing
+    Topic: Shapes
+    Problem: how to explain the shapes for students
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",real_life_example,True,
+e1e4688c-d3d0-4ce8-a72a-c8cf6b1e8e76,2026-01-12T11:00:42.699487,"
+    Class: Class 10
+    Subject: Science
+    Topic: Motion
+    Problem: explain the moment of moon
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",question_based_checking,True,
+c633136b-6894-43ce-abe9-a95c5ef95660,2026-01-12T11:01:35.538099,"
+    Class: Class 10
+    Subject: Science
+    Topic: Heat
+    Problem: what is the formula to measure the current temp 
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",silent_think_time,True,
+9b336438-1dc2-4d21-bae2-dfccc35f48dd,2026-01-12T11:02:42.074777,"
+    Class: Class 10
+    Subject: Mathematics
+    Topic: Integers
+    Problem: what is the formula for integration
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",question_based_checking,True,
+2b5fce39-87f6-4369-9254-52c2bfd95c1c,2026-01-12T11:03:41.561284,"
+    Class: Class 10
+    Subject: Science
+    Topic: Motion
+    Problem: movement of earth
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",question_based_checking,True,
+7969cdf6-9135-445d-bb77-cd623b43402c,2026-01-12T11:04:24.564068,"
+    Class: Class 10
+    Subject: Mathematics
+    Topic: Fractions
+    Problem: fraction of 6
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",real_life_example,True,
+dcf7be61-58cb-409f-aca9-31feea9bd11d,2026-01-12T11:05:17.281714,"
+    Class: Class 9
+    Subject: Science
+    Topic: Motion
+    Problem: Students are finding hard to grasp the topic.
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",peer_teaching_pairs,True,
+9c8101e0-125b-4ba5-97f2-d5a9b9a33ab7,2026-01-12T11:06:32.034363,"
+    Class: Class 9
+    Subject: Science
+    Topic: Motion
+    Problem: Students are finding hard to grasp the topic.
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",,,
+f35a0e63-6c45-44fd-b8cf-05a63cef7e4a,2026-01-12T13:36:34.212212,"
+    Class: Class 6
+    Subject: Mathematics
+    Topic: Algebra
+    Problem: explain the basic algebra
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",student_demonstration,True,
+82f99762-479a-4a5b-aea7-949794c37d8e,2026-01-12T13:39:10.466858,"
+    Class: Class 2
+    Subject: English
+    Topic: Simple Sentences
+    Problem: how to explain the past sentence to students 
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",question_based_checking,True,
+5ef6b3bd-a48a-4a52-83bb-b21605dfe5fe,2026-01-12T14:08:03.101557,"
+    Class: Class 1
+    Subject: Drawing
+    Topic: Colors
+    Problem: how to teach the students filling the colors on papers
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",silent_think_time,True,
+cfe116c0-533a-4b93-9612-8c673f430f18,2026-01-12T14:09:08.044631,"
+    Class: Class 1
+    Subject: 
+    Topic: 
+    Problem: how to explain the students different colors which are useful for drawing
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",real_life_example,True,
+9eaf6c18-8429-47a4-8254-2c8fe835022a,2026-01-12T14:09:22.354139,"
+    Class: Class 1
+    Subject: 
+    Topic: 
+    Problem: hello
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",real_life_example,True,
+b11fe697-80e7-4f1f-88e1-2924f20ce257,2026-01-12T14:10:41.560291,"
+    Class: Class 2
+    Subject: Social Studies
+    Topic: Festivals
+    Problem: how to teach the students that how they communicate in social environments
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",real_life_example,True,
+ce170404-1053-49fe-98ae-3f17b3008e83,2026-01-12T14:12:27.450443,"
+    Class: Class 2
+    Subject: 
+    Topic: 
+    Problem: how to explain the students importance of festivals
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",student_demonstration,True,
+4e81279f-5547-4c5d-9da1-2f1d954d7312,2026-01-12T14:12:50.234469,"
+    Class: Class 2
+    Subject: 
+    Topic: 
+    Problem: hello good evening
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",question_based_checking,True,
+0aa011f3-bdb6-41e5-a662-b24efb39d45c,2026-01-12T14:13:16.591461,"
+    Class: Class 2
+    Subject: 
+    Topic: 
+    Problem: new avtivity for students
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",real_life_example,False,
+19be3080-29ff-41e8-b743-86138f77788d,2026-01-12T14:26:38.953085,"
+    Class: Class 1
+    Subject: Drawing
+    Topic: Shapes
+    Problem: fddds
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",peer_teaching_pairs,True,
+6e29c60a-1e48-45f2-a807-4a14f44dd247,2026-01-12T14:26:49.819100,"
+    Class: Class 1
+    Subject: 
+    Topic: 
+    Problem: fdsasass
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",peer_teaching_pairs,True,
+b9f67220-5d1f-40fb-97c1-560dbbba5b0e,2026-01-12T14:27:01.085327,"
+    Class: Class 1
+    Subject: 
+    Topic: 
+    Problem: dsasasa
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",question_based_checking,True,
+cdf72508-12cf-444b-89d7-00954dd70bc9,2026-01-12T14:39:02.864126,"
+    Class: Class 2
+    Subject: English
+    Topic: Common Nouns
+    Problem: explain the nouns 
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",peer_teaching_pairs,True,
+f63ae01f-46c5-470d-84ba-8fc6fdfe991d,2026-01-12T14:39:24.690747,"
+    Class: Class 2
+    Subject: 
+    Topic: 
+    Problem: explain the different nonus
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",question_based_checking,True,
+1d36d2fe-1e5f-41a6-8a46-5c5e92ad0e73,2026-01-12T15:06:15.052727,"
+    Class: Class 2
+    Subject: Drawing
+    Topic: Colors
+    Problem: fsdas
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",peer_teaching_pairs,True,
+e80f81a8-77fa-48f0-977c-1cad99900092,2026-01-12T15:06:24.686265,"
+    Class: Class 2
+    Subject: 
+    Topic: 
+    Problem: dsfdf
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",question_based_checking,True,
+c936cec5-b905-4c10-b5ab-a75a162c0de0,2026-01-12T15:23:25.601568,"
+    Class: Class 3
+    Subject: Marathi
+    Topic: व्याकरण
+    Problem: explain the basic yakarn
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",peer_teaching_pairs,True,
+5a0e9051-cf61-4125-8a41-3af4fa46911c,2026-01-12T15:23:42.778093,"
+    Class: Class 3
+    Subject: 
+    Topic: 
+    Problem: yakarn for 3rd class
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",silent_think_time,True,
+45b703a2-1673-43e0-81fe-110c9e41d61e,2026-01-13T04:18:12.358830,"
+    Class: Class 1
+    Subject: Mathematic
+    Topic: Multiplication
+    Problem: give the  different numbers for  multiplication 
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",peer_teaching_pairs,True,
+a64274fb-c516-4bc2-aff8-c29ae634400a,2026-01-13T04:18:40.373337,"
+    Class: Class 1
+    Subject: 
+    Topic: 
+    Problem: give the difficult tasks 
+    ",{'students_not_understanding': 0.6},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",silent_think_time,True,
+9dfa01fd-d22f-4140-8358-1462a38aa0da,2026-01-13T05:39:26.107596,"
+    Class: Class 6
+    Subject: Science
+    Topic: Physics
+    Problem: jyddad
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",peer_teaching_pairs,True,
+7e11cb93-9c36-41d8-8c7e-c5255e6aaef5,2026-01-13T05:39:43.347904,"
+    Class: Class 6
+    Subject: 
+    Topic: 
+    Problem: gfgdfdssa
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",silent_think_time,True,
+4cc9c256-6a6f-4059-85ac-3c07a9fc494c,2026-01-13T05:40:50.162452,"
+    Class: Class 6
+    Subject: 
+    Topic: 
+    Problem: gfgdfdssa
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",,,
+1686b7cf-069b-4487-a47f-40c5c61545ba,2026-01-13T05:42:14.603503,"
+    Class: Class 8
+    Subject: Mathematics
+    Topic: Algebra
+    Problem: Hello there shanta is not doing her dare very bad
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",peer_teaching_pairs,False,
+9130f2a4-54c2-4ba1-a835-a616d00604a4,2026-01-13T05:43:52.493932,"
+    Class: Class 8
+    Subject: 
+    Topic: 
+    Problem: Again Shanta is being paranoif
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",peer_teaching_pairs,True,Here is your feedback do somethin!!!
+0a21117b-b2f6-4e18-b55f-65182c6c7f66,2026-01-13T10:25:07.749056,"
+    Class: Class 3
+    Subject: Drawing
+    Topic: Colors
+    Problem: fsdsds
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",peer_teaching_pairs,True,
+6f83c7cd-244e-4acd-9043-53095138d764,2026-01-13T10:25:23.034142,"
+    Class: Class 3
+    Subject: 
+    Topic: 
+    Problem: fdfsas
+    ",{},{},"['peer_teaching_pairs', 'question_based_checking', 'real_life_example', 'silent_think_time', 'student_demonstration']",question_based_checking,True,
+>>>>>>> c02dc543fc3336b184d2383a8179a45603f06476
