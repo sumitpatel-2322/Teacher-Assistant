@@ -25,68 +25,53 @@
         </div>
     </div>
 
-    <!-- CONTEXT BAR -->
-    <div class="context-bar">
-        <select id="classSelect" class="ctx-dropdown">
-            <option value="">Select Class</option>
-            {% for c in ["Class 1","Class 2","Class 3","Class 4","Class 5","Class 6","Class 7","Class 8","Class 9","Class 10"] %}
-                <option value="{{ c }}" {% if prefill and prefill.class == c %}selected{% endif %}>
-                    {{ c }}
-                </option>
-            {% endfor %}
-        </select>
+    <div class="main-layout">
         
-        <select id="subjectSelect" class="ctx-dropdown" {% if not prefill or not prefill.subject %}disabled{% endif %}>
-            <option value="{{ prefill.subject if prefill else '' }}">
-                {{ prefill.subject if prefill and prefill.subject else 'Subject' }}
-            </option>
-        </select>
+        <div class="left-sidebar">
+            
+            <div class="context-stack">
+                <label>Context Selection</label>
+                <select id="classSelect" class="ctx-dropdown">
+                    <option value="">Select Class</option>
+                    {% for c in ["Class 1","Class 2","Class 3","Class 4","Class 5","Class 6","Class 7","Class 8","Class 9","Class 10"] %}
+                        <option value="{{ c }}" {% if prefill and prefill.class == c %}selected{% endif %}>{{ c }}</option>
+                    {% endfor %}
+                </select>
+                
+                <select id="subjectSelect" class="ctx-dropdown" {% if not prefill or not prefill.subject %}disabled{% endif %}>
+                    <option value="{{ prefill.subject if prefill else '' }}">{{ prefill.subject if prefill and prefill.subject else 'Subject' }}</option>
+                </select>
 
-        <select id="topicSelect" class="ctx-dropdown" disabled>
-            <option value="">Topic (Optional)</option>
-        </select>
-    </div>
+                <select id="topicSelect" class="ctx-dropdown" disabled>
+                    <option value="">Topic (Optional)</option>
+                </select>
+            </div>
 
-    <!-- CHAT WINDOW -->
-    <div id="chat-window" class="chat-window">
-        <div class="message bot-msg">
-            <div class="bubble">
-                Hello! Please confirm your Class and Subject above, then type or speak your query below.
+            <div class="feedback-box">
+                <h3>Feedback</h3>
+                <textarea placeholder="Tell us how to improve..."></textarea>
+                <button class="submit-fb-btn">Submit</button>
             </div>
         </div>
-    </div>
 
-    <!-- INPUT AREA -->
-    <div class="input-area">
-        <div class="input-wrapper">
+        <div class="right-chat-area">
+            <div id="chat-window" class="chat-window">
+                <div class="message bot-msg">
+                    <div class="bubble">
+                        Hello! Please confirm your Class and Subject on the left, then type your query below.
+                    </div>
+                </div>
+            </div>
 
-            <!-- TEXT INPUT -->
-            <textarea
-                id="userQuery"
-                placeholder="Type your doubt here..."
-                rows="1"
-            ></textarea>
-
-            <!-- MIC BUTTON -->
-            <button
-                id="micBtn"
-                type="button"
-                class="mic-btn"
-                title="Speak your issue"
-            >
-                🎙️
-            </button>
-
-            <!-- VOICE LOADER -->
-            <span
-                id="voiceLoader"
-                style="display:none; margin-left:10px;"
-            ></span>
-
-            <!-- SEND BUTTON -->
-            <button id="sendBtn" class="send-btn">➤</button>
-
+            <div class="input-area">
+                <div class="input-wrapper">
+                    <textarea id="userQuery" placeholder="Type your doubt here..." rows="1"></textarea>
+                    <button type="button" class="mic-btn">🎤</button>
+                    <button id="sendBtn" class="send-btn">➤</button>
+                </div>
+            </div>
         </div>
+
     </div>
 
 </div>
@@ -99,6 +84,6 @@
 
 {% block scripts %}
 <script src="/static/js/sub.js"></script>
-<script src="/static/js/dashboard_chat.js"></script>
-<script src="/static/js/voice_input.js"></script>
+<script src="/static/js/dashboard_chat.js"></script> 
 {% endblock %}
+
