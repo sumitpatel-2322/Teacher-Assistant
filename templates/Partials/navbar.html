@@ -1,0 +1,15 @@
+<nav>
+    <div class="logo">VEDA</div>
+    
+    <div class="nav-right">
+        {% if user %}
+        <a href="/profile" class="profile-icon" title="Update Profile">
+            <div class="avatar-circle">
+                {{ user.username[0] | upper }}
+            </div>
+        </a>
+        {% endif %}
+
+        <button class="hamburger" id="hamburgerBtn">☰</button>
+    </div>
+</nav>

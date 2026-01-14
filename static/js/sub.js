@@ -1,90 +1,66 @@
 const data = {
-  "Class 1": {
-    "Drawing": ["Colors", "Shapes"],
-    "Mathematic": ["Addition","Subtraction","Multiplication","Division" ],
-    "English": ["Alphabets", "Basic Words"],
-    "Science": ["Plants", "Animals"],
-    "Social Studies": ["My Family", "My School"],
-    "Marathi": ["वर्णमाला", "साधे शब्द"]
-  },
-   "Class 2": {
-    "Drawing": ["Colors", "Shapes"],
-    "Mathematics": ["Tables", "Patterns"],
-    "English": ["Simple Sentences", "Common Nouns"],
-    "Science": ["Physics", "Biology"],
-    "Social Studies": ["Community Helpers", "Festivals"],
-    "Marathi": ["साधे वाक्य", "सामान्य नामे"]
-  },
-   "Class 3": {
-    "Drawing": ["Colors", "Shapes"],
-    "Social Studies": ["Maps", "History"],
-    "English": ["Grammar", "Vocabulary"],
-    "Marathi": ["व्याकरण", "शब्दसंग्रह"],
-    "Science": ["Chemistry", "Biology"],
-    "Mathematics": ["Algebra", "Geometry"],
-  },
-  "Class 4": {
-    "Mathematics": ["Algebra", "Geometry"],
-
-  },
-   "Class 5": {
-    "Mathematics": ["Algebra", "Geometry"],
-    "Science": ["Physics", "Biology"]
-  },
-   "Class 6": {
-    "Mathematics": ["Algebra", "Geometry"],
-    "Science": ["Physics", "Biology"]
-  },
-   "Class 7": {
-    "Mathematics": ["Algebra", "Geometry"],
-    "Science": ["Physics", "Biology"]
-  },
-   "Class 8": {
-    "Mathematics": ["Algebra", "Geometry"],
-    "Science": ["Physics", "Biology"]
-  },
-  "Class 9": {
-    "Mathematics": ["Integers", "Fractions"],
-    "Science": ["Motion", "Heat"]
-  },
-  
-  "Class 10": {
-    "Mathematics": ["Integers", "Fractions"],
-    "Science": ["Motion", "Heat"]
-  }
+  "Class 1": { "Drawing": ["Colors"], "Mathematic": ["Addition"], "English": ["Alphabets"] },
+  "Class 2": { "Mathematic": ["Tables"], "English": ["Simple Sentences"] },
+  "Class 3": { "Mathematics": ["Algebra"], "Science": ["Biology"] },
+  "Class 4": { "Mathematics": ["Geometry"] },
+  "Class 5": { "Mathematics": ["Algebra"], "Science": ["Physics"] },
+  "Class 6": { "Mathematics": ["Algebra"], "Science": ["Biology"] },
+  "Class 7": { "Mathematics": ["Geometry"], "Science": ["Physics"] },
+  "Class 8": { "Mathematics": ["Algebra"], "Science": ["Biology"] },
+  "Class 9": { "Mathematics": ["Trigonometry"], "Science": ["Motion"] },
+  "Class 10": { "Mathematics": ["Calculus"], "Science": ["Optics"] }
 };
 
-const classSelect = document.getElementById("classSelect");
-const subjectSelect = document.getElementById("subjectSelect");
-const topicSelect = document.getElementById("topicSelect");
+document.addEventListener("DOMContentLoaded", () => {
+    const classSelect = document.getElementById("classSelect");
+    const subjectSelect = document.getElementById("subjectSelect");
+    const topicSelect = document.getElementById("topicSelect");
 
-classSelect.addEventListener("change", () => {
-  subjectSelect.innerHTML = '<option value="">Subject</option>';
-  topicSelect.innerHTML = '<option value="">Topic</option>';
-  subjectSelect.disabled = true;
-  topicSelect.disabled = true;
+    if (!classSelect || !subjectSelect) return;
 
-  const cls = classSelect.value;
-  if (!cls) return;
+    // Helper: Populate Subjects
+    function populateSubjects(className, selectedSubject = "") {
+        subjectSelect.innerHTML = '<option value="">Subject</option>';
+        topicSelect.innerHTML = '<option value="">Topic</option>';
+        
+        if (!className || !data[className]) {
+            subjectSelect.disabled = true;
+            topicSelect.disabled = true;
+            return;
+        }
 
-  Object.keys(data[cls]).forEach(subject => {
-    subjectSelect.innerHTML += `<option value="${subject}">${subject}</option>`;
-  });
+        subjectSelect.disabled = false;
+        Object.keys(data[className]).forEach(subj => {
+            const isSelected = (subj === selectedSubject) ? "selected" : "";
+            subjectSelect.innerHTML += `<option value="${subj}" ${isSelected}>${subj}</option>`;
+        });
+    }
 
-  subjectSelect.disabled = false;
-});
+    // Event Listener
+    classSelect.addEventListener("change", () => {
+        populateSubjects(classSelect.value);
+    });
 
-subjectSelect.addEventListener("change", () => {
-  topicSelect.innerHTML = '<option value="">Topic</option>';
-  topicSelect.disabled = true;
+    subjectSelect.addEventListener("change", () => {
+        topicSelect.innerHTML = '<option value="">Topic</option>';
+        const cls = classSelect.value;
+        const sub = subjectSelect.value;
 
-  const cls = classSelect.value;
-  const sub = subjectSelect.value;
-  if (!sub) return;
+        if (cls && sub && data[cls][sub]) {
+            topicSelect.disabled = false;
+            data[cls][sub].forEach(topic => {
+                topicSelect.innerHTML += `<option value="${topic}">${topic}</option>`;
+            });
+        } else {
+            topicSelect.disabled = true;
+        }
+    });
 
-  data[cls][sub].forEach(topic => {
-    topicSelect.innerHTML += `<option value="${topic}">${topic}</option>`;
-  });
-
-  topicSelect.disabled = false;
+    // ➤ AUTO-TRIGGER ON LOAD (The Prefill Fix)
+    if (classSelect.value) {
+        // If HTML has a value (from backend), load subjects immediately
+        // We pass the current value of subjectSelect to keep it selected
+        const currentSubject = subjectSelect.options[subjectSelect.selectedIndex]?.text || "";
+        populateSubjects(classSelect.value, currentSubject);
+    }
 });

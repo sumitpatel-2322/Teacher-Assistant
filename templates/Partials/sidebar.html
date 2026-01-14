@@ -1,0 +1,23 @@
+<div id="mySidepanel">
+    <span class="sidebar-close" id="closeSidebar">✕</span>
+  
+    <a href="/">Home</a>
+    
+    {% if user %}
+        {% if user.role == 'teacher' %}
+            <a href="/teacher">Dashboard</a>
+        {% elif user.role == 'crp' %}
+            <a href="/crp">CRP Dashboard</a>
+        {% elif user.role == 'brp' %}
+            <a href="/brp">BRP Dashboard</a>
+        {% elif user.role == 'arp' %}
+            <a href="/arp">ARP Dashboard</a>
+        {% endif %}
+        
+        <a href="/profile">My Profile</a>
+        <a href="/logout" class="logout-link">Logout</a>
+    {% else %}
+        <a href="/login">Login</a>
+        <a href="/register">Sign Up</a>
+    {% endif %}
+</div>

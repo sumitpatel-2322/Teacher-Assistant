@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile - VEDA{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/register.css"> {% endblock %}
+
+{% block content %}
+<div class="auth-container" style="margin-top: 50px;">
+    <h2>Update Profile</h2>
+    
+    <form method="post" action="/profile/update">
+        
+        <label>Name</label>
+        <input type="text" value="{{ data.name }}" disabled style="background:#eef;">
+
+        <label>School</label>
+        <input type="text" value="{{ data.school_name }}" disabled style="background:#eef;">
+
+        <hr style="margin: 20px 0; border:0; border-top:1px solid #ccc;">
+        
+        <p style="margin-bottom:15px; font-size:14px; color:#555;">
+            Update your default teaching preferences to auto-fill your dashboard.
+        </p>
+
+        <label for="class_name">Preferred Class</label>
+        <select id="classSelect" name="class_name" required>
+            <option value="">Select Class</option>
+            {% for c in ["Class 1","Class 2","Class 3","Class 4","Class 5","Class 6","Class 7","Class 8","Class 9","Class 10"] %}
+                <option value="{{ c }}" {% if data.preferred_class == c %}selected{% endif %}>{{ c }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="subject">Preferred Subject</label>
+        <select id="subjectSelect" name="subject" required>
+            <option value="{{ data.preferred_subject }}" selected>{{ data.preferred_subject }}</option>
+        </select>
+
+        <button type="submit" style="margin-top:20px;">Save Changes</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/sub.js"></script>
+{% endblock %}

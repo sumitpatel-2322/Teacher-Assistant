@@ -1,152 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Teacher Dashboard - Ask Doubt</title>
+{% extends "base.html" %}
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+{% block title %}Teacher Dashboard - VEDA{% endblock %}
 
-<link rel="stylesheet" href="/static/css/Tb.css">
-<link rel="stylesheet" href="/static/css/sidebar.css">
-<link rel="stylesheet" href="/static/css/footer.css">
-</head>
-<script src="/static/js/solution_details.js"></script>
-<body>
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/dashboard_chat.css">
+{% endblock %}
 
-<div id="mySidepanel">
-  <span class="sidebar-close">✕</span>
-  <a href="/">Home</a>
-  <a href="#ask-doubt">Ask Doubt</a>
-  <a href="#">Resources</a>
-  <a href="/logout">Logout</a>
+{% block content %}
+<div class="dashboard-container">
+    
+    <div class="dash-header">
+        <div class="user-welcome">
+            <h2>👋 Hello, {{ user.username }}</h2>
+            <p>I am here to help. Select your class context and ask away.</p>
+        </div>
+        
+        <div class="toggle-container">
+            <label class="switch">
+                <input type="checkbox" id="toggleStatus">
+                <span class="slider"></span>
+            </label>
+            <span class="status offline" id="statusText">Offline</span>
+        </div>
+    </div>
+
+    <div class="context-bar">
+        <select id="classSelect" class="ctx-dropdown">
+            <option value="">Select Class</option>
+            {% for c in ["Class 1","Class 2","Class 3","Class 4","Class 5","Class 6","Class 7","Class 8","Class 9","Class 10"] %}
+                <option value="{{ c }}" {% if prefill and prefill.class == c %}selected{% endif %}>{{ c }}</option>
+            {% endfor %}
+        </select>
+        
+        <select id="subjectSelect" class="ctx-dropdown" {% if not prefill or not prefill.subject %}disabled{% endif %}>
+            <option value="{{ prefill.subject if prefill else '' }}">{{ prefill.subject if prefill and prefill.subject else 'Subject' }}</option>
+        </select>
+
+        <select id="topicSelect" class="ctx-dropdown" disabled>
+            <option value="">Topic (Optional)</option>
+        </select>
+    </div>
+
+    <div id="chat-window" class="chat-window">
+        <div class="message bot-msg">
+            <div class="bubble">
+                Hello! Please confirm your Class and Subject above, then type your query below.
+            </div>
+        </div>
+    </div>
+
+    <div class="input-area">
+        <div class="input-wrapper">
+            <textarea id="userQuery" placeholder="Type your doubt here..." rows="1"></textarea>
+            <button type="button" class="mic-btn">🎤</button>
+            <button id="sendBtn" class="send-btn">➤</button>
+        </div>
+    </div>
+
 </div>
 
-<nav>
-  <div class="logo">VEDA</div>
-  <button class="hamburger" id="hamburgerBtn">☰</button>
-</nav>
+<template id="solution-template">
+    <div class="solution-grid"></div>
+</template>
+{% endblock %}
 
-<header>
-  <div class="header-left">
-    <img src="/static/img/logo.png">
-    <div>
-      <div class="title">Teacher Dashboard</div>
-      <div class="subtitle">Virtual Educator And Digital Assistant</div>
-    </div>
-  </div>
-
-  <div class="toggle-container">
-    <label class="switch">
-      <input type="checkbox" id="toggleStatus">
-      <span class="slider"></span>
-    </label>
-    <span class="status offline" id="statusText">Offline</span>
-  </div>
-
-  <div class="header-right user-profile">
-    <img src="/static/img/user-icon.jpg">
-    <span class="username">{{ user.username }}</span>
-  </div>
-</header>
-
-<div class="ask-layout">
-
-<form action="/teacher/ask" method="post" style="display: contents;">
-
-  <!-- HIDDEN STATE (for persistence) -->
-  <input type="hidden" id="selected_class" value="{{ selected_class or '' }}">
-  <input type="hidden" id="selected_subject" value="{{ selected_subject or '' }}">
-  <input type="hidden" id="selected_topic" value="{{ selected_topic or '' }}">
-
-  <!-- LEFT -->
-  <div class="dropdowns">
-    <select name="class_name" id="classSelect" required>
-      <option value="">Class</option>
-      {% for c in ["Class 1","Class 2","Class 3","Class 4","Class 5",
-                   "Class 6","Class 7","Class 8","Class 9","Class 10"] %}
-        <option value="{{ c }}" {% if selected_class == c %}selected{% endif %}>
-          {{ c }}
-        </option>
-      {% endfor %}
-    </select>
-
-    <!-- ⚠️ DO NOT TOUCH THESE (JS CONTROLS THEM) -->
-    <select name="subject" id="subjectSelect"  disabled>
-      <option value="">Subject</option>
-    </select>
-
-    <select name="topic" id="topicSelect" disabled>
-      <option value="">Topic</option>
-    </select>
-  </div>
-
-  <!-- RIGHT -->
-  <div class="ask-doubt-section" id="ask-doubt">
-
-    <h2>Ask Your Doubt</h2>
-
-    <div class="doubt-input-wrapper">
-      <textarea
-        class="doubt-textarea"
-        name="question"
-        placeholder="Type your doubt here..."
-        required></textarea>
-      <button type="button" class="mic-inside">🎤</button>
-    </div>
-
-    {% if engine_output %}
-      <input type="hidden" id="request_id" value="{{ engine_output.request_id }}">
-    {% endif %}
-
-    <button class="ask-btn" type="submit">Enter</button>
-
-    <div class="ai-response">
-      <h2>AI Response</h2>
-    {% include "solution_details.html" %}
-      <div class="items">
-        {% if engine_output and engine_output.ranked_solutions %}
-          {% for sol in engine_output.ranked_solutions %}
-            <button type="button"
-                    class="response-item"
-                    data-solution-id="{{ sol.solution_id }}">
-              {{ sol.text }}
-              <br><small>Confidence: {{ sol.confidence }}</small>
-            </button>
-          {% endfor %}
-        {% else %}
-          <p style="opacity:0.7;">No suggestions yet.</p>
-        {% endif %}
-      </div>
-
-      <div class="feedback-buttons">
-        <button type="button" class="worked">Worked ✅</button>
-        <button type="button" class="not-worked">Did Not Work ❌</button>
-      </div>
-    </div>
-
-    <div class="feedback-section">
-      <label><b>Your Feedback:</b></label>
-      <div class="feedback-input-wrapper">
-        <textarea id="feedback" class="feedback-box"
-                  placeholder="Enter your feedback here..."></textarea>
-        <button type="button" class="send-inside">➤</button>
-      </div>
-    </div>
-
-  </div>
-</form>
-</div>
-
-<footer class="app-footer">
-  <div class="footer-inner">
-    <span>© 2026 VEDA – Virtual Educator & Digital Assistant</span>
-    <span>Made for Teachers</span>
-  </div>
-</footer>
-
-<script src="/static/js/Tb.js"></script>
+{% block scripts %}
 <script src="/static/js/sub.js"></script>
-</body>
-</html>
+<script src="/static/js/dashboard_chat.js"></script> {% endblock %}

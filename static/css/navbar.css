@@ -1,28 +1,50 @@
-nav {
-    width: 100%;
-    background: #4b0082;
-    color: #fff;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;                  /* Full width */
-    z-index: 1003;             /* Above side panel */
-    transition: none;
+/* Logo Styling */
+nav .logo {
+    font-family: 'Courgette', cursive;
+    font-size: 24px;
+    color: #5CDB95; /* Mint Accent */
 }
 
-nav .logo { font-size:20px; font-weight:600; }
+/* Right Side Container */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
 
+/* Profile Avatar Circle */
+.profile-icon {
+    text-decoration: none;
+}
+
+.avatar-circle {
+    width: 38px;
+    height: 38px;
+    background: #5CDB95;
+    color: #05386B;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+    border: 2px solid #EDF5E1;
+    transition: transform 0.2s;
+}
+
+.avatar-circle:hover {
+    transform: scale(1.1);
+    background: #8EE4AF;
+}
+
+/* Hamburger Reset */
 .hamburger {
-    font-size: 30px;
-    cursor: pointer;
     background: none;
     border: none;
-    color: #fff;
-    padding: 10px 15px;
-    position: relative;
-    z-index: 1004;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
 }
