@@ -7,7 +7,7 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
-    background-color: #EDF5E1;;
+    background-color: #EDF5E1;
 }
 
 .dash-header {
