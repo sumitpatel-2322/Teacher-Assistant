@@ -85,7 +85,7 @@ header {
 .intro {
   max-width:1300p;
   margin:90px auto 20px;
-  background:#c5f8d9;
+  background:#c5f8d9 !important; 
   padding:20px 15px;
   border-radius:12px;
   box-shadow:0 4px 12px rgba(0,0,0,0.05);
@@ -158,7 +158,6 @@ header {
     #ffffff 0%,
     #f8fffb 100%
   );
-
   border-radius: 16px;
   padding: 22px 20px;
 
@@ -184,8 +183,8 @@ header {
   width: 5px;
   background: linear-gradient(
     180deg,
-    #5CDB95,
-    #379683
+  #6F93B8,
+  #2F5F88
   );
   border-radius: 16px 0 0 16px;
   opacity: 0.9;
@@ -262,4 +261,19 @@ header {
 /* ================= RESPONSIVE ================= */
 @media screen and (max-width:768px){
   header { margin-top: 70px; }
+}
+/* Page side spacing */
+.page-container {
+  max-width: 1400px;     /* keeps content centered */
+  margin: 0 auto;        /* center horizontally */
+  padding: 0 24px;       /* 👈 left & right margin */
+}
+.card-icon {
+  width: 28px;
+  height: 28px;
+  stroke: #05386B;
+  stroke-width: 1.8;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }

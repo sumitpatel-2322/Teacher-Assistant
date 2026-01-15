@@ -1,4 +1,15 @@
 /* ================= DASHBOARD HEADER ================= */
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #EDF5E1;;
+}
+
 .dash-header {
     display: flex;
     justify-content: space-between;
@@ -28,7 +39,10 @@
     grid-template-columns: 280px 1fr; /* Fixed Left Sidebar, Flexible Right Chat */
     gap: 20px;
     min-height: 500px;
-        margin-bottom: 48px;   /* adjust: 32px / 48px / 64px */
+        margin-bottom: 48px;
+          flex: 11;              /* 🔑 THIS increases height */
+    min-height: 80vh; 
+        /* adjust: 32px / 48px / 64px */
 
 }
 
