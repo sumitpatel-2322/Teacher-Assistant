@@ -1,45 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CRP Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+{% extends "base.html" %}
 
-  <link rel="stylesheet" href="static/css/crp.css">
-    <link rel="stylesheet" href="static/css/sidebar.css">
-    <link rel="stylesheet" href="static/css/footer.css">
+{% block title %}CRP Dashboard - VEDA{% endblock %}
 
-  
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/crp.css">
+{% endblock %}
 
-</head>
-<body class="theme-crp">
-
-  <div id="mySidepanel">
-        <span class="sidebar-close">✕</span>
-    <a href="/" class="logout-link">Home</a>
-    <a href="Teacher_dashboard.html" class="logout-link">Teachers</a>
-    <a href="/logout" class="logout-link">Logout</a>
-  </div>
+{% block content %}
 <div class="page-content">
-  <nav>
-    <div class="logo">VEDA</div>
-    <button class="hamburger" id="hamburgerBtn">☰</button>
-  </nav>
-
   <header>
-<div class="header-left">
-<img src="static/img/logo.png" alt="Teacher">
-<div>
-<div class="title">CRP Dashboard</div>
-<div class="subtitle">JVirtual Educator And Digital Assistant</div>
-</div>
-</div>
-<div class="header-right">
-<img src="/static/img/user-icon.jpg" alt="User">
-</div>
-</header>
+    <div class="header-left">
+      <img src="/static/img/logo.png" alt="VEDA Logo">
+      <div>
+        <div class="title">CRP Dashboard</div>
+        <div class="subtitle">Virtual Educator And Digital Assistant</div>
+      </div>
+    </div>
+    <div class="header-right">
+      {% if user %}
+        <div class="profile-avatar" style="width:40px; height:40px; font-size:16px;">
+            {{ user.username[0] | upper }}
+        </div>
+      {% else %}
+        <img src="/static/img/user-icon.jpg" alt="User">
+      {% endif %}
+    </div>
+  </header>
 
   <div class="section-title">CRP Actions</div>
   <div class="actions">
@@ -49,24 +35,12 @@
   </div>
 
   <div class="section-title">List of Teachers</div>
-  <div style="text-align:center;">
-    <select id="teacherDropdown">
+  <div style="text-align:center; margin-bottom: 40px;">
+    <select id="teacherDropdown" style="padding: 10px; border-radius: 6px; border: 1px solid #ccc; width: 90%; max-width: 400px;">
       <option>Select a Teacher</option>
       <option>Teacher 1</option>
       <option>Teacher 2</option>
     </select>
   </div>
-</div> <!-- End of page-content -->
-<footer class="app-footer">
-  <div class="footer-inner">
-    <span>© 2026 VEDA – Virtual Educator & Digital Assistant</span>
-    <span>Made for Teachers</span>
-  </div>
-</footer>
-
-  <script src="static/js/arp.js"></script>
-    
-  
-
-</body>
-</html>
+</div>
+{% endblock %}

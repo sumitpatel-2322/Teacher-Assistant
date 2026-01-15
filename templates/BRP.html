@@ -1,61 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BRP Dashboard - Teacher-AssistantAI</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+{% extends "base.html" %}
 
-  <link rel="stylesheet" href="static/css/brp.css">
-    <link rel="stylesheet" href="static/css/sidebar.css">
-     <link rel="stylesheet" href="static/css/footer.css">
+{% block title %}BRP Dashboard - VEDA{% endblock %}
 
-</head>
-<body>
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/brp.css">
+{% endblock %}
 
-  <!-- Side Panel - Right side -->
-  <div id="mySidepanel">
-    <span class="sidebar-close">✕</span>
-
-    <a href="/" class="logout-link">Home</a>
-    <a href="/logout" class="logout-link">Logout</a>
-  </div>
+{% block content %}
 <div class="page-content">
+  <header>
+    <div class="header-left">
+      <img src="/static/img/logo.png" alt="VEDA Logo">
+      <div>
+        <div class="title">BRP Dashboard</div>
+        <div class="subtitle">Virtual Educator And Digital Assistant</div>
+      </div>
+    </div>
+    <div class="header-right">
+       {% if user %}
+        <div class="profile-avatar" style="width:40px; height:40px; font-size:16px;">
+            {{ user.username[0] | upper }}
+        </div>
+      {% else %}
+        <img src="/static/img/user-icon.jpg" alt="User">
+      {% endif %}
+    </div>
+  </header>
 
-  <!-- Navbar - Fixed with Hamburger -->
-  <nav>
-    <div class="logo">VEDA</div>
-    <button class="hamburger" id="hamburgerBtn">☰</button>
-  </nav>
-
-<header>
-<div class="header-left">
-<img src="static/img/logo.png" alt="Teacher">
-<div>
-<div class="title">BRP Dashboard</div>
-<div class="subtitle">Virtual Educator And Digital Assistant</div>
-</div>
-</div>
-<div class="header-right">
-<img src="/static/img/user-icon.jpg" alt="User">
-</div>
-</header>
   <div class="section-title">BRP Actions</div>
   <div class="actions">
     <button>Track CRP Activity</button>
     <button>Identify Training Needs</button>
   </div>
 </div>
- <footer class="app-footer">
-  <div class="footer-inner">
-    <span>© 2026 VEDA – Virtual Educator & Digital Assistant</span>
-    <span>Made for Teachers</span>
-  </div>
-
-</footer>
-
-  <script src="static/js/arp.js"></script>
-
-</body>
-</html>
+{% endblock %}
