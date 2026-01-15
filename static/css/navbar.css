@@ -1,9 +1,13 @@
 /* Logo Styling */
 nav .logo {
-    font-family: 'Courgette', cursive;
-    font-size: 24px;
-    color: #5CDB95; /* Mint Accent */
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    letter-spacing: 3px !important;
+    color:#EDF5E1 !important;
 }
+
+
 
 /* Right Side Container */
 .nav-right {

@@ -7,11 +7,7 @@
     margin: 0;
     padding : 28px 0 22px;
     margin-bottom: 0%;
-    background: linear-gradient(
-        180deg,
-        #2fb7a5 0%,
-        #24a295 100%
-    );
+    background: #05386B;
 
     color: #EDF5E1;
     border-top: 3px solid #5CDB95;
