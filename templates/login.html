@@ -14,20 +14,26 @@
   {% endif %}
 
   <form method="post" action="/login">
-    <label for="role">Role</label>
-    <select id="role" name="role" required>
-      <option value="">Select Role</option>
-      <option value="teacher">Teacher</option>
-      <option value="crp">CRP</option>
-      <option value="brp">BRP</option>
-      <option value="arp">ARP</option>
-    </select>
+  <div class="input-group">
+  <select class="input" name="role" required>
+    <option value="" disabled selected></option>
+    <option value="teacher">Teacher</option>
+    <option value="crp">CRP</option>
+    <option value="brp">BRP</option>
+    <option value="arp">ARP</option>
+  </select>
+  <label class="user-label">Role</label>
+</div>
 
-    <label>Username</label>
-    <input type="text" name="username" required>
+      <div class="input-group">
+  <input class="input" type="text" name="username" required>
+  <label class="user-label">Username</label>
+</div>
 
-    <label>Password</label>
-    <input type="password" name="password" required>
+<div class="input-group">
+  <input class="input" type="password" name="password" required>
+  <label class="user-label">Password</label>
+</div>
 
     <button type="submit">Login</button>
   </form>
