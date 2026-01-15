@@ -6,3 +6,10 @@ python-multipart
 starlette
 itsdangerous
 pandas
+vosk
+sounddevice
+transformers 
+torch
+huggingface_hub
+torchaudio
+librosa

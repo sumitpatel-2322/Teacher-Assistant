@@ -45,9 +45,8 @@ SOLUTION_LIBRARY = load_solutions()
 def process_teacher_query(raw_text: str) -> Dict[str, List[Dict]]:
     """
     Main Decision Engine entry point.
-    Guarantees non-empty output via baseline fallback.
-    Applies situation-alias expansion for coverage.
     """
+    print(f">>> DEBUG: Engine.py received query: '{raw_text}'")
 
     request_id = str(uuid.uuid4())
 
@@ -57,6 +56,8 @@ def process_teacher_query(raw_text: str) -> Dict[str, List[Dict]]:
     signals = extract_signals(raw_text)
     situations = signals.get("situations", {})
     constraints = signals.get("constraints", {})
+    
+    print(f">>> DEBUG: Extracted situations: {list(situations.keys())}")
 
     # -------------------------
     # Expand situations using aliases
@@ -91,6 +92,7 @@ def process_teacher_query(raw_text: str) -> Dict[str, List[Dict]]:
     # Hard fallback: ALWAYS ensure output
     # -------------------------
     if not scored:
+        print(">>> DEBUG: No direct matches found, using fallback...")
         fallback_situations = {BASELINE_SITUATION: 1.0}
 
         for solution in SOLUTION_LIBRARY:
@@ -116,10 +118,10 @@ def process_teacher_query(raw_text: str) -> Dict[str, List[Dict]]:
     # -------------------------
     ranked = sorted(scored, key=lambda x: x["confidence"], reverse=True)
     top_solutions = select_diverse_solutions(
-    ranked=ranked,
-    max_results=5,
-    seed=request_id,
-)
+        ranked=ranked,
+        max_results=5,
+        seed=request_id,
+    )
 
     # -------------------------
     # Logging (silent)
@@ -132,6 +134,7 @@ def process_teacher_query(raw_text: str) -> Dict[str, List[Dict]]:
         solutions_shown=[s["solution_id"] for s in top_solutions],
     )
 
+    print(f">>> DEBUG: Engine selected {len(top_solutions)} solutions.")
     return {
         "request_id": request_id,
         "ranked_solutions": top_solutions,
@@ -143,17 +146,11 @@ def process_teacher_query(raw_text: str) -> Dict[str, List[Dict]]:
 # ======================================================
 
 def _expand_situations(situations: Dict[str, float]) -> Dict[str, float]:
-    """
-    Expands detected situations using alias mapping.
-    """
-
     expanded = dict(situations)
-
     for situation, score in situations.items():
         aliases = SITUATION_ALIASES.get(situation, set())
         for alias in aliases:
             expanded.setdefault(alias, score * 0.9)
-
     return expanded
 
 
@@ -179,14 +176,8 @@ def _passes_hard_constraints(solution: Dict, constraints: Dict[str, float]) -> b
     return True
 
 
-def _score_solution(
-    solution: Dict,
-    situations: Dict[str, float],
-    constraints: Dict[str, float],
-) -> float:
-
+def _score_solution(solution: Dict, situations: Dict[str, float], constraints: Dict[str, float]) -> float:
     score = 0.0
-
     for s in solution.get("situations", []):
         if s in situations:
             score += situations[s]
