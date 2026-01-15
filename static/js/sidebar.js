@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const body = document.body;
 
     function openNav() {
-        if(sidepanel) sidepanel.style.width = "250px";
+        if(sidepanel) sidepanel.style.width = "200px";
         body.classList.add("sidepanel-open");
     }
 
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Close on outside click (optional polish)
     document.addEventListener("click", (e) => {
         if (sidepanel && 
-            sidepanel.style.width === "250px" && 
+            sidepanel.style.width === "200px" && 
             !sidepanel.contains(e.target) && 
             e.target !== hamburgerBtn) {
             closeNav();

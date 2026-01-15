@@ -163,8 +163,8 @@ header {
 
   border: 1px solid rgba(5, 56, 107, 0.15);
 
-  box-shadow:
-    0 4px 10px rgba(5, 56, 107, 0.06),
+   box-shadow:
+    0 2px 6px rgba(5, 56, 107, 0.06),
     0 1px 2px rgba(0,0,0,0.04);
 
   transition: 
@@ -180,11 +180,11 @@ header {
   top: 0;
   left: 0;
   height: 100%;
-  width: 5px;
+  width: 4px;
   background: linear-gradient(
     180deg,
-  #6F93B8,
-  #2F5F88
+    #6F93B8,
+    #2F5F88
   );
   border-radius: 16px 0 0 16px;
   opacity: 0.9;
@@ -192,10 +192,9 @@ header {
 
 /* Hover state */
 .card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-4px);
   box-shadow:
-    0 12px 28px rgba(5, 56, 107, 0.12),
-    0 4px 10px rgba(0,0,0,0.06);
+    0 10px 24px rgba(5, 56, 107, 0.12);
   border-color: #5CDB95;
 }
 
@@ -210,9 +209,13 @@ header {
   width: 44px;
   height: 44px;
   border-radius: 12px;
-
-  background: rgba(92, 219, 149, 0.15);
   color: #05386B;
+   background: linear-gradient(
+    180deg,
+    rgba(92, 219, 149, 0.18),
+    rgba(92, 219, 149, 0.08)
+  );
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
 }
 
 /* Title */
@@ -276,4 +279,13 @@ header {
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+.section-title::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: #5CDB95;
+  margin: 10px auto 0;
+  border-radius: 2px;
 }
