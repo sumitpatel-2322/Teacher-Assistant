@@ -51,9 +51,9 @@ nav .logo {
 #mySidepanel .logout-link {
      font-weight: 600;
   margin-top: 30px;
-  color: black;
+  color:#05386B;
   font-size: medium;
-    text-align: center;
+    text-align: left;
  font-size: 20px;
 }
 
@@ -142,4 +142,19 @@ nav .logo {
   color: #05386B;
   cursor: pointer;
   line-height: 1;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: flex-start;
+}
+
+.nav-icon {
+  width: 22px;
+  height: 22px;
+  color: #05386B;
+  flex-shrink: 0;
+  position: relative;
+  top: 2px;   
 }
