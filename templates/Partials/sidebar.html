@@ -1,23 +1,23 @@
 <div id="mySidepanel">
     <span class="sidebar-close" id="closeSidebar">✕</span>
   
-    <a href="/">Home</a>
+    <a href="/" class="logout-link">Home</a>
     
     {% if user %}
         {% if user.role == 'teacher' %}
-            <a href="/teacher">Dashboard</a>
+            <a href="/teacher" class="logout-link">Dashboard</a>
         {% elif user.role == 'crp' %}
-            <a href="/crp">CRP Dashboard</a>
+            <a href="/crp" class="logout-link">CRP Dashboard</a>
         {% elif user.role == 'brp' %}
-            <a href="/brp">BRP Dashboard</a>
+            <a href="/brp" class="logout-link">BRP Dashboard</a>
         {% elif user.role == 'arp' %}
-            <a href="/arp">ARP Dashboard</a>
+            <a href="/arp" class="logout-link">ARP Dashboard</a>
         {% endif %}
         
-        <a href="/profile">My Profile</a>
+        <a href="/profile" class="logout-link">My Profile</a>
         <a href="/logout" class="logout-link">Logout</a>
     {% else %}
-        <a href="/login">Login</a>
-        <a href="/register">Sign Up</a>
+        <a href="/login" class="logout-link">Login</a>
+        <a href="/register" class="logout-link">Sign Up</a>
     {% endif %}
 </div>

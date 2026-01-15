@@ -7,25 +7,7 @@
 {% endblock %}
 
 {% block content %}
-<header>
-    <div class="header-left">
-        <img src="/static/img/logo.png" alt="VEDA Logo">
-        <div>
-            <div class="title">Hello! Welcome</div>
-            <div class="subtitle">Virtual Educator And Digital Assistant</div>
-        </div>
-    </div>
-
-    <div class="header-right">
-        {% if user %}
-            <div class="profile-avatar">
-                {{ user.username[0] | upper }}
-            </div>
-        {% else %}
-            <img src="/static/img/user-icon.jpg" alt="User" class="default-user-icon">
-        {% endif %}
-    </div>
-</header>
+ 
 
 <div class="intro" id="system-overview">
     <h1>System Overview</h1>
