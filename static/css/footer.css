@@ -1,23 +1,37 @@
 /* =========================
-   PROFESSIONAL DASHBOARD FOOTER
+   FLUENT FULL-WIDTH FOOTER
    ========================= */
 
 .app-footer {
-    margin-top:0;
     width: 100%;
-     background:lightseagreen;
+    margin: 0;
+    padding: 28px 0 22px;
+
+    background: linear-gradient(
+        180deg,
+        #2fb7a5 0%,
+        #24a295 100%
+    );
+
     color: #EDF5E1;
-    padding: 22px 0;
     border-top: 3px solid #5CDB95;
-    margin-bottom: 0px;
-    padding-top: 40px;
 }
 
+/* subtle divider */
+.app-footer::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: rgba(255,255,255,0.35);
+    margin-bottom: 18px;
+}
 
+/* inner content stays centered */
 .footer-inner {
-    max-width: 1200px;
+    max-width: 1320px;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0 32px;
 
     display: flex;
     justify-content: space-between;
@@ -28,51 +42,31 @@
     letter-spacing: 0.3px;
 }
 
-/* Left text */
+/* text */
 .footer-inner span:first-child {
     font-weight: 600;
 }
 
-/* Right text */
 .footer-inner span:last-child {
     opacity: 0.85;
     font-size: 13px;
 }
 
-/* subtle divider line */
-.app-footer::before {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 1px;
-    background: rgba(255,255,255,0.25);
-    margin-bottom: 18px;
-}
-
-/* hover polish (future-proof for links) */
+/* links */
 .app-footer a {
     color: #e9fffb;
     text-decoration: none;
-    transition: color 0.25s ease;
 }
 
 .app-footer a:hover {
-    color: #ffffff;
+    opacity: 1;
 }
 
-.app-footer a:hover {
-    color: #ffffff;
-}
-
-/* Mobile polish */
+/* mobile */
 @media (max-width: 768px) {
     .footer-inner {
         flex-direction: column;
-        gap: 10px;
+        gap: 8px;
         text-align: center;
-    }
-
-    .footer-inner span {
-        font-size: 13px;
     }
 }

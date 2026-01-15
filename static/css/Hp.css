@@ -11,88 +11,9 @@ body {
   line-height:1.5; 
   transition: margin-right 0.5s; 
   max-width: 100%;
-}
 
-/* ================= NAVBAR ================= */
-nav {
-  width: 100%;
-  background: #05386B;
-  color: #EDF5E1;
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1003;
-  height: 50px;
-}
 
-nav .logo { 
-  font-size:20px; 
-  font-weight:600; 
 }
-
-.hamburger {
-  font-size: 30px;
-  cursor: pointer;
-  background: none;
-  border: none;
-  color: #EDF5E1;
-  padding: 10px 15px;
-  position: relative;
-  z-index: 1004;
-}
-
-/* ================= SIDEPANEL ================= */
-#mySidepanel {
-  width: 0;
-  position: fixed;
-  top: 10px;
-  right: 0;
-  z-index: 9999;
-  overflow-x: hidden;
-  overflow-y: auto;
-  transition: width 0.45s ease;
-  padding-top: 80px;
-  height: calc(100vh - 90px);
-  background: rgba(255,255,255,0.65);
-  backdrop-filter: blur(20px) saturate(150%);
-  border-left: 1.5px solid rgba(255,255,255,0.7);
-  border-top-left-radius: 26px;
-  border-bottom-left-radius: 26px;
-}
-
-#mySidepanel.open {
-  width: 200px;
-}
-
-#mySidepanel .sidebar-close {
-  position: absolute;
-  top: 12px;
-  right: 14px;
-  font-size: 26px;
-  font-weight: 700;
-  color: #05386B;
-  cursor: pointer;
-}
-
-#mySidepanel a {
-  display: block;
-  padding: 14px 28px;
-  color: #05386B;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 600;
-  text-align: center;
-}
-
-#mySidepanel a:hover {
-  background: rgba(255,255,255,0.35);
-}
-
 /* ================= HEADER ================= */
 header { 
   display: flex; 
@@ -162,7 +83,7 @@ header {
 
 /* ================= INTRO ================= */
 .intro {
-  max-width:95%;
+  max-width:1300p;
   margin:90px auto 20px;
   background:#c5f8d9;
   padding:20px 15px;
@@ -184,7 +105,7 @@ header {
 
 /* ================= ROLE NAV ================= */
 .role-nav {
-  max-width: 95%;
+  max-width: 1300px;
   margin: 20px auto;
   display: flex;
   justify-content: center;
@@ -221,13 +142,118 @@ header {
   margin:0 auto 30px;
 }
 
-.card {
-  background:#EDF5E1; 
-  border-radius:12px; 
-  padding:15px;
-  border: 1.5px solid #05386B;
-  transition:0.3s; 
+/* ================= FLUENT DESIGN CARDS ================= */
+
+/* ================= FLUENT CARD UPGRADE ================= */
+
+.card-grid {
+  gap: 24px;
 }
+
+/* Base Card */
+.card {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #f8fffb 100%
+  );
+
+  border-radius: 16px;
+  padding: 22px 20px;
+
+  border: 1px solid rgba(5, 56, 107, 0.15);
+
+  box-shadow:
+    0 4px 10px rgba(5, 56, 107, 0.06),
+    0 1px 2px rgba(0,0,0,0.04);
+
+  transition: 
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+/* Accent line (Fluent touch) */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 5px;
+  background: linear-gradient(
+    180deg,
+    #5CDB95,
+    #379683
+  );
+  border-radius: 16px 0 0 16px;
+  opacity: 0.9;
+}
+
+/* Hover state */
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 12px 28px rgba(5, 56, 107, 0.12),
+    0 4px 10px rgba(0,0,0,0.06);
+  border-color: #5CDB95;
+}
+
+/* Icon styling */
+.card .icon {
+  font-size: 26px;
+  margin-bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+
+  background: rgba(92, 219, 149, 0.15);
+  color: #05386B;
+}
+
+/* Title */
+.card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #05386B;
+  margin-bottom: 6px;
+}
+
+/* Text */
+.card p {
+  font-size: 14px;
+  color: #375a6f;
+  line-height: 1.55;
+}
+
+/* ================= INTRO CARD POLISH ================= */
+
+.intro {
+  background: linear-gradient(
+    180deg,
+    #d1ffe8 0%,
+    #c3f6df 100%
+  );
+  border-radius: 18px;
+  border: 1.5px solid rgba(5, 56, 107, 0.25);
+
+  box-shadow:
+    0 10px 28px rgba(5, 56, 107, 0.12),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+/* ================= SECTION TITLES ================= */
+
+.section-title {
+  color: #05386B;
+  letter-spacing: 0.3px;
+}
+
 
 .card:hover { 
   transform:translateY(-3px); 
