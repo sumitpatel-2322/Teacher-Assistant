@@ -1,14 +1,14 @@
 const data = {
-  "Class 1": { "Drawing": ["Colors"], "Mathematic": ["Addition"], "English": ["Alphabets"] },
-  "Class 2": { "Mathematic": ["Tables"], "English": ["Simple Sentences"] },
-  "Class 3": { "Mathematics": ["Algebra"], "Science": ["Biology"] },
-  "Class 4": { "Mathematics": ["Geometry"] },
-  "Class 5": { "Mathematics": ["Algebra"], "Science": ["Physics"] },
-  "Class 6": { "Mathematics": ["Algebra"], "Science": ["Biology"] },
-  "Class 7": { "Mathematics": ["Geometry"], "Science": ["Physics"] },
-  "Class 8": { "Mathematics": ["Algebra"], "Science": ["Biology"] },
-  "Class 9": { "Mathematics": ["Trigonometry"], "Science": ["Motion"] },
-  "Class 10": { "Mathematics": ["Calculus"], "Science": ["Optics"] }
+  "Class 1": { "Drawing": ["Colors"], "Mathematic": ["Addition"], "English": ["Alphabets"],"EVS": ["Plants"] },
+  "Class 2": { "Drawing": ["Shapes"], "Mathematic": ["Tables"], "English": ["Simple Sentences"],"EVS": ["Animals"] },
+  "Class 3": { "Drawing": ["Shapes"], "Mathematics": ["Algebra"], "Science": ["Biology"], "EVS": ["Birds"] },
+  "Class 4": { "Drawing": ["Shapes"], "Mathematics": ["Geometry"] , "Science": ["Chemistry"] , "EVS": ["Flowers"] },
+  "Class 5": { "Drawing": ["Shapes"], "Mathematics": ["Algebra"], "Science": ["Physics"] , "EVS": ["Trees"] },
+  "Class 6": { "Drawing": ["Shapes"], "Mathematics": ["Algebra"], "Science": ["Biology"] , "EVS": ["Insects"] },
+  "Class 7": { "Drawing": ["Shapes"], "Mathematics": ["Geometry"], "Science": ["Physics"] , "EVS": ["Birds"] },
+  "Class 8": { "Drawing": ["Shapes"], "Mathematics": ["Algebra"], "Science": ["Biology"], "EVS": ["Animals"] ,"Hindi": ["Grammar"] },
+  "Class 9": { "Drawing": ["Shapes"], "Mathematics": ["Trigonometry"], "Science": ["Motion"], "EVS": ["Plants"],"Social Studies": ["History"], "Hindi": ["Literature"] },
+  "Class 10": { "Drawing": ["Shapes"], "Mathematics": ["Calculus"], "Science": ["Optics"] , "EVS": ["Birds"] ,"Social Studies": ["Geography"], "Hindi": ["Poetry"] },
 };
 
 document.addEventListener("DOMContentLoaded", () => {

@@ -11,6 +11,7 @@ body {
 }
 
 .dash-header {
+    margin-top: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -316,13 +317,12 @@ body {
 
 .dashboard-container {
     position: relative;
-    left: 50%;
-    transform: translateX(-50%);
     margin-top: 5%;
-    width: calc(100vw - 350px);   /* 👈 controls side margin */
-    max-width: calc(100vw - 350px);
+    width: 90%; /* 👈 controls side margin */
+    max-width: 1200px;
     padding: 0;
     margin-bottom: 5%;
+    margin: 5% auto; /* 'auto' handles the horizontal centering perfectly */
 }
 
 /* Prevent horizontal scroll */
