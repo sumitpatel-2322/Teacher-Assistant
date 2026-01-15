@@ -25,10 +25,11 @@
 /* ================= MAIN LAYOUT (GRID) ================= */
 .main-layout {
     display: grid;
-    grid-template-columns: 280px 1fr; 
+    grid-template-columns: 280px 1fr; /* Fixed Left Sidebar, Flexible Right Chat */
     gap: 20px;
-    height: calc(100vh - 200px); 
     min-height: 500px;
+        margin-bottom: 48px;   /* adjust: 32px / 48px / 64px */
+
 }
 
 /* ================= LEFT SIDEBAR ================= */
@@ -303,11 +304,11 @@
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-
+    margin-top: 5%;
     width: calc(100vw - 350px);   /* 👈 controls side margin */
     max-width: calc(100vw - 350px);
-
     padding: 0;
+    margin-bottom: 5%;
 }
 
 /* Prevent horizontal scroll */
@@ -352,22 +353,24 @@ body {
 
 }
 .mic-btn {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: #05386B;
-    color: #ffffff;
+    width: 42px;
+    height: 42px;
+    background:#05386B;;            /* black square */
+    color: #fff;
     border: none;
-    box-shadow: 0 6px 16px rgba(5,56,107,0.35);
+    border-radius: 10px;         /* rounded square */
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: transform 0.15s ease, background 0.15s ease;
 }
 
 .mic-btn:hover {
     background: #379683;
+    transform: scale(1.05);
 }
-.dashboard-container {
-    background: linear-gradient(180deg, #e8ffe8, #d7fbe8);
+
+.mic-btn:active {
+    transform: scale(0.95);
 }
