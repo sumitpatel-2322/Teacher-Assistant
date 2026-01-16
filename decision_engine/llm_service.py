@@ -1,8 +1,8 @@
 from groq import Groq
 import time
 import os
-# 🔑 PASTE YOUR GROQ API KEY HERE DIRECTLY
-# Get one for free at: https://console.groq.com/keys
+from dotenv import load_dotenv
+load_dotenv()
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 client = None
 try:

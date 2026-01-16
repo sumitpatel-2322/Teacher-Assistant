@@ -16,3 +16,4 @@ librosa
 deep-translator 
 langdetect
 groq
+python-dotenv
