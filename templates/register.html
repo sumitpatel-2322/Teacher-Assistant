@@ -36,45 +36,65 @@
 
   <h2>Register</h2>
 
-  <form method="post" action="/register">
+ <form method="post" action="/register">
 
-    <label for="role">Role</label>
-    <select id="role" name="role" required>
-      <option value="">Select Role</option>
+  <!-- ROLE -->
+  <div class="input-group">
+    <select class="input" id="role" name="role" required>
+      <option value="" disabled selected></option>
       <option value="teacher">Teacher</option>
       <option value="crp">CRP</option>
       <option value="brp">BRP</option>
       <option value="arp">ARP</option>
     </select>
+    <label class="user-label">Role</label>
+  </div>
 
-    <label for="teacher_id">Teacher ID</label>
-    <input type="text" id="teacher_id" name="teacher_id" required>
+  <!-- TEACHER ID -->
+  <div class="input-group">
+    <input class="input" type="text" id="teacher_id" name="teacher_id" required>
+    <label class="user-label">Teacher ID</label>
+  </div>
 
-    <label for="name">Name</label>
-    <input type="text" id="name" name="name" required>
+  <!-- NAME -->
+  <div class="input-group">
+    <input class="input" type="text" id="name" name="name" required>
+    <label class="user-label">Name</label>
+  </div>
 
-    <label for="school_name">School Name</label>
-    <input type="text" id="school_name" name="school_name" required>
+  <!-- SCHOOL NAME -->
+  <div class="input-group">
+    <input class="input" type="text" id="school_name" name="school_name" required>
+    <label class="user-label">School Name</label>
+  </div>
 
-    <label for="username">Username</label>
-    <input type="text" id="username" name="username" required>
+  <!-- USERNAME -->
+  <div class="input-group">
+    <input class="input" type="text" id="username" name="username" required>
+    <label class="user-label">Username</label>
+  </div>
 
-    <!-- PASSWORD FIELD -->
-    <label for="password">Password</label>
-    <input type="password" id="password" name="password" required>
+  <!-- PASSWORD -->
+  <div class="input-group">
+    <input class="input" type="password" id="password" name="password" required>
+    <label class="user-label">Password</label>
+  </div>
 
-    <!-- LIVE PASSWORD MESSAGE -->
-    <p id="passwordMessage" style="font-size:14px; margin-top:5px;"></p>
+  <!-- PASSWORD MESSAGE -->
+  <p id="passwordMessage" style="font-size:14px; margin-top:5px;"></p>
+  <small style="color:#555;">
+    Password must contain uppercase, lowercase, digit, special character (min 8 characters)
+  </small>
 
-    <small style="color:#555;">
-      Password must contain uppercase, lowercase, digit, special character (min 8 characters)
-    </small>
+  <!-- CONFIRM PASSWORD -->
+  <div class="input-group">
+    <input class="input" type="password" id="confirm_password" name="confirm_password" required>
+    <label class="user-label">Confirm Password</label>
+  </div>
 
-    <label for="confirm_password">Confirm Password</label>
-    <input type="password" id="confirm_password" name="confirm_password" required>
+  <button type="submit">Register</button>
+</form>
 
-    <button type="submit">Register</button>
-  </form>
 
   <p>
     Have an account?

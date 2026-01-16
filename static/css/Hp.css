@@ -85,7 +85,7 @@ header {
 .intro {
   max-width:1300p;
   margin:90px auto 20px;
-  background:#c5f8d9;
+  background:#c5f8d9 !important; 
   padding:20px 15px;
   border-radius:12px;
   box-shadow:0 4px 12px rgba(0,0,0,0.05);
@@ -103,28 +103,47 @@ header {
   color:#05386B; 
 }
 
+/* ================= ROLE NAV BUTTONS (Uiverse Style) ================= */
 /* ================= ROLE NAV ================= */
 .role-nav {
-  max-width: 1300px;
-  margin: 20px auto;
+  width: 100%;
   display: flex;
-  justify-content: center;
-  gap: 10px;
+  justify-content: center;   /* center horizontally */
+  align-items: center;
+  gap: 16px;                 /* space between buttons */
+  margin: 30px auto;
 }
 
 .role-nav button {
-  padding: 10px 18px;
-  border-radius: 6px;
-  background: #5CDB95;
+  padding: 1.3em 3em;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+
   color: #05386B;
-  font-weight: 600;
+  background-color: #ffffff;
+
   border: none;
+  border-radius: 45px;
   cursor: pointer;
+  outline: none;
+
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
-.role-nav button:hover { 
-  background: #8EE4AF; 
+.role-nav button:hover {
+  background-color: #c0ffdc;
+  box-shadow: 0px 15px 20px rgba(92, 219, 149, 0.4);
+  color: #010101;
+  transform: translateY(-7px);
 }
+
+.role-nav button:active {
+  transform: translateY(-1px);
+}
+
 
 /* ================= CARDS ================= */
 .section-title {
@@ -158,14 +177,13 @@ header {
     #ffffff 0%,
     #f8fffb 100%
   );
-
   border-radius: 16px;
   padding: 22px 20px;
 
   border: 1px solid rgba(5, 56, 107, 0.15);
 
-  box-shadow:
-    0 4px 10px rgba(5, 56, 107, 0.06),
+   box-shadow:
+    0 2px 6px rgba(5, 56, 107, 0.06),
     0 1px 2px rgba(0,0,0,0.04);
 
   transition: 
@@ -181,11 +199,11 @@ header {
   top: 0;
   left: 0;
   height: 100%;
-  width: 5px;
+  width: 4px;
   background: linear-gradient(
     180deg,
-    #5CDB95,
-    #379683
+    #6F93B8,
+    #2F5F88
   );
   border-radius: 16px 0 0 16px;
   opacity: 0.9;
@@ -193,10 +211,9 @@ header {
 
 /* Hover state */
 .card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-4px);
   box-shadow:
-    0 12px 28px rgba(5, 56, 107, 0.12),
-    0 4px 10px rgba(0,0,0,0.06);
+    0 10px 24px rgba(5, 56, 107, 0.12);
   border-color: #5CDB95;
 }
 
@@ -211,9 +228,13 @@ header {
   width: 44px;
   height: 44px;
   border-radius: 12px;
-
-  background: rgba(92, 219, 149, 0.15);
   color: #05386B;
+   background: linear-gradient(
+    180deg,
+    rgba(92, 219, 149, 0.18),
+    rgba(92, 219, 149, 0.08)
+  );
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
 }
 
 /* Title */
@@ -262,4 +283,94 @@ header {
 /* ================= RESPONSIVE ================= */
 @media screen and (max-width:768px){
   header { margin-top: 70px; }
+}
+/* Page side spacing */
+.page-container {
+  max-width: 1400px;     /* keeps content centered */
+  margin: 0 auto;        /* center horizontally */
+  padding: 0 24px;       /* 👈 left & right margin */
+}
+.card-icon {
+  width: 28px;
+  height: 28px;
+  stroke: #05386B;
+  stroke-width: 1.8;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.section-title::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: #5CDB95;
+  margin: 10px auto 0;
+  border-radius: 2px;
+}/* ================= INTERACTIVE CARD STYLE NEWWWWW ================= */
+
+.card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 22px 20px;
+  overflow: hidden;
+  cursor: pointer;
+
+  border: 1px solid rgba(5, 56, 107, 0.15);
+
+  box-shadow:
+    0 2px 6px rgba(5, 56, 107, 0.06),
+    0 1px 2px rgba(0,0,0,0.04);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+/* Decorative corners */
+.card::before,
+.card::after {
+  content: "";
+  position: absolute;
+  width: 22%;
+  height: 22%;
+  background: rgba(92, 219, 149, 0.25); /* mint accent */
+  transition: all 0.45s ease;
+  z-index: 0;
+}
+
+/* Top-right corner */
+.card::before {
+  top: 0;
+  right: 0;
+  border-radius: 0 16px 0 100%;
+}
+
+/* Bottom-left corner */
+.card::after {
+  bottom: 0;
+  left: 0;
+  border-radius: 0 100% 0 16px;
+}
+
+/* Hover expansion */
+.card:hover::before,
+.card:hover::after {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+}
+
+/* Lift effect */
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 12px 28px rgba(57, 115, 173, 0.14);
+}
+
+/* Keep content ABOVE hover layers */
+.card > * {
+  position: relative;
+  z-index: 1;
 }
