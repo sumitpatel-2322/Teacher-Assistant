@@ -33,9 +33,19 @@
 
         <label for="subject">Preferred Subject</label>
         <select id="subjectSelect" name="subject" required>
+            <option value="English">English</option>
+            <option value="Hindi">Hindi</option>
             <option value="{{ data.preferred_subject }}" selected>{{ data.preferred_subject }}</option>
         </select>
-
+        <label for="language">Preferred Language</label>
+<select id="languageSelect" name="language" required>
+    <option value="en" {% if data.preferred_language == 'en' %}selected{% endif %}>English</option>
+    <option value="hi" {% if data.preferred_language == 'hi' %}selected{% endif %}>Hindi (हिंदी)</option>
+    <option value="te" {% if data.preferred_language == 'te' %}selected{% endif %}>Telugu (తెలుగు)</option>
+    <option value="ta" {% if data.preferred_language == 'ta' %}selected{% endif %}>Tamil (தமிழ்)</option>
+    <option value="mr" {% if data.preferred_language == 'mr' %}selected{% endif %}>Marathi (मराठी)</option>
+    <option value="bn" {% if data.preferred_language == 'bn' %}selected{% endif %}>Bengali (বাংলা)</option>
+</select>
         <button type="submit" style="margin-top:20px;">Save Changes</button>
     </form>
 </div>

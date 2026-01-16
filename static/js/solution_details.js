@@ -9,7 +9,10 @@ document.addEventListener("click", async (e) => {
   if (!detailsContainer) return;
 
   try {
-    const res = await fetch(`/solution/details/${solutionId}`);
+    // ✅ UPDATE: Use the global language variable
+    const lang = window.currentLanguage || 'en';
+    
+    const res = await fetch(`/solution/details/${solutionId}?lang=${lang}`);
     const data = await res.json();
 
     if (!data.success) {
@@ -17,14 +20,18 @@ document.addEventListener("click", async (e) => {
       return;
     }
 
-    const steps = data.data.details.steps
+    // Handle nested structure safely
+    const stepSource = data.data.details?.steps || data.data.steps || [];
+    const objective = data.data.details?.objective || data.data.objective || "Objective not available.";
+    const title = data.data.preview?.title || data.data.title || "Solution";
+
+    const steps = stepSource
       .map((s, i) => `<li>${i + 1}. ${s}</li>`)
       .join("");
 
     detailsContainer.innerHTML = `
-      <h3>${data.data.title}</h3>
-      <p><b>Objective:</b> ${data.data.details.objective}</p>
-      <p><b>Time Required:</b> ${data.data.details.time_required_min} min</p>
+      <h3>${title}</h3>
+      <p><b>Objective:</b> ${objective}</p>
       <ul>${steps}</ul>
     `;
   } catch (err) {

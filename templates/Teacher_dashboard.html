@@ -95,7 +95,12 @@
 </template>
 {% endblock %}
 
-{% block scripts %}
+{% block scripts %} 
+<script>
+    // 👇 INJECT PREFERENCE FROM BACKEND TO FRONTEND
+    window.userPreferredLanguage = "{{ prefill.language }}";
+</script>
+<script src="/static/js/sub.js"></script>
 <script src="/static/js/sub.js"></script>
 <script src="/static/js/dashboard_chat.js"></script>
 <script src="/static/js/voice_input.js"></script>

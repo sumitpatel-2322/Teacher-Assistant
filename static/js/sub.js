@@ -14,53 +14,63 @@ const data = {
 document.addEventListener("DOMContentLoaded", () => {
     const classSelect = document.getElementById("classSelect");
     const subjectSelect = document.getElementById("subjectSelect");
-    const topicSelect = document.getElementById("topicSelect");
+    const topicSelect = document.getElementById("topicSelect"); // Can be null on Profile page
 
     if (!classSelect || !subjectSelect) return;
 
     // Helper: Populate Subjects
     function populateSubjects(className, selectedSubject = "") {
         subjectSelect.innerHTML = '<option value="">Subject</option>';
-        topicSelect.innerHTML = '<option value="">Topic</option>';
+        
+        // ✅ SAFETY CHECK: Only clear topic if it exists
+        if (topicSelect) {
+            topicSelect.innerHTML = '<option value="">Topic</option>';
+            topicSelect.disabled = true;
+        }
         
         if (!className || !data[className]) {
             subjectSelect.disabled = true;
-            topicSelect.disabled = true;
             return;
         }
 
         subjectSelect.disabled = false;
         Object.keys(data[className]).forEach(subj => {
+            // Check if this option matches the pre-selected value
             const isSelected = (subj === selectedSubject) ? "selected" : "";
             subjectSelect.innerHTML += `<option value="${subj}" ${isSelected}>${subj}</option>`;
         });
     }
 
-    // Event Listener
+    // Event Listener: Class Change
     classSelect.addEventListener("change", () => {
         populateSubjects(classSelect.value);
     });
 
+    // Event Listener: Subject Change (Only if topic exists)
     subjectSelect.addEventListener("change", () => {
-        topicSelect.innerHTML = '<option value="">Topic</option>';
         const cls = classSelect.value;
         const sub = subjectSelect.value;
-
-        if (cls && sub && data[cls][sub]) {
-            topicSelect.disabled = false;
-            data[cls][sub].forEach(topic => {
-                topicSelect.innerHTML += `<option value="${topic}">${topic}</option>`;
-            });
-        } else {
-            topicSelect.disabled = true;
+        
+        // ✅ SAFETY CHECK: Only populate topics if the element exists
+        if (topicSelect) {
+            topicSelect.innerHTML = '<option value="">Topic</option>';
+            
+            if (cls && sub && data[cls][sub]) {
+                topicSelect.disabled = false;
+                data[cls][sub].forEach(topic => {
+                    topicSelect.innerHTML += `<option value="${topic}">${topic}</option>`;
+                });
+            } else {
+                topicSelect.disabled = true;
+            }
         }
     });
 
     // ➤ AUTO-TRIGGER ON LOAD (The Prefill Fix)
     if (classSelect.value) {
-        // If HTML has a value (from backend), load subjects immediately
-        // We pass the current value of subjectSelect to keep it selected
+        // We pass the currently rendered text in subjectSelect to keep it selected
         const currentSubject = subjectSelect.options[subjectSelect.selectedIndex]?.text || "";
-        populateSubjects(classSelect.value, currentSubject);
+        // Clean up text (in case Jinja left spaces)
+        populateSubjects(classSelect.value, currentSubject.trim());
     }
 });

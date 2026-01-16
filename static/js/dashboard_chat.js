@@ -3,6 +3,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const userQuery = document.getElementById("userQuery");
     const sendBtn = document.getElementById("sendBtn");
     
+    // ✅ CRITICAL FIX: Initialize with Profile Preference (or default to 'en')
+    // This grabs the variable we injected in the HTML template
+    window.currentLanguage = window.userPreferredLanguage || "en";
+    console.log("System Initialized with Language:", window.currentLanguage);
+
     // Auto-resize textarea
     userQuery.addEventListener('input', function() {
         this.style.height = 'auto';
@@ -44,6 +49,13 @@ document.addEventListener("DOMContentLoaded", () => {
             removeElement(loadingId);
 
             if (data.status === "success" && data.solutions.length > 0) {
+                // ✅ UPDATE: If the user spoke a NEW language, switch to that.
+                // Otherwise, keep using their preferred language.
+                if (data.detected_language && data.detected_language !== 'en') {
+                    window.currentLanguage = data.detected_language;
+                }
+                console.log("Current Session Language:", window.currentLanguage);
+
                 window.renderSolutionButtons(data.solutions, data.request_id);
             } else {
                 appendMessage("bot", "I couldn't find a specific solution. Could you add more details?");
@@ -91,25 +103,40 @@ document.addEventListener("DOMContentLoaded", () => {
         btnElement.classList.add("selected");
 
         try {
-            const res = await fetch(`/solution/details/${solutionId}`);
+            // ✅ CRITICAL: Pass the global language variable to the details API
+            const lang = window.currentLanguage || 'en';
+            console.log(`Fetching details for ${solutionId} in ${lang}`);
+            
+            const res = await fetch(`/solution/details/${solutionId}?lang=${lang}`);
             const data = await res.json();
 
             if (data.success) {
                 renderDetailCard(data.data, requestId, solutionId);
             }
         } catch (err) {
+            console.error(err);
             alert("Failed to load details.");
         }
     };
 
     function renderDetailCard(details, requestId, solutionId) {
-        const steps = details.details.steps.map(s => `<li>${s}</li>`).join("");
+        // Handle structure variations (just in case 'steps' is direct or nested)
+        const stepSource = details.details?.steps || details.steps || [];
+        const objectiveSource = details.details?.objective || details.objective || "Follow the steps below.";
         
+        // Handle list of steps safely (check if array or string)
+        const steps = Array.isArray(stepSource) 
+            ? stepSource.map(s => `<li>${s}</li>`).join("")
+            : `<li>${stepSource}</li>`;
+        
+        // Extract Title safely (Translated title comes from backend)
+        const title = details.preview?.title || details.title || "Solution Details";
+
         const html = `
             <div class="bubble" style="width:100%; max-width:100%; background:transparent; padding:0;">
                 <div class="detail-card">
-                    <h3>${details.title}</h3>
-                    <p><strong>Objective:</strong> ${details.details.objective}</p>
+                    <h3>${title}</h3>
+                    <p><strong>Objective:</strong> ${objectiveSource}</p>
                     <ul>${steps}</ul>
                     
                     <div class="feedback-actions">
@@ -159,8 +186,11 @@ window.renderSolutionButtons = function(solutions, requestId) {
 
     solutions.forEach(sol => {
         const id = sol.id || sol.solution_id;
+        // Use the translated title if available, otherwise fallback to text
+        const label = sol.title || sol.text;
+        
         btns += `<button class="sol-btn" onclick="fetchDetails('${id}', '${requestId}', this)">
-                    ${sol.text} <span style="opacity:0.7; font-size:11px;">(${Math.round(sol.confidence * 100)}%)</span>
+                    ${label} <span style="opacity:0.7; font-size:11px;">(${Math.round(sol.confidence * 100)}%)</span>
                  </button>`;
     });
     

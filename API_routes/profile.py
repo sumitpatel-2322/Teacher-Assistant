@@ -32,25 +32,27 @@ def show_profile(request: Request, user=Depends(require_login)):
 # =========================
 # POST: Update Preferences
 # =========================
+# API_routes/profile.py
+
 @router.post("/profile/update")
 def update_profile(
     request: Request,
     class_name: str = Form(...),
     subject: str = Form(...),
+    language: str = Form("en"),  # 👈 NEW FIELD
     user=Depends(require_login)
 ):
     conn = get_connection()
     cursor = conn.cursor()
     
-    # Update the preferences
+    # Update preferences including language
     cursor.execute("""
         UPDATE teachers 
-        SET preferred_class = ?, preferred_subject = ? 
+        SET preferred_class = ?, preferred_subject = ?, preferred_language = ? 
         WHERE username = ?
-    """, (class_name, subject, user['username']))
+    """, (class_name, subject, language, user['username']))
     
     conn.commit()
     conn.close()
     
-    # Redirect back to Dashboard
     return RedirectResponse(url="/teacher", status_code=303)
