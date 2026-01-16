@@ -15,7 +15,7 @@
 <body class="theme-arp">
 
   <div id="mySidepanel">
-      <span class="sidebar-close">✕</span>
+      <span class="sidebar-close" id="closeSidebar">✕</span>
     <a href="/" class="logout-link">Home</a>
     <a href="/logout" class="logout-link">Logout</a>
   </div>
@@ -33,9 +33,19 @@
 <div class="subtitle">Virtual Educator And Digital Assistant</div>
 </div>
 </div>
+
 <div class="header-right">
-<img src="/static/img/user-icon.jpg" alt="User">
+  {% if user %}
+  <a href="/profile" style="text-decoration:none;">
+    <div style="width: 40px; height: 40px; background: #5CDB95; color: #05386B; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; border: 2px solid #fff;">
+      {{ user.username[0] | upper }}
+    </div>
+  </a>
+  {% else %}
+    <img src="/static/img/user-icon.jpg" alt="User" style="width:40px; height:40px; border-radius:50%;">
+  {% endif %}
 </div>
+
 </header>
 
   <div class="section-title">ARP Actions</div>
@@ -53,7 +63,9 @@
 </footer>
 
 
-  <script src="static/js/arp.js"></script>
+
+
+<script src="/static/js/sidebar.js"></script>
 
 </body>
 </html>
