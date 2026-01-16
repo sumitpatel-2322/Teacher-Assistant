@@ -3,9 +3,9 @@ body {
   color: #05386B;
   min-height: 100vh;
   padding-top: 100px;
-
-
+  font-family: 'Inter', sans-serif;
 }
+
 /* ================= HEADER ================= */
 header {
   margin: 80px auto 20px;
@@ -130,8 +130,8 @@ header {
     margin: 20px 12px;
   }
 }
-/* ===== FLOATING LABEL INPUT (REGISTER – SAME AS LOGIN) ===== */
 
+/* ===== FLOATING LABEL INPUT (REGISTER – SAME AS LOGIN) ===== */
 .auth-container .input-group {
   position: relative;
   margin-bottom: 18px;
@@ -177,9 +177,66 @@ header {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2305386B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 16px center;
   background-size: 14px;
+}
+
+/* Hide sections by default */
+.hidden {
+  display: none;
+}
+
+/* ================= NEW PILL SELECTION STYLES ================= */
+.pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 5px;
+}
+
+/* Hide the actual ugly checkbox */
+.pill-group input[type="checkbox"] {
+  display: none;
+}
+
+/* Style the label to look like a button/pill */
+.pill-group label {
+  background-color: white;
+  border: 1.5px solid #05386B;
+  color: #05386B;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none; /* Prevents text highlighting */
+  font-weight: 500;
+  margin-bottom: 0; /* Reset generic label margin */
+}
+
+/* HOVER STATE */
+.pill-group label:hover {
+  background-color: #EDF5E1;
+}
+
+/* CHECKED STATE (The Magic) */
+.pill-group input[type="checkbox"]:checked + label {
+  background-color: #05386B;
+  color: #EDF5E1;
+  box-shadow: 0 4px 6px rgba(5, 56, 107, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Static Label for Pill Container */
+.static-label {
+  position: absolute;
+  left: 0; 
+  top: -5px; 
+  background: transparent;
+  color: #05386B; 
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding-left: 5px;
 }

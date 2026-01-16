@@ -17,10 +17,10 @@ from API_routes.solution_details import router as solution_details_router
 # ➤ NEW IMPORT
 from API_routes.profile import router as profile_router 
 
-from Database.models import create_teacher_table
+from Database.models import create_tables
 
 # Initialize DB
-create_teacher_table()
+create_tables()
 
 app = FastAPI()
 

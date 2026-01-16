@@ -1,10 +1,22 @@
 from fastapi import APIRouter, Request, Depends, Body, Form
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, RedirectResponse
 from Database.db import get_connection
 from typing import Optional
 
-from API_routes.auth import require_login
+# Ensure this import exists in your project structure
+# If you haven't defined 'require_login' in API_routes/auth.py yet, 
+# you can replace "user=Depends(require_login)" with manual session checking.
+try:
+    from API_routes.auth import require_login
+except ImportError:
+    # Fallback if auth.py is missing (Temporary fix for development)
+    async def require_login(request: Request):
+        user = request.session.get("user")
+        if not user:
+            return RedirectResponse(url="/login")
+        return user
+
 from decision_engine.raw_text.store import store_raw_input
 from decision_engine.engine import process_teacher_query
 from decision_engine.logging import log_feedback
@@ -18,17 +30,35 @@ templates = Jinja2Templates(directory="templates")
 @router.get("/teacher")
 async def teacher_dashboard(request: Request, user=Depends(require_login)):
     
-    # Fetch User Preferences for Pre-fill
+    # 1. Check if user is actually a teacher (Security)
+    if isinstance(user, RedirectResponse): return user # Handle fallback redirect
+    
+    if user.get("role") != "teacher":
+         return RedirectResponse(url="/login?error=Unauthorized")
+
+    # 2. Fetch User Preferences using NEW Schema
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT preferred_class, preferred_subject FROM teachers WHERE username = ?", (user['username'],))
-    row = cursor.fetchone()
-    conn.close()
+    
+    try:
+        # UPDATED QUERY: Uses 'classes', 'subjects' and 'employee_id'
+        # Note: user['username'] holds the employee_id from login.py
+        cursor.execute(
+            "SELECT classes, subjects FROM teachers WHERE employee_id = ?", 
+            (user['username'],)
+        )
+        row = cursor.fetchone()
+    except Exception as e:
+        print(f"DB Error in Dashboard: {e}")
+        row = None
+    finally:
+        conn.close()
 
-    # Pass preferences to template
+    # 3. Pass data to template
+    # The DB stores "Math, Science" as a string. We pass it directly.
     prefill = {
-        "class": row["preferred_class"] if row else "",
-        "subject": row["preferred_subject"] if row else ""
+        "class": row["classes"] if row else "",     # Fixed column name
+        "subject": row["subjects"] if row else ""   # Fixed column name
     }
 
     return templates.TemplateResponse(
@@ -53,6 +83,7 @@ async def ask_doubt_api(
     Receives JSON payload from Chatbot JS.
     Returns JSON response with solutions.
     """
+    if isinstance(user, RedirectResponse): return user
     
     # Extract data safely
     class_name = payload.get("class_name", "").strip()
@@ -61,8 +92,9 @@ async def ask_doubt_api(
     question = payload.get("question", "").strip()
 
     # 1. Store Raw Input (Logging)
+    # Ensure 'store_raw_input' is updated to handle new schema if it touches DB
     store_raw_input(
-        username=user["username"],
+        username=user["username"], # This is employee_id
         role=user["role"],
         class_name=class_name,
         subject=subject,
@@ -75,7 +107,6 @@ async def ask_doubt_api(
     engine_output = process_teacher_query(raw_text)
 
     # 3. Return JSON structure for Frontend
-    # ✅ FIX: Use dictionary access ["key"] instead of .key
     response_data = {
         "status": "success",
         "request_id": engine_output["request_id"],
@@ -100,6 +131,8 @@ async def teacher_feedback(
     request: Request,
     user=Depends(require_login)
 ):
+    if isinstance(user, RedirectResponse): return user
+
     data = await request.json()
 
     log_feedback(
