@@ -389,3 +389,73 @@ body {
 .mic-btn:active {
     transform: scale(0.95);
 }
+/* ================= NOTICE BAR ================= */
+/* ================= NOTICE BAR (LEFT CORNER FIX) ================= */
+
+.notice-bar {
+    position: fixed;
+    top: 80px;          /* just below nav */
+    left: 16px;         /* true left corner */
+    z-index: 1000;
+}
+
+.notice-btn {
+    background: #BFD6DA;        /* mist-soft */
+    color: #1E3A32;             /* forest-deep */
+    border: 1.5px solid #2F5D50;/* forest-main */
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+
+    box-shadow: 0 4px 10px rgba(30,58,50,0.15);
+    transition: transform 0.2s ease;
+}
+
+.notice-btn:hover {
+    background: #6F9E8F; /* forest-soft */
+    transform: translateY(-2px);
+}
+/* ================= NOTICE PANEL ================= */
+
+.notice-panel {
+    position: fixed;
+    top: 110px;              /* below nav + notice button */
+    left: 16px;
+    width: 320px;
+    max-height: 420px;
+    background: #F3F4EF;     /* feather-light */
+    border: 1.5px solid #2F5D50;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(30,58,50,0.2);
+    display: none;           /* hidden by default */
+    z-index: 1100;
+    overflow: hidden;
+}
+
+.notice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background: #BFD6DA;     /* mist-soft */
+    color: #1E3A32;
+    font-weight: 600;
+}
+
+.notice-header button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #1E3A32;
+}
+
+.notice-content {
+    padding: 14px;
+    font-size: 14px;
+    color: #1E3A32;
+    overflow-y: auto;
+    max-height: 350px;
+}

@@ -1,46 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CRP Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+{% extends "base.html" %}
 
-  <link rel="stylesheet" href="static/css/crp.css">
-    <link rel="stylesheet" href="static/css/sidebar.css">
-    <link rel="stylesheet" href="static/css/footer.css">
+{% block title %}CRP Dashboard - VEDA{% endblock %}
 
-  
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/crp.css">
+{% endblock %}
 
-</head>
-<body class="theme-crp">
+{% block content %}
 
-  <div id="mySidepanel">
-        <span class="sidebar-close">✕</span>
-    <a href="/" class="logout-link">Home</a>
-    <a href="Teacher_dashboard.html" class="logout-link">Teachers</a>
-    <a href="/logout" class="logout-link">Logout</a>
+<div class="page-container">
+
+  <!-- CRP Header Card -->
+  <header class="crp-header">
+    <div class="header-left">
+      <img src="/static/img/logo.png" alt="CRP">
+      <div>
+        <div class="title">CRP Dashboard</div>
+        <div class="subtitle">Virtual Educator And Digital Assistant</div>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <img src="/static/img/user-icon.jpg" alt="User">
+    </div>
+  </header>
+
+  <!-- Select Teacher -->
+  <div class="section-title">Select Teacher</div>
+  <div class="teacher-dropdown-wrapper">
+    <select id="teacherDropdown">
+      <option value="">Select a Teacher</option>
+      <option value="t1">Anita Sharma (Class 6–8 · Mathematics)</option>
+      <option value="t2">Rahul Patil (Class 5 · Science)</option>
+      <option value="t3">Sneha Kulkarni (Class 8–10 · English)</option>
+    </select>
   </div>
-<div class="page-content">
-  <nav>
-    <div class="logo">VEDA</div>
-    <button class="hamburger" id="hamburgerBtn">☰</button>
-  </nav>
 
-  <header>
-<div class="header-left">
-<img src="static/img/logo.png" alt="Teacher">
-<div>
-<div class="title">CRP Dashboard</div>
-<div class="subtitle">Virtual Educator And Digital Assistant</div>
-</div>
-</div>
-<div class="header-right">
-<img src="/static/img/user-icon.jpg" alt="User">
-</div>
-</header>
+  <!-- Performance Overview -->
+  <div class="section-title">Teacher Performance Overview</div>
 
+  <div class="charts-grid">
+    <!-- Donut Chart -->
+    <div class="chart-card small">
+      <canvas id="completionDonut"></canvas>
+    </div>
+
+    <!-- Histogram -->
+    <div class="chart-card wide">
+      <canvas id="teacherHistogram"></canvas>
+    </div>
+  </div>
+
+  <!-- CRP Actions -->
   <div class="section-title">CRP Actions</div>
   <div class="actions">
     <button>Reply to Teachers</button>
@@ -48,25 +59,11 @@
     <button>Send Messages</button>
   </div>
 
-  <div class="section-title">List of Teachers</div>
-  <div style="text-align:center;">
-    <select id="teacherDropdown">
-      <option>Select a Teacher</option>
-      <option>Teacher 1</option>
-      <option>Teacher 2</option>
-    </select>
-  </div>
-</div> <!-- End of page-content -->
-<footer class="app-footer">
-  <div class="footer-inner">
-    <span>© 2026 VEDA – Virtual Educator & Digital Assistant</span>
-    <span>Made for Teachers</span>
-  </div>
-</footer>
+</div>
 
-  <script src="static/js/sidebar.js"></script>
-    
-  
+{% endblock %}
 
-</body>
-</html>
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/static/js/crp.js"></script>
+{% endblock %}

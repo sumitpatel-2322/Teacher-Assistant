@@ -1,59 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ARP Dashboard - Teacher-AssistantAI</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+{% extends "base.html" %}
 
-  <link rel="stylesheet" href="static/css/arp.css">
-      <link rel="stylesheet" href="static/css/sidebar.css">
-       <link rel="stylesheet" href="static/css/footer.css">
+{% block title %}ARP Dashboard - VEDA{% endblock %}
 
-</head>
-<body class="theme-arp">
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/arp.css">
+{% endblock %}
 
-  <div id="mySidepanel">
-      <span class="sidebar-close">✕</span>
-    <a href="/" class="logout-link">Home</a>
-    <a href="/logout" class="logout-link">Logout</a>
-  </div>
-<div class="page-content">
+{% block content %}
 
-  <nav>
-    <div class="logo">VEDA</div>
-    <button class="hamburger" id="hamburgerBtn">☰</button>
-  </nav>
-<header>
-<div class="header-left">
-<img src="static/img/logo.png" alt="Teacher">
-<div>
-<div class="title">ARP Dashboard</div>
-<div class="subtitle">Virtual Educator And Digital Assistant</div>
-</div>
-</div>
-<div class="header-right">
-<img src="/static/img/user-icon.jpg" alt="User">
-</div>
-</header>
+<div class="page-container">
 
+  <!-- ARP Header Card -->
+  <header class="arp-header">
+    <div class="header-left">
+      <img src="/static/img/logo.png" alt="ARP">
+      <div>
+        <div class="title">ARP Dashboard</div>
+        <div class="subtitle">Virtual Educator And Digital Assistant</div>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <img src="/static/img/user-icon.jpg" alt="User">
+    </div>
+  </header>
+
+  <!-- ARP Actions -->
   <div class="section-title">ARP Actions</div>
   <div class="actions">
     <button>Upload Subject Models</button>
     <button>Add Micro-Learning</button>
     <button>Improve Teaching Strategies</button>
   </div>
+
 </div>
- <footer class="app-footer">
-  <div class="footer-inner">
-    <span>© 2026 VEDA – Virtual Educator & Digital Assistant</span>
-    <span>Made for Teachers</span>
-  </div>
-</footer>
 
+{% endblock %}
 
-  <script src="static/js/sidebar.js"></script>
-
-</body>
-</html>
+{% block scripts %}
+<script src="/static/js/sidebar.js"></script>
+{% endblock %}

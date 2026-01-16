@@ -9,8 +9,8 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background:#EDF5E1;
-  color:#05386B;
+  background:#EDF5E1 !important;
+  color:#1E3A32
 }
 
 
@@ -20,7 +20,7 @@ header {
     justify-content: space-between; 
     align-items: center; 
     padding: 15px 20px; 
-    background:#b8e6dd;  
+    background:#4c8e7ab5; 
     border-radius: 12px; 
     margin: 20px auto; 
     width: 100%;
@@ -49,7 +49,7 @@ header {
 
 .header-left .subtitle { 
   font-size:12px; 
-  color:#379683; 
+  color:#07231e; 
 }
 
 .header-right img { 
@@ -66,7 +66,7 @@ header {
   font-size:18px;
   font-weight:600;
   text-align:center;
-  color:#05386B;
+  color:#1E3A32
 }
 
 /* Actions */
@@ -84,8 +84,8 @@ header {
   font-size:14px;
   border:none;
   border-radius:6px;
-  background:#5CDB95;
-  color:#05386B;
+  background: #6F9E8F;
+  color:#1E3A32;
   cursor:pointer;
   font-weight:600;
   transition:0.3s;
@@ -106,15 +106,7 @@ header {
   color:#05386B;
 }
 
-/* Footer */
-footer {
-  max-width:1200px;
-  margin:20px auto;
-  padding:10px 20px;
-  text-align:center;
-  color:#379683;
-  font-size:14px;
-}
+
 
 /* Responsive */
 @media screen and (max-width:768px){
@@ -143,4 +135,58 @@ footer {
 }
 .page-content {
     flex: 1; 
+}
+/* ================= TEACHER DROPDOWN ================= */
+
+.teacher-dropdown-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+#teacherDropdown {
+  width: 90%;
+  max-width: 420px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1.5px solid #6F9E8F;
+  background: #F3F4EF;
+  color: #1E3A32;
+  font-size: 14px;
+  outline: none;
+}
+/* ================= MODERN CHART LAYOUT ================= */
+
+.charts-grid {
+  max-width: 900px;
+  margin: 0 auto 50px;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 20px;
+}
+
+.chart-card {
+  background: #F3F4EF;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 6px 16px rgba(30,58,50,0.12);
+}
+
+.chart-card.small {
+  height: 220px;
+}
+
+.chart-card.wide {
+  height: 220px;
+}
+
+.chart-card canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+
+.app-footer {
+  margin-top: auto;
 }
