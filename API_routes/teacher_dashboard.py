@@ -3,6 +3,8 @@ from fastapi.templating import Jinja2Templates
 from fastapi.responses import JSONResponse
 from Database.db import get_connection
 from typing import Optional
+from pathlib import Path
+import time
 
 # Reliable Translation
 from deep_translator import GoogleTranslator
@@ -13,6 +15,9 @@ from API_routes.auth import require_login
 from decision_engine.raw_text.store import store_raw_input
 from decision_engine.engine import process_teacher_query
 from decision_engine.logging import log_feedback
+
+# ✅ Hybrid Service Imports
+from decision_engine.llm_service import get_conversational_advice, get_general_chat_response
 
 # Seed for consistent detection
 DetectorFactory.seed = 0
@@ -50,7 +55,7 @@ async def teacher_dashboard(request: Request, user=Depends(require_login)):
     )
 
 # =========================
-# 2. CHAT API (The Fix)
+# 2. CHAT API (The Hybrid Logic)
 # =========================
 @router.post("/api/teacher/ask")
 async def ask_doubt_api(
@@ -59,10 +64,12 @@ async def ask_doubt_api(
     payload: dict = Body(...)
 ):
     """
-    Smart Multilingual API:
+    Smart Hybrid API:
     1. Checks User's Profile Preference (The "Boss").
     2. Handles Input (translates to English for the Engine).
-    3. Forces Output into Profile Language.
+    3. Greeting Guardrail: Stops 'Hello' from triggering math solutions.
+    4. Tries Online LLM for conversation (Circuit Breaker).
+    5. Falls back to Rule-Engine text if Offline.
     """
     
     # 1. Fetch User's Preferred Language First
@@ -92,31 +99,81 @@ async def ask_doubt_api(
             except:
                 detected_input = 'en'
 
-            # HINGLISH HANDLING:
-            # If detected as 'en' but user prefers 'hi', it MIGHT be Hinglish.
-            # But standard translators struggle with Hinglish -> English without specific models.
-            # We will rely on Google Translate's 'auto' which is decent at mixed script.
-            
             # If input is NOT English, translate to English for the engine
             if detected_input != 'en':
                 print(f"DEBUG: Input detected as {detected_input}. Translating to English...")
                 translator = GoogleTranslator(source='auto', target='en')
                 processed_question = translator.translate(user_question)
-            
-            # If input IS 'en' (or Hinglish detected as en), we send it to engine.
-            # (Future improvement: specific Hinglish detection library)
 
         except Exception as e:
             print(f"WARNING: Input translation failed: {e}")
 
-    # 2. Process with Engine
-    raw_text = f"Class: {class_name}\nSubject: {subject}\nTopic: {topic}\nProblem: {processed_question}"
-    engine_output = process_teacher_query(raw_text)
-
-    # --- LAYER 2: OUTPUT TRANSLATION (Enforce Profile Pref) ---
-    final_solutions = []
+    # 🛑 GREETING GUARDRAIL 🛑
+    # If input is short and looks like a greeting, FORCE the Engine to return nothing.
+    is_greeting = False
+    greetings = ["hello", "hi", "hey", "greetings", "namaste", "hola", "thanks", "thank you", "good morning", "good evening"]
     
-    # Initialize output translator if target is not English
+    # Clean text to check
+    clean_text = processed_question.lower().strip().replace("!", "").replace(".", "")
+    
+    # Logic: If text is short (< 6 words) AND contains a greeting
+    if len(clean_text.split()) < 6 and any(g == clean_text or clean_text.startswith(g + " ") for g in greetings):
+        is_greeting = True
+        print("DEBUG: Greeting detected! Skipping Rule Engine.")
+
+    # 2. Process with Engine (Core Logic)
+    if is_greeting:
+        # Mock an empty engine response to force Chit-Chat mode
+        engine_output = {"request_id": f"chat_{int(time.time())}", "ranked_solutions": []}
+    else:
+        # Run the actual engine
+        raw_text = f"Class: {class_name}\nSubject: {subject}\nTopic: {topic}\nProblem: {processed_question}"
+        engine_output = process_teacher_query(raw_text)
+
+    # --- LAYER 2: HYBRID CONVERSATION LAYER ---
+    final_solutions = []
+    bot_message = ""
+
+    # CASE A: Engine Found Solutions (Teaching Mode)
+    if engine_output["ranked_solutions"]:
+        best_sol = engine_output["ranked_solutions"][0]
+        
+        # 1. Hybrid Header (LLM or Raw)
+        llm_reply = get_conversational_advice(
+            problem_text=processed_question,
+            best_solution_title=best_sol['title'],
+            lang=target_lang
+        )
+        if llm_reply:
+            bot_message = llm_reply
+            print("DEBUG: Served via Groq (Online - Teaching)")
+        else:
+            # Fallback Header
+            if target_lang == 'hi':
+                bot_message = f"मुझे {len(engine_output['ranked_solutions'])} सुझाव मिले। '{best_sol['title']}' आज़माएँ।"
+            else:
+                bot_message = f"Found {len(engine_output['ranked_solutions'])} suggestions. Try '{best_sol['title']}'."
+                print("DEBUG: Served via Fallback (Offline - Teaching)")
+
+    # CASE B: No Solutions (Chit-Chat Mode)
+    else:
+        # 2. Try General Chat LLM
+        # We use the ORIGINAL user_question (preserves tone), not the English translation
+        chat_reply = get_general_chat_response(user_question, lang=target_lang)
+        
+        if chat_reply:
+            bot_message = chat_reply
+            print("DEBUG: Served via Groq (Online - ChitChat)")
+        else:
+            # Final Fallback if LLM fails too
+            if target_lang == 'hi':
+                bot_message = "मैं सुन रहा हूँ। कृपया अपनी कक्षा की समस्या साझा करें।"
+            else:
+                bot_message = "I'm listening. Please share your classroom challenge."
+                print("DEBUG: Served via Fallback (Offline - ChitChat)")
+
+
+    # B. Translate Solution Cards (Force Profile Pref)
     out_translator = None
     if target_lang != 'en':
         try:
@@ -144,12 +201,11 @@ async def ask_doubt_api(
         })
 
     # Return response
-    # CRITICAL: We send 'target_lang' back as 'detected_language'
-    # This forces the Frontend to ask for details in the Profile Language
     response_data = {
         "status": "success",
         "request_id": engine_output["request_id"],
         "detected_language": target_lang, 
+        "bot_message": bot_message, # <--- The conversational part
         "solutions": final_solutions
     }
     

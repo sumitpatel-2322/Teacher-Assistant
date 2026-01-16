@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const userQuery = document.getElementById("userQuery");
     const sendBtn = document.getElementById("sendBtn");
     
-    // ✅ CRITICAL FIX: Initialize with Profile Preference (or default to 'en')
-    // This grabs the variable we injected in the HTML template
+    // ✅ 1. Initialize with Profile Preference (or default to 'en')
+    // This variable is injected by Teacher_dashboard.html
     window.currentLanguage = window.userPreferredLanguage || "en";
     console.log("System Initialized with Language:", window.currentLanguage);
 
@@ -48,15 +48,31 @@ document.addEventListener("DOMContentLoaded", () => {
             const data = await response.json();
             removeElement(loadingId);
 
-            if (data.status === "success" && data.solutions.length > 0) {
-                // ✅ UPDATE: If the user spoke a NEW language, switch to that.
-                // Otherwise, keep using their preferred language.
-                if (data.detected_language && data.detected_language !== 'en') {
+            if (data.status === "success") {
+                // Update language if backend detected/enforced something new
+                if (data.detected_language) {
                     window.currentLanguage = data.detected_language;
                 }
-                console.log("Current Session Language:", window.currentLanguage);
+                
+                // ✅ LOGIC UPDATE: Handle Hybrid Conversation
+                
+                // A. Show the Bot Message (If exists)
+                // This covers "Chit-Chat" (Hello/Thanks) AND "Teaching" (Hybrid Header)
+                if (data.bot_message) {
+                    appendMessage("bot", data.bot_message);
+                }
 
-                window.renderSolutionButtons(data.solutions, data.request_id);
+                // B. Render Solution Cards (ONLY if they exist)
+                // Chit-chat responses won't have solutions, so we skip this block
+                if (data.solutions && data.solutions.length > 0) {
+                    window.renderSolutionButtons(data.solutions, data.request_id);
+                } 
+                
+                // C. Fallback: If success but empty (Edge case)
+                if (!data.bot_message && (!data.solutions || data.solutions.length === 0)) {
+                     appendMessage("bot", "I'm listening. Please ask your question.");
+                }
+
             } else {
                 appendMessage("bot", "I couldn't find a specific solution. Could you add more details?");
             }
@@ -103,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
         btnElement.classList.add("selected");
 
         try {
-            // ✅ CRITICAL: Pass the global language variable to the details API
+            // ✅ Pass the global language variable to the details API
             const lang = window.currentLanguage || 'en';
             console.log(`Fetching details for ${solutionId} in ${lang}`);
             
@@ -120,11 +136,11 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     function renderDetailCard(details, requestId, solutionId) {
-        // Handle structure variations (just in case 'steps' is direct or nested)
+        // Handle structure variations
         const stepSource = details.details?.steps || details.steps || [];
         const objectiveSource = details.details?.objective || details.objective || "Follow the steps below.";
         
-        // Handle list of steps safely (check if array or string)
+        // Handle list of steps safely
         const steps = Array.isArray(stepSource) 
             ? stepSource.map(s => `<li>${s}</li>`).join("")
             : `<li>${stepSource}</li>`;
@@ -180,8 +196,9 @@ window.renderSolutionButtons = function(solutions, requestId) {
     const container = document.createElement("div");
     container.className = "message bot-msg";
     
+    // 👇 The header text is now handled by the LLM 'bot_message' above.
+    // We just render the grid of buttons here.
     let btns = `<div class="bubble" style="background:transparent; padding:0;">
-                <p style="margin-bottom:8px; font-size:13px; color:#555;">Found ${solutions.length} suggestions:</p>
                 <div class="solution-grid">`;
 
     solutions.forEach(sol => {

@@ -11,7 +11,7 @@ from decision_engine.constants import (
     STUDENT_STATES,
 )
 
-SOLUTION_LIBRARY = [
+REDDIT_SOLUTIONS = [
     {
         "solution_id": "guided_first_line_start",
         "version": 1,

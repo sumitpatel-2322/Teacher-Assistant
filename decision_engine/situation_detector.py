@@ -1,49 +1,35 @@
 """
 Layer 2: Rule-based Situation Detection
-Consumes normalized text from Layer 1.
-Outputs situation scores using canonical SITUATIONS.
+Maps signals (from normalized text) to Master Situations.
 """
 
 from decision_engine.constants import SITUATIONS
 
-
-# Signal token → situation mapping with base weights
+# Signal -> Master Situation Mapping
 SIGNAL_RULES = {
-    "low_attention_signal": {
-        SITUATIONS["LOW_ATTENTION"]: 0.8,
-    },
-    "silent_class_signal": {
-        SITUATIONS["LOW_ATTENTION"]: 0.6,
-    },
-    "unresponsive_class_signal": {
-        SITUATIONS["LOW_ATTENTION"]: 0.7,
-    },
-    "confusion_signal": {
-        SITUATIONS["STUDENTS_NOT_UNDERSTANDING"]: 0.85,
-    },
-    "noise_spike_signal": {
-        SITUATIONS["ACTIVITY_FAILURE"]: 0.6,
-    },
-    "writing_block_signal": {
-        SITUATIONS["LEARNING_DIFFICULTIES"]: 0.8,
-    },
-    "low_engagement_signal": {
-        SITUATIONS["ACTIVITY_FAILURE"]: 0.7,
-    },
-    "fatigue_signal": {
-        SITUATIONS["EMOTIONAL_INSTABILITY"]: 0.6,
-    },
+    "chaos_signal":      SITUATIONS["CLASSROOM_CHAOS"],
+    "boredom_signal":    SITUATIONS["LOW_ENGAGEMENT"],
+    "attention_signal":  SITUATIONS["LOW_ATTENTION"],
+    "confusion_signal":  SITUATIONS["CONCEPT_CONFUSION"],
+    "memory_signal":     SITUATIONS["MEMORY_RETENTION_ISSUE"],
+    "writing_signal":    SITUATIONS["WRITING_DIFFICULTY"],
+    "reading_signal":    SITUATIONS["READING_LANGUAGE_ISSUE"],
+    "math_signal":       SITUATIONS["MATH_DIFFICULTY"],
+    "shyness_signal":    SITUATIONS["SHYNESS_LOW_CONFIDENCE"],
+    "time_signal":       SITUATIONS["TIME_MANAGEMENT_ISSUE"],
+    "mixed_signal":      SITUATIONS["MIXED_LEVELS"],
+    "disrespect_signal": SITUATIONS["DISRESPECT_DEFIANCE"],
+    "home_signal":       SITUATIONS["HOMEWORK_PARENT_ISSUE"],
+    "resource_signal":   SITUATIONS["RESOURCE_CONSTRAINT"],
+    "emotion_signal":    SITUATIONS["EMOTIONAL_WELLBEING"],
 }
-
 
 def detect_situations(normalized_text: str) -> dict:
     """
-    Returns a dict of {situation_id: score}
-    Deterministic, multi-situation allowed.
+    Returns {situation_id: score}
+    Example: {'classroom_chaos': 0.95, 'low_attention': 0.95}
     """
-
     situation_scores = {}
-
     if not normalized_text:
         return situation_scores
 
@@ -51,10 +37,8 @@ def detect_situations(normalized_text: str) -> dict:
 
     for token in tokens:
         if token in SIGNAL_RULES:
-            for situation, weight in SIGNAL_RULES[token].items():
-                situation_scores[situation] = max(
-                    situation_scores.get(situation, 0.0),
-                    weight
-                )
+            situation = SIGNAL_RULES[token]
+            # Accumulate score if found
+            situation_scores[situation] = 0.95 
 
     return situation_scores

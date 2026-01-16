@@ -13,6 +13,6 @@ torch
 huggingface_hub
 torchaudio
 librosa
-googletrans==4.0.0-rc1
 deep-translator 
 langdetect
+groq

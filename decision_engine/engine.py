@@ -4,6 +4,7 @@ Core Runtime Logic (Schema-Aware)
 """
 
 import uuid
+import re
 from typing import Dict, List
 from decision_engine.diversity_selector import select_diverse_solutions
 from decision_engine.situations import extract_signals
@@ -50,33 +51,49 @@ def process_teacher_query(raw_text: str) -> Dict[str, List[Dict]]:
 
     request_id = str(uuid.uuid4())
 
-    # -------------------------
-    # Layer 2: Signal extraction
-    # -------------------------
+    # 1. Extract Metadata (Subject) explicitly from the raw text headers
+    context = _extract_context(raw_text)
+    user_subject = context.get("subject", "GENERAL")
+    print(f">>> DEBUG: Detected User Subject: {user_subject}")
+
+    # 2. Signal extraction
     signals = extract_signals(raw_text)
     situations = signals.get("situations", {})
     constraints = signals.get("constraints", {})
     
     print(f">>> DEBUG: Extracted situations: {list(situations.keys())}")
 
-    # -------------------------
-    # Expand situations using aliases
-    # -------------------------
+    # 3. Expand situations using aliases
     expanded_situations = _expand_situations(situations)
 
     scored: List[Dict] = []
+    
+    # DEBUG COUNTERS
+    reject_subject = 0
+    reject_situation = 0
+    total_checked = 0
 
     # -------------------------
-    # Primary pass: situation-driven
+    # Primary pass: Situation-Driven
     # -------------------------
     for solution in SOLUTION_LIBRARY:
+        total_checked += 1
 
-        if expanded_situations and not _matches_situations(solution, expanded_situations):
+        # Check Subject Match
+        if not _is_subject_relevant(solution, user_subject):
+            reject_subject += 1
             continue
 
+        # Check Situation Match
+        if expanded_situations and not _matches_situations(solution, expanded_situations):
+            reject_situation += 1
+            continue
+
+        # Check Constraints
         if not _passes_hard_constraints(solution, constraints):
             continue
 
+        # Calculate Score
         score = _score_solution(solution, expanded_situations, constraints)
         if score <= 0:
             continue
@@ -88,30 +105,38 @@ def process_teacher_query(raw_text: str) -> Dict[str, List[Dict]]:
             "confidence": round(score, 2),
         })
 
+    print(f">>> DEBUG: Pass finished. Checked {total_checked}. Rejections -> Subject: {reject_subject} | Situation: {reject_situation}")
+
     # -------------------------
-    # Hard fallback: ALWAYS ensure output
+    # Fallback Logic (The Safety Net)
     # -------------------------
+    is_fallback = False
+    
     if not scored:
-        print(">>> DEBUG: No direct matches found, using fallback...")
+        is_fallback = True
+        print(">>> DEBUG: ⚠️ FALLBACK TRIGGERED - Attempting Standard Fallback...")
+        
         fallback_situations = {BASELINE_SITUATION: 1.0}
 
+        # Level 1: Try Fallback Solutions matching the SUBJECT
         for solution in SOLUTION_LIBRARY:
-            if BASELINE_SITUATION not in solution.get("situations", []):
-                continue
-
-            if not _passes_hard_constraints(solution, constraints):
-                continue
-
+            if not _is_subject_relevant(solution, user_subject): continue
+            if BASELINE_SITUATION not in solution.get("situations", []): continue
+            if not _passes_hard_constraints(solution, constraints): continue
+            
             score = _score_solution(solution, fallback_situations, constraints)
-            if score <= 0:
-                continue
+            scored.append(_format_solution(solution, score))
 
-            scored.append({
-                "solution_id": solution["solution_id"],
-                "title": solution["preview"]["title"],
-                "text": solution["preview"]["action_text"],
-                "confidence": round(score, 2),
-            })
+        # Level 2: Emergency Fallback (Ignore Subject)
+        if not scored:
+            print(">>> DEBUG: 🚨 EMERGENCY FALLBACK - Ignoring Subject Filter to ensure output.")
+            for solution in SOLUTION_LIBRARY:
+                if BASELINE_SITUATION not in solution.get("situations", []): continue
+                # We still respect hardware constraints (e.g., no internet)
+                if not _passes_hard_constraints(solution, constraints): continue
+                
+                score = _score_solution(solution, fallback_situations, constraints)
+                scored.append(_format_solution(solution, score))
 
     # -------------------------
     # Rank & select
@@ -123,27 +148,42 @@ def process_teacher_query(raw_text: str) -> Dict[str, List[Dict]]:
         seed=request_id,
     )
 
-    # -------------------------
-    # Logging (silent)
-    # -------------------------
-    log_decision(
-        request_id=request_id,
-        raw_query=raw_text,
-        situations=situations,
-        constraints=constraints,
-        solutions_shown=[s["solution_id"] for s in top_solutions],
-    )
-
-    print(f">>> DEBUG: Engine selected {len(top_solutions)} solutions.")
+    log_decision(request_id, raw_text, situations, constraints, [s["solution_id"] for s in top_solutions])
+    print(f">>> DEBUG: Engine selected {len(top_solutions)} solutions. (Fallback: {is_fallback})")
+    
     return {
         "request_id": request_id,
         "ranked_solutions": top_solutions,
+        "is_fallback": is_fallback 
     }
 
 
 # ======================================================
 # Helper Functions
 # ======================================================
+
+def _format_solution(solution, score):
+    return {
+        "solution_id": solution["solution_id"],
+        "title": solution["preview"]["title"],
+        "text": solution["preview"]["action_text"],
+        "confidence": round(score, 2),
+    }
+
+def _extract_context(raw_text: str) -> Dict[str, str]:
+    context = {}
+    subject_match = re.search(r"Subject:\s*(.*)", raw_text, re.IGNORECASE)
+    if subject_match:
+        context["subject"] = subject_match.group(1).strip().upper()
+    return context
+
+def _is_subject_relevant(solution: Dict, user_subject: str) -> bool:
+    sol_subjects = [s.upper() for s in solution.get("subjects", [])]
+    if "GENERAL" in sol_subjects or "ALL" in sol_subjects: return True
+    if not user_subject: return True
+    for sol_sub in sol_subjects:
+        if sol_sub in user_subject or user_subject in sol_sub: return True
+    return False
 
 def _expand_situations(situations: Dict[str, float]) -> Dict[str, float]:
     expanded = dict(situations)
@@ -153,50 +193,31 @@ def _expand_situations(situations: Dict[str, float]) -> Dict[str, float]:
             expanded.setdefault(alias, score * 0.9)
     return expanded
 
-
 def _matches_situations(solution: Dict, situations: Dict[str, float]) -> bool:
     for s in solution.get("situations", []):
-        if s in situations:
-            return True
+        if s in situations: return True
     return False
-
 
 def _passes_hard_constraints(solution: Dict, constraints: Dict[str, float]) -> bool:
     requires = solution.get("constraints", {}).get("requires", [])
     avoid_if = solution.get("constraints", {}).get("avoid_if", [])
-
     for req in requires:
-        if req not in constraints:
-            return False
-
+        if req not in constraints: return False
     for avoid in avoid_if:
-        if avoid in constraints:
-            return False
-
+        if avoid in constraints: return False
     return True
-
 
 def _score_solution(solution: Dict, situations: Dict[str, float], constraints: Dict[str, float]) -> float:
     score = 0.0
     for s in solution.get("situations", []):
-        if s in situations:
-            score += situations[s]
-
-    if _fits_constraints(solution, constraints):
-        score += CONSTRAINT_FIT_BONUS
-
-    effort = solution.get("effort_level")
-    score += EFFORT_SCORE.get(effort, 0.0)
-
-    safety = solution.get("classroom_safety")
-    score += SAFETY_BONUS.get(safety, 0.0)
-
+        if s in situations: score += situations[s]
+    if _fits_constraints(solution, constraints): score += CONSTRAINT_FIT_BONUS
+    score += EFFORT_SCORE.get(solution.get("effort_level"), 0.0)
+    score += SAFETY_BONUS.get(solution.get("classroom_safety"), 0.0)
     return score
-
 
 def _fits_constraints(solution: Dict, constraints: Dict[str, float]) -> bool:
     avoid_if = solution.get("constraints", {}).get("avoid_if", [])
     for avoid in avoid_if:
-        if avoid in constraints:
-            return False
+        if avoid in constraints: return False
     return True

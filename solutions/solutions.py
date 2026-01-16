@@ -66,6 +66,49 @@ SOLUTION_LIBRARY = [
         "tags": ["peer_learning", "differentiation", "math"],
     },
     {
+        "solution_id": "math_zero_borrowing_concrete",
+        "version": 1,
+        "status": "active",
+        "response_style": "STRUCTURAL",
+        "situations": ["CONCEPT_CONFUSION", "STUCK_ON_ZERO"],
+        "subjects": ["MATH"],
+        "class_range": "PRIMARY",
+        "topic_type": "CONCEPTUAL",
+        "learning_mode": "VISUAL",
+        "preview": {
+            "title": "The 'Empty Bundle' Method (Zero Borrowing)",
+            "action_text": "Use bundles of sticks to show that '0' means an empty holder, requiring a swap from the next place."
+        },
+        "details": {
+            "objective": "To visualize borrowing from zero using concrete materials.",
+            "steps": [
+                "Show '304' using 3 bundles of 100, 0 bundles of 10, and 4 loose sticks.",
+                "Ask: 'Can we take 8 sticks from the 4?' (No).",
+                "Ask: 'Can we borrow from the tens?' (No, it's empty).",
+                "Show opening a 100-bundle to make 10 tens. Now borrow from that.",
+            ],
+            "time_required_min": 10,
+            "materials_needed": ["sticks", "rubber bands"],
+            "teacher_tone": "patient"
+        },
+        "pedagogy": {
+            "why_it_works": "Concrete operations remove the abstraction of 'borrowing from nothing'.",
+            "cognitive_target": "conceptual_restructuring"
+        },
+        "constraints": {
+            "requires": ["MANIPULATIVES"],
+            "avoid_if": []
+        },
+        "effort_level": "MEDIUM",
+        "classroom_safety": "HIGH",
+        "noise_level": "LOW",
+        "works_best_when": {
+            "class_strength": "small",
+            "student_state": "CONFUSED"
+        },
+        "tags": ["math", "subtraction", "zero"]
+    },
+    {
         "solution_id": "silent_think_time_general_low_attention",
         "version": 1,
         "status": "active",
