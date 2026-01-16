@@ -67,7 +67,7 @@ body {
 
 .context-stack label {
     font-weight: 600;
-    color: #05386B;
+    color:  #1E3A32;
     font-size: 14px;
     margin-bottom: -5px;
 }
@@ -78,7 +78,7 @@ body {
     border: 1px solid #379683;
     border-radius: 8px;
     background: #fff;
-    color: #05386B;
+    color:  #1E3A32;
     font-size: 14px;
     outline: none;
 }
@@ -120,7 +120,7 @@ body {
 }
 
 .submit-fb-btn {
-    background: #05386B;
+    background: #1E3A32;
     color: #fff;
     border: none;
     padding: 10px;
@@ -178,12 +178,12 @@ body {
 
 .bot-msg .bubble {
     background: #f0f4f8;
-    color: #05386B;
+    color:  #1E3A32;
     border-bottom-left-radius: 2px;
 }
 
 .user-msg .bubble {
-    background: #05386B;
+    background: #1E3A32;
     color: #fff;
     border-bottom-right-radius: 2px;
 }
@@ -199,7 +199,7 @@ body {
 .sol-btn {
     background: #fff;
     border: 1px solid #5CDB95;
-    color: #05386B;
+    color: #1E3A32;
     padding: 8px 14px;
     border-radius: 20px;
     font-size: 13px;
@@ -213,9 +213,9 @@ body {
 }
 
 .sol-btn.selected {
-    background: #05386B;
+    background:  #1E3A32;
     color: #fff;
-    border-color: #05386B;
+    border-color:  #1E3A32;
 }
 
 /* Detail Card (Inside Chat) */
@@ -286,7 +286,7 @@ body {
 }
 
 .send-btn {
-    background: #05386B;
+    background:  #1E3A32;
     color: white;
     width: 40px;
     height: 40px;
@@ -370,7 +370,7 @@ body {
 .mic-btn {
     width: 42px;
     height: 42px;
-    background:#05386B;;            /* black square */
+    background: #1E3A32;          /* black square */
     color: #fff;
     border: none;
     border-radius: 10px;         /* rounded square */

@@ -1,3 +1,14 @@
+:root {
+  --forest-deep: #1E3A32;
+  --forest-main: #2F5D50;
+  --forest-soft: #6F9E8F;
+
+  --mist-deep: #5F7F8C;
+  --mist-soft: #BFD6DA;
+
+  --feather-light: #F3F4EF;
+}
+
 * { 
   box-sizing: border-box; 
   margin:0; 
@@ -6,25 +17,24 @@
 }
 
 body { 
-  background:#EDF5E1; 
-  color:#05386B; 
+  background:#EDF5E1;
+  color: var(--forest-deep); 
   line-height:1.5; 
   transition: margin-right 0.5s; 
   max-width: 100%;
-
-
 }
+
 /* ================= HEADER ================= */
 header { 
   display: flex; 
   justify-content: space-between; 
   align-items: center; 
   padding: 15px 20px; 
-  background:#b8e6dd;  
+  background: var(--mist-soft);  
   border-radius: 12px; 
   margin: 20px auto; 
   width: 100%;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+  box-shadow: 0 4px 12px rgba(30,58,50,0.12); 
   margin-top: 60px; 
 }
 
@@ -47,10 +57,10 @@ header {
 
 .header-left .subtitle { 
   font-size: 12px; 
-  color: #379683; 
+  color: var(--forest-main); 
 }
 
-/* 🔑 FIX: header-right alignment */
+/* header-right alignment */
 .header-right {
   display: flex;
   align-items: center;
@@ -62,19 +72,16 @@ header {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  background-color:#05386B;
-  color: #ffffff;
+  background-color: var(--forest-deep);
+  color: var(--feather-light);
   font-size: 18px;
   font-weight: 600;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   line-height: 1;
 }
 
-/* Default icon when logged out */
 .default-user-icon {
   width: 40px;
   height: 40px;
@@ -83,14 +90,14 @@ header {
 
 /* ================= INTRO ================= */
 .intro {
-  max-width:1300p;
+  max-width:1300px;
   margin:90px auto 20px;
-  background:#c5f8d9 !important; 
+  background: var(--mist-soft) !important; 
   padding:20px 15px;
   border-radius:12px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+  box-shadow:0 4px 12px rgba(30,58,50,0.12);
   text-align:center;
-  border:1.5px solid #05386B;
+  border:1.5px solid var(--forest-deep);
 }
 
 .intro h1 { 
@@ -100,17 +107,16 @@ header {
 
 .intro p { 
   font-size:14px; 
-  color:#05386B; 
+  color: var(--forest-deep); 
 }
 
-/* ================= ROLE NAV BUTTONS (Uiverse Style) ================= */
 /* ================= ROLE NAV ================= */
 .role-nav {
   width: 100%;
   display: flex;
-  justify-content: center;   /* center horizontally */
+  justify-content: center;
   align-items: center;
-  gap: 16px;                 /* space between buttons */
+  gap: 16px;
   margin: 30px auto;
 }
 
@@ -120,23 +126,19 @@ header {
   text-transform: uppercase;
   letter-spacing: 2.5px;
   font-weight: 500;
-
-  color: #05386B;
-  background-color: #ffffff;
-
+  color: var(--forest-deep);
+  background-color: var(--feather-light);
   border: none;
   border-radius: 45px;
   cursor: pointer;
   outline: none;
-
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 8px 15px rgba(30,58,50,0.18);
   transition: all 0.3s ease;
 }
 
 .role-nav button:hover {
-  background-color: #c0ffdc;
-  box-shadow: 0px 15px 20px rgba(92, 219, 149, 0.4);
-  color: #010101;
+  background-color: var(--mist-soft);
+  box-shadow: 0px 15px 20px rgba(47,93,80,0.35);
   transform: translateY(-7px);
 }
 
@@ -144,217 +146,63 @@ header {
   transform: translateY(-1px);
 }
 
-
 /* ================= CARDS ================= */
 .section-title {
   text-align: center;
   font-size: 18px;
   font-weight: 600;
   margin: 30px 0 15px;
+  color: var(--forest-deep);
 }
 
 .card-grid {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:15px;
+  gap:24px;
   max-width:95%;
   margin:0 auto 30px;
 }
 
-/* ================= FLUENT DESIGN CARDS ================= */
-
-/* ================= FLUENT CARD UPGRADE ================= */
-
-.card-grid {
-  gap: 24px;
-}
-
-/* Base Card */
+/* ================= CARD ================= */
 .card {
   position: relative;
-  background: linear-gradient(
-    180deg,
-    #ffffff 0%,
-    #f8fffb 100%
-  );
-  border-radius: 16px;
-  padding: 22px 20px;
-
-  border: 1px solid rgba(5, 56, 107, 0.15);
-
-   box-shadow:
-    0 2px 6px rgba(5, 56, 107, 0.06),
-    0 1px 2px rgba(0,0,0,0.04);
-
-  transition: 
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    border-color 0.25s ease;
-}
-
-/* Accent line (Fluent touch) */
-.card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 4px;
-  background: linear-gradient(
-    180deg,
-    #6F93B8,
-    #2F5F88
-  );
-  border-radius: 16px 0 0 16px;
-  opacity: 0.9;
-}
-
-/* Hover state */
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow:
-    0 10px 24px rgba(5, 56, 107, 0.12);
-  border-color: #5CDB95;
-}
-
-/* Icon styling */
-.card .icon {
-  font-size: 26px;
-  margin-bottom: 12px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  color: #05386B;
-   background: linear-gradient(
-    180deg,
-    rgba(92, 219, 149, 0.18),
-    rgba(92, 219, 149, 0.08)
-  );
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
-}
-
-/* Title */
-.card h3 {
-  font-size: 16px;
-  font-weight: 600;
-  color: #05386B;
-  margin-bottom: 6px;
-}
-
-/* Text */
-.card p {
-  font-size: 14px;
-  color: #375a6f;
-  line-height: 1.55;
-}
-
-/* ================= INTRO CARD POLISH ================= */
-
-.intro {
-  background: linear-gradient(
-    180deg,
-    #d1ffe8 0%,
-    #c3f6df 100%
-  );
-  border-radius: 18px;
-  border: 1.5px solid rgba(5, 56, 107, 0.25);
-
-  box-shadow:
-    0 10px 28px rgba(5, 56, 107, 0.12),
-    inset 0 1px 0 rgba(255,255,255,0.6);
-}
-
-/* ================= SECTION TITLES ================= */
-
-.section-title {
-  color: #05386B;
-  letter-spacing: 0.3px;
-}
-
-
-.card:hover { 
-  transform:translateY(-3px); 
-}
-
-/* ================= RESPONSIVE ================= */
-@media screen and (max-width:768px){
-  header { margin-top: 70px; }
-}
-/* Page side spacing */
-.page-container {
-  max-width: 1400px;     /* keeps content centered */
-  margin: 0 auto;        /* center horizontally */
-  padding: 0 24px;       /* 👈 left & right margin */
-}
-.card-icon {
-  width: 28px;
-  height: 28px;
-  stroke: #05386B;
-  stroke-width: 1.8;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.section-title::after {
-  content: "";
-  display: block;
-  width: 48px;
-  height: 3px;
-  background: #5CDB95;
-  margin: 10px auto 0;
-  border-radius: 2px;
-}/* ================= INTERACTIVE CARD STYLE NEWWWWW ================= */
-
-.card {
-  position: relative;
-  background: #ffffff;
+  background: var(--feather-light);
   border-radius: 16px;
   padding: 22px 20px;
   overflow: hidden;
   cursor: pointer;
-
-  border: 1px solid rgba(5, 56, 107, 0.15);
-
+  border: 1px solid rgba(30,58,50,0.25);
   box-shadow:
-    0 2px 6px rgba(5, 56, 107, 0.06),
-    0 1px 2px rgba(0,0,0,0.04);
-
+    0 2px 6px rgba(30,58,50,0.12),
+    0 1px 2px rgba(30,58,50,0.08);
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease;
 }
 
-/* Decorative corners */
 .card::before,
 .card::after {
   content: "";
   position: absolute;
   width: 22%;
   height: 22%;
-  background: rgba(92, 219, 149, 0.25); /* mint accent */
+  background: rgba(111,158,143,0.35);
   transition: all 0.45s ease;
   z-index: 0;
 }
 
-/* Top-right corner */
 .card::before {
   top: 0;
   right: 0;
   border-radius: 0 16px 0 100%;
 }
 
-/* Bottom-left corner */
 .card::after {
   bottom: 0;
   left: 0;
   border-radius: 0 100% 0 16px;
 }
 
-/* Hover expansion */
 .card:hover::before,
 .card:hover::after {
   width: 100%;
@@ -362,15 +210,59 @@ header {
   border-radius: 16px;
 }
 
-/* Lift effect */
 .card:hover {
   transform: translateY(-4px);
-  box-shadow:
-    0 12px 28px rgba(57, 115, 173, 0.14);
+  box-shadow: 0 12px 28px rgba(30,58,50,0.25);
 }
 
-/* Keep content ABOVE hover layers */
 .card > * {
   position: relative;
   z-index: 1;
+}
+
+.card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--forest-deep);
+}
+
+.card p {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--forest-main);
+}
+
+/* ================= ICON ================= */
+.card-icon {
+  width: 28px;
+  height: 28px;
+  stroke: var(--forest-deep);
+  stroke-width: 1.8;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ================= SECTION TITLE DECOR ================= */
+.section-title::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--forest-soft);
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+/* ================= PAGE SPACING ================= */
+.page-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media screen and (max-width:768px){
+  header { margin-top: 70px; }
 }
