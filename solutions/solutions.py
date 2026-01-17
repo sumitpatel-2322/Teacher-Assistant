@@ -20,7 +20,7 @@ from decision_engine.constants import (
 # SOLUTION LIBRARY
 # ======================================================
 
-SOLUTION_LIBRARY = [
+SOLUTIONS = [
     {
         "solution_id": "peer_teaching_math_mixed_levels",
         "version": 1,
