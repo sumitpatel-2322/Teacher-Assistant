@@ -254,6 +254,23 @@ header {
     width: 95%;
   }
 }
+/* Upload Guidance Text Fields */
+#guidanceTitle,
+#guidanceDescription {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1.5px solid #6F9E8F;
+  background: #fff;
+  font-size: 14px;
+  color: #1E3A32;
+  outline: none;
+}
+
+#guidanceDescription {
+  resize: vertical;
+}
+
 /* ================= SCHEDULE VISIT FORM ================= */
 
 .modal-label {
