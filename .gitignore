@@ -7,3 +7,4 @@ __pycache__/
 decision_engine/raw_text/data
 decision_engine/logs/decision_logs.csv
 speech/
+.env
