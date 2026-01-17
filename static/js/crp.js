@@ -50,7 +50,7 @@ if (histCtx) {
           "#5F7F8C", // mist blue
           "#2F5D50", // deep forest
           "#8FB8A8", // light teal
-          "#BFD6DA"  // mist light
+          "#f1f5f6"  // mist light
         ],
         borderColor: "#1E3A32",
         borderWidth: 1.5,
@@ -86,5 +86,39 @@ if (histCtx) {
         }
       }
     }
+  });
+}
+/* ================= UPLOAD GUIDANCE ================= */
+
+const uploadBtn = document.querySelector(".actions button:nth-child(2)");
+const uploadModal = document.getElementById("uploadModal");
+const closeUpload = document.getElementById("closeUpload");
+
+if (uploadBtn) {
+  uploadBtn.addEventListener("click", () => {
+    uploadModal.style.display = "flex";
+  });
+}
+
+if (closeUpload) {
+  closeUpload.addEventListener("click", () => {
+    uploadModal.style.display = "none";
+  });
+}
+/* ================= SCHEDULE VISIT ================= */
+
+const visitBtn = document.querySelector(".actions button:nth-child(3)");
+const visitModal = document.getElementById("visitModal");
+const closeVisit = document.getElementById("closeVisit");
+
+if (visitBtn) {
+  visitBtn.addEventListener("click", () => {
+    visitModal.style.display = "flex";
+  });
+}
+
+if (closeVisit) {
+  closeVisit.addEventListener("click", () => {
+    visitModal.style.display = "none";
   });
 }
