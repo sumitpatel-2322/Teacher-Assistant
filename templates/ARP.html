@@ -8,64 +8,60 @@
   <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="static/css/arp.css">
-      <link rel="stylesheet" href="static/css/sidebar.css">
-       <link rel="stylesheet" href="static/css/footer.css">
-
+  <link rel="stylesheet" href="static/css/sidebar.css">
+  <link rel="stylesheet" href="static/css/footer.css">
 </head>
 <body class="theme-arp">
 
   <div id="mySidepanel">
-      <span class="sidebar-close" id="closeSidebar">✕</span>
+    <span class="sidebar-close" id="closeSidebar">✕</span>
     <a href="/" class="logout-link">Home</a>
     <a href="/logout" class="logout-link">Logout</a>
   </div>
-<div class="page-content">
 
-  <nav>
-    <div class="logo">VEDA</div>
-    <button class="hamburger" id="hamburgerBtn">☰</button>
-  </nav>
-<header>
-<div class="header-left">
-<img src="static/img/logo.png" alt="Teacher">
-<div>
-<div class="title">ARP Dashboard</div>
-<div class="subtitle">Virtual Educator And Digital Assistant</div>
-</div>
-</div>
+  <div class="page-content">
+    <nav>
+      <div class="logo">VEDA</div>
+      <button class="hamburger" id="hamburgerBtn">☰</button>
+    </nav>
 
-<div class="header-right">
-  {% if user %}
-  <a href="/profile" style="text-decoration:none;">
-    <div style="width: 40px; height: 40px; background: #5CDB95; color: #05386B; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; border: 2px solid #fff;">
-      {{ user.username[0] | upper }}
+    <header>
+      <div class="header-left">
+        <img src="static/img/logo.png" alt="Teacher">
+        <div>
+          <div class="title">Welcome, {{ user.name }}</div>
+          <div class="subtitle">Virtual Educator And Digital Assistant</div>
+        </div>
+      </div>
+
+      <div class="header-right">
+        {% if user %}
+        <a href="/profile" style="text-decoration:none;">
+          <div style="width: 40px; height: 40px; background: #5CDB95; color: #05386B; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; border: 2px solid #fff;">
+            {{ user.name[0] | upper }}
+          </div>
+        </a>
+        {% else %}
+          <img src="/static/img/user-icon.jpg" alt="User" style="width:40px; height:40px; border-radius:50%;">
+        {% endif %}
+      </div>
+    </header>
+
+    <div class="section-title">ARP Actions</div>
+    <div class="actions">
+      <button>Upload Subject Models</button>
+      <button>Add Micro-Learning</button>
+      <button>Improve Teaching Strategies</button>
     </div>
-  </a>
-  {% else %}
-    <img src="/static/img/user-icon.jpg" alt="User" style="width:40px; height:40px; border-radius:50%;">
-  {% endif %}
-</div>
-
-</header>
-
-  <div class="section-title">ARP Actions</div>
-  <div class="actions">
-    <button>Upload Subject Models</button>
-    <button>Add Micro-Learning</button>
-    <button>Improve Teaching Strategies</button>
   </div>
-</div>
- <footer class="app-footer">
-  <div class="footer-inner">
-    <span>© 2026 VEDA – Virtual Educator & Digital Assistant</span>
-    <span>Made for Teachers</span>
-  </div>
-</footer>
+  
+  <footer class="app-footer">
+    <div class="footer-inner">
+      <span>© 2026 VEDA – Virtual Educator & Digital Assistant</span>
+      <span>Made for Teachers</span>
+    </div>
+  </footer>
 
-
-
-
-<script src="/static/js/sidebar.js"></script>
-
+  <script src="/static/js/sidebar.js"></script>
 </body>
 </html>
