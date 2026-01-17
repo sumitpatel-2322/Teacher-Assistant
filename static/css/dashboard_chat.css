@@ -459,3 +459,27 @@ body {
     overflow-y: auto;
     max-height: 350px;
 }
+@media (max-width: 768px) {
+
+  .main-layout {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Header stays first */
+  .dash-header {
+    order: 1;
+  }
+
+  /* Context selection should come BEFORE chat */
+  .left-sidebar {
+    order: 2;
+  }
+
+  /* Chat + input AFTER context */
+  .right-chat-area {
+    order: 3;
+  }
+
+}
+
