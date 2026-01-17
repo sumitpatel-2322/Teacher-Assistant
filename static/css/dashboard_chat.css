@@ -67,7 +67,7 @@ body {
 
 .context-stack label {
     font-weight: 600;
-    color: #05386B;
+    color:  #1E3A32;
     font-size: 14px;
     margin-bottom: -5px;
 }
@@ -78,7 +78,7 @@ body {
     border: 1px solid #379683;
     border-radius: 8px;
     background: #fff;
-    color: #05386B;
+    color:  #1E3A32;
     font-size: 14px;
     outline: none;
 }
@@ -120,7 +120,7 @@ body {
 }
 
 .submit-fb-btn {
-    background: #05386B;
+    background: #1E3A32;
     color: #fff;
     border: none;
     padding: 10px;
@@ -178,12 +178,12 @@ body {
 
 .bot-msg .bubble {
     background: #f0f4f8;
-    color: #05386B;
+    color:  #1E3A32;
     border-bottom-left-radius: 2px;
 }
 
 .user-msg .bubble {
-    background: #05386B;
+    background: #1E3A32;
     color: #fff;
     border-bottom-right-radius: 2px;
 }
@@ -199,7 +199,7 @@ body {
 .sol-btn {
     background: #fff;
     border: 1px solid #5CDB95;
-    color: #05386B;
+    color: #1E3A32;
     padding: 8px 14px;
     border-radius: 20px;
     font-size: 13px;
@@ -213,9 +213,9 @@ body {
 }
 
 .sol-btn.selected {
-    background: #05386B;
+    background:  #1E3A32;
     color: #fff;
-    border-color: #05386B;
+    border-color:  #1E3A32;
 }
 
 /* Detail Card (Inside Chat) */
@@ -286,7 +286,7 @@ body {
 }
 
 .send-btn {
-    background: #05386B;
+    background:  #1E3A32;
     color: white;
     width: 40px;
     height: 40px;
@@ -370,7 +370,7 @@ body {
 .mic-btn {
     width: 42px;
     height: 42px;
-    background:#05386B;;            /* black square */
+    background: #1E3A32;          /* black square */
     color: #fff;
     border: none;
     border-radius: 10px;         /* rounded square */
@@ -388,4 +388,74 @@ body {
 
 .mic-btn:active {
     transform: scale(0.95);
+}
+/* ================= NOTICE BAR ================= */
+/* ================= NOTICE BAR (LEFT CORNER FIX) ================= */
+
+.notice-bar {
+    position: fixed;
+    top: 80px;          /* just below nav */
+    left: 16px;         /* true left corner */
+    z-index: 1000;
+}
+
+.notice-btn {
+    background: #BFD6DA;        /* mist-soft */
+    color: #1E3A32;             /* forest-deep */
+    border: 1.5px solid #2F5D50;/* forest-main */
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+
+    box-shadow: 0 4px 10px rgba(30,58,50,0.15);
+    transition: transform 0.2s ease;
+}
+
+.notice-btn:hover {
+    background: #6F9E8F; /* forest-soft */
+    transform: translateY(-2px);
+}
+/* ================= NOTICE PANEL ================= */
+
+.notice-panel {
+    position: fixed;
+    top: 110px;              /* below nav + notice button */
+    left: 16px;
+    width: 320px;
+    max-height: 420px;
+    background: #F3F4EF;     /* feather-light */
+    border: 1.5px solid #2F5D50;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(30,58,50,0.2);
+    display: none;           /* hidden by default */
+    z-index: 1100;
+    overflow: hidden;
+}
+
+.notice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background: #BFD6DA;     /* mist-soft */
+    color: #1E3A32;
+    font-weight: 600;
+}
+
+.notice-header button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #1E3A32;
+}
+
+.notice-content {
+    padding: 14px;
+    font-size: 14px;
+    color: #1E3A32;
+    overflow-y: auto;
+    max-height: 350px;
 }

@@ -1,30 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Teacher-AssistantAI | Register</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "base.html" %}
 
+{% block title %}Register | VEDA{% endblock %}
+
+{% block extra_css %}
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
-
+  
   <link rel="stylesheet" href="static/css/register.css">
   <link rel="stylesheet" href="static/css/sidebar.css">
   <link rel="stylesheet" href="static/css/footer.css">
-</head>
+{% endblock %}
 
-<body>
-
-<nav>
-  <div class="logo">VEDA</div>
-  <button class="hamburger" id="hamburgerBtn">☰</button>
-</nav>
+{% block content %}
 
 <div id="mySidepanel">
   <span class="sidebar-close" id="closeSidebar">✕</span>
   <a href="/" class="logout-link">Home</a>
   <a href="/login" class="logout-link">Login</a>
 </div>
+
+<nav>
+  <div class="logo">VEDA</div>
+  <button class="hamburger" id="hamburgerBtn">☰</button>
+</nav>
 
 <div class="auth-container">
 
@@ -78,16 +76,12 @@
           <div class="pill-group">
             <input type="checkbox" id="class1" name="class" value="1">
             <label for="class1">Class 1</label>
-
             <input type="checkbox" id="class2" name="class" value="2">
             <label for="class2">Class 2</label>
-
             <input type="checkbox" id="class3" name="class" value="3">
             <label for="class3">Class 3</label>
-
             <input type="checkbox" id="class4" name="class" value="4">
             <label for="class4">Class 4</label>
-
             <input type="checkbox" id="class5" name="class" value="5">
             <label for="class5">Class 5</label>
           </div>
@@ -100,16 +94,12 @@
           <div class="pill-group">
             <input type="checkbox" id="math" name="subjects" value="math">
             <label for="math">Mathematics</label>
-
             <input type="checkbox" id="science" name="subjects" value="science">
             <label for="science">Science</label>
-
             <input type="checkbox" id="english" name="subjects" value="english">
             <label for="english">English</label>
-
             <input type="checkbox" id="social" name="subjects" value="social">
             <label for="social">Social Studies</label>
-
             <input type="checkbox" id="hindi" name="subjects" value="hindi">
             <label for="hindi">Hindi</label>
           </div>
@@ -182,6 +172,10 @@
 
 </div>
 
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/sidebar.js"></script>
 <script src="/static/js/login.js"></script>
 
 <script>
@@ -239,6 +233,4 @@
     }
   });
 </script>
-
-</body>
-</html>
+{% endblock %}

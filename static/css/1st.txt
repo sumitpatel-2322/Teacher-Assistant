@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Teacher-AssistantAI | Register</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="static/css/register.css">
+    <link rel="stylesheet" href="static/css/sidebar.css">
+     <link rel="stylesheet" href="static/css/footer.css">
+
+</head>
+
+<body>
+
+<nav>
+  <div class="logo">VEDA</div>
+  <button class="hamburger" id="hamburgerBtn">☰</button>
+</nav>
+
+<div id="mySidepanel">
+  <span class="sidebar-close" id="closeSidebar">✕</span>
+
+  <a href="/" class="logout-link">Home</a>
+  
+  <a href="/login" class="logout-link">login</a>
+</div>
+
+<div class="auth-container">
+
+  <h2>Register</h2>
+
+ <form method="post" action="/register">
+
+  <!-- ROLE -->
+  <div class="input-group">
+    <select class="input" id="role" name="role" required>
+      <option value="" disabled selected></option>
+      <option value="teacher">Teacher</option>
+      <option value="crp">CRP</option>
+      <option value="brp">BRP</option>
+      <option value="arp">ARP</option>
+    </select>
+    <label class="user-label">Role</label>
+  </div>
+
+  <!-- TEACHER ID -->
+  <div class="input-group">
+    <input class="input" type="text" id="teacher_id" name="teacher_id" required>
+    <label class="user-label">Teacher ID</label>
+  </div>
+
+  <!-- NAME -->
+  <div class="input-group">
+    <input class="input" type="text" id="name" name="name" required>
+    <label class="user-label">Name</label>
+  </div>
+
+  <!-- SCHOOL NAME -->
+  <div class="input-group">
+    <input class="input" type="text" id="school_name" name="school_name" required>
+    <label class="user-label">School Name</label>
+  </div>
+
+  <!-- USERNAME -->
+  <div class="input-group">
+    <input class="input" type="text" id="username" name="username" required>
+    <label class="user-label">Username</label>
+  </div>
+
+  <!-- PASSWORD -->
+  <div class="input-group">
+    <input class="input" type="password" id="password" name="password" required>
+    <label class="user-label">Password</label>
+  </div>
+
+  <!-- PASSWORD MESSAGE -->
+  <p id="passwordMessage" style="font-size:14px; margin-top:5px;"></p>
+  <small style="color:#555;">
+    Password must contain uppercase, lowercase, digit, special character (min 8 characters)
+  </small>
+
+  <!-- CONFIRM PASSWORD -->
+  <div class="input-group">
+    <input class="input" type="password" id="confirm_password" name="confirm_password" required>
+    <label class="user-label">Confirm Password</label>
+  </div>
+
+  <button type="submit">Register</button>
+</form>
+
+
+  <p>
+    Have an account?
+    <a href="/login">Login</a>
+  </p>
+
+</div>
+<footer class="app-footer">
+    <div class="footer-inner">
+      <span>© 2026 VEDA – Virtual Educator & Digital Assistant</span>
+      <span>Made for Teachers</span>
+    </div>
+</footer>
+<script src="/static/js/sidebar.js"></script>
+
+<!-- ================= SIDEBAR SCRIPT ================= -->
+<script src="/static/js/login.js"></script>
+<!-- ================= PASSWORD VALIDATION SCRIPT ================= -->
+<script>
+  const passwordInput = document.getElementById("password");
+  const message = document.getElementById("passwordMessage");
+
+  passwordInput.addEventListener("input", function () {
+    const password = passwordInput.value;
+
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+    if (password.length === 0) {
+      message.textContent = "";
+      return;
+    }
+
+    if (!regex.test(password)) {
+      message.textContent =
+        "Password must contain uppercase, lowercase, digit, special character (min 8 characters)";
+      message.style.color = "red";
+    } else {
+      message.textContent = "Strong password ✔";
+      message.style.color = "green";
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -16,7 +16,7 @@ body {
 /* --- NAVIGATION BAR --- */
 nav {
   width: 100%;
-  background: #05386B; /* */
+  background:#1E3A32;/* */
   color: #EDF5E1;
   padding: 10px 20px;
   display: flex;
@@ -62,7 +62,7 @@ nav {
   padding-top: 60px;
   height: calc(100vh - 50px);
   /* Using Deep Navy for a unified look */
-  background: #05386B; 
+  background:#1E3A32; 
   border-left: 1px solid rgba(255, 255, 255, 0.1);
   border-top-left-radius: 24px;
   border-bottom-left-radius: 24px;

@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ARP Dashboard - Teacher-AssistantAI</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+{% extends "base.html" %}
 
+{% block title %}ARP Dashboard - VEDA{% endblock %}
+
+{% block extra_css %}
   <link rel="stylesheet" href="static/css/arp.css">
   <link rel="stylesheet" href="static/css/sidebar.css">
   <link rel="stylesheet" href="static/css/footer.css">
-</head>
-<body class="theme-arp">
+{% endblock %}
+
+{% block content %}
 
   <div id="mySidepanel">
     <span class="sidebar-close" id="closeSidebar">✕</span>
@@ -20,6 +17,7 @@
   </div>
 
   <div class="page-content">
+    
     <nav>
       <div class="logo">VEDA</div>
       <button class="hamburger" id="hamburgerBtn">☰</button>
@@ -53,8 +51,9 @@
       <button>Add Micro-Learning</button>
       <button>Improve Teaching Strategies</button>
     </div>
-  </div>
   
+  </div>
+
   <footer class="app-footer">
     <div class="footer-inner">
       <span>© 2026 VEDA – Virtual Educator & Digital Assistant</span>
@@ -62,6 +61,8 @@
     </div>
   </footer>
 
+{% endblock %}
+
+{% block scripts %}
   <script src="/static/js/sidebar.js"></script>
-</body>
-</html>
+{% endblock %}

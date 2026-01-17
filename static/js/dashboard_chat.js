@@ -170,3 +170,20 @@ document.addEventListener("DOMContentLoaded", () => {
         parent.innerHTML = `<span style="font-size:13px; color:#379683; font-weight:600;">Thanks for your feedback!</span>`;
     };
 });
+    /* ================= NOTICE PANEL LOGIC ================= */
+
+    const noticeBtn = document.querySelector(".notice-btn");
+    const noticePanel = document.getElementById("notice-panel");
+    const closeNotice = document.getElementById("closeNotice");
+
+    if (noticeBtn && noticePanel) {
+        noticeBtn.addEventListener("click", () => {
+            noticePanel.style.display = "block";
+        });
+    }
+
+    if (closeNotice) {
+        closeNotice.addEventListener("click", () => {
+            noticePanel.style.display = "none";
+        });
+    }
