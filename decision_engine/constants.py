@@ -2,7 +2,7 @@
 Theme 1 Constants
 Merged: Master Situations + Backward Compatibility + Project Constraints
 """
-
+print("\n>>> DEBUG: [Import] decision_engine/constants.py loaded")
 # ======================================================
 # 1. MASTER SITUATIONS (Normalized for Detection & Reporting)
 # ======================================================

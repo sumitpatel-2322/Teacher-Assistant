@@ -2,6 +2,10 @@ from pathlib import Path
 from datetime import datetime
 import pandas as pd
 
+# <--- DEBUG START --->
+print("\n>>> DEBUG: [Import] decision_engine/logging.py loaded")
+# <--- DEBUG END --->
+
 # -------------------------
 # Paths
 # -------------------------
@@ -52,6 +56,9 @@ def log_decision(
     """
     Logs initial decision output.
     """
+    # <--- DEBUG START --->
+    print(f">>> DEBUG: [Logging] Writing decision log for ReqID: {request_id}")
+    # <--- DEBUG END --->
 
     try:
         _ensure_log_file()
@@ -75,8 +82,8 @@ def log_decision(
             index=False
         )
 
-    except Exception:
-        pass
+    except Exception as e:
+        print(f">>> DEBUG: [Logging] Error writing log: {e}")
 
 
 # -------------------------
@@ -92,6 +99,9 @@ def log_feedback(
     """
     Updates the most recent log row with teacher feedback.
     """
+    # <--- DEBUG START --->
+    print(f">>> DEBUG: [Logging] Updating feedback for ReqID: {request_id}")
+    # <--- DEBUG END --->
 
     try:
         if not LOG_FILE.exists():
@@ -106,13 +116,13 @@ def log_feedback(
         if not match.any():
             return
 
-        idx = df[match].index[-1]
-
+        # Update the row
+        idx = df.index[match][0]
         df.at[idx, "solution_chosen"] = solution_chosen
         df.at[idx, "worked"] = worked
         df.at[idx, "feedback"] = feedback
 
         df.to_csv(LOG_FILE, index=False)
 
-    except Exception:
-        pass
+    except Exception as e:
+        print(f">>> DEBUG: [Logging] Error updating feedback: {e}")

@@ -3,7 +3,7 @@ Theme 1 Preprocessing
 Massive Phrase Map for 18 Master Situations
 Maps raw phrases to intermediate signal tokens.
 """
-
+print("\n>>> DEBUG: [Import] preprocessing/phrase_map.py loaded")
 PHRASE_MAP = {
     # 1. CLASSROOM CHAOS (chaos_signal)
     "too loud": "chaos_signal", "making noise": "chaos_signal", "fish market": "chaos_signal",

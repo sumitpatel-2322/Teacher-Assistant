@@ -1,101 +1,131 @@
 """
-Solution Loader & Validator
----------------------------
-Loads the solution library into memory and validates
-basic structural integrity at startup.
+solution_loader.py
+------------------
+SAFE priority-aware solution loader.
 
-Supported Sources:
-1. solutions.py (Manual)
-2. reddit_based_solutions.py (Scraped/Generated)
-3. behavior_solutions.py (New Behavioral Strategies)
+IMPORTANT:
+- Returns a FLAT LIST (engine contract unchanged)
+- Internally reorders solutions by intent priority
+- Normalizes instructional solutions to match engine's 'situations' expectation
 """
 
-from typing import List, Dict
-from solutions.solutions import SOLUTION_LIBRARY as MANUAL_SOLUTIONS
+# ----------------------------
+# Existing solution libraries
+# ----------------------------
 
-# ✅ 1. Try to import Reddit Solutions
-try:
-    from solutions.reddit_based_solutions import REDDIT_SOLUTIONS
-except ImportError:
-    print("⚠️ WARNING: Could not load reddit_based_solutions.py. Using empty list.")
-    REDDIT_SOLUTIONS = []
-except AttributeError:
-    print("⚠️ WARNING: reddit_based_solutions.py found but REDDIT_SOLUTIONS list is missing.")
-    REDDIT_SOLUTIONS = []
+from solutions.solutions import SOLUTIONS  # MAIN SOLUTIONS LIBRARY
+from solutions.behavior_solutions import BEHAVIOR_SOLUTIONS
+from solutions.management_solutions import MANAGEMENT_SOLUTIONS
+from solutions.wellbeing_solutions import WELLBEING_SOLUTIONS
+from solutions.productivity_solutions import PRODUCTIVITY_SOLUTIONS
+from solutions.inclusive_solutions import INCLUSIVE_SOLUTIONS
+from solutions.fln_solutions import FLN_SOLUTIONS
+from solutions.reddit_based_solutions import REDDIT_SOLUTIONS
+from solutions.science_solutions import SCIENCE_SOLUTIONS
 
-# ✅ 2. Try to import Behavior Solutions
-try:
-    from solutions.behavior_solutions import BEHAVIOR_SOLUTIONS
-except ImportError:
-    # It's okay if this doesn't exist yet, just warn
-    print("⚠️ WARNING: Could not load behavior_solutions.py. Using empty list.")
-    BEHAVIOR_SOLUTIONS = []
-except AttributeError:
-    print("⚠️ WARNING: behavior_solutions.py found but BEHAVIOR_SOLUTIONS list is missing.")
-    BEHAVIOR_SOLUTIONS = []
+# ----------------------------
+# Instructional libraries
+# ----------------------------
 
-# Validation Keys
-REQUIRED_TOP_LEVEL_KEYS = {
-    "solution_id",
-    "version",
-    "status",
-    "situations",
-    "subjects",
-    "class_range",
-    "topic_type",
-    "learning_mode",
-    "preview",
-    "details",
-    "constraints",
-    "effort_level",
-    "classroom_safety",
-}
-
-REQUIRED_PREVIEW_KEYS = {"title", "action_text"}
-REQUIRED_DETAILS_KEYS = {"objective", "steps", "time_required_min"}
+from instructional_concept_library.math.solutions import MATH_INSTRUCTIONAL_SOLUTIONS
+from instructional_concept_library.science.solutions import SCIENCE_INSTRUCTIONAL_SOLUTIONS
+from instructional_concept_library.language.solutions import LANGUAGE_INSTRUCTIONAL_SOLUTIONS
+from instructional_concept_library.social_studies.solutions import SOCIAL_STUDIES_INSTRUCTIONAL_SOLUTIONS
 
 
-def validate_solution(solution: Dict) -> None:
+def _is_diagnostic(solution: dict) -> bool:
+    return solution.get("instruction_type") == "DIAGNOSTIC"
+
+def _normalize_instructional_solution(sol: dict) -> dict:
     """
-    Checks if a solution dictionary has all required keys.
+    Injects 'situations' key into instructional solutions 
+    so the Engine can score them correctly.
     """
-    missing = REQUIRED_TOP_LEVEL_KEYS - solution.keys()
-    if missing:
-        # We warn but don't stop execution, to be forgiving during development
-        print(f"⚠️ Validation Warning: Solution '{solution.get('solution_id', '???')}' missing keys: {missing}")
-
-    preview = solution.get("preview", {})
-    if not REQUIRED_PREVIEW_KEYS.issubset(preview.keys()):
-        print(f"❌ Invalid Preview in: {solution.get('solution_id')}")
-
-    details = solution.get("details", {})
-    if not REQUIRED_DETAILS_KEYS.issubset(details.keys()):
-        print(f"❌ Invalid Details in: {solution.get('solution_id')}")
-
-
-def load_solutions() -> List[Dict]:
-    """
-    Loads, merges, and validates all solutions from all sources.
-    Returns a single combined list of solution dictionaries.
-    """
-    # 1. Merge Libraries
-    combined_library = MANUAL_SOLUTIONS + REDDIT_SOLUTIONS + BEHAVIOR_SOLUTIONS
+    # Create situations list if missing
+    if "situations" not in sol:
+        sol["situations"] = []
     
-    print("-" * 50)
-    print(f">>> LOADER REPORT:")
-    print(f"   - Manual Solutions:   {len(MANUAL_SOLUTIONS)}")
-    print(f"   - Reddit Solutions:   {len(REDDIT_SOLUTIONS)}")
-    print(f"   - Behavior Solutions: {len(BEHAVIOR_SOLUTIONS)}")
-    print(f"   - TOTAL LOADED:       {len(combined_library)}")
-    print("-" * 50)
+    # 1. Map 'student_profile' (e.g., CONCEPT_CONFUSION) to situations
+    if "student_profile" in sol:
+        sol["situations"].extend(sol["student_profile"])
+        
+    # 2. Map 'topic' (e.g., GEOMETRY_2D_3D) to situations
+    # This allows the engine to match specific topics detected in text
+    if "topic" in sol:
+        sol["situations"].append(sol["topic"])
+        
+    return sol
 
-    # 2. Validate
-    valid_solutions = []
-    for sol in combined_library:
-        try:
-            validate_solution(sol)
-            valid_solutions.append(sol)
-        except Exception as e:
-            print(f"Skipping invalid solution {sol.get('solution_id', 'unknown')}: {e}")
+def load_solutions():
+    """
+    Returns a SINGLE flat list of solutions,
+    ordered by priority to guide the engine naturally.
 
-    return valid_solutions
+    Priority order:
+    1. Instructional (subject-specific)
+    2. Diagnostic (subject-specific)
+    3. Behavioral / Management
+    4. Wellbeing
+    5. Other support solutions
+    """
+
+    instructional = []
+    diagnostic = []
+    behavioral = []
+    wellbeing = []
+    other = []
+
+    # --------------------------------------------------
+    # Instructional Concept Libraries (HIGH PRIORITY)
+    # --------------------------------------------------
+    
+    # Helper to process and sort into lists
+    def process_lib(library):
+        for sol in library:
+            # Normalize first!
+            norm_sol = _normalize_instructional_solution(sol)
+            if _is_diagnostic(norm_sol):
+                diagnostic.append(norm_sol)
+            else:
+                instructional.append(norm_sol)
+
+    process_lib(MATH_INSTRUCTIONAL_SOLUTIONS)
+    process_lib(SCIENCE_INSTRUCTIONAL_SOLUTIONS)
+    process_lib(LANGUAGE_INSTRUCTIONAL_SOLUTIONS)
+    process_lib(SOCIAL_STUDIES_INSTRUCTIONAL_SOLUTIONS)
+
+    # --------------------------------------------------
+    # Behavioral / Management (MID PRIORITY)
+    # --------------------------------------------------
+
+    behavioral.extend(BEHAVIOR_SOLUTIONS)
+    behavioral.extend(MANAGEMENT_SOLUTIONS)
+
+    # --------------------------------------------------
+    # Wellbeing (LOW PRIORITY)
+    # --------------------------------------------------
+
+    wellbeing.extend(WELLBEING_SOLUTIONS)
+
+    # --------------------------------------------------
+    # Other Supporting Libraries (LOWEST PRIORITY)
+    # --------------------------------------------------
+
+    other.extend(SOLUTIONS)  # MAIN SOLUTIONS LIBRARY
+    other.extend(PRODUCTIVITY_SOLUTIONS)
+    other.extend(INCLUSIVE_SOLUTIONS)
+    other.extend(FLN_SOLUTIONS)
+    other.extend(REDDIT_SOLUTIONS)
+    other.extend(SCIENCE_SOLUTIONS)
+
+    # --------------------------------------------------
+    # FINAL MERGED LIST (FLAT, ORDERED)
+    # --------------------------------------------------
+
+    return (
+        instructional
+        + diagnostic
+        + behavioral
+        + wellbeing
+        + other
+    )
