@@ -13,43 +13,47 @@ templates = Jinja2Templates(directory="templates")
 @router.get("/brp")
 async def brp_dashboard(request: Request, user=Depends(require_login)):
     
-    # Security Check
+    # 1. Security Check
     if isinstance(user, RedirectResponse): return user
     if user.get("role") != "brp":
-        return RedirectResponse(url="/login")
+        return RedirectResponse(url="/login?error=Unauthorized")
 
     conn = get_connection()
+    conn.row_factory = lambda cursor, row: {col[0]: row[idx] for idx, col in enumerate(cursor.description)}
     cursor = conn.cursor()
     
-    # Fetch all CRPs to populate the dropdown
-    # (In a real scenario, you might filter by the BRP's Block)
+    # Fetch all CRPs for dropdown
     cursor.execute("SELECT name, employee_id, assigned_cluster FROM crps")
     crps = cursor.fetchall()
     
     conn.close()
 
-    return templates.TemplateResponse("BRP.html", {
+    # 2. Render with NO-CACHE Headers
+    response = templates.TemplateResponse("BRP.html", {
         "request": request,
         "user": user,
-        "crps": crps # Pass CRP list to template
+        "crps": crps
     })
+    response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+
+    return response
 
 # ==========================================
 # 2. CRP STATS API (For Charts)
 # ==========================================
 @router.get("/api/brp/crp-stats/{crp_id}")
 async def get_crp_stats(crp_id: str, user=Depends(require_login)):
-    """
-    Returns activity counts for a specific CRP to populate charts.
-    """
+    
     conn = get_connection()
     cursor = conn.cursor()
     
-    # 1. Count Guidance Uploaded by this CRP
+    # Count Guidance
     cursor.execute("SELECT COUNT(*) FROM guidance WHERE crp_id = ?", (crp_id,))
     guidance_count = cursor.fetchone()[0]
     
-    # 2. Count Visits Scheduled by this CRP
+    # Count Visits
     cursor.execute("SELECT COUNT(*) FROM visits WHERE crp_id = ?", (crp_id,))
     visit_count = cursor.fetchone()[0]
     
