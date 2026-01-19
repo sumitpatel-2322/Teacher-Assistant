@@ -133,7 +133,7 @@ async def ask_doubt_api(
     # 1. Fetch User's Preferred Language First
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT preferred_language FROM teachers WHERE username = ?", (user['username'],))
+    cursor.execute("SELECT preferred_language FROM teachers WHERE name = ?", (user['username'],))
     row = cursor.fetchone()
     conn.close()
 
