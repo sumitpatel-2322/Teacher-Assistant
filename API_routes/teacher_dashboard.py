@@ -4,19 +4,18 @@ from fastapi.responses import JSONResponse, RedirectResponse
 from Database.db import get_connection
 from typing import Optional
 
-# Ensure this import exists in your project structure
-# If you haven't defined 'require_login' in API_routes/auth.py yet, 
-# you can replace "user=Depends(require_login)" with manual session checking.
+# Authentication Dependency
 try:
     from API_routes.auth import require_login
 except ImportError:
-    # Fallback if auth.py is missing (Temporary fix for development)
+    # Fallback if auth.py is missing
     async def require_login(request: Request):
         user = request.session.get("user")
         if not user:
             return RedirectResponse(url="/login")
         return user
 
+# Decision Engine Imports
 from decision_engine.raw_text.store import store_raw_input
 from decision_engine.engine import process_teacher_query
 from decision_engine.logging import log_feedback
@@ -24,55 +23,89 @@ from decision_engine.logging import log_feedback
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 
-# =========================
-# 1. PAGE LOAD (Sync)
-# =========================
+# ==========================================
+# 1. TEACHER DASHBOARD (GET)
+# Fetches User Info, School Context, Notices, & Visits
+# ==========================================
 @router.get("/teacher")
 async def teacher_dashboard(request: Request, user=Depends(require_login)):
     
-    # 1. Check if user is actually a teacher (Security)
-    if isinstance(user, RedirectResponse): return user # Handle fallback redirect
-    
+    # Security: Ensure only teachers access this
+    if isinstance(user, RedirectResponse): return user
     if user.get("role") != "teacher":
          return RedirectResponse(url="/login?error=Unauthorized")
 
-    # 2. Fetch User Preferences using NEW Schema
     conn = get_connection()
     cursor = conn.cursor()
     
-    try:
-        # UPDATED QUERY: Uses 'classes', 'subjects' and 'employee_id'
-        # Note: user['username'] holds the employee_id from login.py
-        cursor.execute(
-            "SELECT classes, subjects FROM teachers WHERE employee_id = ?", 
-            (user['username'],)
-        )
-        row = cursor.fetchone()
-    except Exception as e:
-        print(f"DB Error in Dashboard: {e}")
-        row = None
-    finally:
-        conn.close()
+    # ---------------------------------------------------------
+    # A. Fetch Teacher Details (School & Preferences)
+    # ---------------------------------------------------------
+    # We need the 'school_udise' to find relevant notices/visits
+    cursor.execute(
+        "SELECT school_udise, classes, subjects FROM teachers WHERE employee_id = ?", 
+        (user['username'],)
+    )
+    teacher_data = cursor.fetchone()
+    
+    prefill = {"class": "", "subject": ""}
+    school_id = ""
 
-    # 3. Pass data to template
-    # The DB stores "Math, Science" as a string. We pass it directly.
-    prefill = {
-        "class": row["classes"] if row else "",     # Fixed column name
-        "subject": row["subjects"] if row else ""   # Fixed column name
-    }
+    if teacher_data:
+        prefill["class"] = teacher_data["classes"]
+        prefill["subject"] = teacher_data["subjects"]
+        school_id = teacher_data["school_udise"] # This links Teacher -> School
 
+    # ---------------------------------------------------------
+    # B. Fetch Notices & Visits for this School
+    # ---------------------------------------------------------
+    notices = []
+    
+    if school_id:
+        # 1. Get Guidance Notices (Uploaded by CRP for this School)
+        cursor.execute("SELECT * FROM guidance WHERE school_id = ? ORDER BY created_at DESC", (school_id,))
+        guidance_list = cursor.fetchall()
+        
+        for g in guidance_list:
+            notices.append({
+                "type": "Guidance",
+                "title": g["title"],
+                "content": g["description"],
+                "date": g["created_at"]
+            })
+
+        # 2. Get Scheduled Visits (Scheduled by CRP for this School)
+        cursor.execute("SELECT * FROM visits WHERE school_id = ? ORDER BY visit_date ASC", (school_id,))
+        visit_list = cursor.fetchall()
+        
+        for v in visit_list:
+            notices.append({
+                "type": "Visit",
+                "title": "CRP Visit Scheduled",
+                "content": f"Date: {v['visit_date']} at {v['visit_time']}",
+                "date": v['created_at']
+            })
+
+    conn.close()
+
+    # ---------------------------------------------------------
+    # C. Render Template
+    # ---------------------------------------------------------
     return templates.TemplateResponse(
         "Teacher_dashboard.html",
         {
             "request": request,
             "user": user,
-            "prefill": prefill 
+            "prefill": prefill,
+            "notices": notices  # Pass the combined list to the UI
         }
     )
 
-# =========================
-# 2. CHAT API (Async)
-# =========================
+
+# ==========================================
+# 2. CHAT API (POST)
+# Handles AI Queries from the Chat Interface
+# ==========================================
 @router.post("/api/teacher/ask")
 async def ask_doubt_api(
     request: Request,
@@ -81,7 +114,7 @@ async def ask_doubt_api(
 ):
     """
     Receives JSON payload from Chatbot JS.
-    Returns JSON response with solutions.
+    Returns JSON response with ranked solutions.
     """
     if isinstance(user, RedirectResponse): return user
     
@@ -91,10 +124,9 @@ async def ask_doubt_api(
     topic = payload.get("topic", "").strip()
     question = payload.get("question", "").strip()
 
-    # 1. Store Raw Input (Logging)
-    # Ensure 'store_raw_input' is updated to handle new schema if it touches DB
+    # 1. Store Raw Input (For Analytics/Logging)
     store_raw_input(
-        username=user["username"], # This is employee_id
+        username=user["username"], # This is the employee_id
         role=user["role"],
         class_name=class_name,
         subject=subject,
@@ -102,7 +134,7 @@ async def ask_doubt_api(
         question=question
     )
 
-    # 2. Process with Engine
+    # 2. Process with Decision Engine
     raw_text = f"Class: {class_name}\nSubject: {subject}\nTopic: {topic}\nProblem: {question}"
     engine_output = process_teacher_query(raw_text)
 
@@ -123,9 +155,10 @@ async def ask_doubt_api(
     return JSONResponse(content=response_data)
 
 
-# =========================
-# 3. FEEDBACK API (Async)
-# =========================
+# ==========================================
+# 3. FEEDBACK API (POST)
+# Handles Thumbs Up/Down or Written Feedback
+# ==========================================
 @router.post("/teacher/feedback")
 async def teacher_feedback(
     request: Request,

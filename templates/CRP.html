@@ -36,17 +36,17 @@
     <div class="teacher-dropdown-wrapper">
       <select id="teacherDropdown">
         <option value="">Select a School</option>
-        <option value="t1">Gurukul</option>
-        <option value="t2">S.M.Joshi</option>
-        <option value="t3">Waghire</option>
+        {% for s in schools %}
+          <option value="{{ s }}">{{ s }}</option>
+        {% endfor %}
       </select>
     </div>
 
    <div class="section-title">CRP Actions</div>
     <div class="actions">
       <button>Reply to Teachers</button>
-      <button>Upload Guidance</button>
-      <button>Schedule Visit</button>
+      <button onclick="document.getElementById('uploadModal').style.display='flex'">Upload Guidance</button>
+      <button onclick="document.getElementById('visitModal').style.display='flex'">Schedule Visit</button>
     </div>
 
     <div class="section-title">Teacher Performance Overview</div>
@@ -59,71 +59,60 @@
       </div>
     </div>
     <br>
-   <!-- Upload Guidance Modal -->
-<div id="uploadModal" class="upload-modal">
-  <div class="upload-card">
-    <h3>Upload Guidance</h3>
 
-    <!-- Title -->
-    <label class="modal-label">Title</label>
-    <input
-      type="text"
-      id="guidanceTitle"
-      placeholder="Enter guidance title"
-    />
+   <div id="uploadModal" class="upload-modal" style="display:none;">
+      <div class="upload-card">
+        <h3>Upload Guidance</h3>
+        <form action="/crp/upload-guidance" method="POST">
+            
+            <label class="modal-label">Select School</label>
+            <select name="school_id" required>
+                <option value="">Select School</option>
+                {% for s in schools %}
+                <option value="{{ s }}">{{ s }}</option>
+                {% endfor %}
+            </select>
 
-    <!-- Description -->
-    <label class="modal-label">Description</label>
-    <textarea
-      id="guidanceDescription"
-      rows="3"
-      placeholder="Enter short description"
-    ></textarea>
+            <label class="modal-label">Title</label>
+            <input type="text" name="title" placeholder="Enter guidance title" required />
 
-    <!-- File Upload -->
-    <label class="modal-label">Upload File / Image / Video</label>
-    <input
-      type="file"
-      id="guidanceFile"
-      accept=".pdf,.doc,.docx,.ppt,.pptx,image/*,video/*"
-      multiple
-    />
+            <label class="modal-label">Description</label>
+            <textarea name="description" rows="3" placeholder="Enter details..." required></textarea>
 
-    <div class="upload-actions">
-      <button id="closeUpload">Cancel</button>
-      <button id="submitUpload">Upload</button>
+            <div class="upload-actions">
+                <button type="button" onclick="document.getElementById('uploadModal').style.display='none'">Cancel</button>
+                <button type="submit">Upload</button>
+            </div>
+        </form>
+      </div>
     </div>
-  </div>
-</div>
 
-   <!-- Schedule Visit Modal -->
-<div id="visitModal" class="upload-modal">
-  <div class="upload-card">
-    <h3>Schedule Visit</h3>
+   <div id="visitModal" class="upload-modal" style="display:none;">
+      <div class="upload-card">
+        <h3>Schedule Visit</h3>
+        <form action="/crp/schedule-visit" method="POST">
+            
+            <label class="modal-label">Select School</label>
+            <select name="school_id" required>
+                <option value="">Select School</option>
+                {% for s in schools %}
+                <option value="{{ s }}">{{ s }}</option>
+                {% endfor %}
+            </select>
 
-    <!-- Select School -->
-    <label class="modal-label">Select School</label>
-    <select id="visitSchool">
-      <option value="">Select School</option>
-      <option value="Gurukul">Gurukul</option>
-      <option value="S.M.Joshi">S.M.Joshi</option>
-      <option value="Waghire">Waghire</option>
-    </select>
+            <label class="modal-label">Select Date</label>
+            <input type="date" name="visit_date" required>
 
-    <!-- Select Date -->
-    <label class="modal-label">Select Date</label>
-    <input type="date" id="visitDate">
+            <label class="modal-label">Select Time</label>
+            <input type="time" name="visit_time" required>
 
-    <!-- Select Time -->
-    <label class="modal-label">Select Time</label>
-    <input type="time" id="visitTime">
-
-    <div class="upload-actions">
-      <button id="closeVisit">Cancel</button>
-      <button id="submitVisit">Schedule</button>
+            <div class="upload-actions">
+                <button type="button" onclick="document.getElementById('visitModal').style.display='none'">Cancel</button>
+                <button type="submit">Schedule</button>
+            </div>
+        </form>
+      </div>
     </div>
-  </div>
-</div>
 
   </div>
 {% endblock %}
