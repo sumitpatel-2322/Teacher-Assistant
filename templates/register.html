@@ -1,77 +1,153 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Teacher-AssistantAI | Register</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "base.html" %}
 
-  <!-- Font -->
+{% block title %}Register | VEDA{% endblock %}
+
+{% block extra_css %}
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
-
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="static/css/register.css">
-    <link rel="stylesheet" href="static/css/sidebar.css">
-     <link rel="stylesheet" href="static/css/footer.css">
-
-</head>
-
-<body>
-
-<nav>
-  <div class="logo">VEDA</div>
-  <button class="hamburger" id="hamburgerBtn">☰</button>
-</nav>
-
-<div id="mySidepanel">
-  <span class="sidebar-close" id="closeSidebar">✕</span>
-
-  <a href="/" class="logout-link">Home</a>
   
-  <a href="/login" class="logout-link">login</a>
-</div>
+  <link rel="stylesheet" href="static/css/register.css">
+{% endblock %}
+
+{% block content %}
 
 <div class="auth-container">
 
   <h2>Register</h2>
 
-  <form method="post" action="/register">
+  <form method="post" action="/register" id="registerForm">
 
-    <label for="role">Role</label>
-    <select id="role" name="role" required>
-      <option value="">Select Role</option>
-      <option value="teacher">Teacher</option>
-      <option value="crp">CRP</option>
-      <option value="brp">BRP</option>
-      <option value="arp">ARP</option>
-    </select>
+    <div class="input-group">
+      <select class="input" id="role" name="role" required onchange="toggleFormFields()">
+        <option value="" disabled selected></option>
+        <option value="teacher">Teacher</option>
+        <option value="admin">Admin (CRP/BRP/ARP)</option>
+      </select>
+      <label class="user-label">I am registering as...</label>
+    </div>
 
-    <label for="teacher_id">Teacher ID</label>
-    <input type="text" id="teacher_id" name="teacher_id" required>
+    <div id="teacher-fields" class="hidden">
+      
+      <div class="input-group">
+        <input class="input" type="text" id="tname" name="tname">
+        <label class="user-label">Teacher Name</label>
+      </div>
 
-    <label for="name">Name</label>
-    <input type="text" id="name" name="name" required>
+      <div class="input-group">
+        <input class="input" type="text" id="tid" name="tid">
+        <label class="user-label">Teacher ID</label>
+      </div>
 
-    <label for="school_name">School Name</label>
-    <input type="text" id="school_name" name="school_name" required>
+      <div class="input-group">
+        <input class="input" type="text" id="school_ucode" name="school_ucode">
+        <label class="user-label">School UDISE Code</label>
+      </div>
 
-    <label for="username">Username</label>
-    <input type="text" id="username" name="username" required>
+      <div class="input-group">
+        <input class="input" type="email" id="t_email" name="emailid">
+        <label class="user-label">Email ID</label>
+      </div>
 
-    <!-- PASSWORD FIELD -->
-    <label for="password">Password</label>
-    <input type="password" id="password" name="password" required>
+      <div class="input-group">
+        <select class="input" id="preferedlanguage" name="preferedlanguage">
+          <option value="" disabled selected></option>
+          <option value="english">English</option>
+          <option value="hindi">Hindi</option>
+          <option value="marathi">Marathi</option>
+        </select>
+        <label class="user-label">Preferred Language</label>
+      </div>
 
-    <!-- LIVE PASSWORD MESSAGE -->
+      <div class="input-group">
+        <div class="input" style="height: auto; padding-top: 25px; border: none; padding-left:0;">
+          <div class="pill-group">
+            <input type="checkbox" id="class1" name="class" value="1">
+            <label for="class1">Class 1</label>
+            <input type="checkbox" id="class2" name="class" value="2">
+            <label for="class2">Class 2</label>
+            <input type="checkbox" id="class3" name="class" value="3">
+            <label for="class3">Class 3</label>
+            <input type="checkbox" id="class4" name="class" value="4">
+            <label for="class4">Class 4</label>
+            <input type="checkbox" id="class5" name="class" value="5">
+            <label for="class5">Class 5</label>
+          </div>
+        </div>
+        <label class="static-label">Select Classes (Tap to select)</label>
+      </div>
+
+      <div class="input-group">
+        <div class="input" style="height: auto; padding-top: 25px; border: none; padding-left:0;">
+          <div class="pill-group">
+            <input type="checkbox" id="math" name="subjects" value="math">
+            <label for="math">Mathematics</label>
+            <input type="checkbox" id="science" name="subjects" value="science">
+            <label for="science">Science</label>
+            <input type="checkbox" id="english" name="subjects" value="english">
+            <label for="english">English</label>
+            <input type="checkbox" id="social" name="subjects" value="social">
+            <label for="social">Social Studies</label>
+            <input type="checkbox" id="hindi" name="subjects" value="hindi">
+            <label for="hindi">Hindi</label>
+          </div>
+        </div>
+        <label class="static-label">Select Subjects (Tap to select)</label>
+      </div>
+
+    </div>
+
+    <div id="admin-fields" class="hidden">
+      
+      <div class="input-group">
+        <input class="input" type="text" id="full_name" name="full_name">
+        <label class="user-label">Full Name</label>
+      </div>
+
+      <div class="input-group">
+        <input class="input" type="text" id="cid" name="cid">
+        <label class="user-label">Cluster/Block ID (CID)</label>
+      </div>
+
+      <div class="input-group">
+        <input class="input" type="email" id="a_email" name="emailid_admin">
+        <label class="user-label">Email ID</label>
+      </div>
+
+      <div class="input-group">
+        <select class="input" id="designation" name="designation">
+          <option value="" disabled selected></option>
+          <option value="crp">CRP</option>
+          <option value="brp">BRP</option>
+          <option value="arp">ARP</option>
+        </select>
+        <label class="user-label">Designation</label>
+      </div>
+
+      <div class="input-group">
+        <input class="input" type="text" id="assign_cluster" name="assign_cluster">
+        <label class="user-label">Assigned Cluster/Block</label>
+      </div>
+
+      <div class="input-group">
+        <input class="input" type="text" id="domain" name="domain">
+        <label class="user-label">Primary Domain (e.g. Admin, Academic)</label>
+      </div>
+    </div>
+
+    <div class="input-group">
+      <input class="input" type="password" id="password" name="password" required>
+      <label class="user-label">Password</label>
+    </div>
+
     <p id="passwordMessage" style="font-size:14px; margin-top:5px;"></p>
-
     <small style="color:#555;">
       Password must contain uppercase, lowercase, digit, special character (min 8 characters)
     </small>
 
-    <label for="confirm_password">Confirm Password</label>
-    <input type="password" id="confirm_password" name="confirm_password" required>
+    <div class="input-group" style="margin-top: 20px;">
+      <input class="input" type="password" id="confirm_password" name="confirm_password" required>
+      <label class="user-label">Confirm Password</label>
+    </div>
 
     <button type="submit">Register</button>
   </form>
@@ -83,16 +159,49 @@
 
 </div>
 
-<!-- ================= SIDEBAR SCRIPT ================= -->
-<script src="/static/js/login.js"></script>
-<!-- ================= PASSWORD VALIDATION SCRIPT ================= -->
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/sidebar.js"></script>
 <script>
+  function toggleFormFields() {
+    const role = document.getElementById('role').value;
+    const teacherFields = document.getElementById('teacher-fields');
+    const adminFields = document.getElementById('admin-fields');
+
+    // Reset visibility
+    teacherFields.style.display = 'none';
+    adminFields.style.display = 'none';
+
+    // Helper to toggle 'required' attribute on text/select inputs
+    function setRequired(container, isRequired) {
+      const inputs = container.querySelectorAll('input:not([type="checkbox"]), select');
+      inputs.forEach(input => {
+        if(isRequired) {
+          input.setAttribute('required', '');
+        } else {
+          input.removeAttribute('required');
+        }
+      });
+    }
+
+    if (role === 'teacher') {
+      teacherFields.style.display = 'block';
+      setRequired(teacherFields, true);
+      setRequired(adminFields, false);
+    } else if (role === 'admin') {
+      adminFields.style.display = 'block';
+      setRequired(adminFields, true);
+      setRequired(teacherFields, false);
+    }
+  }
+
+  // Password Validation
   const passwordInput = document.getElementById("password");
   const message = document.getElementById("passwordMessage");
 
   passwordInput.addEventListener("input", function () {
     const password = passwordInput.value;
-
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
 
     if (password.length === 0) {
@@ -101,8 +210,7 @@
     }
 
     if (!regex.test(password)) {
-      message.textContent =
-        "Password must contain uppercase, lowercase, digit, special character (min 8 characters)";
+      message.textContent = "Password must contain uppercase, lowercase, digit, special character (min 8 characters)";
       message.style.color = "red";
     } else {
       message.textContent = "Strong password ✔";
@@ -110,6 +218,4 @@
     }
   });
 </script>
-
-</body>
-</html>
+{% endblock %}

@@ -1,6 +1,7 @@
 /* Logo Styling */
 nav .logo {
-    font-family: 'Poppins', sans-serif !important;
+    font-family: 'Gabriela', serif !important;
+    letter-spacing: 2px;
     font-size: 24px !important;
     font-weight: 700 !important;
     letter-spacing: 3px !important;
@@ -51,4 +52,24 @@ nav .logo {
     padding: 0;
     display: flex;
     align-items: center;
+}/* Logo wrapper */
+.logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Logo image */
+.veda-logo {
+    height: 34px;
+    width: auto;
+}
+
+/* Logo text (existing VEDA style preserved) */
+.logo-text {
+    font-family: 'Gabriela', serif !important;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    letter-spacing: 3px !important;
+    color: #EDF5E1 !important;
 }

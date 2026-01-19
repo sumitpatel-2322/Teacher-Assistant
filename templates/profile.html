@@ -3,34 +3,95 @@
 {% block title %}My Profile - VEDA{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="/static/css/register.css"> {% endblock %}
+<style>
+    .profile-container {
+        max-width: 800px;
+        margin: 40px auto;
+        background: white;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        border: 1px solid #e0e0e0;
+    
+    }
+
+    .profile-header {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        border-bottom: 2px solid #f0f0f0;
+        padding-bottom: 30px;
+        margin-bottom: 30px;
+    }
+
+    .avatar-circle {
+        width: 80px;
+        height: 80px;
+        background: #05386B;
+        color: #EDF5E1;
+        font-size: 32px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+    }
+
+    .profile-title h2 {
+        margin: 0;
+        font-size: 28px;
+        color: #05386B;
+    }
+
+    .profile-title p {
+        margin: 5px 0 0;
+        color: #379683;
+        font-weight: 600;
+        font-size: 16px;
+    }
+    
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+    }
+    
+    .info-item label {
+        display: block;
+        font-size: 13px;
+        color: #888;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .info-item .value {
+        font-size: 18px;
+        color: #333;
+        font-weight: 500;
+        padding: 10px 15px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        border-left: 4px solid #379683;
+    }
+    
+    .back-btn {
+        margin-top: 30px;
+        display: inline-block;
+        text-decoration: none;
+        color: #05386B;
+        font-weight: 600;
+    }
+    .page-wrapper{
+        padding-top: 50px;
+    }
+</style>
+{% endblock %}
 
 {% block content %}
-<div class="auth-container" style="margin-top: 50px;">
-    <h2>Update Profile</h2>
-    
-    <form method="post" action="/profile/update">
+<div class="page-wrapper">
+    <div class="profile-container">
         
-        <label>Name</label>
-        <input type="text" value="{{ data.name }}" disabled style="background:#eef;">
-
-        <label>School</label>
-        <input type="text" value="{{ data.school_name }}" disabled style="background:#eef;">
-
-        <hr style="margin: 20px 0; border:0; border-top:1px solid #ccc;">
-        
-        <p style="margin-bottom:15px; font-size:14px; color:#555;">
-            Update your default teaching preferences to auto-fill your dashboard.
-        </p>
-
-        <label for="class_name">Preferred Class</label>
-        <select id="classSelect" name="class_name" required>
-            <option value="">Select Class</option>
-            {% for c in ["Class 1","Class 2","Class 3","Class 4","Class 5","Class 6","Class 7","Class 8","Class 9","Class 10"] %}
-                <option value="{{ c }}" {% if data.preferred_class == c %}selected{% endif %}>{{ c }}</option>
-            {% endfor %}
-        </select>
-
         <label for="subject">Preferred Subject</label>
         <select id="subjectSelect" name="subject" required>
             <option value="English">English</option>
@@ -38,19 +99,84 @@
             <option value="{{ data.preferred_subject }}" selected>{{ data.preferred_subject }}</option>
         </select>
         <label for="language">Preferred Language</label>
-<select id="languageSelect" name="language" required>
-    <option value="en" {% if data.preferred_language == 'en' %}selected{% endif %}>English</option>
-    <option value="hi" {% if data.preferred_language == 'hi' %}selected{% endif %}>Hindi (हिंदी)</option>
-    <option value="te" {% if data.preferred_language == 'te' %}selected{% endif %}>Telugu (తెలుగు)</option>
-    <option value="ta" {% if data.preferred_language == 'ta' %}selected{% endif %}>Tamil (தமிழ்)</option>
-    <option value="mr" {% if data.preferred_language == 'mr' %}selected{% endif %}>Marathi (मराठी)</option>
-    <option value="bn" {% if data.preferred_language == 'bn' %}selected{% endif %}>Bengali (বাংলা)</option>
-</select>
+        <select id="languageSelect" name="language" required>
+        <option value="en" {% if data.preferred_language == 'en' %}selected{% endif %}>English</option>
+        <option value="hi" {% if data.preferred_language == 'hi' %}selected{% endif %}>Hindi (हिंदी)</option>
+        <option value="te" {% if data.preferred_language == 'te' %}selected{% endif %}>Telugu (తెలుగు)</option>
+        <option value="ta" {% if data.preferred_language == 'ta' %}selected{% endif %}>Tamil (தமிழ்)</option>
+        <option value="mr" {% if data.preferred_language == 'mr' %}selected{% endif %}>Marathi (मराठी)</option>
+        <option value="bn" {% if data.preferred_language == 'bn' %}selected{% endif %}>Bengali (বাংলা)</option>
+        </select>
         <button type="submit" style="margin-top:20px;">Save Changes</button>
-    </form>
-</div>
-{% endblock %}
+        </form>
+        </div>
+        <div class="profile-header">
+            <div class="avatar-circle">
+                {{ profile.name[0] }}
+            </div>
+            <div class="profile-title">
+                <h2>{{ profile.name }}</h2>
+                <p>{{ role }} | {{ profile.employee_id }}</p>
+            </div>
+        </div>
 
-{% block scripts %}
-<script src="/static/js/sub.js"></script>
+        <div class="info-grid">
+            
+            <div class="info-item">
+                <label>Email ID</label>
+                <div class="value">{{ profile.email }}</div>
+            </div>
+
+            {% if role == 'TEACHER' %}
+                <div class="info-item">
+                    <label>School UDISE</label>
+                    <div class="value">{{ profile.school_udise }}</div>
+                </div>
+                <div class="info-item">
+                    <label>Preferred Language</label>
+                    <div class="value">{{ profile.preferred_language }}</div>
+                </div>
+                <div class="info-item">
+                    <label>Subjects</label>
+                    <div class="value">{{ profile.subjects }}</div>
+                </div>
+                <div class="info-item">
+                    <label>Classes</label>
+                    <div class="value">{{ profile.classes }}</div>
+                </div>
+
+            {% elif role == 'CRP' %}
+                <div class="info-item">
+                    <label>Assigned Cluster</label>
+                    <div class="value">{{ profile.assigned_cluster }}</div>
+                </div>
+                <div class="info-item">
+                    <label>Domain</label>
+                    <div class="value">{{ profile.domain }}</div>
+                </div>
+
+            {% elif role == 'BRP' %}
+                <div class="info-item">
+                    <label>Assigned Block</label>
+                    <div class="value">{{ profile.assigned_block }}</div>
+                </div>
+
+            {% elif role == 'ARP' %}
+                <div class="info-item">
+                    <label>Specialization</label>
+                    <div class="value">{{ profile.specialization }}</div>
+                </div>
+                <div class="info-item">
+                    <label>Assigned Block</label>
+                    <div class="value">{{ profile.assigned_block }}</div>
+                </div>
+            {% endif %}
+
+        </div>
+
+        <a href="/dashboard" class="back-btn">← Back to Dashboard</a>
+        <a href="/logout" class="back-btn" style="float: right; color: red;">Logout</a>
+
+    </div>
+</div>
 {% endblock %}

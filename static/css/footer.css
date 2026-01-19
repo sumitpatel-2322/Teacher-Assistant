@@ -1,13 +1,10 @@
-/* =========================
-   FLUENT FULL-WIDTH FOOTER
-   ========================= */
 
 .app-footer {
     width: 100%;
     margin: 0;
     padding : 28px 0 22px;
     margin-bottom: 0%;
-     background: #05386B; /* */
+     background:#1E3A32; /* */
     color: #EDF5E1;
     border-top: 3px solid #5CDB95;
 }
@@ -66,3 +63,6 @@
     }
 }
 
+.app-footer {
+    margin-top: auto;
+}

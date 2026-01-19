@@ -3,35 +3,44 @@
 {% block title %}ARP Dashboard - VEDA{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="/static/css/arp.css">
+  <link rel="stylesheet" href="static/css/arp.css">
 {% endblock %}
 
 {% block content %}
-<div class="page-content">
-  <header>
-    <div class="header-left">
-      <img src="/static/img/logo.png" alt="VEDA Logo">
-      <div>
-        <div class="title">ARP Dashboard</div>
-        <div class="subtitle">Virtual Educator And Digital Assistant</div>
-      </div>
-    </div>
-    <div class="header-right">
-       {% if user %}
-        <div class="profile-avatar" style="width:40px; height:40px; font-size:16px;">
-            {{ user.username[0] | upper }}
-        </div>
-      {% else %}
-        <img src="/static/img/user-icon.jpg" alt="User">
-      {% endif %}
-    </div>
-  </header>
 
-  <div class="section-title">ARP Actions</div>
-  <div class="actions">
-    <button>Upload Subject Models</button>
-    <button>Add Micro-Learning</button>
-    <button>Improve Teaching Strategies</button>
+  <div class="page-container">
+    <header class="arp-header">
+      <div class="header-left">
+        <img src="static/img/logo.png" alt="Teacher">
+        <div>
+          <div class="title">Welcome, {{ user.name }}</div>
+          <div class="subtitle">Virtual Educator And Digital Assistant</div>
+        </div>
+      </div>
+
+      <div class="header-right">
+        {% if user %}
+        <a href="/profile" style="text-decoration:none;">
+          <div style="width: 40px; height: 40px; background: #5CDB95; color: #05386B; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; border: 2px solid #fff;">
+            {{ user.name[0] | upper }}
+          </div>
+        </a>
+        {% else %}
+          <img src="/static/img/user-icon.jpg" alt="User" style="width:40px; height:40px; border-radius:50%;">
+        {% endif %}
+      </div>
+    </header>
+
+    <div class="section-title">ARP Actions</div>
+    <div class="actions">
+      <button>Upload Subject Models</button>
+      <button>Add Micro-Learning</button>
+      <button>Improve Teaching Strategies</button>
+    </div>
+  
   </div>
-</div>
+{% endblock %}
+
+{% block scripts %}
+  <script src="/static/js/sidebar.js"></script>
 {% endblock %}

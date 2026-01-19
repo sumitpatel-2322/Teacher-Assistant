@@ -3,44 +3,120 @@
 {% block title %}CRP Dashboard - VEDA{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="/static/css/crp.css">
+  <link rel="stylesheet" href="static/css/crp.css">
 {% endblock %}
 
 {% block content %}
-<div class="page-content">
-  <header>
-    <div class="header-left">
-      <img src="/static/img/logo.png" alt="VEDA Logo">
-      <div>
-        <div class="title">CRP Dashboard</div>
-        <div class="subtitle">Virtual Educator And Digital Assistant</div>
+
+  <div class="page-container">
+
+    <header class="crp-header">
+      <div class="header-left">
+        <img src="static/img/logo.png" alt="CRP">
+        <div>
+          <div class="title">Welcome, {{ user.name }}</div>
+          <div class="subtitle">Virtual Educator And Digital Assistant</div>
+        </div>
+      </div>
+
+      <div class="header-right">
+        {% if user %}
+        <a href="/profile" style="text-decoration:none;">
+          <div style="width: 40px; height: 40px; background: #5CDB95; color: #05386B; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; border: 2px solid #fff;">
+            {{ user.name[0] | upper }}
+          </div>
+        </a>
+        {% else %}
+          <img src="/static/img/user-icon.jpg" alt="User" style="width:40px; height:40px; border-radius:50%;">
+        {% endif %}
+      </div>
+    </header>
+
+    <div class="section-title">Select School</div>
+    <div class="teacher-dropdown-wrapper">
+      <select id="teacherDropdown">
+        <option value="">Select a School</option>
+        {% for s in schools %}
+          <option value="{{ s }}">{{ s }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+   <div class="section-title">CRP Actions</div>
+    <div class="actions">
+      <button onclick="document.getElementById('uploadModal').style.display='flex'">Upload Guidance</button>
+      <button onclick="document.getElementById('visitModal').style.display='flex'">Schedule Visit</button>
+    </div>
+
+    <div class="section-title">Teacher Performance Overview</div>
+    <div class="charts-grid">
+      <div class="chart-card small">
+        <canvas id="completionDonut"></canvas>
+      </div>
+      <div class="chart-card wide">
+        <canvas id="teacherHistogram"></canvas>
       </div>
     </div>
-    <div class="header-right">
-      {% if user %}
-        <div class="profile-avatar" style="width:40px; height:40px; font-size:16px;">
-            {{ user.username[0] | upper }}
-        </div>
-      {% else %}
-        <img src="/static/img/user-icon.jpg" alt="User">
-      {% endif %}
+    <br>
+
+   <div id="uploadModal" class="upload-modal" style="display:none;">
+      <div class="upload-card">
+        <h3>Upload Guidance</h3>
+        <form action="/crp/upload-guidance" method="POST">
+            
+            <label class="modal-label">Select School</label>
+            <select name="school_id" required>
+                <option value="">Select School</option>
+                {% for s in schools %}
+                <option value="{{ s }}">{{ s }}</option>
+                {% endfor %}
+            </select>
+
+            <label class="modal-label">Title</label>
+            <input type="text" name="title" placeholder="Enter guidance title" required />
+
+            <label class="modal-label">Description</label>
+            <textarea name="description" rows="3" placeholder="Enter details..." required></textarea>
+
+            <div class="upload-actions">
+                <button type="button" onclick="document.getElementById('uploadModal').style.display='none'">Cancel</button>
+                <button type="submit">Upload</button>
+            </div>
+        </form>
+      </div>
     </div>
-  </header>
 
-  <div class="section-title">CRP Actions</div>
-  <div class="actions">
-    <button>Reply to Teachers</button>
-    <button>Upload Guidance</button>
-    <button>Send Messages</button>
-  </div>
+   <div id="visitModal" class="upload-modal" style="display:none;">
+      <div class="upload-card">
+        <h3>Schedule Visit</h3>
+        <form action="/crp/schedule-visit" method="POST">
+            
+            <label class="modal-label">Select School</label>
+            <select name="school_id" required>
+                <option value="">Select School</option>
+                {% for s in schools %}
+                <option value="{{ s }}">{{ s }}</option>
+                {% endfor %}
+            </select>
 
-  <div class="section-title">List of Teachers</div>
-  <div style="text-align:center; margin-bottom: 40px;">
-    <select id="teacherDropdown" style="padding: 10px; border-radius: 6px; border: 1px solid #ccc; width: 90%; max-width: 400px;">
-      <option>Select a Teacher</option>
-      <option>Teacher 1</option>
-      <option>Teacher 2</option>
-    </select>
+            <label class="modal-label">Select Date</label>
+            <input type="date" name="visit_date" required>
+
+            <label class="modal-label">Select Time</label>
+            <input type="time" name="visit_time" required>
+
+            <div class="upload-actions">
+                <button type="button" onclick="document.getElementById('visitModal').style.display='none'">Cancel</button>
+                <button type="submit">Schedule</button>
+            </div>
+        </form>
+      </div>
+    </div>
+
   </div>
-</div>
+{% endblock %}
+
+{% block scripts %}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/static/js/crp.js"></script>
 {% endblock %}

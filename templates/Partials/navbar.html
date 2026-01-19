@@ -1,12 +1,14 @@
 <nav>
 
-    <div class="logo">VEDA</div>
+<div class="logo-wrap">
+    <img src="/static/img/logo.png" alt="VEDA Logo" class="veda-logo">
+</div>
     
     <div class="nav-right">
         {% if user %}
         <a href="/profile" class="profile-icon" title="Update Profile">
             <div class="avatar-circle">
-                {{ user.username[0] | upper }}
+                {{ user.get('user','name')[0] | upper }}
             </div>
         </a>
         {% endif %}
