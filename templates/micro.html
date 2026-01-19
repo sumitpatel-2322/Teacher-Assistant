@@ -1,3 +1,103 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Micro Learning | Teacher Resources</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="micro-learning.css">
+</head>
+<body>
 
-{% block title %}Register | VEDA{% endblock %}
+<header class="top-bar">
+  <h1>Micro Learning Hub</h1>
+  <p>Short, focused learning resources for quick teaching moments</p>
+</header>
+
+<section class="actions">
+  <input type="text" placeholder="Search topic or keyword..." class="search-box">
+
+  <button class="primary-btn">Upload Resource</button>
+</section>
+
+<section class="upload-panel">
+  <h2>Add Micro Learning Content</h2>
+
+  <div class="upload-grid">
+    <input type="text" placeholder="Title">
+    <select>
+      <option>Class</option>
+      <option>Class 6</option>
+      <option>Class 7</option>
+      <option>Class 8</option>
+    </select>
+
+    <select>
+      <option>Content Type</option>
+      <option>Video</option>
+      <option>Image</option>
+      <option>PDF</option>
+      <option>Document</option>
+    </select>
+
+    <input type="text" placeholder="Estimated Time (e.g. 5 min)">
+    <input type="file">
+  </div>
+
+  <textarea placeholder="Short description (micro explanation)"></textarea>
+
+  <button class="secondary-btn">Save Resource</button>
+</section>
+
+<section class="resource-section">
+  <h2>Available Micro Learning Resources</h2>
+
+  <div class="resource-grid">
+
+    <div class="resource-card">
+      <div class="icon">🎥</div>
+      <h3>Photosynthesis Basics</h3>
+      <p>Short animated explanation</p>
+
+      <div class="meta">
+        <span>⏱️ 4 min</span>
+        <span>📘 Class 7</span>
+      </div>
+
+      <div class="card-actions">
+        <button>⭐</button>
+        <button>📌</button>
+        <button>Open</button>
+      </div>
+    </div>
+
+    <div class="resource-card">
+      <div class="icon">📄</div>
+      <h3>Algebra Formula Sheet</h3>
+      <p>Quick revision reference</p>
+
+      <div class="meta">
+        <span>⏱️ 3 min</span>
+        <span>📘 Class 8</span>
+      </div>
+
+      <div class="card-actions">
+        <button>⭐</button>
+        <button>📌</button>
+        <button>Open</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="notes-section">
+  <h2>Quick Teaching Notes</h2>
+  <textarea placeholder="Write reminders, teaching tips, or follow-up ideas..."></textarea>
+</section>
+
+<footer class="footer">
+  <p>Micro Learning supports focused, fast, and effective teaching</p>
+</footer>
+
+</body>
+</html>

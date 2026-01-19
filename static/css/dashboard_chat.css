@@ -19,7 +19,7 @@ body {
     background: #fff;
     padding: 15px 20px;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.413);
 }
 
 .user-welcome h2 {
@@ -52,6 +52,8 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.413);
+
 }
 
 /* Context Menu */
@@ -141,6 +143,8 @@ body {
     flex-direction: column;
     height: 100%;
     gap: 15px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.413);
+
 }
 
 /* Chat Window */
@@ -155,7 +159,7 @@ body {
     flex-direction: column;
     max-height: 80vh;
     gap: 15px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.413);
 }
 
 /* Messages */
@@ -482,4 +486,3 @@ body {
   }
 
 }
-

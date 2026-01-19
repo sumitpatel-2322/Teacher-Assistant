@@ -83,7 +83,8 @@ nav .logo {
   border: 1.5px solid rgba(5,56,107,0.25);
   box-shadow: 0 10px 30px rgba(0,0,0,0.12);
    margin-bottom: 180px;
-
+   padding-top: 10px;
+   padding-bottom: 10px;
 
 }
 

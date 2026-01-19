@@ -1,0 +1,263 @@
+:root {
+  --forest-deep: #1E3A32;
+  --forest-main: #2F5D50;
+  --forest-soft: #6F9E8F;
+
+  --mist-deep: #5F7F8C;
+  --mist-soft: #BFD6DA;
+
+  --feather-light: #F3F4EF;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: var(--feather-light);
+  color: var(--forest-deep);
+  padding: 20px;
+}
+
+/* Header */
+.top-bar {
+  background: var(--mist-soft);
+  color: var(--forest-deep);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(30,58,50,0.12);
+}
+
+.top-bar h1 {
+  font-size: 24px;
+}
+
+.top-bar p {
+  font-size: 14px;
+  color: var(--forest-main);
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.search-box {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--mist-deep);
+  background: var(--feather-light);
+  color: var(--forest-deep);
+}
+
+.primary-btn {
+  background: var(--forest-main);
+  color: var(--feather-light);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Upload Panel */
+.upload-panel {
+  background: var(--feather-light);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  border: 1px solid rgba(30,58,50,0.25);
+  box-shadow: 0 8px 24px rgba(30,58,50,0.12);
+}
+
+.upload-panel h2 {
+  margin-bottom: 15px;
+  color: var(--forest-deep);
+}
+
+.upload-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.upload-panel input,
+.upload-panel select,
+.upload-panel textarea {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--mist-deep);
+  background: var(--feather-light);
+  color: var(--forest-deep);
+}
+
+.upload-panel textarea {
+  min-height: 80px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.secondary-btn {
+  background: var(--forest-soft);
+  color: var(--forest-deep);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Resources */
+.resource-section h2 {
+  margin-bottom: 15px;
+  color: var(--forest-deep);
+}
+
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.resource-card {
+  background: var(--feather-light);
+  padding: 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(30,58,50,0.25);
+  box-shadow: 0 6px 18px rgba(30,58,50,0.12);
+}
+
+.resource-card .icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.resource-card h3 {
+  font-size: 16px;
+  margin-bottom: 4px;
+  color: var(--forest-deep);
+}
+
+.resource-card p {
+  font-size: 13px;
+  color: var(--forest-main);
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin: 10px 0;
+  color: var(--mist-deep);
+}
+
+.card-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.card-actions button {
+  flex: 1;
+  padding: 6px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background: var(--mist-soft);
+  color: var(--forest-deep);
+}
+
+/* Notes */
+.notes-section {
+  margin-top: 30px;
+}
+
+.notes-section textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--mist-deep);
+  background: var(--feather-light);
+  color: var(--forest-deep);
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 13px;
+  color: var(--mist-deep);
+}
+
+/* Micro Toolbar */
+.micro-toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.micro-toolbar input {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--mist-deep);
+  background: var(--feather-light);
+  color: var(--forest-deep);
+}
+
+.primary-btn {
+  background: var(--forest-main);
+  color: var(--feather-light);
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Micro Cards */
+.micro-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.micro-card {
+  background: var(--feather-light);
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(30,58,50,0.25);
+  box-shadow: 0 4px 14px rgba(30,58,50,0.12);
+}
+
+.micro-card .tag {
+  font-size: 12px;
+  color: var(--mist-deep);
+}
+
+.micro-card h3 {
+  margin: 8px 0 4px;
+  font-size: 16px;
+  color: var(--forest-deep);
+}
+
+.micro-card p {
+  font-size: 13px;
+  color: var(--forest-main);
+  margin-bottom: 10px;
+}
+
+.micro-card button {
+  background: var(--mist-soft);
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--forest-deep);
+}

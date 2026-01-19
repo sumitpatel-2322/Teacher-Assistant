@@ -1,142 +1,268 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Teacher-AssistantAI | Register</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+:root {
+  --forest-deep: #1E3A32;
+  --forest-main: #2F5D50;
+  --forest-soft: #6F9E8F;
 
-  <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+  --mist-deep: #5F7F8C;
+  --mist-soft: #BFD6DA;
 
+  --feather-light: #F3F4EF;
+}
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="static/css/register.css">
-    <link rel="stylesheet" href="static/css/sidebar.css">
-     <link rel="stylesheet" href="static/css/footer.css">
+* { 
+  box-sizing: border-box; 
+  margin:0; 
+  padding:0; 
+  font-family:'Inter', sans-serif; 
+}
 
-</head>
+body { 
+  background:#EDF5E1;
+  color: var(--forest-deep); 
+  line-height:1.5; 
+  transition: margin-right 0.5s; 
+  max-width: 100%;
+}
 
-<body>
+/* ================= HEADER ================= */
+header { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 15px 20px; 
+  background: var(--mist-soft);  
+  border-radius: 12px; 
+  margin: 20px auto; 
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(30,58,50,0.12); 
+  margin-top: 60px; 
+}
 
-<nav>
-  <div class="logo">VEDA</div>
-  <button class="hamburger" id="hamburgerBtn">☰</button>
-</nav>
+.header-left { 
+  display: flex; 
+  align-items: center; 
+  gap: 15px; 
+}
 
-<div id="mySidepanel">
-  <span class="sidebar-close" id="closeSidebar">✕</span>
+.header-left img { 
+  width: 50px; 
+  height: 50px; 
+  border-radius: 50%; 
+}
 
-  <a href="/" class="logout-link">Home</a>
-  
-  <a href="/login" class="logout-link">login</a>
-</div>
+.header-left .title { 
+  font-size: 20px; 
+  font-weight: 600; 
+}
 
-<div class="auth-container">
+.header-left .subtitle { 
+  font-size: 12px; 
+  color: var(--forest-main); 
+}
 
-  <h2>Register</h2>
+/* header-right alignment */
+.header-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
- <form method="post" action="/register">
+/* ================= PROFILE AVATAR ================= */
+.profile-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: var(--forest-deep);
+  color: var(--feather-light);
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
 
-  <!-- ROLE -->
-  <div class="input-group">
-    <select class="input" id="role" name="role" required>
-      <option value="" disabled selected></option>
-      <option value="teacher">Teacher</option>
-      <option value="crp">CRP</option>
-      <option value="brp">BRP</option>
-      <option value="arp">ARP</option>
-    </select>
-    <label class="user-label">Role</label>
-  </div>
+.default-user-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
 
-  <!-- TEACHER ID -->
-  <div class="input-group">
-    <input class="input" type="text" id="teacher_id" name="teacher_id" required>
-    <label class="user-label">Teacher ID</label>
-  </div>
+/* ================= INTRO ================= */
+.intro {
+  max-width:1300px;
+  margin:90px auto 20px;
+  background: var(--mist-soft) !important; 
+  padding:20px 15px;
+  border-radius:12px;
+  box-shadow:0 4px 12px rgba(30,58,50,0.12);
+  text-align:center;
+  border:1.5px solid var(--forest-deep);
+}
 
-  <!-- NAME -->
-  <div class="input-group">
-    <input class="input" type="text" id="name" name="name" required>
-    <label class="user-label">Name</label>
-  </div>
+.intro h1 { 
+  font-size:24px; 
+  margin-bottom:10px; 
+}
 
-  <!-- SCHOOL NAME -->
-  <div class="input-group">
-    <input class="input" type="text" id="school_name" name="school_name" required>
-    <label class="user-label">School Name</label>
-  </div>
+.intro p { 
+  font-size:14px; 
+  color: var(--forest-deep); 
+}
 
-  <!-- USERNAME -->
-  <div class="input-group">
-    <input class="input" type="text" id="username" name="username" required>
-    <label class="user-label">Username</label>
-  </div>
+/* ================= ROLE NAV ================= */
+.role-nav {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin: 30px auto;
+}
 
-  <!-- PASSWORD -->
-  <div class="input-group">
-    <input class="input" type="password" id="password" name="password" required>
-    <label class="user-label">Password</label>
-  </div>
+.role-nav button {
+  padding: 1.3em 3em;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: var(--forest-deep);
+  background-color: var(--feather-light);
+  border: none;
+  border-radius: 45px;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0px 8px 15px rgba(30,58,50,0.18);
+  transition: all 0.3s ease;
+}
 
-  <!-- PASSWORD MESSAGE -->
-  <p id="passwordMessage" style="font-size:14px; margin-top:5px;"></p>
-  <small style="color:#555;">
-    Password must contain uppercase, lowercase, digit, special character (min 8 characters)
-  </small>
+.role-nav button:hover {
+  background-color: var(--mist-soft);
+  box-shadow: 0px 15px 20px rgba(47,93,80,0.35);
+  transform: translateY(-7px);
+}
 
-  <!-- CONFIRM PASSWORD -->
-  <div class="input-group">
-    <input class="input" type="password" id="confirm_password" name="confirm_password" required>
-    <label class="user-label">Confirm Password</label>
-  </div>
+.role-nav button:active {
+  transform: translateY(-1px);
+}
 
-  <button type="submit">Register</button>
-</form>
+/* ================= CARDS ================= */
+.section-title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 30px 0 15px;
+  color: var(--forest-deep);
+}
 
+.card-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:24px;
+  max-width:95%;
+  margin:0 auto 30px;
+}
 
-  <p>
-    Have an account?
-    <a href="/login">Login</a>
-  </p>
+/* ================= CARD ================= */
+.card {
+  position: relative;
+  background: var(--feather-light);
+  border-radius: 16px;
+  padding: 22px 20px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid rgba(30,58,50,0.25);
+  box-shadow:
+    0 2px 6px rgba(30,58,50,0.12),
+    0 1px 2px rgba(30,58,50,0.08);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
 
-</div>
-<footer class="app-footer">
-    <div class="footer-inner">
-      <span>© 2026 VEDA – Virtual Educator & Digital Assistant</span>
-      <span>Made for Teachers</span>
-    </div>
-</footer>
-<script src="/static/js/sidebar.js"></script>
+.card::before,
+.card::after {
+  content: "";
+  position: absolute;
+  width: 22%;
+  height: 22%;
+  background: rgba(111,158,143,0.35);
+  transition: all 0.45s ease;
+  z-index: 0;
+}
 
-<!-- ================= SIDEBAR SCRIPT ================= -->
-<script src="/static/js/login.js"></script>
-<!-- ================= PASSWORD VALIDATION SCRIPT ================= -->
-<script>
-  const passwordInput = document.getElementById("password");
-  const message = document.getElementById("passwordMessage");
+.card::before {
+  top: 0;
+  right: 0;
+  border-radius: 0 16px 0 100%;
+}
 
-  passwordInput.addEventListener("input", function () {
-    const password = passwordInput.value;
+.card::after {
+  bottom: 0;
+  left: 0;
+  border-radius: 0 100% 0 16px;
+}
 
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+.card:hover::before,
+.card:hover::after {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+}
 
-    if (password.length === 0) {
-      message.textContent = "";
-      return;
-    }
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(30,58,50,0.25);
+}
 
-    if (!regex.test(password)) {
-      message.textContent =
-        "Password must contain uppercase, lowercase, digit, special character (min 8 characters)";
-      message.style.color = "red";
-    } else {
-      message.textContent = "Strong password ✔";
-      message.style.color = "green";
-    }
-  });
-</script>
+.card > * {
+  position: relative;
+  z-index: 1;
+}
 
-</body>
-</html>
+.card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--forest-deep);
+}
+
+.card p {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--forest-main);
+}
+
+/* ================= ICON ================= */
+.card-icon {
+  width: 28px;
+  height: 28px;
+  stroke: var(--forest-deep)!important;
+  stroke-width: 1.8;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ================= SECTION TITLE DECOR ================= */
+.section-title::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--forest-soft);
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+/* ================= PAGE SPACING ================= */
+.page-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media screen and (max-width:768px){
+  header { margin-top: 70px; }
+}
