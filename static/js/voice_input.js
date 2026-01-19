@@ -66,7 +66,7 @@ function stopRecording() {
  */
 async function sendAudioToBackend() {
     if (!audioChunks.length) {
-        loader.style.display = "none";
+        if (loader) loader.classList.remove("active");
         return;
     }
 
@@ -86,13 +86,13 @@ async function sendAudioToBackend() {
 
         const data = await response.json();
 
-        loader.style.display = "none";
+        if (loader) loader.classList.remove("active");
 
         if (data.status === "success" && data.solutions) {
             if (window.renderSolutionButtons) {
                 window.renderSolutionButtons(data.solutions, data.request_id);
             } else {
-                console.error("renderSolutionButtons is not defined");
+                console.error("❌ renderSolutionButtons is not defined");
             }
         } else if (data.error) {
             alert(data.error);
@@ -101,9 +101,9 @@ async function sendAudioToBackend() {
         }
 
     } catch (err) {
-        console.error("Voice processing error:", err);
+        console.error("🎤 Voice processing error:", err);
         alert("Voice processing failed");
-        loader.style.display = "none";
+        if (loader) loader.classList.remove("active");
     } finally {
         micButton.classList.remove("recording");
     }
@@ -112,10 +112,14 @@ async function sendAudioToBackend() {
 /**
  * Mic button click handler
  */
-micButton.addEventListener("click", () => {
-    if (!isRecording) {
-        startRecording();
-    } else {
-        stopRecording();
-    }
-});
+if (micButton) {
+    micButton.addEventListener("click", () => {
+        if (!isRecording) {
+            startRecording();
+        } else {
+            stopRecording();
+        }
+    });
+} else {
+    console.error("🎤 Could not attach mic button listener - element not found");
+}
