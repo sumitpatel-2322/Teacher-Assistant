@@ -105,24 +105,7 @@ header {
   }
 }
 
-#mySidepanel {
-  width: 0;
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 100%;
-  z-index: 9999;
-  transition: width 0.45s ease;
-}
 
-#mySidepanel .sidebar-close {
-  position: absolute;
-  top: 14px;
-  right: 20px;
-  font-size: 26px;
-  font-weight: 700;
-  cursor: pointer;
-}
 .page-content {
   flex: 1;   /* pushes footer to bottom */
 }

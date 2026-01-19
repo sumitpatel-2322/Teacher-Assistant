@@ -266,3 +266,79 @@ header {
 @media screen and (max-width:768px){
   header { margin-top: 70px; }
 }
+/* ===== IMPROVE INFO CARDS (TEACHER / CRP / BRP / ARP) ===== */
+
+/* Container spacing */
+.e-card-row {
+  gap: 48px;                 /* more breathing space */
+  margin: 40px auto 60px;
+}
+
+/* Card size + presence */
+.e-card {
+  width: 340px;              /* ⬅ slightly bigger */
+  height: auto;              /* allow content to breathe */
+  padding: 22px 24px;        /* inner spacing */
+  background: var(--feather-light);
+  border-radius: 18px;
+  border: 1.5px solid rgba(30,58,50,0.25);
+  box-shadow: 0 8px 20px rgba(30,58,50,0.15);
+  transition: 
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+/* Title */
+.e-card .infotop {
+  position: relative;        /* remove absolute compression */
+  top: 0;
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: var(--forest-deep);
+}
+
+/* Bullet text */
+.e-card .name {
+  font-size: 14px;           /* ⬅ slightly larger text */
+  line-height: 1.65;
+  color: var(--forest-main);
+  font-weight: 500;
+}
+
+/* Hover effect (FIXED) */
+.e-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 18px 36px rgba(30,58,50,0.3);
+}
+
+/* Disable wave dominance */
+.wave {
+  opacity: 0.22;
+}
+
+/* Mobile adjustment */
+@media (max-width: 768px) {
+  .e-card {
+    width: 100%;
+    max-width: 380px;
+  }
+}
+/* ===== FORCE SIDE-BY-SIDE INFO CARDS ===== */
+
+.e-card-row {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center;
+  align-items: stretch;
+  gap: 40px;
+  flex-wrap: nowrap;           /* 🔑 THIS fixes stacking */
+  max-width: 1100px;
+  margin: 40px auto 60px;
+}
+
+/* Ensure cards don’t expand full width */
+.e-card {
+  width: 420px !important;     /* fixed desktop width */
+  max-width: 420px;
+  flex: 0 0 auto;
+}
