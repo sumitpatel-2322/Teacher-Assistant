@@ -24,3 +24,7 @@ bcrypt
 
 # --- Utilities ---
 typing-extensions
+torch
+torchvision
+torchaudio
+transformers
