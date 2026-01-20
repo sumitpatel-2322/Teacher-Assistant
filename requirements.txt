@@ -1,0 +1,26 @@
+# --- Web Framework & Server ---
+fastapi
+uvicorn[standard]
+jinja2
+python-multipart
+gunicorn
+itsdangerous
+websockets
+
+# --- AI & LLM Services ---
+groq
+requests
+
+# --- Language & Translation ---
+deep-translator
+langdetect
+
+# --- Speech Recognition (Offline) ---
+vosk
+
+# --- Authentication & Security ---
+passlib[bcrypt]
+bcrypt
+
+# --- Utilities ---
+typing-extensions
