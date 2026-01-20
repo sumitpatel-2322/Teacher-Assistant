@@ -13,6 +13,10 @@ Theme 1 rules:
 from typing import Dict, Optional
 from decision_engine.solution_loader import load_solutions
 
+# <--- DEBUG START --->
+print("\n>>> DEBUG: [Import] decision_engine/solution_service.py loaded")
+# <--- DEBUG END --->
+
 # Load once
 SOLUTION_LIBRARY = load_solutions()
 
@@ -24,9 +28,13 @@ def get_solution_details(solution_id: str) -> Optional[Dict]:
     """
     Returns the detailed solution block for a given solution_id.
     """
+    # <--- DEBUG START --->
+    print(f">>> DEBUG: [Solution Service] Fetching details for ID: '{solution_id}'")
+    # <--- DEBUG END --->
 
     solution = _SOLUTION_MAP.get(solution_id)
     if not solution:
+        print(f">>> DEBUG: [Solution Service] ❌ ID '{solution_id}' not found in library.")
         return None
 
     return {

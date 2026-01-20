@@ -2,7 +2,7 @@
 Token-level typo corrections.
 Strictly single-word mappings only.
 """
-
+print("\n>>> DEBUG: [Import] preprocessing/typo_map.py loaded")
 TYPO_MAP = {
     # students
     "stutents": "students",

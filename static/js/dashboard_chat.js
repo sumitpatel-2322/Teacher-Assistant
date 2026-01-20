@@ -3,6 +3,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const userQuery = document.getElementById("userQuery");
     const sendBtn = document.getElementById("sendBtn");
     
+    // ✅ 1. Initialize with Profile Preference (or default to 'en')
+    // This variable is injected by Teacher_dashboard.html
+    window.currentLanguage = window.userPreferredLanguage || "en";
+    console.log("System Initialized with Language:", window.currentLanguage);
+
     // Auto-resize textarea
     userQuery.addEventListener('input', function() {
         this.style.height = 'auto';
@@ -28,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const loadingId = appendLoading();
 
         try {
-            // 3. API Call (We will build this endpoint in Phase 3)
+            // 3. API Call
             const response = await fetch("/api/teacher/ask", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -43,8 +48,31 @@ document.addEventListener("DOMContentLoaded", () => {
             const data = await response.json();
             removeElement(loadingId);
 
-            if (data.status === "success" && data.solutions.length > 0) {
-                renderSolutionButtons(data.solutions, data.request_id);
+            if (data.status === "success") {
+                // Update language if backend detected/enforced something new
+                if (data.detected_language) {
+                    window.currentLanguage = data.detected_language;
+                }
+                
+                // ✅ LOGIC UPDATE: Handle Hybrid Conversation
+                
+                // A. Show the Bot Message (If exists)
+                // This covers "Chit-Chat" (Hello/Thanks) AND "Teaching" (Hybrid Header)
+                if (data.bot_message) {
+                    appendMessage("bot", data.bot_message);
+                }
+
+                // B. Render Solution Cards (ONLY if they exist)
+                // Chit-chat responses won't have solutions, so we skip this block
+                if (data.solutions && data.solutions.length > 0) {
+                    window.renderSolutionButtons(data.solutions, data.request_id);
+                } 
+                
+                // C. Fallback: If success but empty (Edge case)
+                if (!data.bot_message && (!data.solutions || data.solutions.length === 0)) {
+                     appendMessage("bot", "I'm listening. Please ask your question.");
+                }
+
             } else {
                 appendMessage("bot", "I couldn't find a specific solution. Could you add more details?");
             }
@@ -84,54 +112,47 @@ document.addEventListener("DOMContentLoaded", () => {
         chatWindow.scrollTop = chatWindow.scrollHeight;
     }
 
-    function renderSolutionButtons(solutions, requestId) {
-        const container = document.createElement("div");
-        container.className = "message bot-msg";
-        
-        let btns = `<div class="bubble" style="background:transparent; padding:0;">
-                    <p style="margin-bottom:8px; font-size:13px; color:#555;">Found ${solutions.length} suggestions:</p>
-                    <div class="solution-grid">`;
-
-        solutions.forEach(sol => {
-            // Passing arguments safely to global function
-            btns += `<button class="sol-btn" onclick="fetchDetails('${sol.id}', '${requestId}', this)">
-                        ${sol.text} <span style="opacity:0.7; font-size:11px;">(${Math.round(sol.confidence * 100)}%)</span>
-                     </button>`;
-        });
-        
-        btns += `</div></div>`;
-        container.innerHTML = btns;
-        chatWindow.appendChild(container);
-        scrollToBottom();
-    }
-
     // GLOBAL FUNCTION: Fetch Details (Called by buttons)
     window.fetchDetails = async (solutionId, requestId, btnElement) => {
-        // Highlight active button
         const siblings = btnElement.parentElement.children;
         for (let btn of siblings) btn.classList.remove("selected");
         btnElement.classList.add("selected");
 
         try {
-            const res = await fetch(`/solution/details/${solutionId}`);
+            // ✅ Pass the global language variable to the details API
+            const lang = window.currentLanguage || 'en';
+            console.log(`Fetching details for ${solutionId} in ${lang}`);
+            
+            const res = await fetch(`/solution/details/${solutionId}?lang=${lang}`);
             const data = await res.json();
 
             if (data.success) {
                 renderDetailCard(data.data, requestId, solutionId);
             }
         } catch (err) {
+            console.error(err);
             alert("Failed to load details.");
         }
     };
 
     function renderDetailCard(details, requestId, solutionId) {
-        const steps = details.details.steps.map(s => `<li>${s}</li>`).join("");
+        // Handle structure variations
+        const stepSource = details.details?.steps || details.steps || [];
+        const objectiveSource = details.details?.objective || details.objective || "Follow the steps below.";
         
+        // Handle list of steps safely
+        const steps = Array.isArray(stepSource) 
+            ? stepSource.map(s => `<li>${s}</li>`).join("")
+            : `<li>${stepSource}</li>`;
+        
+        // Extract Title safely (Translated title comes from backend)
+        const title = details.preview?.title || details.title || "Solution Details";
+
         const html = `
             <div class="bubble" style="width:100%; max-width:100%; background:transparent; padding:0;">
                 <div class="detail-card">
-                    <h3>${details.title}</h3>
-                    <p><strong>Objective:</strong> ${details.details.objective}</p>
+                    <h3>${title}</h3>
+                    <p><strong>Objective:</strong> ${objectiveSource}</p>
                     <ul>${steps}</ul>
                     
                     <div class="feedback-actions">
@@ -151,7 +172,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // GLOBAL FUNCTION: Feedback
     window.sendFeedback = async (reqId, solId, worked, btn) => {
-        // Disable buttons
         const parent = btn.parentElement;
         parent.style.opacity = "0.5";
         parent.style.pointerEvents = "none";
@@ -166,7 +186,6 @@ document.addEventListener("DOMContentLoaded", () => {
             })
         });
 
-        // Replace buttons with thank you text
         parent.innerHTML = `<span style="font-size:13px; color:#379683; font-weight:600;">Thanks for your feedback!</span>`;
     };
 });
@@ -187,3 +206,31 @@ document.addEventListener("DOMContentLoaded", () => {
             noticePanel.style.display = "none";
         });
     }
+
+
+// ➤ GLOBAL FUNCTION EXPOSED TO WINDOW
+window.renderSolutionButtons = function(solutions, requestId) {
+    const chatWindow = document.getElementById("chat-window");
+    const container = document.createElement("div");
+    container.className = "message bot-msg";
+    
+    // 👇 The header text is now handled by the LLM 'bot_message' above.
+    // We just render the grid of buttons here.
+    let btns = `<div class="bubble" style="background:transparent; padding:0;">
+                <div class="solution-grid">`;
+
+    solutions.forEach(sol => {
+        const id = sol.id || sol.solution_id;
+        // Use the translated title if available, otherwise fallback to text
+        const label = sol.title || sol.text;
+        
+        btns += `<button class="sol-btn" onclick="fetchDetails('${id}', '${requestId}', this)">
+                    ${label} <span style="opacity:0.7; font-size:11px;">(${Math.round(sol.confidence * 100)}%)</span>
+                 </button>`;
+    });
+    
+    btns += `</div></div>`;
+    container.innerHTML = btns;
+    chatWindow.appendChild(container);
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+}

@@ -1,8 +1,30 @@
-Fastapi
-pydantic
-uvicorn
+# --- Web Framework & Server ---
+fastapi
+uvicorn[standard]
 jinja2
 python-multipart
-starlette
+gunicorn
 itsdangerous
-pandas
+websockets
+
+# --- AI & LLM Services ---
+groq
+requests
+
+# --- Language & Translation ---
+deep-translator
+langdetect
+
+# --- Speech Recognition (Offline) ---
+vosk
+
+# --- Authentication & Security ---
+passlib[bcrypt]
+bcrypt
+
+# --- Utilities ---
+typing-extensions
+torch
+torchvision
+torchaudio
+transformers

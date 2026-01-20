@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pastel Dreamscape – EdTech Trial</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ================= RESET ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: #d4e7fcf8;                 /* Pale Sky */
+  color: #2E2E3A;                      /* High-contrast text */
+  line-height: 1.6;
+}
+
+/* ================= HEADER ================= */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #84AFE6;                 /* Baby Blue Ice */
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #79BEEE;
+}
+
+header .logo {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+header nav a {
+  color: #2E2E3A;
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 14px;
+}
+
+header nav a:hover {
+  color: #8A84E2;                      /* Soft Periwinkle */
+}
+
+/* ================= HERO ================= */
+.hero {
+  max-width: 1100px;
+  margin: 48px auto 36px;
+  padding: 40px 32px;
+  background: linear-gradient(
+    180deg,
+    #B7D3F2
+  );
+  border-radius: 18px;
+  border: 1px solid #79BEEE;
+}
+
+.hero h1 {
+  font-size: 26px;
+  margin-bottom: 12px;
+}
+
+.hero p {
+  max-width: 720px;
+  font-size: 15px;
+  color: #2E2E3A;
+}
+
+/* ================= SECTION ================= */
+.section {
+  max-width: 1100px;
+  margin: 56px auto;
+  padding: 0 24px;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 28px;
+  position: relative;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 48px;
+  height: 3px;
+  background: #79BEEE;                 /* Maya Blue */
+  border-radius: 2px;
+}
+
+/* ================= CARDS ================= */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: 22px;
+  border: 1px solid rgba(121,190,238,0.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(138,132,226,0.25);
+}
+
+/* Card icon */
+.card-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: #79BEEE;                 /* Maya Blue */
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-bottom: 14px;
+}
+
+/* Card text */
+.card h3 {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.card p {
+  font-size: 14px;
+  color: #3F3F52;
+  line-height: 1.55;
+}
+
+/* ================= FOOTER ================= */
+footer {
+  margin-top: 64px;
+  padding: 20px;
+  background: #84AFE6;
+  text-align: center;
+  font-size: 13px;
+  color: #2E2E3A;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">VEDA</div>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Learn</a>
+    <a href="#">Dashboard</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Dreamy Learning, Clear Focus</h1>
+  <p>
+    A pastel blue–periwinkle interface designed for calm concentration,
+    clarity, and long learning sessions—soft in tone, strong in structure.
+  </p>
+</section>
+
+<!-- SECTION -->
+<section class="section">
+  <div class="section-title">Why This Works</div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">☁️</div>
+      <h3>Low Visual Noise</h3>
+      <p>Pastel blues soothe without reducing legibility.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">📘</div>
+      <h3>Academic Calm</h3>
+      <p>Periwinkle tones feel thoughtful and scholarly.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">🧠</div>
+      <h3>Focus-Oriented</h3>
+      <p>Strong contrast hierarchy keeps attention on content.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Pastel Dreamscape EdTech Trial • Calm • Clear • Structured
+</footer>
+
+</body>
+</html>

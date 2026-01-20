@@ -1,17 +1,60 @@
-# Situation IDs
+"""
+Theme 1 Constants
+Merged: Master Situations + Backward Compatibility + Project Constraints
+"""
+print("\n>>> DEBUG: [Import] decision_engine/constants.py loaded")
+# ======================================================
+# 1. MASTER SITUATIONS (Normalized for Detection & Reporting)
+# ======================================================
 SITUATIONS = {
-    # Core detected situations
-    "LOW_ATTENTION": "low_attention",
-    "MIXED_LEARNING_LEVELS": "mixed_learning_levels",
-    "STUDENTS_NOT_UNDERSTANDING": "students_not_understanding",
-    "HIGH_CLASS_STRENGTH": "high_class_strength",
-    "ACTIVITY_FAILURE": "activity_failure",
-    "LEARNING_DIFFICULTIES": "learning_difficulties",
-    "EMOTIONAL_INSTABILITY": "emotional_instability",
+    # --- BEHAVIOR & DISCIPLINE ---
+    "CLASSROOM_CHAOS": "classroom_chaos",
+    "DISRESPECT_DEFIANCE": "disrespect_defiance",
+    "BULLYING_CONFLICT": "bullying_conflict",
 
-    # BASELINE (MANDATORY for closure)
+    # --- ENGAGEMENT & ENERGY ---
+    "LOW_ENGAGEMENT": "low_engagement",
+    "LOW_ATTENTION": "low_attention",
+    "SHYNESS_LOW_CONFIDENCE": "shyness_low_confidence",
+
+    # --- COGNITION & LEARNING ---
+    "CONCEPT_CONFUSION": "concept_confusion",
+    "MEMORY_RETENTION_ISSUE": "memory_retention_issue",
+    "LACK_CRITICAL_THINKING": "lack_critical_thinking",
+
+    # --- ACADEMIC SKILLS ---
+    "WRITING_DIFFICULTY": "writing_difficulty",
+    "READING_LANGUAGE_ISSUE": "reading_language_issue",
+    "MATH_DIFFICULTY": "math_difficulty",
+
+    # --- CLASSROOM MANAGEMENT ---
+    "TIME_MANAGEMENT_ISSUE": "time_management_issue",
+    "MIXED_LEVELS": "mixed_levels",
+    "LARGE_CLASS_CROWD": "large_class_crowd",
+
+    # --- EXTERNAL FACTORS ---
+    "HOMEWORK_PARENT_ISSUE": "homework_parent_issue",
+    "RESOURCE_CONSTRAINT": "resource_constraint",
+    "EMOTIONAL_WELLBEING": "emotional_wellbeing",
+    
+    # --- BASELINE (MANDATORY) ---
     "GENERAL_CLASSROOM_SUPPORT": "general_classroom_support",
+
+    # ======================================================
+    # ⚠️ BACKWARD COMPATIBILITY ALIASES (Fixes KeyError)
+    # Maps OLD keys (used in solutions.py) to NEW normalized values
+    # ======================================================
+    "MIXED_LEARNING_LEVELS": "mixed_levels",        # Maps to MIXED_LEVELS
+    "STUDENTS_NOT_UNDERSTANDING": "concept_confusion", # Maps to CONCEPT_CONFUSION
+    "HIGH_CLASS_STRENGTH": "large_class_crowd",     # Maps to LARGE_CLASS_CROWD
+    "ACTIVITY_FAILURE": "concept_confusion",        # Maps to CONCEPT_CONFUSION
+    "LEARNING_DIFFICULTIES": "low_engagement",      # Maps to LOW_ENGAGEMENT (or specific)
+    "EMOTIONAL_INSTABILITY": "emotional_wellbeing", # Maps to EMOTIONAL_WELLBEING
 }
+
+# ======================================================
+# 2. EXISTING PROJECT CONSTANTS (Preserved)
+# ======================================================
 
 # Subjects
 SUBJECTS = {
@@ -66,6 +109,7 @@ EFFORT_LEVELS = {
 SAFETY_LEVELS = {
     "HIGH": "high",
     "MEDIUM": "medium",
+    "LOW": "low",  # Ensure LOW is here too if used
 }
 
 # Noise levels

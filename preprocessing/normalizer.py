@@ -1,47 +1,57 @@
 import re
-
-from preprocessing.typo_map import TYPO_MAP
-from preprocessing.phrase_map import PHRASE_MAP
 from preprocessing.noise_words import NOISE_WORDS
+from preprocessing.phrase_map import PHRASE_MAP
+from preprocessing.typo_map import TYPO_MAP
 
+print("\n>>> DEBUG: [Import] preprocessing/normalizer.py loaded") # <--- ADD THIS (Top Level)
 
 def normalize_text(raw_text: str) -> str:
     """
-    Layer 1: Rule-based text normalization.
-    Deterministic. No decisions.
+    1. Lowercase
+    2. Remove noise words
+    3. Fix typos
+    4. Map phrases to signals (e.g., "too loud" -> "noise_spike_signal")
     """
+    # <--- ADD THIS BLOCK START --->
+    print(f"\n>>> DEBUG [Normalizer] Input: '{raw_text}'")
+    # <--- ADD THIS BLOCK END --->
 
     if not raw_text:
         return ""
 
-    # -------------------------
-    # 1. Basic cleanup
-    # -------------------------
-    text = raw_text.lower()
-    text = re.sub(r"[^\w\s]", " ", text)
-    text = re.sub(r"\s+", " ", text).strip()
+    text = raw_text.lower().strip()
+    
+    # Remove special chars (keep spaces)
+    text = re.sub(r'[^a-z0-9\s]', '', text)
 
-    # -------------------------
-    # 2. Token-level typo correction
-    # -------------------------
-    tokens = []
-    for token in text.split():
-        tokens.append(TYPO_MAP.get(token, token))
-    text = " ".join(tokens)
+    # 1. Map Phrases (Longer phrases first to avoid partial matches)
+    sorted_phrases = sorted(PHRASE_MAP.keys(), key=len, reverse=True)
+    
+    for phrase in sorted_phrases:
+        if phrase in text:
+            signal_token = PHRASE_MAP[phrase]
+            # <--- ADD THIS OPTIONAL DEBUG --->
+            print(f"   -> [Normalizer] Mapped phrase '{phrase}' to '{signal_token}'")
+            # <--- END OPTIONAL DEBUG --->
+            text = text.replace(phrase, f" {signal_token} ")
 
-    # -------------------------
-    # 3. Phrase-level normalization
-    # -------------------------
-    for phrase, replacement in PHRASE_MAP.items():
-        pattern = r"\b" + re.escape(phrase) + r"\b"
-        text = re.sub(pattern, replacement, text)
+    # 2. Tokenize
+    tokens = text.split()
+    clean_tokens = []
 
-    # -------------------------
-    # 4. Noise word removal
-    # -------------------------
-    final_tokens = [
-        t for t in text.split()
-        if t not in NOISE_WORDS
-    ]
+    for t in tokens:
+        # Fix typos
+        if t in TYPO_MAP:
+            t = TYPO_MAP[t]
+        
+        # Remove noise
+        if t not in NOISE_WORDS:
+            clean_tokens.append(t)
 
-    return " ".join(final_tokens)
+    normalized_output = " ".join(clean_tokens)
+
+    # <--- ADD THIS BLOCK START --->
+    print(f">>> DEBUG [Normalizer] Output: '{normalized_output}'")
+    # <--- ADD THIS BLOCK END --->
+
+    return normalized_output

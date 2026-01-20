@@ -3,6 +3,7 @@ from fastapi.staticfiles import StaticFiles
 from starlette.middleware.sessions import SessionMiddleware
 
 # Import Routers
+from API_routes.voice import router as voice_router
 from API_routes.dashboard import router as dashboard_router
 from API_routes.home import router as home_router
 from API_routes.login import router as login_router
@@ -33,6 +34,7 @@ app.add_middleware(SessionMiddleware, secret_key="our_secret_key", same_site="la
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Include Routers
+app.include_router(voice_router)
 app.include_router(home_router)
 app.include_router(login_router)
 app.include_router(register_router)

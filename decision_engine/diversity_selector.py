@@ -1,6 +1,6 @@
 import random
 from typing import List, Dict
-
+print("\n>>> DEBUG: [Import] decision_engine/diversity_selector.py loaded")
 
 def select_diverse_solutions(
     ranked: List[Dict],

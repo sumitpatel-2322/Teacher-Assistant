@@ -50,13 +50,13 @@
         font-weight: 600;
         font-size: 16px;
     }
-
+    
     .info-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 25px;
     }
-
+    
     .info-item label {
         display: block;
         font-size: 13px;
@@ -65,7 +65,7 @@
         text-transform: uppercase;
         letter-spacing: 0.5px;
     }
-
+    
     .info-item .value {
         font-size: 18px;
         color: #333;
@@ -75,7 +75,7 @@
         border-radius: 8px;
         border-left: 4px solid #379683;
     }
-
+    
     .back-btn {
         margin-top: 30px;
         display: inline-block;
@@ -93,6 +93,24 @@
 <div class="page-wrapper">
     <div class="profile-container">
         
+        <label for="subject">Preferred Subject</label>
+        <select id="subjectSelect" name="subject" required>
+            <option value="English">English</option>
+            <option value="Hindi">Hindi</option>
+            <option value="{{ profile.preferred_subject }}" selected>{{ profile.preferred_subject }}</option>
+        </select>
+        <label for="language">Preferred Language</label>
+        <select id="languageSelect" name="language" required>
+        <option value="en" {% if profile.preferred_language == 'en' %}selected{% endif %}>English</option>
+        <option value="hi" {% if profile.preferred_language == 'hi' %}selected{% endif %}>Hindi (हिंदी)</option>
+        <option value="te" {% if profile.preferred_language == 'te' %}selected{% endif %}>Telugu (తెలుగు)</option>
+        <option value="ta" {% if profile.preferred_language == 'ta' %}selected{% endif %}>Tamil (தமிழ்)</option>
+        <option value="mr" {% if profile.preferred_language == 'mr' %}selected{% endif %}>Marathi (मराठी)</option>
+        <option value="bn" {% if profile.preferred_language == 'bn' %}selected{% endif %}>Bengali (বাংলা)</option>
+        </select>
+        <button type="submit" style="margin-top:20px;">Save Changes</button>
+        </form>
+        </div>
         <div class="profile-header">
             <div class="avatar-circle">
                 {{ profile.name[0] }}
