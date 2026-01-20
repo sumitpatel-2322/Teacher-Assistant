@@ -86,8 +86,10 @@ async function sendAudioToBackend() {
 
         const data = await response.json();
 
-        if (loader) loader.classList.remove("active");
-
+        if (loader){
+            loader.style.displa="none";
+            loader.innerText="";
+        } 
         if (data.status === "success" && data.solutions) {
             if (window.renderSolutionButtons) {
                 window.renderSolutionButtons(data.solutions, data.request_id);
