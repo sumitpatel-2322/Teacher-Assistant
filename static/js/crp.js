@@ -10,18 +10,20 @@ if (donutCtx) {
       datasets: [{
         data: [70, 30],
         backgroundColor: [
-          "#2F5D50", // deep forest
-          "#BFD6DA"  // mist light
+          "#14B8A6",  // fresh teal (completed)
+          "#E6FFFA"   // light aqua (remaining)
         ],
         hoverBackgroundColor: [
-          "#1E3A32",
-          "#8FB8A8"
+          "#0D9488",
+          "#CCFBF1"
         ],
         borderWidth: 0
       }]
     },
     options: {
       cutout: "70%",
+      responsive: true,
+      maintainAspectRatio: true,
       plugins: {
         legend: { display: false },
         tooltip: {
@@ -33,7 +35,6 @@ if (donutCtx) {
     }
   });
 }
-
 /* ================= HISTOGRAM CHART ================= */
 
 const histCtx = document.getElementById("teacherHistogram");
@@ -46,16 +47,16 @@ if (histCtx) {
       datasets: [{
         data: [5, 15, 30, 35, 15],
         backgroundColor: [
-          "#6F9E8F", // soft green
-          "#5F7F8C", // mist blue
-          "#2F5D50", // deep forest
-          "#8FB8A8", // light teal
-          "#f1f5f6"  // mist light
+          "#E0F2FE", // light sky (low)
+          "#7DD3FC", // soft blue
+          "#38BDF8", // clear blue
+          "#0cb3b3", // success green
+          "#24cfa7"  // strong green (high)
         ],
-        borderColor: "#1E3A32",
-        borderWidth: 1.5,
-        borderRadius: 6,
-        barThickness: 30
+        borderColor: "#134E4A",
+        borderWidth: 1.2,
+        borderRadius: 8,
+        barThickness: 32
       }]
     },
     options: {
@@ -68,7 +69,7 @@ if (histCtx) {
         x: {
           grid: { display: false },
           ticks: {
-            color: "#1E3A32",
+            color: "#134E4A",
             font: { size: 12, weight: "600" }
           }
         },
@@ -78,47 +79,13 @@ if (histCtx) {
           ticks: {
             stepSize: 20,
             callback: v => v + "%",
-            color: "#1E3A32"
+            color: "#134E4A"
           },
           grid: {
-            color: "rgba(30,58,50,0.12)"
+            color: "rgba(20,184,166,0.18)"
           }
         }
       }
     }
-  });
-}
-/* ================= UPLOAD GUIDANCE ================= */
-
-const uploadBtn = document.querySelector(".actions button:nth-child(2)");
-const uploadModal = document.getElementById("uploadModal");
-const closeUpload = document.getElementById("closeUpload");
-
-if (uploadBtn) {
-  uploadBtn.addEventListener("click", () => {
-    uploadModal.style.display = "flex";
-  });
-}
-
-if (closeUpload) {
-  closeUpload.addEventListener("click", () => {
-    uploadModal.style.display = "none";
-  });
-}
-/* ================= SCHEDULE VISIT ================= */
-
-const visitBtn = document.querySelector(".actions button:nth-child(3)");
-const visitModal = document.getElementById("visitModal");
-const closeVisit = document.getElementById("closeVisit");
-
-if (visitBtn) {
-  visitBtn.addEventListener("click", () => {
-    visitModal.style.display = "flex";
-  });
-}
-
-if (closeVisit) {
-  closeVisit.addEventListener("click", () => {
-    visitModal.style.display = "none";
   });
 }

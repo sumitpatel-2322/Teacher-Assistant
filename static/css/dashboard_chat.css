@@ -122,7 +122,7 @@ body {
 }
 
 .submit-fb-btn {
-    background: #1E3A32;
+      background:#0F9F82;
     color: #fff;
     border: none;
     padding: 10px;
@@ -134,7 +134,7 @@ body {
 }
 
 .submit-fb-btn:hover {
-    background: #379683;
+    background: #176152;
 }
 
 /* ================= RIGHT CHAT AREA ================= */
@@ -182,12 +182,12 @@ body {
 
 .bot-msg .bubble {
     background: #f0f4f8;
-    color:  #1E3A32;
+    color:  #0a0c0c;
     border-bottom-left-radius: 2px;
 }
 
 .user-msg .bubble {
-    background: #1E3A32;
+    background: #139872;
     color: #fff;
     border-bottom-right-radius: 2px;
 }
@@ -217,7 +217,7 @@ body {
 }
 
 .sol-btn.selected {
-    background:  #1E3A32;
+    background:#0F9F82;
     color: #fff;
     border-color:  #1E3A32;
 }
@@ -290,7 +290,7 @@ body {
 }
 
 .send-btn {
-    background:  #1E3A32;
+    background:#0F9F82;
     color: white;
     width: 40px;
     height: 40px;
@@ -301,7 +301,7 @@ body {
 }
 
 .send-btn:hover {
-    background: #379683;
+    background:#0a4f41;
 }
 
 /* ================= RESPONSIVE ================= */
@@ -374,7 +374,7 @@ body {
 .mic-btn {
     width: 42px;
     height: 42px;
-    background: #1E3A32;          /* black square */
+    background:#0F9F82;         /* black square */
     color: #fff;
     border: none;
     border-radius: 10px;         /* rounded square */
@@ -386,7 +386,7 @@ body {
 }
 
 .mic-btn:hover {
-    background: #379683;
+    background: #1b5c4f;
     transform: scale(1.05);
 }
 

@@ -11,9 +11,9 @@ header {
   margin: 80px auto 20px;
   padding: 16px 22px;
   width: 100%;
-  background: #EDF5E1 !important;
+  background: #f9f9f9 !important;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 30px rgba(0, 4, 2, 0.507);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -57,7 +57,7 @@ header {
   padding: 28px 24px;
   border-radius: 14px;
   border: 1.5px solid rgba(5,56,107,0.25);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.498);
 }
 
 .login-container h2,

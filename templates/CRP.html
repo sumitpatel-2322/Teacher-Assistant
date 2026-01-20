@@ -42,10 +42,23 @@
       </select>
     </div>
 
-   <div class="section-title">CRP Actions</div>
+    <div class="section-title">CRP Actions</div>
     <div class="actions">
-      <button onclick="document.getElementById('uploadModal').style.display='flex'">Upload Guidance</button>
-      <button onclick="document.getElementById('visitModal').style.display='flex'">Schedule Visit</button>
+      <!-- FIX: close visit modal before opening upload -->
+      <button onclick="
+        document.getElementById('visitModal').style.display='none';
+        document.getElementById('uploadModal').style.display='flex';
+      ">
+        Upload Guidance
+      </button>
+
+      <!-- FIX: close upload modal before opening visit -->
+      <button onclick="
+        document.getElementById('uploadModal').style.display='none';
+        document.getElementById('visitModal').style.display='flex';
+      ">
+        Schedule Visit
+      </button>
     </div>
 
     <div class="section-title">Teacher Performance Overview</div>
@@ -59,61 +72,68 @@
     </div>
     <br>
 
-   <div id="uploadModal" class="upload-modal" style="display:none;">
-      <div class="upload-card">
-        <h3>Upload Guidance</h3>
-        <form action="/crp/upload-guidance" method="POST">
-            
-            <label class="modal-label">Select School</label>
-            <select name="school_id" required>
-                <option value="">Select School</option>
-                {% for s in schools %}
-                <option value="{{ s }}">{{ s }}</option>
-                {% endfor %}
-            </select>
-
-            <label class="modal-label">Title</label>
-            <input type="text" name="title" placeholder="Enter guidance title" required />
-
-            <label class="modal-label">Description</label>
-            <textarea name="description" rows="3" placeholder="Enter details..." required></textarea>
-
-            <div class="upload-actions">
-                <button type="button" onclick="document.getElementById('uploadModal').style.display='none'">Cancel</button>
-                <button type="submit">Upload</button>
-            </div>
-        </form>
-      </div>
-    </div>
-
-   <div id="visitModal" class="upload-modal" style="display:none;">
-      <div class="upload-card">
-        <h3>Schedule Visit</h3>
-        <form action="/crp/schedule-visit" method="POST">
-            
-            <label class="modal-label">Select School</label>
-            <select name="school_id" required>
-                <option value="">Select School</option>
-                {% for s in schools %}
-                <option value="{{ s }}">{{ s }}</option>
-                {% endfor %}
-            </select>
-
-            <label class="modal-label">Select Date</label>
-            <input type="date" name="visit_date" required>
-
-            <label class="modal-label">Select Time</label>
-            <input type="time" name="visit_time" required>
-
-            <div class="upload-actions">
-                <button type="button" onclick="document.getElementById('visitModal').style.display='none'">Cancel</button>
-                <button type="submit">Schedule</button>
-            </div>
-        </form>
-      </div>
-    </div>
-
   </div>
+
+<div id="uploadModal" class="upload-modal" style="display:none;">
+  <div class="upload-card">
+    <h3>Upload Guidance</h3>
+
+    <form action="/crp/upload-guidance" method="POST">
+      <label class="modal-label">Select School</label>
+      <select name="school_id" required>
+        <option value="">Select School</option>
+        {% for s in schools %}
+          <option value="{{ s }}">{{ s }}</option>
+        {% endfor %}
+      </select>
+
+      <label class="modal-label">Title</label>
+      <input type="text" name="title" required>
+
+      <label class="modal-label">Description</label>
+      <textarea name="description" rows="3" required></textarea>
+
+      <div class="upload-actions">
+        <button type="button"
+          onclick="document.getElementById('uploadModal').style.display='none'">
+          Cancel
+        </button>
+        <button type="submit">Upload</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div id="visitModal" class="upload-modal" style="display:none;">
+  <div class="upload-card">
+    <h3>Schedule Visit</h3>
+
+    <form action="/crp/schedule-visit" method="POST">
+      <label class="modal-label">Select School</label>
+      <select name="school_id" required>
+        <option value="">Select School</option>
+        {% for s in schools %}
+          <option value="{{ s }}">{{ s }}</option>
+        {% endfor %}
+      </select>
+
+      <label class="modal-label">Select Date</label>
+      <input type="date" name="visit_date" required>
+
+      <label class="modal-label">Select Time</label>
+      <input type="time" name="visit_time" required>
+
+      <div class="upload-actions">
+        <button type="button"
+          onclick="document.getElementById('visitModal').style.display='none'">
+          Cancel
+        </button>
+        <button type="submit">Schedule</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
 {% endblock %}
 
 {% block scripts %}

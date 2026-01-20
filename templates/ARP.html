@@ -8,39 +8,68 @@
 
 {% block content %}
 
-  <div class="page-container">
-    <header class="arp-header">
-      <div class="header-left">
-        <img src="static/img/logo.png" alt="Teacher">
-        <div>
-          <div class="title">Welcome, {{ user.name }}</div>
-          <div class="subtitle">Virtual Educator And Digital Assistant</div>
-        </div>
-      </div>
+<div class="page-container">
 
-      <div class="header-right">
-        {% if user %}
-        <a href="/profile" style="text-decoration:none;">
-          <div style="width: 40px; height: 40px; background: #5CDB95; color: #05386B; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; border: 2px solid #fff;">
-            {{ user.name[0] | upper }}
-          </div>
-        </a>
-        {% else %}
-          <img src="/static/img/user-icon.jpg" alt="User" style="width:40px; height:40px; border-radius:50%;">
-        {% endif %}
+  <!-- HEADER -->
+  <header class="arp-header">
+    <div class="header-left">
+      <img src="static/img/logo.png" alt="ARP">
+      <div>
+        <div class="title">Welcome, {{ user.name }}</div>
+        <div class="subtitle">Virtual Educator And Digital Assistant</div>
       </div>
-    </header>
-
-    <div class="section-title">ARP Actions</div>
-    <div class="actions">
-      <button>Upload Subject Models</button>
-      <button>Add Micro-Learning</button>
-      <button>Improve Teaching Strategies</button>
     </div>
-  
+
+    <div class="header-right">
+      <a href="/profile" style="text-decoration:none;">
+        <div style="width:40px;height:40px;background:#5CDB95;color:#05386B;
+             border-radius:50%;display:flex;align-items:center;justify-content:center;
+             font-weight:700;font-size:18px;border:2px solid #fff;">
+          {{ user.name[0] | upper }}
+        </div>
+      </a>
+    </div>
+  </header>
+
+  <!-- SELECT SCHOOL (SAME AS CRP) -->
+  <div class="section-title">Select School</div>
+  <div class="teacher-dropdown-wrapper">
+    <select id="teacherDropdown">
+      <option value="">Select a School</option>
+      {% for s in schools %}
+        <option value="{{ s }}">{{ s }}</option>
+      {% endfor %}
+    </select>
   </div>
+
+  <!-- ARP ACTIONS (KEPT) -->
+  <div class="section-title">ARP Actions</div>
+  <div class="actions">
+    <button>Upload Subject Models</button>
+
+    <a href="/micro_add" class="action-btn">
+      Add Micro-Learning
+    </a>
+
+    <button>Improve Teaching Strategies</button>
+  </div>
+
+  <!-- TEACHER PERFORMANCE OVERVIEW (SAME AS CRP) -->
+  <div class="section-title">Teacher Performance Overview</div>
+  <div class="charts-grid">
+    <div class="chart-card small">
+      <canvas id="completionDonut"></canvas>
+    </div>
+    <div class="chart-card wide">
+      <canvas id="teacherHistogram"></canvas>
+    </div>
+  </div>
+
+</div>
+
 {% endblock %}
 
 {% block scripts %}
-  <script src="/static/js/sidebar.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/static/js/crp.js"></script> <!-- reuse CRP charts -->
 {% endblock %}

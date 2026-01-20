@@ -1,344 +1,440 @@
+/* ================= THEME ================= */
 :root {
-  --forest-deep: #1E3A32;
-  --forest-main: #2F5D50;
-  --forest-soft: #6F9E8F;
-
-  --mist-deep: #5F7F8C;
-  --mist-soft: #BFD6DA;
-
-  --feather-light: #F3F4EF;
+  --primary: #0F9F82;
+  --primary-dark: #0B7D67;
+  --accent-soft: #E7F6F2;
+  --bg-main: #F6FBF9;
+  --card-bg: #ffffff;
+  --text-dark: #1E3A32;
+  --text-soft: #5F7F8C;
+  --border-soft: #E3EFEA;
 }
 
-* { 
-  box-sizing: border-box; 
-  margin:0; 
-  padding:0; 
-  font-family:'Inter', sans-serif; 
+/* ================= RESET ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", system-ui, sans-serif;
 }
 
-body { 
-  background:#EDF5E1;
-  color: var(--forest-deep); 
-  line-height:1.5; 
-  transition: margin-right 0.5s; 
-  max-width: 100%;
+body {
+  background:
+    radial-gradient(1200px 600px at 90% -10%, #DFF3ED 0%, transparent 60%),
+    radial-gradient(800px 400px at -10% 20%, #EAF7F3 0%, transparent 60%),
+    var(--bg-main);
+  color: var(--text-dark);
+  line-height: 1.7;
 }
 
-/* ================= HEADER ================= */
-header { 
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center; 
-  padding: 15px 20px; 
-  background: var(--mist-soft);  
-  border-radius: 12px; 
-  margin: 20px auto; 
-  width: 100%;
-  box-shadow: 0 4px 12px rgba(30,58,50,0.12); 
-  margin-top: 60px; 
+/* ================= PAGE CONTAINER ================= */
+.page-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 80px 20px 40px;
 }
 
-.header-left { 
-  display: flex; 
-  align-items: center; 
-  gap: 15px; 
+/* ================= HERO ================= */
+.hero {
+  text-align: center;
+  padding: 100px 20px 70px;
 }
 
-.header-left img { 
-  width: 50px; 
-  height: 50px; 
-  border-radius: 50%; 
-}
-
-.header-left .title { 
-  font-size: 20px; 
-  font-weight: 600; 
-}
-
-.header-left .subtitle { 
-  font-size: 12px; 
-  color: var(--forest-main); 
-}
-
-/* header-right alignment */
-.header-right {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* ================= PROFILE AVATAR ================= */
-.profile-avatar {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background-color: var(--forest-deep);
-  color: var(--feather-light);
-  font-size: 18px;
+.hero-badge {
+  display: inline-block;
+  background: var(--accent-soft);
+  color: var(--primary-dark);
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 13px;
   font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
+  margin-bottom: 18px;
 }
 
-.default-user-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+.hero h1 {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 800;
+  margin-bottom: 16px;
 }
 
-/* ================= INTRO ================= */
-.intro {
-  max-width:1300px;
-  margin:90px auto 20px;
-  background: var(--mist-soft) !important; 
-  padding:20px 15px;
-  border-radius:12px;
-  box-shadow:0 4px 12px rgba(30,58,50,0.12);
-  text-align:center;
-  border:1.5px solid var(--forest-deep);
+.hero h1 span {
+  background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.intro h1 { 
-  font-size:24px; 
-  margin-bottom:10px; 
+.hero p {
+  max-width: 900px;
+  margin: auto;
+  font-size: 18px;
+  color: var(--text-soft);
 }
 
-.intro p { 
-  font-size:14px; 
-  color: var(--forest-deep); 
-}
-
-/* ================= ROLE NAV ================= */
+/* ================= HERO BUTTONS ================= */
+.hero-actions,
 .role-nav {
-  width: 100%;
+  margin-top: 36px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 16px;
-  margin: 30px auto;
+  gap: 18px;
+  flex-wrap: wrap;
 }
 
+.hero-actions a,
 .role-nav button {
-  padding: 1.3em 3em;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 2.5px;
-  font-weight: 500;
-  color: var(--forest-deep);
-  background-color: var(--feather-light);
+  padding: 15px 34px;
+  border-radius: 16px;
+  font-weight: 700;
   border: none;
-  border-radius: 45px;
   cursor: pointer;
-  outline: none;
-  box-shadow: 0px 8px 15px rgba(30,58,50,0.18);
+  font-size: 15px;
   transition: all 0.3s ease;
 }
 
-.role-nav button:hover {
-  background-color: var(--mist-soft);
-  box-shadow: 0px 15px 20px rgba(47,93,80,0.35);
-  transform: translateY(-7px);
+.hero-actions a:first-child,
+.role-nav button:first-child {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  box-shadow: 0 18px 45px rgba(15,159,130,.35);
 }
 
-.role-nav button:active {
-  transform: translateY(-1px);
+.hero-actions a:last-child,
+.role-nav button:last-child {
+  background: #fff;
+  border: 1.5px solid var(--border-soft);
+  color: var(--primary-dark);
 }
 
-/* ================= CARDS ================= */
-.section-title {
-  text-align: center;
-  font-size: 18px;
-  font-weight: 600;
-  margin: 30px 0 15px;
-  color: var(--forest-deep);
+/* ================= SECTION ================= */
+.section,
+.intro {
+  padding: 50px 10px;
 }
 
-.card-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:24px;
-  max-width:95%;
-  margin:0 auto 30px;
+.section-title,
+.section h2,
+.intro h1 {
+  font-size: clamp(28px, 4vw, 40px);
+  margin-bottom: 14px;
 }
 
-/* ================= CARD ================= */
-.card {
+.section p,
+.intro p {
+  max-width: 900px;
+  font-size: 16px;
+  color: var(--text-soft);
+}
+
+/* ================= DIVIDER ================= */
+.section-divider {
+  width: 100%;
+  max-width: 900px;
+  height: 1px;
+  margin: 30px auto;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(15,159,130,0.35),
+    transparent
+  );
+}
+
+/* ================= GRID ================= */
+.card-grid,
+.e-card-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 26px;
+  margin-top: 30px;
+}
+
+/* ================= PREMIUM CARD ================= */
+.card,
+.e-card {
   position: relative;
-  background: var(--feather-light);
-  border-radius: 16px;
-  padding: 22px 20px;
-  overflow: hidden;
-  cursor: pointer;
-  border: 1px solid rgba(30,58,50,0.25);
+  background: linear-gradient(180deg, #ffffff, #fbfefd);
+  border-radius: 26px;
+  padding: 28px;
+  border: 1px solid var(--border-soft);
   box-shadow:
-    0 2px 6px rgba(30,58,50,0.12),
-    0 1px 2px rgba(30,58,50,0.08);
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
+    0 18px 45px rgba(0, 0, 0, 0.153),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
 .card::before,
-.card::after {
+.e-card::before {
   content: "";
   position: absolute;
-  width: 22%;
-  height: 22%;
-  background: rgba(111,158,143,0.35);
-  transition: all 0.45s ease;
-  z-index: 0;
+  inset: -1px;
+  border-radius: 26px;
+  background: linear-gradient(
+    135deg,
+    rgba(15,159,130,0.35),
+    rgba(255,255,255,0),
+    rgba(15,159,130,0.25)
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
 }
 
-.card::before {
-  top: 0;
-  right: 0;
-  border-radius: 0 16px 0 100%;
-}
-
-.card::after {
-  bottom: 0;
-  left: 0;
-  border-radius: 0 100% 0 16px;
+.card:hover,
+.e-card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 22px 50px rgba(15,159,130,0.14),
+    inset 0 1px 0 rgba(255,255,255,0.9);
 }
 
 .card:hover::before,
-.card:hover::after {
-  width: 100%;
-  height: 100%;
-  border-radius: 16px;
+.e-card:hover::before {
+  opacity: 1;
 }
 
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(30,58,50,0.25);
-}
-
-.card > * {
-  position: relative;
-  z-index: 1;
-}
-
-.card h3 {
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 6px;
-  color: var(--forest-deep);
-}
-
-.card p {
-  font-size: 14px;
-  line-height: 1.55;
-  color: var(--forest-main);
-}
-
-/* ================= ICON ================= */
-.card-icon {
-  width: 28px;
-  height: 28px;
-  stroke: var(--forest-deep);
-  stroke-width: 1.8;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-/* ================= SECTION TITLE DECOR ================= */
-.section-title::after {
-  content: "";
-  display: block;
-  width: 48px;
-  height: 3px;
-  background: var(--forest-soft);
-  margin: 10px auto 0;
-  border-radius: 2px;
-}
-
-/* ================= PAGE SPACING ================= */
-.page-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-/* ================= RESPONSIVE ================= */
-@media screen and (max-width:768px){
-  header { margin-top: 70px; }
-}
-/* ===== IMPROVE INFO CARDS (TEACHER / CRP / BRP / ARP) ===== */
-
-/* Container spacing */
-.e-card-row {
-  gap: 48px;                 /* more breathing space */
-  margin: 40px auto 60px;
-}
-
-/* Card size + presence */
-.e-card {
-  width: 340px;              /* ⬅ slightly bigger */
-  height: auto;              /* allow content to breathe */
-  padding: 22px 24px;        /* inner spacing */
-  background: var(--feather-light);
-  border-radius: 18px;
-  border: 1.5px solid rgba(30,58,50,0.25);
-  box-shadow: 0 8px 20px rgba(30,58,50,0.15);
-  transition: 
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
-}
-
-/* Title */
-.e-card .infotop {
-  position: relative;        /* remove absolute compression */
-  top: 0;
+/* ================= CARD TEXT ================= */
+.card h3,
+.card h4,
+.e-card h3 {
   font-size: 18px;
-  margin-bottom: 12px;
-  color: var(--forest-deep);
+  margin-bottom: 10px;
+  font-weight: 600;
 }
 
-/* Bullet text */
-.e-card .name {
-  font-size: 14px;           /* ⬅ slightly larger text */
-  line-height: 1.65;
-  color: var(--forest-main);
-  font-weight: 500;
+.card p,
+.card li,
+.e-card span {
+  font-size: 14.5px;
+  color: var(--text-soft);
 }
 
-/* Hover effect (FIXED) */
-.e-card:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 18px 36px rgba(30,58,50,0.3);
+.card ul {
+  padding-left: 18px;
 }
 
-/* Disable wave dominance */
+/* ================= WAVES OFF (CLEAN LOOK) ================= */
 .wave {
-  opacity: 0.22;
+  display: none;
 }
 
-/* Mobile adjustment */
+/* ================= MOBILE ================= */
 @media (max-width: 768px) {
-  .e-card {
+  .hero {
+    padding: 80px 15px 60px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .hero-actions a,
+  .role-nav button {
     width: 100%;
-    max-width: 380px;
+    text-align: center;
   }
 }
-/* ===== FORCE SIDE-BY-SIDE INFO CARDS ===== */
-
-.e-card-row {
-  display: flex !important;
-  flex-direction: row !important;
-  justify-content: center;
-  align-items: stretch;
-  gap: 40px;
-  flex-wrap: nowrap;           /* 🔑 THIS fixes stacking */
+/* ================= CTA SECTION ================= */
+.cta {
+  margin: 60px auto 40px;          /* reduced vertical gap */
   max-width: 1100px;
-  margin: 40px auto 60px;
+  padding: 70px 30px;
+  border-radius: 36px;
+
+  background:
+    radial-gradient(600px 300px at 20% 10%, #EAF7F3 0%, transparent 60%),
+    linear-gradient(135deg, #F6FBF9, #FFFFFF);
+
+  text-align: center;
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.411),
+    inset 0 1px 0 rgba(255,255,255,0.9);
 }
 
-/* Ensure cards don’t expand full width */
-.e-card {
-  width: 420px !important;     /* fixed desktop width */
-  max-width: 420px;
-  flex: 0 0 auto;
+.cta h2 {
+  font-size: clamp(30px, 4vw, 44px);
+  font-weight: 800;
+  margin-bottom: 16px;
+  color: var(--text-dark);
+}
+
+.cta p {
+  max-width: 820px;
+  margin: 0 auto 32px;
+  font-size: 16px;
+  color: var(--text-soft);
+}
+
+/* CTA BUTTON */
+.cta .btn-primary,
+.cta a {
+  display: inline-block;
+  padding: 16px 40px;
+  border-radius: 18px;
+
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+
+  box-shadow: 0 18px 45px rgba(15,159,130,0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cta .btn-primary:hover,
+.cta a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 26px 60px rgba(15,159,130,0.45);
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 600px) {
+  .cta {
+    padding: 50px 20px;
+    border-radius: 26px;
+  }
+
+  .cta h2 {
+    font-size: 26px;
+  }
+
+  .cta p {
+    font-size: 15px;
+  }
+
+  .cta a {
+    width: 100%;
+    text-align: center;
+  }
+}
+/* ================= SYSTEM OVERVIEW CONTAINER ================= */
+#system-overview {
+  max-width: 1300px;
+  margin: 40px auto 20px;      /* reduces gap before/after */
+  padding: 60px 40px;
+  border-radius: 32px;
+
+  background:
+    linear-gradient(180deg, #ffffff, #fbfefd);
+
+  border: 1px solid var(--border-soft);
+
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.41),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+
+  text-align: center;
+}
+
+#system-overview h2 {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800;
+  margin-bottom: 16px;
+  color: var(--text-dark);
+}
+
+#system-overview .section-desc,
+#system-overview p {
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 16px;
+  color: var(--text-soft);
+  line-height: 1.8;
+}
+
+/* Subtle top divider glow */
+#system-overview::before {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 3px;
+  margin: 0 auto 22px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--primary),
+    transparent
+  );
+  opacity: 0.6;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+  #system-overview {
+    padding: 45px 22px;
+    border-radius: 24px;
+  }
+}
+/* ================= BUTTON HOVER ANIMATIONS ================= */
+
+/* Common animation base */
+.hero-actions a,
+.role-nav button,
+.btn-primary,
+.btn-secondary {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+/* PRIMARY BUTTON (Get Started) */
+.btn-primary,
+.hero-actions a:first-child,
+.role-nav button:first-child {
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+}
+
+/* Hover effect */
+.btn-primary:hover,
+.hero-actions a:first-child:hover,
+.role-nav button:first-child:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 26px 60px rgba(15,159,130,0.45);
+}
+
+/* Active (click) */
+.btn-primary:active,
+.hero-actions a:first-child:active,
+.role-nav button:first-child:active {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 30px rgba(15,159,130,0.35);
+}
+
+/* SECONDARY BUTTON (Login) */
+.btn-secondary,
+.hero-actions a:last-child,
+.role-nav button:last-child {
+  background: #ffffff;
+  border: 1.5px solid var(--border-soft);
+}
+
+/* Hover effect */
+.btn-secondary:hover,
+.hero-actions a:last-child:hover,
+.role-nav button:last-child:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.12);
+  border-color: var(--primary);
+  color: var(--primary-dark);
+}
+
+/* Active (click) */
+.btn-secondary:active,
+.hero-actions a:last-child:active,
+.role-nav button:last-child:active {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }

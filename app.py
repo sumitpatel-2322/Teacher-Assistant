@@ -13,6 +13,10 @@ from API_routes.crp import router as crp_router
 from API_routes.brp import router as brp_router
 from API_routes.registered import router as registered_router
 from API_routes.solution_details import router as solution_details_router
+from API_routes.micro import router as micro_router
+from API_routes.micro_add import router as micro_add_router
+
+
 
 # ➤ NEW IMPORT
 from API_routes.profile import router as profile_router 
@@ -39,6 +43,8 @@ app.include_router(solution_details_router)
 app.include_router(arp_router)
 app.include_router(crp_router)
 app.include_router(brp_router)
+app.include_router(micro_router)
+app.include_router(micro_add_router)   
 
 # ➤ INCLUDE PROFILE ROUTER
 app.include_router(profile_router)
