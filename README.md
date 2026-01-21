@@ -9,139 +9,216 @@ app_port: 7860
 license: apache-2.0
 short_description: AI-Powered Teacher Assistant
 ---
-# Just in Time Classroom Assistant  
-## Design and Approach Document
+# 🎓 Just-in-Time Classroom Assistant
 
-## 1. Context and Problem Background
+A **deterministic, real-time classroom decision-support system** built for teachers operating under real classroom constraints.
 
-Teachers frequently face high pressure and unpredictable classroom situations where immediate support is needed.  
-Current support structures rely on periodic visits by resource persons, which results in delayed and generic feedback.  
-This gap leaves teachers without actionable guidance during the most critical moments of instruction.  
-Over time, this leads to implementation anxiety, abandonment of innovative practices, and burnout.
+> **Design guarantee:** Given the same input and constraints, the system will always return the same output.
 
 ---
 
-## 2. Core Positioning of the Application
+## 📌 What This System Is — and Is Not
 
-This application is a **Just in Time Classroom Helper**.
+### This system **IS**
+- A just-in-time **classroom panic button**
+- A **deterministic decision engine**, not a chatbot
+- A bridge between **teacher micro-moments** and **academic leadership insight**
+- Designed for **government and low-infrastructure classrooms**
 
-It does not replace teacher training programs, resource persons, or pedagogical frameworks.  
-Instead, it acts as a real time support bridge that extends the intent of teacher training and mentoring into the exact moment when a classroom situation is failing.
+### This system **IS NOT**
+- A generative AI chatbot
+- A counselling or therapy tool
+- A lesson planner or curriculum designer
+- A black-box ML personalization engine
 
----
-
-## 3. Core Design Philosophy
-
-**The teacher is not asking a question. She is reporting a situation.**
-
-Teachers are treated as skilled professionals who require situational support, not evaluation or correction.  
-The assistant responds to classroom breakdowns rather than abstract theoretical doubts.
-
----
-
-## 4. System Thinking Pipeline
-
-Every interaction strictly follows this sequence:
-
-- Situation  
-- Constraints  
-- Immediate Options  
-- Optional Activity
+Clear boundaries ensure safety, predictability, and trust.
 
 ---
 
-## 5. Nature of Teacher Input
+## 📖 Overview
 
-Teacher input may include:
+Teachers face breakdowns **during** teaching, not after workshops.
 
-• Messy and unstructured text or voice input  
-• Grammatically incorrect or mixed language usage  
-• Emotionally loaded or vague descriptions  
-• Explicit mention of failure or urgency  
+The Just-in-Time Classroom Assistant supports teachers in live classroom moments by converting messy, emotional input into **safe, executable actions within seconds**.
 
-The system is designed to work reliably even when the input is imperfect.
-
----
-
-## 6. Classroom Situation Categories
-
-The system identifies one dominant classroom situation per interaction:
-
-• Attention and discipline breakdown  
-• Time pressure situations  
-• Conceptual confusion  
-• Activity failure  
-• Technical breakdown  
-• Student behavior edge cases  
-
-Multiple issues are intentionally not handled together to reduce cognitive load.
+Instead of post-facto feedback, the system provides **micro-interventions** that respect:
+- Time pressure
+- Large class sizes
+- Limited digital infrastructure
+- Zero tolerance for experimentation risk
 
 ---
 
-## 7. Constraint Awareness
+## ⚠️ Problem Statement
 
-Before generating any response, the system evaluates real world classroom constraints such as:
+### Context
+Classroom breakdowns are immediate:
+- Noise escalation
+- Conceptual confusion
+- Student disengagement
+- Time overruns
 
-• Time remaining in the period  
-• Class size and student mix  
-• Grade level  
-• Subject type  
-• Available tools  
+### Why Existing Systems Fail
+- **Delayed**: Feedback arrives days or weeks later  
+- **Generic**: Abstract advice, not executable steps  
+- **Disconnected**: No feedback loop to academic leadership  
 
-Board only conditions are assumed by default.  
-The system never assumes ideal classroom environments.
-
----
-
-## 8. Output Design Rules
-
-All responses strictly follow these rules:
-
-• No fluff or motivational language  
-• No explanation of why a suggestion works  
-• Exactly three to four options per response  
-• Options sorted by efficiency and safety  
-• Every response includes a graceful fallback  
+### Result
+Teachers develop **Implementation Anxiety**, revert to rote methods, and avoid innovation.
 
 ---
 
-## 9. Activities Purpose and Inclusion Logic
+## 🧠 Ground Research & Validation
 
-**Purpose of Activities**
+Before development, we studied the field:
 
-The purpose of an activity is not to teach the concept, but to unstuck the classroom and reset student thinking.
+- Teacher surveys (Google Forms) identifying real breakdown moments
+- Classroom observations in government schools
+- Interviews revealing why existing EdTech tools fail:
+  - Too complex
+  - Internet dependent
+  - High cognitive load
 
-**Activity Rules**
-
-• Activities are never auto suggested  
-• Activities appear only when explicitly requested by the teacher  
-• Only one activity is provided per interaction  
-• Activities are non generic, low risk, and time boxed for three to five minutes  
-
----
-
-## 10. Reference Scenario
-
-**Teacher Input Example**
-
-I have tried explaining Algebra concepts but students are not understanding.
-
-**System Behavior**
-
-The assistant provides immediate, executable options.  
-If the teacher requests an activity, one curiosity driven activity is added to break the stuck pattern rather than repeat explanation.
+**Key insight:**  
+Teachers don’t need intelligence. They need **reliability under pressure**.
 
 ---
 
-## 11. Expected Outcomes
+## 💡 The Solution
 
-This system reduces implementation anxiety and eliminates coaching lag time.  
-It helps teachers retain innovative practices without reverting to rote instruction.  
-It complements existing training and mentoring structures by providing real time, context aware classroom support.
+### For Teachers
+- Voice or text input (messy input allowed)
+- Instant output: **Top 3 low-effort classroom actions**
+- No follow-up questions
+- No explanations
+- Classroom-ready language
+
+### For Academic Leadership (CRP / BRP / ARP)
+- Live dashboards of classroom issues
+- Cluster-wise heat maps
+- Data-backed visit planning
+- Visibility into digital vs physical intervention gaps
 
 ---
 
-## Final Positioning Statement
+## 📚 Knowledge Base & Data Sources
 
-This application is not a trainer, evaluator, or replacement for mentors.  
-It is a reliable, just in time classroom companion that supports teachers at the exact moment they need help.
+All solutions are **pre-validated**, not generated.
+
+Sources include:
+- CBSE Handbooks (official pedagogy)
+- FLN & NEP resources
+- Large-scale scraping of teacher forums (practical edge cases)
+
+This forms a **Solution Library** blending:
+- Pedagogical correctness
+- Field-tested practicality
+
+---
+
+## ⚙️ How the Deterministic Decision Engine Works
+
+### End-to-End Example
+
+**Input**
+> “Students are noisy and don’t understand fractions”
+
+**Detected Signals**
+- NOISE_SPIKE
+- CONCEPT_CONFUSION
+
+**Constraints**
+- No projector
+- Time remaining < 10 minutes
+
+**Output**
+1. Board-based Think–Pair–Explain (fractions)
+2. Fraction voting cards
+3. Silent solve + peer check
+
+---
+
+### Core Pipeline
+
+1. **Input Normalization**
+   - Handles spelling errors, emotion, grammar noise
+
+2. **Signal Extraction**
+   - Rule-based detection (e.g., NOISE_SPIKE, TIME_LOW)
+
+3. **Constraint Filtering**
+   - Infrastructure, time, safety constraints applied
+
+4. **Deterministic Scoring**
+   - Low effort + high safety ranked highest
+
+5. **Solution Selection**
+   - Top 3 distinct solutions retrieved
+   - No hallucination, no free-text generation
+
+---
+
+## 🛡 Failure Modes & Safeguards
+
+- No solution match → fallback to safest generic intervention
+- Overlapping solutions → enforced diversity
+- Vague input → defaults to classroom-safe actions
+- Empty output → impossible by design
+
+---
+
+## 🔄 Administrative Feedback Loop
+
+Teacher → CRP → BRP → ARP
+
+- Teachers report breakdowns
+- CRPs see real-time cluster issues
+- BRPs monitor intervention coverage
+- ARPs identify systemic academic gaps
+
+All logging is silent and non-intrusive.
+
+---
+
+## 🛠 Tech Stack
+
+### Current
+- Backend: FastAPI (Python 3.11)
+- Frontend: Jinja2 + Vanilla JS
+- Database: SQLite (zero-ops, offline-friendly)
+- AI: Whisper/Vosk, HuggingFace (signal detection)
+- Visualization: Chart.js
+
+### Why SQLite First?
+- Zero operational overhead
+- Predictable performance
+- Ideal for school pilots and offline-first deployment
+
+---
+
+## 🔮 Roadmap (Non-Negotiables Included)
+
+- Offline Lite App (text-only, local DB)
+- Vernacular language expansion
+- SLMs for **empathetic acknowledgement only**
+  - Deterministic decision core remains untouched
+
+---
+
+## 🚀 Installation
+
+```bash
+git clone <repo_url>
+pip install -r requirements.txt
+uvicorn app:app --reload
+```
+
+- Teacher Dashboard: http://localhost:8000/dashboard
+- Admin Login: http://localhost:8000/login
+
+---
+
+## 🧭 Design Principle
+
+> Convert real-time classroom chaos into safe, ranked actions — instantly, predictably, and explainably.
+
