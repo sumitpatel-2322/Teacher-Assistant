@@ -229,3 +229,18 @@ uvicorn app:app --reload
 
 > Convert real-time classroom chaos into safe, ranked actions — instantly, predictably, and explainably.
 
+## 📱/🖥️ Here's a preview of our website!
+
+<img width="1919" height="932" alt="Screenshot 2026-01-21 173548" src="https://github.com/user-attachments/assets/8ce54f86-83db-44da-8e22-6965fad21910" />
+
+<img width="1461" height="386" alt="Screenshot 2026-01-21 173614" src="https://github.com/user-attachments/assets/56eeb562-7a01-449b-9387-e56cd10bbca4" />
+
+<img width="1530" height="784" alt="Screenshot 2026-01-21 173633" src="https://github.com/user-attachments/assets/0c5e3896-e2d0-430a-bff1-29b715719126" />
+
+<img width="1509" height="613" alt="Screenshot 2026-01-21 173707" src="https://github.com/user-attachments/assets/f567208c-7a55-4f17-bb1a-87f2cd0317f3" />
+
+<img width="1533" height="603" alt="Screenshot 2026-01-21 173720" src="https://github.com/user-attachments/assets/304fd7b1-2e04-47c5-ab47-43c9715d6ed6" />
+
+<img width="1453" height="635" alt="Screenshot 2026-01-21 173737" src="https://github.com/user-attachments/assets/21d25bf6-6be8-43a6-88cb-747405d5c364" />
+
+---
