@@ -1,3 +1,14 @@
+---
+title: Teacher Assistant
+emoji: 📚
+colorFrom: blue
+colorTo: green
+sdk: docker
+pinned: false
+app_port: 7860
+license: apache-2.0
+short_description: AI-Powered Teacher Assistant
+---
 # Just in Time Classroom Assistant  
 ## Design and Approach Document
 

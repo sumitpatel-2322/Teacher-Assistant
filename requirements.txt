@@ -6,7 +6,7 @@ python-multipart
 gunicorn
 itsdangerous
 websockets
-
+pandas
 # --- AI & LLM Services ---
 groq
 requests
