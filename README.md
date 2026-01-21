@@ -11,6 +11,8 @@ short_description: AI-Powered Teacher Assistant
 ---
 # 🎓 Just-in-Time Classroom Assistant
 
+try it here: https://muxperts-veda.hf.space
+
 A **deterministic, real-time classroom decision-support system** built for teachers operating under real classroom constraints.
 
 > **Design guarantee:** Given the same input and constraints, the system will always return the same output.
