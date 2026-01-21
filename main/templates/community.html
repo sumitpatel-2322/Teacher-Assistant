@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}VEDA - Community{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/community.css">
+{% endblock %}
+
+{% block content %}
+<div class="community-wrapper">
+    <div class="main-layout">
+        <aside class="comm-sidebar">
+            <div class="sidebar-header"><h3>Explore Topics</h3></div>
+            <ul id="tag-list" class="filter-menu">
+                <li class="loading-tags">Loading topics...</li>
+            </ul>
+        </aside>
+
+        <main class="feed">
+            <div class="feed-header">
+                <h2 id="current-topic-title">Recent Discussions</h2>
+                <div class="sort-container">
+                    <select id="sortOrder" onchange="handleSortChange()">
+                        <option value="top_agreed">Top Agreed</option>
+                        <option value="newest">Newest</option>
+                        <option value="oldest">Oldest</option>
+                        <option value="less_agreed">Less Agreed</option>
+                    </select>
+                </div>
+            </div>
+            <div id="feed-container"></div>
+        </main>
+
+        <aside class="widgets">
+            <div class="widget-card ask-box">
+                <h3>Ask the Community</h3>
+                <input type="text" id="postTitle" placeholder="Give your topic a title...">
+                <textarea id="postContent" placeholder="What's on your mind today?"></textarea>
+                <div class="tag-selector">
+                    <label>Tag:</label>
+                    <input list="tag-options" id="postTagInput" placeholder="Choose a topic...">
+                    <datalist id="tag-options"></datalist>
+                </div>
+                <button class="btn-primary" onclick="submitPost()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2L9.19 8.63 2 12l7.19 3.37L12 22l2.81-6.63L22 12l-7.19-3.37L12 2z"/>
+                    </svg> 
+                    Publish Post
+                </button>
+            </div>
+        </aside>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>const USER_NAME = "{{ user.username }}";</script>
+<script src="/static/js/community.js"></script>
+{% endblock %}

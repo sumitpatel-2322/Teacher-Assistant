@@ -1,0 +1,251 @@
+/* --- VEDA COMMUNITY THEME (FINAL ALIGNMENT FIX) --- */
+:root {
+    --veda-primary: #056b64;       
+    --veda-hover: #04524c;
+    --veda-accent: #5CDB95;        
+    --veda-light: #EDF5E1;         
+    
+    --bg-body: #f9fafb;
+    --bg-card: #ffffff;
+    
+    --text-main: #056b64;          
+    --text-body: #2c3e50;
+    --text-muted: #6b7280;
+    
+    --border: #e5e7eb;
+    --shadow: 0 4px 12px rgba(5, 107, 100, 0.1);
+    --radius: 12px;
+    
+    --font-main: 'Inter', sans-serif; 
+    --font-brand: 'Gabriela', serif;
+}
+
+body { font-family: var(--font-main); background-color: var(--bg-body); color: var(--text-body); margin: 0; }
+
+/* --- LAYOUT & SPACING (THE FIX) --- */
+
+.community-wrapper { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    /* THIS FIXES THE UPWARD ISSUE: Pushes content down below the Navbar */
+    padding-top: 85px; 
+    padding-bottom: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.main-layout { 
+    display: grid; 
+    /* Exact proportions from the Blue Theme */
+    grid-template-columns: 240px 1fr 300px; 
+    gap: 30px; 
+    align-items: start; 
+}
+
+/* --- SIDEBAR (Filters) --- */
+.sidebar-header h3 {
+    text-transform: uppercase; font-size: 0.85rem; color: var(--text-muted);
+    letter-spacing: 1px; margin: 0 0 15px 0; padding-bottom: 5px; 
+    border-bottom: 2px solid var(--veda-accent);
+    display: inline-block;
+}
+
+.filter-menu { list-style: none; padding: 0; margin: 0; }
+.filter-menu li {
+    background: #ffffff; border: 1px solid var(--border); border-left: 4px solid var(--border);
+    padding: 12px 16px; margin-bottom: 10px; border-radius: 8px; cursor: pointer;
+    font-weight: 600; font-size: 0.9rem; color: var(--text-body); transition: all 0.2s ease;
+}
+.filter-menu li:hover {
+    transform: translateX(4px); border-left-color: var(--veda-primary);
+    background: var(--veda-light); color: var(--veda-primary);
+}
+.filter-menu li.active {
+    background: var(--veda-primary); color: white; border-color: var(--veda-primary);
+    border-left-color: var(--veda-accent);
+}
+
+/* --- FEED (Center) --- */
+.feed-header { 
+    display: flex; justify-content: space-between; align-items: center; 
+    margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 15px; 
+}
+.feed-header h2 { font-size: 1.6rem; color: var(--text-main); font-family: var(--font-brand); margin: 0; }
+
+.sort-container { display: flex; align-items: center; gap: 10px; }
+.sort-label { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; display: inline-block; }
+select#sortOrder {
+    padding: 8px 12px; border: 2px solid var(--border); border-radius: 8px;
+    background: var(--bg-card); color: var(--text-main); font-weight: 600; cursor: pointer;
+    font-family: var(--font-main);
+}
+select#sortOrder:focus { border-color: var(--veda-primary); outline: none; }
+
+.post-card { background: var(--bg-card); border-radius: var(--radius); padding: 25px; margin-bottom: 25px; box-shadow: var(--shadow); border: 1px solid var(--border); }
+.post-meta { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.badge-tag { background: var(--veda-accent); color: #004d40; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; }
+.post-title { margin: 10px 0; font-size: 1.3rem; font-weight: 700; color: var(--veda-primary); }
+.post-body { line-height: 1.6; font-size: 1rem; margin-bottom: 20px; color: var(--text-body); }
+
+/* --- ACTIONS --- */
+.action-bar { border-top: 1px solid var(--border); padding-top: 15px; display: flex; gap: 10px; flex-wrap: wrap; }
+.btn-vote { 
+    border: none; border-radius: 50px; padding: 8px 18px; 
+    cursor: pointer; font-weight: 600; display: flex; gap: 8px; align-items: center; transition: 0.2s; 
+}
+.vote-agree { background-color: #f0fdf4; color: var(--text-body); } 
+.vote-agree:hover { background-color: var(--veda-light); color: var(--veda-primary); } 
+.vote-agree.active { background-color: var(--veda-primary); color: white; }
+
+.vote-disagree { background-color: #fef2f2; color: var(--text-body); } 
+.vote-disagree:hover { background-color: #fee2e2; color: #b91c1c; }
+.vote-disagree.active { background-color: #ef4444; color: white; }
+
+.btn-text { background: none; border: none; cursor: pointer; color: var(--text-muted); font-weight: 600; display: flex; gap: 6px; align-items: center; font-size: 0.9rem; margin-left: auto; }
+.btn-text:hover { color: var(--veda-primary); }
+
+/* --- COMMENTS (Threaded) --- */
+.comments-section { display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); }
+.comment-thread-line { border-left: 2px solid #e2e8f0; margin-left: 12px; padding-left: 15px; margin-top: 10px; }
+.comment-node { margin-bottom: 12px; margin-top: 10px; }
+.comment-bubble { background: #f8fafc; padding: 10px 15px; border-radius: 8px; border: 1px solid var(--border); }
+.comment-header { font-size: 0.8rem; font-weight: 700; color: var(--veda-primary); margin-bottom: 4px; }
+.replying-to { color: var(--text-muted); font-weight: 400; font-size: 0.75rem; font-style: italic;}
+.reply-link { cursor: pointer; color: var(--veda-primary); font-weight: 700; margin-top: 5px; display: inline-block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;}
+.reply-input-box { margin-top: 10px; display: none; padding-left: 5px; }
+.reply-input-box input { width: 65%; display: inline-block; margin-right: 5px; }
+
+/* --- WIDGETS (Ask Box) --- */
+.widget-card { 
+    background: #ffffff; border-radius: var(--radius); padding: 25px; 
+    box-shadow: var(--shadow); border: 1px solid var(--border); 
+    /* Sticky Fix */
+    position: sticky; top: 100px; 
+    border-top: 4px solid var(--veda-accent); 
+}
+.widget-card h3 { color: var(--veda-primary); margin-top: 0; }
+
+input, textarea { 
+    width: 100%; padding: 12px; margin-bottom: 15px; 
+    border: 2px solid var(--border); border-radius: 8px; 
+    font-family: var(--font-main); box-sizing: border-box; 
+}
+input:focus, textarea:focus { border-color: var(--veda-primary); outline: none; }
+
+.btn-primary { 
+    background: var(--veda-primary); color: white; width: 100%; padding: 12px; 
+    border: none; border-radius: 50px; font-weight: 700; cursor: pointer; 
+    display: flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.2s;
+}
+.btn-primary:hover { background: var(--veda-hover); }
+.btn-small { background: var(--veda-primary); color: white; border: none; padding: 6px 14px; border-radius: 50px; cursor: pointer; font-weight: 600; font-size: 0.8rem; }
+
+/* --- MOBILE OPTIMIZATION (MATCHING BLUE THEME LOGIC) --- */
+@media (max-width: 900px) {
+    .community-wrapper {
+        padding-top: 70px; /* Slightly less on mobile */
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .main-layout { 
+        display: flex; 
+        flex-direction: column; 
+    }
+
+    /* ORDER REARRANGEMENT: Ask Box -> Filters -> Feed */
+    .widgets { 
+        order: 1; 
+        position: static; /* No sticky on mobile */
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    
+    .comm-sidebar { 
+        order: 2; 
+        width: 100%;
+        overflow-x: auto; 
+        white-space: nowrap; 
+        margin-bottom: 20px;
+        padding-bottom: 10px; /* Scrollbar space */
+    }
+    
+    .filter-menu {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .filter-menu li {
+        margin-bottom: 0;
+        min-width: fit-content;
+    }
+
+    .feed { 
+        order: 3; 
+    }
+    
+    .feed-header h2 {
+        font-size: 1.3rem;
+    }
+    
+    .sort-label { display: none; } /* Save space on mobile */
+}
+
+
+/* --- SHARE BUTTON & ACTION BAR FIX --- */
+
+.action-bar {
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+    display: flex;
+    align-items: center; /* Vertically center everything */
+    gap: 8px;            /* Tighter gap to fit everything */
+    flex-wrap: nowrap;   /* TRY to keep on one line */
+    overflow-x: auto;    /* Allow scroll if it REALLY overflows (safety net) */
+    scrollbar-width: none; /* Hide scrollbar for cleaner look */
+}
+
+/* Hide scrollbar for Chrome/Safari */
+.action-bar::-webkit-scrollbar { display: none; }
+
+.btn-vote, .btn-text {
+    border: none;
+    border-radius: 50px;
+    padding: 6px 12px;   /* Slightly more compact padding */
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    transition: 0.2s;
+    white-space: nowrap; /* CRITICAL: Prevents text from breaking */
+    font-size: 0.85rem;  /* Optimal size for mobile & desktop */
+    flex-shrink: 0;      /* Prevent buttons from getting squished */
+}
+
+/* Specific fix for the Share button to align perfectly right if needed, 
+   or just sit nicely in the flow */
+.btn-text {
+    background: transparent;
+    color: var(--text-muted);
+}
+.btn-text:hover {
+    background-color: var(--veda-light);
+    color: var(--veda-primary);
+}
+
+/* Mobile Optimization for Action Bar */
+@media (max-width: 600px) {
+    .action-bar {
+        justify-content: space-between; /* Distribute space evenly */
+        gap: 4px; /* Tight gap on small screens */
+    }
+    
+    .btn-vote, .btn-text {
+        padding: 6px 10px; /* Compact mobile padding */
+        font-size: 0.8rem;
+    }
+    
+    /* Optional: Hide the word 'Share' on very small screens if you want icon only?
+       For now, we keep it but ensure it fits. */
+}
