@@ -220,7 +220,7 @@ uvicorn app:app --reload
 
 - Teacher Dashboard: http://localhost:8000/dashboard
 - Admin Login: http://localhost:8000/login
-
+- This changes is for the a feature of using microphone this is demo for the project the online site does not contain this feature yet because the microphone and speech to text need heavy models power processiing since that feature is not included yet,But you can access it via this above installation.
 ---
 
 ## 🧭 Design Principle
