@@ -206,7 +206,12 @@ All logging is silent and non-intrusive.
 ---
 
 ## 🚀 Installation
-
+First edit the requirements.txt uncomment these three lines then follow the steps below it.(remove #)
+```
+# torch
+# torchvision
+# torchaudio #(for deployment purpose)
+```
 ```bash
 git clone <repo_url>
 pip install -r requirements.txt
