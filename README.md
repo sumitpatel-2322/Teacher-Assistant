@@ -249,3 +249,14 @@ uvicorn app:app --reload
 <img width="1453" height="635" alt="Screenshot 2026-01-21 173737" src="https://github.com/user-attachments/assets/21d25bf6-6be8-43a6-88cb-747405d5c364" />
 
 ---
+
+
+## 🌐 The VEDA Community
+- The VEDA Community is the VEDA Community Hub is a secure, collaborative space where educators can crowd-source solutions to real-time classroom challenges, validate pedagogical strategies through peer consensus, and leverage threaded discussions to turn individual experiences into a shared intelligence network—all powered by a deterministic, transparent decision engine.
+---
+Here's the preview:-
+---
+
+<img width="1918" height="937" alt="Screenshot 2026-01-22 211816" src="https://github.com/user-attachments/assets/9c23f5fb-57b5-4227-95b8-750a8cd7970f" />
+
+---
