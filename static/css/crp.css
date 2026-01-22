@@ -1,0 +1,343 @@
+* { 
+  box-sizing: border-box; 
+  margin:0; 
+  padding:0; 
+  font-family:'Inter', sans-serif; 
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background:#ffffff !important;
+  color:#1E3A32
+}
+
+
+/* Header */
+header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 15px 20px; 
+    background:#4c8e7ab5; 
+    border-radius: 12px; 
+    margin: 20px auto; 
+    width: 100%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+    flex-wrap: wrap; 
+    margin-top: 50px; 
+}
+
+.header-left { 
+  display:flex; 
+  align-items:center; 
+  gap:15px; 
+  flex-wrap: wrap; 
+}
+
+.header-left img { 
+  width:50px; 
+  height:50px; 
+  border-radius:50%; 
+}
+
+.header-left .title { 
+  font-size:20px; 
+  font-weight:600; 
+}
+
+.header-left .subtitle { 
+  font-size:12px; 
+  color:#07231e; 
+}
+
+.header-right img { 
+  width:40px; 
+  height:40px; 
+  border-radius:50%; 
+  margin-top:10px; 
+}
+
+/* Section Title */
+.section-title {
+  max-width:95%;
+  margin:30px auto 15px;
+  font-size:18px;
+  font-weight:600;
+  text-align:center;
+  color:#1E3A32
+}
+
+/* Actions */
+.actions {
+  max-width:95%;
+  margin:20px auto 40px;
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap: wrap;
+}
+
+.actions button {
+  padding:10px 18px;
+  font-size:14px;
+  border:none;
+  border-radius:6px;
+  background: #6F9E8F;
+  color:#1E3A32;
+  cursor:pointer;
+  font-weight:600;
+  transition:0.3s;
+}
+
+.actions button:hover { 
+  background:#8EE4AF; 
+}
+
+/* Teacher Dropdown */
+#teacherDropdown {
+  width:90%;
+  max-width:400px;
+  padding:10px;
+  border-radius:6px;
+  border:1px solid #379683;
+  font-size:14px;
+  color:#05386B;
+}
+
+
+
+/* Responsive */
+@media screen and (max-width:768px){
+  header { margin-top: 80px; }
+  .section-title { font-size:16px; }
+  .actions button { padding:8px 12px; font-size:13px; }
+}
+
+#mySidepanel {
+  width: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  z-index: 9999;
+  transition: width 0.45s ease;
+}
+
+#mySidepanel .sidebar-close {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+  font-size: 26px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.page-content {
+    flex: 1; 
+}
+/* ================= TEACHER DROPDOWN ================= */
+
+.teacher-dropdown-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+#teacherDropdown {
+  width: 90%;
+  max-width: 420px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1.5px solid #000000;
+  background: #ffffff;
+  color: #1E3A32;
+  font-size: 14px;
+  outline: none;
+}
+/* ================= MODERN CHART LAYOUT ================= */
+
+.charts-grid {
+  max-width: 900px;
+  margin: 0 auto 50px;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 20px;
+}
+
+.chart-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 6px 16px rgba(30,58,50,0.12);
+}
+
+.chart-card.small {
+  height: 220px;
+}
+
+.chart-card.wide {
+  height: 220px;
+}
+
+.chart-card canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+
+.app-footer {
+  margin-top: auto;
+}
+/* ================= UPLOAD MODAL ================= */
+/* =====================================================
+   MODAL OVERLAY (UPLOAD + SCHEDULE)
+===================================================== */
+
+.upload-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(3px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* =====================================================
+   MODAL CARD (COMMON)
+===================================================== */
+
+.upload-card {
+  background: #F7F9F7;
+  width: 92%;
+  max-width: 460px;
+  padding: 26px 28px;
+  border-radius: 18px;
+  box-shadow:
+    0 25px 55px rgba(30, 58, 50, 0.35),
+    0 10px 25px rgba(30, 58, 50, 0.2);
+  animation: modalPop 0.25s ease-out;
+}
+
+/* Animation */
+@keyframes modalPop {
+  from {
+    transform: translateY(14px) scale(0.96);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* =====================================================
+   MODAL TITLE
+===================================================== */
+
+.upload-card h3 {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1E3A32;
+  margin-bottom: 18px;
+}
+
+/* =====================================================
+   LABELS
+===================================================== */
+
+.modal-label {
+  display: block;
+  margin: 14px 0 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1E3A32;
+}
+
+/* =====================================================
+   INPUTS / SELECT / TEXTAREA
+===================================================== */
+
+.upload-card select,
+.upload-card input,
+.upload-card textarea {
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 10px;
+  border: 1.5px solid #6F9E8F;
+  background: #ffffff;
+  font-size: 14px;
+  color: #1E3A32;
+  outline: none;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.upload-card textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.upload-card select:focus,
+.upload-card input:focus,
+.upload-card textarea:focus {
+  border-color: #2F5D50;
+  box-shadow: 0 0 0 2px rgba(47, 93, 80, 0.18);
+}
+
+/* =====================================================
+   ACTION BUTTONS
+===================================================== */
+
+.upload-actions {
+  display: flex;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.upload-actions button {
+  flex: 1;
+  padding: 12px 0;
+  border-radius: 12px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Cancel Button */
+.upload-actions button[type="button"] {
+  background: #E6ECE8;
+  color: #1E3A32;
+}
+
+.upload-actions button[type="button"]:hover {
+  transform: translateY(-1px);
+}
+
+/* Submit Button */
+.upload-actions button[type="submit"] {
+  background: #2F5D50;
+  color: #ffffff;
+  box-shadow: 0 8px 18px rgba(47, 93, 80, 0.35);
+}
+
+.upload-actions button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(47, 93, 80, 0.45);
+}
+
+/* =====================================================
+   MOBILE REFINEMENT
+===================================================== */
+
+@media (max-width: 768px) {
+  .upload-card {
+    width: 95%;
+    padding: 22px;
+  }
+}

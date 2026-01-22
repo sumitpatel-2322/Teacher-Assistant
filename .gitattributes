@@ -1,0 +1,10 @@
+speech/** !text !filter !merge !diff
+speech/models/**/*.mdl filter=lfs diff=lfs merge=lfs -text
+speech/models/**/*.fst filter=lfs diff=lfs merge=lfs -text
+static/micro_uploads/*.pdf filter=lfs diff=lfs merge=lfs -text
+*.mdl filter=lfs diff=lfs merge=lfs -text
+*.fst filter=lfs diff=lfs merge=lfs -text
+*.pdf filter=lfs diff=lfs merge=lfs -text
+solutions/__pycache__/solutions.cpython-311.pyc filter=lfs diff=lfs merge=lfs -text
+solutions/__pycache__/solutions.cpython-313.pyc filter=lfs diff=lfs merge=lfs -text
+static/img/model_architecture.png filter=lfs diff=lfs merge=lfs -text

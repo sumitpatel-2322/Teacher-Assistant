@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block title %}Add Micro Learning | VEDA{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/micro_add.css">
+<style>
+    /* FIX: Push content down so it's not hidden behind the Navbar */
+    .micro-add-page {
+        max-width: 800px;
+        margin: 90px auto 40px; /* 90px Top to clear header */
+        padding: 20px;
+    }
+
+    /* UNIFIED WELCOME BLOCK STYLE */
+    .welcome-section {
+        background-color: white;
+        padding: 20px 25px;
+        border-radius: 10px;
+        margin-bottom: 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        border-left: 5px solid #5CDB95;
+    }
+    .welcome-text h2 {
+        margin: 0;
+        color: #05386B;
+        font-size: 26px;
+        font-family: 'Poppins', sans-serif;
+    }
+    .welcome-text p {
+        margin: 5px 0 0;
+        color: #888;
+        font-size: 14px;
+    }
+    .profile-shortcut {
+         text-decoration: none;
+         transition: transform 0.2s;
+         display: block;
+    }
+    .profile-shortcut:hover {
+         transform: scale(1.05);
+    }
+    .user-avatar-large {
+         width: 55px; 
+         height: 55px; 
+         background: #05386B; 
+         color: #5CDB95; 
+         border-radius: 50%; 
+         display: flex; 
+         align-items: center; 
+         justify-content: center; 
+         font-weight: 700; 
+         font-size: 24px; 
+         border: 3px solid #EDF5E1;
+         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="micro-add-page">
+
+  <div class="welcome-section">
+      <div class="welcome-text">
+          <h2>Add Content</h2>
+          <p>Create short, focused learning resources for teachers</p>
+      </div>
+      
+      {% if user and request.url.path != '/profile' %}
+      <a href="/profile" class="profile-shortcut" title="Open My Profile">
+          <div class="user-avatar-large">
+              {{ user.name[0] | upper if user.name else 'U' }}
+          </div>
+      </a>
+      {% endif %}
+  </div>
+
+  <form class="micro-add-form" method="post" enctype="multipart/form-data">
+
+    <div class="form-group">
+      <label>Title</label>
+      <input type="text" name="title" placeholder="e.g. Photosynthesis – Core Concept" required>
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <textarea name="description" placeholder="Short explanation of the micro learning content" required></textarea>
+    </div>
+
+    <div class="form-grid">
+
+      <div class="form-group">
+        <label>Class</label>
+        <select name="class" required>
+          <option value="">Select Class</option>
+          <option>Class 6</option>
+          <option>Class 7</option>
+          <option>Class 8</option>
+          <option>Class 9</option>
+          <option>Class 10</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Subject</label>
+        <select name="subject" required>
+          <option value="">Select Subject</option>
+          <option>Mathematics</option>
+          <option>Science</option>
+          <option>Biology</option>
+          <option>Physics</option>
+          <option>Chemistry</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Content Type</label>
+        <select name="content_type" required>
+          <option value="">Select Type</option>
+          <option value="video">Video</option>
+          <option value="pdf">PDF</option>
+          <option value="image">Image</option>
+          <option value="document">Document</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Estimated Time</label>
+        <input type="text" name="duration" placeholder="e.g. 3 min" required>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <label>Upload File</label>
+      <input type="file" name="file" required>
+      <small>Supported: PDF, MP4, Images, Docs</small>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn-primary">Save Micro Content</button>
+      <a href="/micro" class="btn-secondary">Cancel</a>
+    </div>
+
+  </form>
+
+</div>
+
+{% endblock %}

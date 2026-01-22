@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block title %}Micro Learning | VEDA{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/micro.css">
+<style>
+    /* FIX: Push content down so it's not hidden behind the Navbar */
+    .micro-page {
+        max-width: 1200px;
+        margin: 90px auto 40px; /* 90px Top to clear header */
+        padding: 20px;
+    }
+
+    /* UNIFIED WELCOME BLOCK STYLE */
+    .welcome-section {
+        background-color: white;
+        padding: 20px 25px;
+        border-radius: 10px;
+        margin-bottom: 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        border-left: 5px solid #5CDB95;
+    }
+    .welcome-text h2 {
+        margin: 0;
+        color: #05386B;
+        font-size: 26px;
+        font-family: 'Poppins', sans-serif;
+    }
+    .welcome-text p {
+        margin: 5px 0 0;
+        color: #888;
+        font-size: 14px;
+    }
+    
+    /* Profile Icon Styles */
+    .profile-shortcut {
+         text-decoration: none;
+         transition: transform 0.2s;
+         display: block;
+    }
+    .profile-shortcut:hover {
+         transform: scale(1.05);
+    }
+    .user-avatar-large {
+         width: 55px; 
+         height: 55px; 
+         background: #05386B; 
+         color: #5CDB95; 
+         border-radius: 50%; 
+         display: flex; 
+         align-items: center; 
+         justify-content: center; 
+         font-weight: 700; 
+         font-size: 24px; 
+         border: 3px solid #EDF5E1;
+         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    /* Empty State Styling */
+    .empty-state {
+        text-align: center;
+        padding: 40px;
+        color: #888;
+        background: white;
+        border-radius: 10px;
+        grid-column: 1 / -1;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="micro-page">
+
+  <div class="welcome-section">
+      <div class="welcome-text">
+          <h2>Community Resources</h2>
+          <p>Quick, focused learning resources curated for teaching clarity</p>
+      </div>
+      
+      {% if user and request.url.path != '/profile' %}
+      <a href="/profile" class="profile-shortcut" title="Open My Profile">
+          <div class="user-avatar-large">
+              {{ user.name[0] | upper if user.name else 'U' }}
+          </div>
+      </a>
+      {% endif %}
+  </div>
+
+  <div class="micro-search">
+    <input type="text" placeholder="Search micro lessons, topics, or concepts…">
+    <button class="micro-search-btn">Search</button>
+  </div>
+
+
+  <section class="micro-content-grid">
+
+    {% if contents %}
+        {% for item in contents %}
+        <article class="micro-card">
+          <div class="micro-icon {{ item.content_type }}">
+            {% if item.content_type == 'video' %}🎥
+            {% elif item.content_type == 'pdf' %}📄
+            {% elif item.content_type == 'image' %}🖼️
+            {% else %}📁
+            {% endif %}
+          </div>
+
+          <div class="micro-info">
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
+
+            <div class="micro-meta">
+              <span>⏱ {{ item.duration }}</span>
+              <span>📘 {{ item.class_level }}</span>
+              <span style="background:#eee; padding:2px 6px; border-radius:4px; font-size:11px;">{{ item.subject }}</span>
+            </div>
+          </div>
+
+          <a href="{{ item.file_path }}" target="_blank" class="micro-open-btn" style="text-decoration:none; text-align:center;">
+              Open
+          </a>
+        </article>
+        {% endfor %}
+    
+    {% else %}
+        <div class="empty-state">
+            <h3>No resources found yet.</h3>
+            <p>Be the first to upload content via the ARP Dashboard!</p>
+        </div>
+    {% endif %}
+
+  </section>
+
+</div>
+<script src="/static/js/micro.js"></script>
+
+{% endblock %}

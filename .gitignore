@@ -1,0 +1,10 @@
+venv/
+.venv/
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+decision_engine/raw_text/data
+decision_engine/logs/decision_logs.csv
+speech/models/
+.env

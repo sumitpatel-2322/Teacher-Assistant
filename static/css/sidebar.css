@@ -1,0 +1,127 @@
+/* --- NAVIGATION BAR --- */
+nav {
+  width: 100%;
+  background:#0F9F82 !important;/* */
+  color: #EDF5E1;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1003;
+  height: 50px;
+}
+
+.logo {
+  font-family: 'Courgette', cursive !important;
+  font-size: 32px;
+  font-weight: 400 !important;
+  letter-spacing: 1px; 
+  color: #ffffff;
+  display: inline-block;
+  line-height: 1.2;
+}
+
+.hamburger {
+  font-size: 30px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #EDF5E1;
+  padding: 10px 15px;
+}
+
+/* --- SIDEPANEL CONTAINER (DARK MODE) --- */
+#mySidepanel {
+  width: 0; /* Controlled by JS */
+  position: fixed;
+  top: 50px;
+  right: 0;
+  z-index: 9999;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  padding-top: 60px;
+  height: calc(100vh - 50px);
+  /* Using Deep Navy for a unified look */
+  background:#0F9F82; 
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  border-top-left-radius: 24px;
+  border-bottom-left-radius: 24px;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+}
+
+/* --- NAVIGATION LINKS --- */
+#mySidepanel a {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  margin: 4px 12px;
+  /* Light Mint text for readability on Dark Navy */
+  color: #EDF5E1; 
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 12px;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+/* Hover State */
+#mySidepanel a:hover {
+  background: rgba(255, 255, 255, 0.1); /* Subtle white glow */
+  transform: translateX(-5px);
+  color: #ffffff;
+}
+
+/* Active State */
+#mySidepanel a.active {
+  background: #38A169; /* Use the Emerald green for active state */
+  color: #ffffff;
+}
+
+#mySidepanel a.active .nav-icon {
+  color: #ffffff;
+}
+
+/* --- LOGOUT SECTION --- */
+#mySidepanel .logout-link {
+  margin-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 20px;
+}
+
+/* --- ICONS AND WRAPPERS --- */
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  color: #EDF5E1; /* Matching icon color to light text */
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Close Button (X) */
+#mySidepanel .sidebar-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  color: #EDF5E1;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+#mySidepanel .sidebar-close:hover {
+  opacity: 1;
+}

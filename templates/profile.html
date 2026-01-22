@@ -1,0 +1,249 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile - VEDA{% endblock %}
+
+{% block extra_css %}
+<style>
+    .profile-container {
+        max-width: 800px;
+        margin: 40px auto;
+        background: white;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border: 1px solid #e0e0e0;
+    }
+
+    .profile-header {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        border-bottom: 2px solid #f0f0f0;
+        padding-bottom: 30px;
+        margin-bottom: 30px;
+    }
+
+    .avatar-circle-large {
+        width: 100px;
+        height: 100px;
+        background: #05386B;  
+        color: #5CDB95;
+        font-size: 42px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: 4px solid #EDF5E1;
+    }
+
+    .profile-title h2 {
+        margin: 0;
+        font-size: 32px;
+        color: #05386B;  
+    }
+
+    .profile-title p {
+        margin: 5px 0 0;
+        color: #379683;
+        font-weight: 600;
+        font-size: 18px;
+    }
+    
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+    }
+    
+    .form-group label {
+        display: block;
+        font-size: 13px;
+        color: #666;
+        margin-bottom: 8px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+    
+    .form-control {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #eee;
+        border-radius: 8px;
+        font-size: 16px;
+        color: #333;
+        transition: border-color 0.3s;
+    }
+
+    .form-control:focus {
+        border-color: #5CDB95;
+        outline: none;
+    }
+
+    .form-control[readonly] {
+        background-color: #f8f9fa;
+        color: #888;
+        cursor: not-allowed;
+        border-color: #f0f0f0;
+    }
+
+    .btn-save {
+        background-color: #05386B;
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 30px;
+        transition: background 0.3s;
+    }
+
+    .btn-save:hover {
+        background-color: #379683;
+    }
+
+    .logout-btn {
+        float: right;
+        margin-top: 35px;
+        color: #e74c3c;
+        text-decoration: none;
+        font-weight: 600;
+        border: 2px solid #e74c3c;
+        padding: 8px 16px;
+        border-radius: 6px;
+        transition: all 0.3s;
+    }
+
+    .logout-btn:hover {
+        background: #e74c3c;
+        color: white;
+    }
+
+    /* Message Alert */
+    .alert {
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    .alert-success { background: #d4edda; color: #155724; }
+    .alert-error { background: #f8d7da; color: #721c24; }
+
+    @media (max-width: 600px) {
+        .form-grid { grid-template-columns: 1fr; }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-wrapper" style="padding-top: 50px;">
+    
+    <div class="profile-container">
+        
+        {% if request.query_params.get('success') %}
+        <div class="alert alert-success">✅ Profile Updated Successfully!</div>
+        {% endif %}
+        {% if request.query_params.get('error') %}
+        <div class="alert alert-error">❌ Update Failed. Please try again.</div>
+        {% endif %}
+
+        <div class="profile-header">
+            <div class="avatar-circle-large">
+                {{ profile.name[0] | upper }}
+            </div>
+            <div class="profile-title">
+                <h2>{{ profile.name }}</h2>
+                <p>{{ role }} | {{ profile.employee_id }}</p>
+            </div>
+        </div>
+
+        <form action="/profile/update" method="POST">
+            
+            <div class="form-grid">
+                
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" name="name" class="form-control" value="{{ profile.name }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email ID</label>
+                    <input type="email" class="form-control" value="{{ profile.email }}" readonly>
+                </div>
+
+                {% if role == 'TEACHER' %}
+                    <div class="form-group">
+                        <label>School UDISE</label>
+                        <input type="text" class="form-control" value="{{ profile.school_udise }}" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Preferred Language</label>
+                        <select name="preferred_language" class="form-control">
+                            <option value="english" {% if profile.preferred_language == 'english' %}selected{% endif %}>English</option>
+                            <option value="hindi" {% if profile.preferred_language == 'hindi' %}selected{% endif %}>Hindi</option>
+                            <option value="marathi" {% if profile.preferred_language == 'marathi' %}selected{% endif %}>Marathi</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Subjects</label>
+                        <input type="text" name="subjects" class="form-control" value="{{ profile.subjects }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Classes</label>
+                        <input type="text" name="classes" class="form-control" value="{{ profile.classes }}">
+                    </div>
+
+                {% elif role == 'CRP' %}
+                    <div class="form-group">
+                        <label>Assigned Block</label>
+                        <input type="text" class="form-control" value="{{ profile.assigned_block }}" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Domain</label>
+                        <input type="text" name="domain" class="form-control" value="{{ profile.domain }}">
+                    </div>
+
+                {% elif role == 'BRP' %}
+                    <div class="form-group">
+                        <label>Assigned Block</label>
+                        <input type="text" class="form-control" value="{{ profile.assigned_block }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Domain</label>
+                        <input type="text" name="domain" class="form-control" value="{{ profile.domain }}">
+                    </div>
+
+                {% elif role == 'ARP' %}
+                    <div class="form-group">
+                        <label>Assigned Block</label>
+                        <input type="text" class="form-control" value="{{ profile.assigned_block }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Specialization</label>
+                        <input type="text" name="specialization" class="form-control" value="{{ profile.specialization }}">
+                    </div>
+                {% endif %}
+
+            </div>
+
+            <button type="submit" class="btn-save">💾 Save Changes</button>
+            <a href="/logout" class="logout-btn">Logout</a>
+
+        </form>
+
+        <div style="margin-top: 20px;">
+            {% if role == 'TEACHER' %}
+            <a href="/teacher" style="text-decoration: none; color: #555;">← Back to Dashboard</a>
+            {% else %}
+            <a href="/{{ role|lower }}" style="text-decoration: none; color: #555;">← Back to Dashboard</a>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+{% endblock %}

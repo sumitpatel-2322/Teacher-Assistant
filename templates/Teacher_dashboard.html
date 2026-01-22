@@ -1,0 +1,229 @@
+{% extends "base.html" %}
+
+{% block title %}Teacher Dashboard - VEDA{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/dashboard_chat.css">
+<link rel="stylesheet" href="/static/css/footer.css">
+<style>
+    /* UNIFIED WELCOME BLOCK STYLE */
+    .welcome-section {
+        background-color: white;
+        padding: 20px 25px;
+        border-radius: 10px;
+        margin-bottom: 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        border-left: 5px solid #5CDB95;
+    }
+    .welcome-text h2 {
+        margin: 0;
+        color: #05386B;
+        font-size: 26px;
+        font-family: 'Poppins', sans-serif;
+    }
+    .welcome-text p {
+        margin: 5px 0 0;
+        color: #888;
+        font-size: 14px;
+    }
+    
+    /* Profile Icon Styles */
+    .profile-shortcut {
+         text-decoration: none;
+         transition: transform 0.2s;
+         display: block;
+    }
+    .profile-shortcut:hover {
+         transform: scale(1.05);
+    }
+    .user-avatar-large {
+         width: 55px; 
+         height: 55px; 
+         background: #05386B; 
+         color: #5CDB95; 
+         border-radius: 50%; 
+         display: flex; 
+         align-items: center; 
+         justify-content: center; 
+         font-weight: 700; 
+         font-size: 24px; 
+         border: 3px solid #EDF5E1;
+         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    /* Container for Toggle + Profile Icon */
+    .header-right-controls {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-wrapper">
+    
+    <div class="notice-bar">
+        <button class="notice-btn" id="openNoticeBtn">
+            📢 Notices 
+            {% if notices|length > 0 %}
+            <span style="background:red; color:white; border-radius:50%; padding:2px 6px; font-size:12px;">{{ notices|length }}</span>
+            {% endif %}
+        </button>
+    </div>
+
+    <div id="notice-panel" class="notice-panel">
+      <div class="notice-header">
+        <span>📢 School Notices</span>
+        <button id="closeNotice">✕</button>
+      </div>
+
+      <div class="notice-content">
+        {% if notices %}
+            {% for notice in notices %}
+            <div style="border-bottom:1px solid #eee; padding: 10px 0;">
+                <strong style="color: #05386B; display:block;">
+                    {% if notice.type == 'Visit' %}📅{% else %}📄{% endif %} {{ notice.title }}
+                </strong>
+                <span style="color: #555; font-size: 0.9em;">{{ notice.content }}</span>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p style="color:#777;">No new notices for your school.</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="dashboard-container">
+        
+        <div class="welcome-section">
+            <div class="welcome-text">
+                <h2>👋 Hello, {{ user.name }}</h2>
+                <p>I am here to help. Select your class context and ask away.</p>
+            </div>
+            
+            <div class="header-right-controls">
+                <div class="toggle-container">
+                    <label class="switch">
+                        <input type="checkbox" id="toggleStatus">
+                        <span class="slider"></span>
+                    </label>
+                    <span class="status offline" id="statusText">Offline</span>
+                </div>
+
+                {% if user %}
+                <a href="/profile" class="profile-shortcut" title="Open My Profile">
+                    <div class="user-avatar-large">
+                        {{ user.name[0] | upper }}
+                    </div>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="main-layout">
+            
+            <div class="left-sidebar">
+                
+                <div class="context-stack">
+                    <label>Context Selection</label>
+                    <select id="classSelect" class="ctx-dropdown">
+                        <option value="">Select Class</option>
+                        {% for c in ["Class 1","Class 2","Class 3","Class 4","Class 5","Class 6","Class 7","Class 8","Class 9","Class 10"] %}
+                            <option value="{{ c }}" {% if prefill and prefill.class == c %}selected{% endif %}>{{ c }}</option>
+                        {% endfor %}
+                    </select>
+                    
+                    <select id="subjectSelect" class="ctx-dropdown" {% if not prefill or not prefill.subject %}disabled{% endif %}>
+                        <option value="{{ prefill.subject if prefill else '' }}">{{ prefill.subject if prefill and prefill.subject else 'Subject' }}</option>
+                    </select>
+
+                    <select id="topicSelect" class="ctx-dropdown" disabled>
+                        <option value="">Topic (Optional)</option>
+                    </select>
+                </div>
+
+                <div class="feedback-box">
+                    <h3>Feedback</h3>
+                    <textarea placeholder="Tell us how to improve..."></textarea>
+                    <button class="submit-fb-btn">Submit</button>
+                </div>
+            </div>
+
+            <div class="right-chat-area">
+                <div id="chat-window" class="chat-window">
+                    <div class="message bot-msg">
+                        <div class="bubble">
+                            Hello! Please confirm your Class and Subject on the left, then type your query below.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-area">
+                    <div class="input-wrapper">
+                        <textarea id="userQuery" placeholder="Type your doubt here..." rows="1"></textarea>
+                        <div id="voiceLoader" style="display:none;"></div>
+                        
+                        <button type="button" class="mic-btn" aria-label="Voice input" id="micBtn">
+                          <svg viewBox="0 0 24 24" width="18" height="18">
+                            <path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z" fill="currentColor"/>
+                            <path d="M19 11a1 1 0 1 0-2 0 5 5 0 0 1-10 0 1 1 0 1 0-2 0 7 7 0 0 0 6 6.92V20h2v-2.08A7 7 0 0 0 19 11z" fill="currentColor"/>
+                          </svg>
+                        </button>
+
+                        <button id="sendBtn" class="send-btn">➤</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button id="fabHelp" class="fab-help" title="Ask an Expert">
+    ❓ Help
+</button>
+
+<div id="helpModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h3>👨‍🏫 Ask an Expert</h3>
+        <p>Describe your issue specifically for the CRP.</p>
+        <textarea id="escalateInput" rows="4" placeholder="I need help with..."></textarea>
+        <button id="submitEscalation" class="modal-submit-btn">Send to CRP</button>
+    </div>
+</div>
+
+<template id="solution-template">
+    <div class="solution-grid"></div>
+</template>
+{% endblock %}
+
+{% block scripts %} 
+<script>
+    window.userPreferredLanguage = "{{ prefill.language }}";
+</script>
+<script src="/static/js/sub.js"></script>
+<script src="/static/js/dashboard_chat.js"></script> 
+<script src="/static/js/voice_input.js"></script>
+<script>
+    const noticePanel = document.getElementById('notice-panel');
+    const openBtn = document.getElementById('openNoticeBtn');
+    const closeBtn = document.getElementById('closeNotice');
+    if(openBtn) {
+        openBtn.addEventListener('click', () => {
+            noticePanel.classList.add('active'); 
+            noticePanel.style.display = 'block'; 
+            noticePanel.style.right = '0';
+        });
+    }
+    if(closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            noticePanel.classList.remove('active');
+            noticePanel.style.display = 'none';
+        });
+    }
+</script>
+{% endblock %}

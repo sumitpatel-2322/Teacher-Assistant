@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+
+{% block title %}ARP Dashboard - VEDA{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="static/css/arp.css">
+  <style>
+      /* FIX: Push content down */
+      .page-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          margin-top: 90px; /* Added top margin */
+          padding: 20px;
+      }
+
+      /* UNIFIED WELCOME BLOCK STYLE */
+      .welcome-section {
+        background-color: white;
+        padding: 20px 25px;
+        border-radius: 10px;
+        margin-bottom: 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        border-left: 5px solid #5CDB95;
+      }
+      .welcome-text h2 {
+        margin: 0;
+        color: #05386B;
+        font-size: 26px;
+        font-family: 'Poppins', sans-serif;
+      }
+      .welcome-text p {
+        margin: 5px 0 0;
+        color: #888;
+        font-size: 14px;
+      }
+      .profile-shortcut {
+         text-decoration: none;
+         transition: transform 0.2s;
+         display: block;
+      }
+      .profile-shortcut:hover {
+         transform: scale(1.05);
+      }
+      .user-avatar-large {
+         width: 55px; 
+         height: 55px; 
+         background: #05386B; 
+         color: #5CDB95; 
+         border-radius: 50%; 
+         display: flex; 
+         align-items: center; 
+         justify-content: center; 
+         font-weight: 700; 
+         font-size: 24px; 
+         border: 3px solid #EDF5E1;
+         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      }
+  </style>
+{% endblock %}
+
+{% block content %}
+
+<div class="page-container">
+
+  <div class="welcome-section">
+      <div class="welcome-text">
+          <h2>Welcome, {{ user.name }}</h2>
+          <p>Virtual Educator And Digital Assistant</p>
+      </div>
+      
+      {% if user %}
+      <a href="/profile" class="profile-shortcut" title="Open My Profile">
+          <div class="user-avatar-large">
+            {{ user.name[0] | upper }}
+          </div>
+      </a>
+      {% endif %}
+  </div>
+
+  <div class="section-title">Select School</div>
+  <div class="teacher-dropdown-wrapper">
+    <select id="schoolSelect" onchange="fetchArpStats()">
+      <option value="">All Schools (Global Stats)</option>
+      {% for s in schools %}
+        <option value="{{ s.udise }}">{{ s.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="section-title">ARP Actions</div>
+  <div class="actions">
+    <button>Upload Subject Models</button>
+
+    <a href="/micro_add" class="action-btn">
+      Add Micro-Learning
+    </a>
+
+    <button>Improve Teaching Strategies</button>
+  </div>
+
+  <div class="section-title">Teacher Performance Overview</div>
+  <div class="charts-grid">
+    <div class="chart-card small">
+      <h4 style="text-align:center; color:#05386B; margin-bottom:10px;">Success Rate</h4>
+      <canvas id="completionDonut"></canvas>
+    </div>
+    <div class="chart-card wide">
+      <h4 style="text-align:center; color:#05386B; margin-bottom:10px;">Top Problem Areas</h4>
+      <canvas id="teacherHistogram"></canvas>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <script>
+    let pieChartInstance = null;
+    let barChartInstance = null;
+
+    // 1. Fetch Function (Targets ARP API)
+    async function fetchArpStats() {
+        const schoolId = document.getElementById('schoolSelect').value;
+        let url = '/api/arp/stats';
+        
+        // Append query param if a school is selected
+        if (schoolId) {
+            url += `?school_id=${schoolId}`;
+        }
+
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            renderCharts(data);
+        } catch (error) {
+            console.error("Error fetching ARP stats:", error);
+        }
+    }
+
+    // 2. Render Charts
+    function renderCharts(data) {
+        const ctxPie = document.getElementById('completionDonut').getContext('2d');
+        const ctxBar = document.getElementById('teacherHistogram').getContext('2d');
+
+        // Destroy old charts to prevent overlapping
+        if (pieChartInstance) pieChartInstance.destroy();
+        if (barChartInstance) barChartInstance.destroy();
+
+        // -- Pie Chart --
+        pieChartInstance = new Chart(ctxPie, {
+            type: 'doughnut',
+            data: {
+                labels: ['Success', 'Failed', 'Unknown'],
+                datasets: [{
+                    data: data.pie_data, // [success, failed, unknown]
+                    backgroundColor: ['#5CDB95', '#05386B', '#888'],
+                    borderWidth: 1
+                }]
+            },
+            options: { responsive: true }
+        });
+
+        // -- Bar Chart (Histogram) --
+        barChartInstance = new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: data.hist_labels, // ["Math", "General", ...]
+                datasets: [{
+                    label: 'Issues Count',
+                    data: data.hist_data,
+                    backgroundColor: '#379683',
+                    borderColor: '#05386B',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: { y: { beginAtZero: true, suggestedMax: 5 } },
+                plugins: { legend: { display: false } }
+            }
+        });
+    }
+
+    // 3. Initial Load
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchArpStats();
+    });
+  </script>
+{% endblock %}

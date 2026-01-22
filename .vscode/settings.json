@@ -1,0 +1,16 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^python debug_extract_signals\\.py 2>&1 \\| Select-String -NotMatch \"DEBUG\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^python diagnose_matching\\.py 2>&1 \\| Select-String -NotMatch \"DEBUG\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^python test_situation_detection\\.py 2>&1 \\| tail -20$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}

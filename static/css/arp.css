@@ -1,0 +1,187 @@
+* { 
+  box-sizing: border-box; 
+  margin:0; 
+  padding:0; 
+  font-family:'Inter', sans-serif; 
+}
+
+body { 
+  background:#EDF5E1; 
+  color:#05386B; 
+  line-height:1.5; 
+  transition: margin-right 0.5s; 
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 15px 20px; 
+    background:#b8e6dd;  
+    border-radius: 12px; 
+    margin: 20px auto; 
+    width: 100%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+    flex-wrap: wrap; 
+    margin-top: 50px; 
+}
+.header-left { 
+  display:flex; 
+  align-items:center; 
+  gap:15px; 
+  flex-wrap: wrap; 
+}
+
+.header-left img { 
+  width:50px; 
+  height:50px; 
+  border-radius:50%; 
+}
+
+.header-left .title { 
+  font-size:20px; 
+  font-weight:600; 
+}
+
+.header-left .subtitle { 
+  font-size:12px; 
+  color:#379683; 
+}
+
+.header-right img { 
+  width:40px; 
+  height:40px; 
+  border-radius:50%; 
+  margin-top:10px; 
+}
+
+/* Section Title */
+.section-title { 
+  max-width:95%; 
+  margin:30px auto 15px; 
+  font-size:18px; 
+  font-weight:600; 
+  text-align:center; 
+  color:#05386B;
+}
+
+/* Actions */
+.actions {
+  max-width:95%;
+  margin:20px auto 40px;
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap: wrap;
+}
+
+.actions button {
+  padding:10px 18px;
+  font-size:14px;
+  border:none;
+  border-radius:6px;
+  background:#5CDB95;
+  color:#05386B;
+  cursor:pointer;
+  font-weight:600;
+  transition:0.3s;
+}
+
+.actions button:hover { 
+  background:#8EE4AF; 
+}
+
+
+
+
+#mySidepanel .sidebar-close {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+  font-size: 26px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@media screen and (max-width:768px){
+  .actions button { 
+    padding:8px 12px; 
+    font-size:13px; 
+  }
+  body.sidepanel-open { margin-right: 0; }
+}
+.page-content {
+  flex: 1;   /* pushes footer to bottom */
+}
+.actions .action-btn {
+  display: inline-block;
+  padding: 12px 18px;
+  background: #0F9F82;
+  color: #ffffff;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.actions .action-btn:hover {
+  background: #0c8a70;
+}
+/* ================= ARP DASHBOARD ANALYTICS ================= */
+
+.teacher-dropdown-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+#teacherDropdown {
+  width: 90%;
+  max-width: 420px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1.5px solid #000000;
+  background: #ffffff;
+  color: #1E3A32;
+  font-size: 14px;
+  outline: none;
+}
+
+/* Charts */
+.charts-grid {
+  max-width: 900px;
+  margin: 0 auto 50px;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 20px;
+  align-items: center;
+}
+
+.chart-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 6px 16px rgba(30, 58, 50, 0.437);
+}
+
+/* DONUT */
+.chart-card.small {
+  height: 240px;              /* ✅ ideal donut size */
+  width: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* HISTOGRAM */
+.chart-card.wide {
+  height: 260px;
+}

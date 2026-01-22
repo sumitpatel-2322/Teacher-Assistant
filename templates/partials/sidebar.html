@@ -1,0 +1,131 @@
+<div id="mySidepanel">
+    <span class="sidebar-close" id="closeSidebar">✕</span>
+
+<a href="/" class="logout-link"><svg class="nav-icon" viewBox="0 0 24 24" fill="none">
+  <path d="M3 10.5L12 3l9 7.5V21a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1v-10.5z"
+    stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round"/>
+</svg> Home</a>
+
+    {% if user %}
+        {% if user.role == 'teacher' %}
+            <a href="/teacher" class="logout-link"><svg class="nav-icon" viewBox="0 0 24 24" fill="none">
+  <rect x="3" y="3" width="7" height="7" rx="1.5"
+    stroke="currentColor" stroke-width="2"/>
+  <rect x="14" y="3" width="7" height="7" rx="1.5"
+    stroke="currentColor" stroke-width="2"/>
+  <rect x="3" y="14" width="7" height="7" rx="1.5"
+    stroke="currentColor" stroke-width="2"/>
+  <rect x="14" y="14" width="7" height="7" rx="1.5"
+    stroke="currentColor" stroke-width="2"/>
+</svg> Dashboard</a>
+<a href="/micro" class="logout-link">
+  <svg class="nav-icon" viewBox="0 0 24 24" fill="none">
+    <path d="M4 4h16v12H4z"
+          stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M8 20h8"
+          stroke="currentColor" stroke-width="2"
+          stroke-linecap="round"/>
+    <path d="M12 8v4"
+          stroke="currentColor" stroke-width="2"
+          stroke-linecap="round"/>
+    <path d="M10 10l2-2 2 2"
+          stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  Microlearn
+</a>
+
+        {% elif user.role == 'crp' %}
+            <a href="/crp" class="logout-link"><svg class="nav-icon" viewBox="0 0 24 24" fill="none">
+  <rect x="3" y="3" width="7" height="7" rx="1.5"
+    stroke="currentColor" stroke-width="2"/>
+  <rect x="14" y="3" width="7" height="7" rx="1.5"
+    stroke="currentColor" stroke-width="2"/>
+  <rect x="3" y="14" width="7" height="7" rx="1.5"
+    stroke="currentColor" stroke-width="2"/>
+  <rect x="14" y="14" width="7" height="7" rx="1.5"
+    stroke="currentColor" stroke-width="2"/>
+</svg> CRP Dashboard</a>
+        {% elif user.role == 'brp' %}
+            <a href="/brp" class="logout-link"><svg class="nav-icon" viewBox="0 0 24 24" fill="none">
+  <rect x="3" y="3" width="7" height="7" rx="1.5"
+    stroke="currentColor" stroke-width="2"/>
+  <rect x="14" y="3" width="7" height="7" rx="1.5"
+    stroke="currentColor" stroke-width="2"/>
+  <rect x="3" y="14" width="7" height="7" rx="1.5"
+    stroke="currentColor" stroke-width="2"/>
+  <rect x="14" y="14" width="7" height="7" rx="1.5"
+    stroke="currentColor" stroke-width="2"/>
+</svg> BRP Dashboard</a>
+        {% elif user.role == 'arp' %}
+            <a href="/arp" class="logout-link"><svg class="nav-icon" viewBox="0 0 24 24" fill="none">
+  <rect x="3" y="3" width="7" height="7" rx="1.5"
+    stroke="currentColor" stroke-width="2"/>
+  <rect x="14" y="3" width="7" height="7" rx="1.5"
+    stroke="currentColor" stroke-width="2"/>
+  <rect x="3" y="14" width="7" height="7" rx="1.5"
+    stroke="currentColor" stroke-width="2"/>
+  <rect x="14" y="14" width="7" height="7" rx="1.5"
+    stroke="currentColor" stroke-width="2"/>
+</svg> ARP Dashboard</a>
+        {% endif %}
+        
+        <a href="/profile" class="logout-link"><svg class="nav-icon" viewBox="0 0 24 24" fill="none">
+  <circle cx="12" cy="8" r="4"
+    stroke="currentColor" stroke-width="2"/>
+  <path d="M4 21c0-4 4-6 8-6s8 2 8 6"
+    stroke="currentColor" stroke-width="2"
+    stroke-linecap="round"/>
+</svg> My Profile</a>
+        <a href="/logout" class="logout-link"><svg class="nav-icon" viewBox="0 0 24 24" fill="none">
+  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"
+    stroke="currentColor" stroke-width="2"/>
+  <path d="M16 17l5-5-5-5"
+    stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M21 12H9"
+    stroke="currentColor" stroke-width="2"
+    stroke-linecap="round"/>
+</svg> Logout</a>
+    {% else %}
+        <a href="/login" class="logout-link"><svg class="nav-icon" viewBox="0 0 24 24" fill="none">
+    <path d="M15 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+    <path d="M10 17l5-5-5-5"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+    <path d="M15 12H3"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+  </svg> Login</a>
+        <a href="/register" class="logout-link"> <svg class="nav-icon" viewBox="0 0 24 24" fill="none">
+    <!-- User -->
+    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+    <circle cx="9" cy="7" r="4"
+            stroke="currentColor"
+            stroke-width="2"/>
+    <!-- Plus -->
+    <path d="M19 8v6"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"/>
+    <path d="M16 11h6"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"/>
+  </svg> Sign Up</a>
+    {% endif %}
+</div>

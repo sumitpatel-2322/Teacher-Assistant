@@ -1,0 +1,189 @@
+:root {
+  --primary: #0F9F82;
+  --primary-soft: #DFF3ED;
+  --text-dark: #1E3A32;
+  --text-soft: #5F7F8C;
+  --bg-light: #F3F4EF;
+  --card-bg: #FFFFFF;
+}
+
+/* ================= PAGE ================= */
+.micro-page {
+  padding: 20px;
+  padding-top: 80px; /* offset for fixed navbar */
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* ================= HEADER ================= */
+.micro-header {
+  margin-bottom: 18px;
+}
+
+.micro-header h1 {
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.micro-header p {
+  font-size: 14px;
+  color: var(--text-soft);
+}
+
+/* ================= SEARCH BAR ================= */
+.micro-search {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 26px;
+}
+
+.micro-search input {
+  flex: 1;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1.5px solid #d5dcd9;
+  font-size: 14px;
+  color: var(--text-dark);
+  background: #fff;
+  transition: all 0.25s ease;
+}
+
+.micro-search input::placeholder {
+  color: #9aa9a3;
+}
+
+.micro-search input:hover {
+  border-color: var(--primary);
+}
+
+.micro-search input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(15, 159, 130, 0.18);
+}
+
+.micro-search-btn {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.micro-search-btn:hover {
+  background: #0c8a70;
+  transform: translateY(-1px);
+}
+
+.micro-search-btn:active {
+  transform: translateY(0);
+}
+
+/* ================= GRID ================= */
+.micro-content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* ================= CARD ================= */
+.micro-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 18px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.micro-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* ================= ICON ================= */
+.micro-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  background: var(--primary-soft);
+  flex-shrink: 0;
+}
+
+/* ================= CONTENT ================= */
+.micro-info {
+  flex: 1;
+}
+
+.micro-info h3 {
+  font-size: 15px;
+  margin-bottom: 4px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.micro-info p {
+  font-size: 13px;
+  color: var(--text-soft);
+  margin-bottom: 10px;
+  line-height: 1.45;
+}
+
+.micro-meta {
+  display: flex;
+  gap: 14px;
+  font-size: 12px;
+  color: var(--text-soft);
+}
+
+/* ================= BUTTON ================= */
+.micro-open-btn {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 9px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background 0.2s ease;
+}
+
+.micro-open-btn:hover {
+  background: #0c8a70;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 600px) {
+
+  .micro-search {
+    flex-direction: column;
+  }
+
+  .micro-search-btn {
+    width: 100%;
+  }
+
+  .micro-card {
+    flex-direction: column;
+  }
+
+  .micro-open-btn {
+    width: 100%;
+    margin-top: 10px;
+  }
+}

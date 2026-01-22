@@ -1,0 +1,75 @@
+/* Logo Styling */
+nav .logo {
+    font-family: 'Gabriela', serif !important;
+    letter-spacing: 2px;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    letter-spacing: 3px !important;
+    color:#EDF5E1 !important;
+}
+
+
+
+/* Right Side Container */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Profile Avatar Circle */
+.profile-icon {
+    text-decoration: none;
+}
+
+.avatar-circle {
+    width: 38px;
+    height: 38px;
+    background: #5CDB95;
+    color:#0F9F82;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+    border: 2px solid #EDF5E1;
+    transition: transform 0.2s;
+}
+
+.avatar-circle:hover {
+    transform: scale(1.1);
+    background: #8EE4AF;
+}
+
+/* Hamburger Reset */
+.hamburger {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}/* Logo wrapper */
+.logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Logo image */
+.veda-logo {
+    height: 100px;
+    width: auto;
+}
+
+/* Logo text (existing VEDA style preserved) */
+.logo-text {
+    font-family: 'Gabriela', serif !important;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    letter-spacing: 3px !important;
+    color: #EDF5E1 !important;
+}

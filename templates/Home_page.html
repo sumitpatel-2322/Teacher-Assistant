@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% block title %}VEDA – Virtual Educator & Digital Assistant{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/Hp.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="page-container">
+
+  <!-- ================= HERO (NEW, SAME AS LANDING) ================= -->
+  <section class="hero">
+    <div class="hero-badge">AI-Powered Academic Support Platform</div>
+
+    <h1>
+      <span>VEDA</span> – Virtual Educator & Digital Assistant
+    </h1>
+
+    <p>
+      VEDA is an intelligent academic support system connecting Teachers, CRP, BRP,
+      and ARP into a unified, data-driven digital ecosystem.
+    </p>
+
+    {% if not user %}
+    <div class="hero-actions">
+      <a href="/register" class="btn-primary">Get Started</a>
+      <a href="/login" class="btn-secondary">Login</a>
+    </div>
+    {% endif %}
+  </section>
+
+  <!-- ================= SYSTEM OVERVIEW ================= -->
+  <section class="section" id="system-overview">
+    <h2>System Overview</h2>
+    <p class="section-desc">
+      Teacher-AssistantAI addresses key challenges in teacher support, providing
+      real-time, personalized guidance. It integrates CRP, BRP, ARP, and teachers
+      in a single digital coaching model. Teachers can ask questions via voice or
+      text, and AI provides context-aware, subject-specific solutions.
+    </p>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ================= HOW VEDA HELPS ================= -->
+  <section class="section">
+    <h2>How VEDA Helps the Education System</h2>
+
+    <div class="e-card-row">
+
+      <!-- TEACHER SUPPORT -->
+      <div class="e-card playing">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+
+        <div class="infotop">
+          Teacher Support
+          <br>
+          <span class="name">
+            • Acts as a <strong>digital teaching assistant</strong>, giving instant help for lesson planning and classroom doubts.<br><br>
+            • Teachers select <strong>class, subject, and topic</strong>, so guidance is context-specific, not generic.<br><br>
+            • Provides <strong>step-by-step explanations, activities, and teaching strategies</strong> in real time.<br><br>
+            • Displays <strong>official notices and guidance</strong> on the same dashboard.<br><br>
+            • Doubts can be asked via <strong>text or voice</strong>, saving preparation time.<br><br>
+            • Works smoothly on <strong>mobile devices</strong>, making it practical inside classrooms.
+          </span>
+        </div>
+      </div>
+
+      <!-- CRP / BRP / ARP SUPPORT -->
+      <div class="e-card playing">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+
+        <div class="infotop">
+          CRP, BRP & ARP Support
+          <br>
+          <span class="name">
+            • Provides <strong>one common platform</strong> for CRP, BRP, and ARP coordination.<br><br>
+            • Helps <strong>CRPs guide teachers</strong>, share notices, and track school activities.<br><br>
+            • Enables <strong>BRPs to monitor CRP performance</strong> using dashboards and analytics.<br><br>
+            • Supports <strong>ARPs in sharing subject expertise</strong> and best practices.<br><br>
+            • <strong>Reduces paperwork</strong> through centralized digital tracking.<br><br>
+            • Improves <strong>planning and decision-making</strong> using real-time data.
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ================= CHALLENGES ================= -->
+  <section class="section" id="challenges">
+    <h2>Challenges Solved</h2>
+
+    <div class="card-grid">
+      <div class="card">
+        <h3>Limited CRPs</h3>
+        <p>Reduces dependency on a small number of CRPs for teacher support.</p>
+      </div>
+
+      <div class="card">
+        <h3>Infrequent School Visits</h3>
+        <p>Provides digital guidance to replace rare physical visits.</p>
+      </div>
+
+      <div class="card">
+        <h3>Delayed Problem Resolution</h3>
+        <p>Enables timely interventions through AI-based support.</p>
+      </div>
+
+      <div class="card">
+        <h3>Lack of Real-Time Support</h3>
+        <p>Teachers receive immediate advice for classroom challenges.</p>
+      </div>
+
+      <div class="card">
+        <h3>No Single Platform</h3>
+        <p>Connects Teacher–CRP–BRP–ARP in one integrated system.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ================= FEATURES ================= -->
+  <section class="section" id="features">
+    <h2>Key Features</h2>
+
+    <div class="card-grid">
+      <div class="card"><h3>Immediate Personalized Advice</h3><p>AI offers subject- and context-aware solutions.</p></div>
+      <div class="card"><h3>Offline / Low Network Access</h3><p>Accessible even with limited connectivity.</p></div>
+      <div class="card"><h3>Voice & Text Interaction</h3><p>Teachers ask questions via voice or text.</p></div>
+      <div class="card"><h3>Regional Language Support</h3><p>Supports local languages for inclusive access.</p></div>
+      <div class="card"><h3>Role-Based Dashboards</h3><p>Dedicated dashboards for CRP, BRP, and ARP.</p></div>
+      <div class="card"><h3>Micro-Learning Resources</h3><p>Lesson plans, teaching tips, and engagement ideas.</p></div>
+    </div>
+  </section>
+
+  <!-- ================= CTA SECTION ================= -->
+<section class="cta">
+  <h2>Empowering Education Through Intelligent Support</h2>
+  <p>
+    VEDA strengthens teaching quality, academic leadership,
+    and learning outcomes through intelligent digital support.
+  </p>
+
+  {% if not user %}
+    <a href="/register" class="btn-primary">Join VEDA Today</a>
+  {% endif %}
+</section>
+
+</div>
+
+{% endblock %}
